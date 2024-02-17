@@ -5,7 +5,7 @@ import OpenAI from 'openai'
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
 
-export const runtime = 'edge'
+// export const runtime = 'nodejs16'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
