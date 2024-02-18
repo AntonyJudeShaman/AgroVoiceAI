@@ -84,7 +84,7 @@ export function ChatPanel({
             )
           )}
         </div>
-        <div className="px-4 py-2 space-y-4 border-t shadow-lg bg-background sm:rounded-t-xl sm:border md:py-4">
+        <div className="px-4 py-2 space-y-4 border md:mb-10 shadow-lg bg-background  sm:rounded-tr-[25px] sm:rounded-bl-[25px] dark:sm:border-gray-800 sm:border-gray-300 md:py-4">
           <PromptForm
             onSubmit={async value => {
               await append({
@@ -97,7 +97,7 @@ export function ChatPanel({
             setInput={setInput}
             isLoading={isLoading}
           />
-          <FooterText className="hidden sm:block" />
+          {/* <FooterText className="hidden sm:block" /> */}
         </div>
       </div>
     </div>

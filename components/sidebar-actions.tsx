@@ -78,13 +78,12 @@ export function SidebarActions({
         onOpenChange={setShareDialogOpen}
         onCopy={() => setShareDialogOpen(false)}
       />
-      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent>
+      <AlertDialog open={deleteDialogOpen}  onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent className='border dark:border-red-900 border-red-500'>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle className='text-red-600'>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete your chat message and remove your
-              data from our servers.
+              This will permanently delete your chat message.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -92,6 +91,7 @@ export function SidebarActions({
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
+            className="bg-red-600 text-white hover:bg-red-600/80"
               disabled={isRemovePending}
               onClick={event => {
                 event.preventDefault()
