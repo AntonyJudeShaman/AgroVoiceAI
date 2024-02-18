@@ -4,7 +4,7 @@ import OpenAI from 'openai'
 
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
-
+import redis from '@/lib/redis'
 // export const runtime = 'nodejs16'
 
 const openai = new OpenAI({
@@ -53,8 +53,8 @@ export async function POST(req: Request) {
           }
         ]
       }
-      await kv.hmset(`chat:${id}`, payload)
-      await kv.zadd(`user:chat:${userId}`, {
+      await redis.hmset(`chat:${id}`, payload)
+      await redis.zadd(`user:chat:${userId}`, {
         score: createdAt,
         member: `chat:${id}`
       })

@@ -14,6 +14,7 @@ import { UserMenu } from '@/components/user-menu'
 import { SidebarMobile } from './sidebar-mobile'
 import { SidebarToggle } from './sidebar-toggle'
 import { ChatHistory } from './chat-history'
+import { ThemeToggle } from './theme-toggle'
 
 async function UserOrLogin() {
   const session = await auth()
@@ -54,8 +55,8 @@ export function Header() {
           <UserOrLogin />
         </React.Suspense>
       </div>
-      <div className="flex items-center justify-end space-x-2">
-        
+      <div className="flex items-center justify-end space-x-8">
+        <ThemeToggle/>
       </div>
     </header>
   )

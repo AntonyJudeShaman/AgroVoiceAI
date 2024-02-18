@@ -10,12 +10,16 @@ import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/chat-message-actions'
+import { auth } from '@/auth'
+import Image from 'next/image'
+import { Session } from 'next-auth'
 
 export interface ChatMessageProps {
   message: Message
+  userImage: string | null | undefined
 }
 
-export function ChatMessage({ message, ...props }: ChatMessageProps) {
+export function ChatMessage({ message, userImage,  ...props }: ChatMessageProps) {
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -29,8 +33,21 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
             : 'bg-primary text-primary-foreground'
         )}
       >
-        {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
+        {message.role === 'user' ? <Image
+                className="size-6 transition-opacity` duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
+                src={userImage ? `${userImage}&s=60` : ''}
+                alt={'Avatar'}
+                height={48}
+                width={48}
+              /> :  <IconOpenAI/>}
       </div>
+      {/* <Image
+                className="size-6 transition-opacity` duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
+                src={user?.image ? `${user.image}&s=60` : ''}
+                alt={user.name ?? 'Avatar'}
+                height={48}
+                width={48}
+              /> */}
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown
           className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"

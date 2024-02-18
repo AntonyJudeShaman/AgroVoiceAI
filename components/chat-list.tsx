@@ -1,22 +1,45 @@
+
 import { type Message } from 'ai'
 
 import { Separator } from '@/components/ui/separator'
 import { ChatMessage } from '@/components/chat-message'
+import { getUser } from '@/app/actions'
+import { useEffect, useState } from 'react'
+import { User } from 'next-auth'
 
 export interface ChatList {
   messages: Message[]
 }
 
 export function ChatList({ messages }: ChatList) {
-  if (!messages.length) {
-    return null
-  }
 
+  const [session, setSession] = useState<User | undefined>(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const sessionData = await getUser();
+        setSession(sessionData);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchData();
+
+    // Clean-up function to cancel the effect if the component unmounts
+    return () => {};
+  }, []);
+
+  if (!messages.length) {
+    return null;
+  }
+  
   return (
     <div className="relative mx-auto max-w-2xl px-4">
       {messages.map((message, index) => (
         <div key={index}>
-          <ChatMessage message={message} />
+          <ChatMessage message={message} userImage={session?.image}/>
           {index < messages.length - 1 && (
             <Separator className="my-4 md:my-8" />
           )}

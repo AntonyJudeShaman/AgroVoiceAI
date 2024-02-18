@@ -10,6 +10,7 @@ import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { IconCheck, IconCopy, IconDownload } from '@/components/ui/icons'
 import { Button } from '@/components/ui/button'
+import toast from 'react-hot-toast'
 
 interface Props {
   language: string
@@ -89,6 +90,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
 
   const onCopy = () => {
     if (isCopied) return
+    toast.success("Code copied to Clipboard.")
     copyToClipboard(value)
   }
 
