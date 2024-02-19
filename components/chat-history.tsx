@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { SidebarList } from '@/components/sidebar-list'
 import { buttonVariants } from '@/components/ui/button'
 import { IconPlus } from '@/components/ui/icons'
+import { ThemeToggle } from './theme-toggle'
 
 interface ChatHistoryProps {
   userId?: string
@@ -14,7 +15,7 @@ interface ChatHistoryProps {
 export async function ChatHistory({ userId }: ChatHistoryProps) {
   return (
     <div className="flex flex-col h-full">
-      <div className="px-2 my-4">
+      <div className="px-2 my-4 space-x-2 flex">
         <Link
           href="/"
           className={cn(
@@ -25,6 +26,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
           <IconPlus className="-translate-x-2 stroke-2" />
           New Chat
         </Link>
+        <ThemeToggle />
       </div>
       <React.Suspense
         fallback={

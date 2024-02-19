@@ -51,7 +51,6 @@ export function Header() {
   const navItems = [
     { name: 'home', path: '/' },
     { name: 'about', path: '/about' },
-    { name: 'work', path: '/work' },
     { name: 'contact', path: '/contact' }
   ]
   return (
@@ -62,21 +61,21 @@ export function Header() {
         </React.Suspense>
       </div>
       <div className="flex justify-center flex-1">
-        <div className="border-white/30 border p-2 rounded-full">
+        <div className="p-2 mt-2 flex flex-row rounded-full">
           {navItems.map((item, index) => (
             <Link
               href={item.path}
               key={index}
-              className="gap-5 rounded-full hover:bg-slate-800/60 py-2 px-3"
+              className="gap-5 py-2 px-3 relative overflow-hidden after:relative after:flex after:items-center after:content-'' after:w-0 after:h-[2px] dark:after:bg-orange-400 after:bg-blue-700 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full after:mt-2"
             >
               {item.name}
             </Link>
           ))}
-          <Button className='rounded-full py-5'>Download App</Button>
         </div>
       </div>
       <div className="flex items-center justify-end space-x-8">
         <ThemeToggle />
+        <Button className="rounded-full py-5">Download App</Button>
       </div>
     </header>
   )

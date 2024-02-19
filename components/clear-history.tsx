@@ -17,7 +17,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { IconSpinner } from '@/components/ui/icons'
+import { IconSpinner, IconTrash } from '@/components/ui/icons'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 
 interface ClearHistoryProps {
   isEnabled: boolean
@@ -34,24 +39,33 @@ export function ClearHistory({
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" disabled={!isEnabled || isPending}>
-          {isPending && <IconSpinner className="mr-2" />}
-          Clear history
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
+      <Tooltip>
+        <TooltipTrigger>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="ghost"
+              className="h-10"
+              disabled={!isEnabled || isPending}
+            >
+              {isPending && <IconSpinner className="mr-2" />}
+              <IconTrash />
+            </Button>
+          </AlertDialogTrigger>
+        </TooltipTrigger>
+        <TooltipContent>Clear Chat History</TooltipContent>
+      </Tooltip>
+      <AlertDialogContent className='border dark:border-red-900 border-red-500'>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle className='text-red-600'>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete your chat history and remove your data
-            from our servers.
+            This will permanently delete your chat history.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
+            className="bg-red-600 text-white hover:bg-red-600/80"
             onClick={event => {
               event.preventDefault()
               startTransition(() => {
