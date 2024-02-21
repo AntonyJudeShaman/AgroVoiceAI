@@ -47,7 +47,7 @@ export function MovingButton({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              "h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]",
+              "size-20 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]",
               borderClassName
             )}
           />
@@ -56,7 +56,7 @@ export function MovingButton({
 
       <div
         className={cn(
-          "relative bg-slate-900/[0.8] border border-slate-900 backdrop-blur-xl text-white flex items-center justify-center w-full h-full text-sm antialiased",
+          "relative bg-slate-900/[0.8] border border-slate-900 backdrop-blur-xl text-white flex items-center justify-center size-full text-sm antialiased",
           className
         )}
         style={{
@@ -109,7 +109,7 @@ export const MovingBorder = ({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
-        className="absolute h-full w-full"
+        className="absolute size-full"
         width="100%"
         height="100%"
         {...otherProps}

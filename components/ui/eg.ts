@@ -12,17 +12,13 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   const json = await req.json()
-  const { messages, previewToken } = json
+  const { messages} = json
   const userId = (await auth())?.user.id
 
   if (!userId) {
     return new Response('Unauthorized', {
       status: 401
     })
-  }
-
-  if (previewToken) {
-    openai.apiKey = previewToken
   }
 
   const res = await openai.chat.completions.create({
