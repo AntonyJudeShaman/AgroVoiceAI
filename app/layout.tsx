@@ -6,8 +6,9 @@ import '@/app/globals.css'
 import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
-import { Header } from '@/components/header'
+import { Header } from '@/components/chat-header'
 import { Analytics } from '@vercel/analytics/react'
+import { MovingButton } from '@/components/ui/moving-border'
 
 export const metadata = {
   metadataBase: new URL(`https://${process.env.VERCEL_URL}`),

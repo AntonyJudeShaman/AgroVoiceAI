@@ -39,7 +39,7 @@ export function ChatList({ messages }: ChatList) {
     <div className="relative mx-auto max-w-2xl px-4">
       {messages.map((message, index) => (
         <div key={index}>
-          <ChatMessage message={message} userImage={session?.image}/>
+          <ChatMessage message={message} userImage={session?.image} userName={session?.name}/>
           {index < messages.length - 1 && (
             <Separator className="my-4 md:my-8" />
           )}

@@ -44,11 +44,11 @@ export function ClearHistory({
           <AlertDialogTrigger asChild>
             <Button
               variant="ghost"
-              className="h-10"
+              className=""
               disabled={!isEnabled || isPending}
             >
               {isPending && <IconSpinner className="mr-2" />}
-              <IconTrash />
+              <IconTrash className='size-5'/>
             </Button>
           </AlertDialogTrigger>
         </TooltipTrigger>

@@ -1,29 +1,15 @@
+import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
 
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
 import redis from '@/lib/redis'
+// export const runtime = 'nodejs16'
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!
+})
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from 'ai';
- 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || '');
- 
-// IMPORTANT! Set the runtime to edge
-// export const runtime = 'edge';
- 
-// convert messages from the Vercel AI SDK Format to the format
-// that is expected by the Google GenAI SDK
-const buildGoogleGenAIPrompt = (messages: Message[]) => ({
-  contents: messages
-    .filter(message => message.role === 'user' || message.role === 'assistant')
-    .map(message => ({
-      role: message.role === 'user' ? 'user' : 'model',
-      parts: [{ text: message.content }],
-    })),
-});
- 
 export async function POST(req: Request) {
   const json = await req.json()
   const { messages, previewToken } = json
@@ -34,13 +20,19 @@ export async function POST(req: Request) {
       status: 401
     })
   }
- 
-  const geminiStream = await genAI
-    .getGenerativeModel({ model: 'gemini-pro' })
-    .generateContentStream(buildGoogleGenAIPrompt(messages));
- 
-  // Convert the response into a friendly text-stream
-  const stream = GoogleGenerativeAIStream(geminiStream, {
+
+  if (previewToken) {
+    openai.apiKey = previewToken
+  }
+
+  const res = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages,
+    temperature: 0.7,
+    stream: true
+  })
+
+  const stream = OpenAIStream(res, {
     async onCompletion(completion) {
       const title = json.messages[0].content.substring(0, 100)
       const id = json.id ?? nanoid()

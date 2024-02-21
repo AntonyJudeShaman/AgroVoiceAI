@@ -22,30 +22,12 @@ interface languageMap {
 }
 
 export const programmingLanguages: languageMap = {
-  javascript: '.js',
-  python: '.py',
-  java: '.java',
-  c: '.c',
-  cpp: '.cpp',
-  'c++': '.cpp',
-  'c#': '.cs',
-  ruby: '.rb',
-  php: '.php',
-  swift: '.swift',
-  'objective-c': '.m',
-  kotlin: '.kt',
-  typescript: '.ts',
-  go: '.go',
-  perl: '.pl',
-  rust: '.rs',
-  scala: '.scala',
-  haskell: '.hs',
-  lua: '.lua',
-  shell: '.sh',
-  sql: '.sql',
+  pdf: '.pdf',
   html: '.html',
-  css: '.css'
-  // add more file extensions here, make sure the key is same as language prop in CodeBlock.tsx component
+  xml: '.xml',
+  svg: '.svg',
+  txt: '.txt',
+  markdown: '.md',
 }
 
 export const generateRandomString = (length: number, lowercase = false) => {
@@ -64,7 +46,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
     if (typeof window === 'undefined') {
       return
     }
-    const fileExtension = programmingLanguages[language] || '.file'
+    const fileExtension = programmingLanguages[language] || '.txt'
     const suggestedFileName = `file-${generateRandomString(
       3,
       true
@@ -96,12 +78,12 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
 
   return (
     <div className="relative w-full font-sans codeblock bg-zinc-950">
-      <div className="flex items-center justify-between w-full px-6 py-2 pr-4 bg-zinc-800 text-zinc-100">
+      <div className="flex items-center justify-between w-full px-6 py-2 pr-4 bg-zinc-900 text-zinc-100">
         <span className="text-xs lowercase">{language}</span>
         <div className="flex items-center space-x-1">
           <Button
             variant="ghost"
-            className="hover:bg-zinc-800 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:ring-offset-0"
+            className="hover:bg-zinc-900 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:ring-offset-0"
             onClick={downloadAsFile}
             size="icon"
           >
@@ -111,11 +93,11 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
           <Button
             variant="ghost"
             size="icon"
-            className="text-xs hover:bg-zinc-800 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:ring-offset-0"
+            className="text-xs hover:bg-zinc-900 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:ring-offset-0"
             onClick={onCopy}
           >
             {isCopied ? <IconCheck /> : <IconCopy />}
-            <span className="sr-only">Copy code</span>
+            <span className="sr-only">Copy</span>
           </Button>
         </div>
       </div>
