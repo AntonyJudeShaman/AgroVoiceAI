@@ -76,7 +76,7 @@ export function Header() {
       </div>
       <div className="flex items-center justify-end space-x-8">
         {/* <ThemeToggle /> */}
-        <MovingButton children="Download App" className="" />
+        <MovingButton className="">Download App</MovingButton>
       </div>
     </header>
   )
