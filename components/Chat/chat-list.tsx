@@ -2,7 +2,7 @@
 import { type Message } from 'ai'
 
 import { Separator } from '@/components/ui/separator'
-import { ChatMessage } from '@/components/chat-message'
+import { ChatMessage } from '@/components/Chat/chat-message'
 import { getUser } from '@/app/actions'
 import { useEffect, useState } from 'react'
 import { User } from 'next-auth'
@@ -27,7 +27,6 @@ export function ChatList({ messages }: ChatList) {
 
     fetchData();
 
-    // Clean-up function to cancel the effect if the component unmounts
     return () => {};
   }, []);
 

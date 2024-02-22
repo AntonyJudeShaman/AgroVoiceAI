@@ -10,8 +10,7 @@ import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from 'ai';
  
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || '');
  
-// IMPORTANT! Set the runtime to edge
-// export const runtime = 'edge';
+export const runtime = 'edge';
  
 // convert messages from the Vercel AI SDK Format to the format
 // that is expected by the Google GenAI SDK
@@ -26,7 +25,7 @@ const buildGoogleGenAIPrompt = (messages: Message[]) => ({
  
 export async function POST(req: Request) {
   const json = await req.json()
-  const { messages, previewToken } = json
+  const { messages } = json
   const userId = (await auth())?.user.id
 
   if (!userId) {

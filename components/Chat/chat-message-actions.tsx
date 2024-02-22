@@ -17,11 +17,11 @@ export function ChatMessageActions({
   className,
   ...props
 }: ChatMessageActionsProps) {
-  const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 2000 })
+  const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 3000 })
 
   const onCopy = () => {
     if (isCopied) return
-    toast.success("Text copied to Clipboard.")
+    toast.success('Text copied to Clipboard.')
     copyToClipboard(message.content)
   }
 

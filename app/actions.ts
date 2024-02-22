@@ -2,22 +2,11 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { kv } from '@vercel/kv'
 
 import { auth } from '@/auth'
 import { type Chat } from '@/lib/types'
 
 import redis from '@/lib/redis'
-
-// const redis = new Redis({
-//   url: process.env.KV_REST_API_URL!,
-//   token: process.env.KV_REST_API_TOKEN!,
-// })
-
-// import { Redis } from 'ioredis'
-
-// const redisUri = "rediss://default:AVNS_3uWuHo4nkwsoHm_IZ8N@agrovoice-antonyjudeshaman-d9a4.a.aivencloud.com:27280"
-// const redis = new Redis(redisUri);
 
 export async function getChats(userId?: string | null) {
   if (!userId) {
@@ -36,7 +25,7 @@ export async function getChats(userId?: string | null) {
 
     const results = await pipeline.exec()
 
-    return results as unknown as Chat[]
+    return results as Chat[]
   } catch (error) {
     return []
   }

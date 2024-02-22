@@ -1,9 +1,20 @@
+import { SettingsHeader } from '@/components/header'
+import { SettingsForm } from '@/components/settings-form'
+import { SettingsShell } from '@/components/settings-shell'
 import React from 'react'
+import { getUser } from '../actions'
 
-function page() {
+async function Settings() {
+  const session = await getUser()
   return (
-    <div className='container py-10 text-3xl font-semibold'>User Settings</div>
+    <SettingsShell>
+      <SettingsHeader
+        heading="Settings"
+        text="Manage account and website settings."
+      />
+      <SettingsForm user={session} className="" />
+    </SettingsShell>
   )
 }
 
-export default page
+export default Settings

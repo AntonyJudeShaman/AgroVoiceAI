@@ -1,6 +1,8 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
+import EmailProvider from "next-auth/providers/email"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 declare module 'next-auth' {
   interface Session {

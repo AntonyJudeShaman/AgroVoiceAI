@@ -3,10 +3,9 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
-import { SidebarList } from '@/components/sidebar-list'
+import { SidebarList } from '@/components/Sidebar/sidebar-list'
 import { buttonVariants } from '@/components/ui/button'
 import { IconPlus } from '@/components/ui/icons'
-import { ThemeToggle } from './theme-toggle'
 
 interface ChatHistoryProps {
   userId?: string

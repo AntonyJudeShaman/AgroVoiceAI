@@ -65,7 +65,7 @@ export function ClearHistory({
           <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
-            className="bg-red-600 text-white hover:bg-red-600/80"
+            className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
             onClick={event => {
               event.preventDefault()
               startTransition(() => {

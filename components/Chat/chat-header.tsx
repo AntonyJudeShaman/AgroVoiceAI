@@ -11,11 +11,11 @@ import {
   IconVercel
 } from '@/components/ui/icons'
 import { UserMenu } from '@/components/user-menu'
-import { SidebarMobile } from './sidebar-mobile'
-import { SidebarToggle } from './sidebar-toggle'
+import { SidebarMobile } from '../Sidebar/sidebar-mobile'
+import { SidebarToggle } from '../Sidebar/sidebar-toggle'
 import { ChatHistory } from './chat-history'
-import { ThemeToggle } from './theme-toggle'
-import { MovingButton } from './ui/moving-border'
+import { MovingButton } from '../ui/moving-border'
+import { ThemeToggle } from '../Theme/theme-toggle'
 
 async function UserOrLogin() {
   const session = await auth()

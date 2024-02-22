@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { IconShare, IconSpinner, IconTrash } from '@/components/ui/icons'
-import { ChatShareDialog } from '@/components/chat-share-dialog'
+import { ChatShareDialog } from '@/components/Chat/chat-share-dialog'
 import {
   Tooltip,
   TooltipContent,
@@ -91,7 +91,7 @@ export function SidebarActions({
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
-            className="bg-red-600 text-white hover:bg-red-600/80"
+            className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
               disabled={isRemovePending}
               onClick={event => {
                 event.preventDefault()

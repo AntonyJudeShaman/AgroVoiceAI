@@ -3,10 +3,10 @@
 import { useChat, type Message } from 'ai/react'
 
 import { cn } from '@/lib/utils'
-import { ChatList } from '@/components/chat-list'
-import { ChatPanel } from '@/components/chat-panel'
+import { ChatList } from '@/components/Chat/chat-list'
+import { ChatPanel } from '@/components/Chat/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
-import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
+import { ChatScrollAnchor } from '@/components/Chat/chat-scroll-anchor'
 import { toast } from 'react-hot-toast'
 import { usePathname, useRouter } from 'next/navigation'
 
