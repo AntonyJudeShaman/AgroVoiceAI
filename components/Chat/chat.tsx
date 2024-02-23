@@ -38,26 +38,28 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     })
   return (
     <>
-      <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
+      <div className={cn('pb-[200px] md:pb-[0px] pt-4 md:pt-10', className)}>
         {messages.length ? (
           <>
             <ChatList messages={messages} />
             <ChatScrollAnchor trackVisibility={isLoading} />
           </>
         ) : (
-          <EmptyScreen setInput={setInput} />
+          <>
+            <EmptyScreen setInput={setInput} />{' '}
+            <ChatPanel
+              id={id}
+              isLoading={isLoading}
+              stop={stop}
+              append={append}
+              reload={reload}
+              messages={messages}
+              input={input}
+              setInput={setInput}
+            />
+          </>
         )}
       </div>
-      <ChatPanel
-        id={id}
-        isLoading={isLoading}
-        stop={stop}
-        append={append}
-        reload={reload}
-        messages={messages}
-        input={input}
-        setInput={setInput}
-      />
     </>
   )
 }

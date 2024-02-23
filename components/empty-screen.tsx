@@ -2,11 +2,12 @@ import { UseChatHelpers } from 'ai/react'
 
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/external-link'
-import { IconArrowRight } from '@/components/ui/icons'
+import { IconArrowRight, IconOpenAI } from '@/components/ui/icons'
 
 const exampleMessages = [
+  // பூச்சிகளைக் கையாள்வது
   {
-    heading: 'உங்கள் பண்ணையில் பூச்சிகளைக் கையாள்வது',
+    heading: 'உங்கள் பண்ணையில்',
     message:
       'தீங்கு விளைவிக்கும் இரசாயனங்களை நாடாமல் எங்கள் பயிர்களில் பூச்சிகளை நிர்வகிக்க சில பயனுள்ள மற்றும் சுற்றுச்சூழல் நட்பு வழிகள் யாவை?'
   },
@@ -19,34 +20,37 @@ const exampleMessages = [
     heading: 'பயிர் சுழற்சியை மேம்படுத்துதல்',
     message:
       'உற்பத்தித்திறனை அதிகரிக்கவும், மண் குறைவதைத் தடுக்கவும், நோய்களின் அபாயத்தைக் குறைக்கவும் ஒரு திறமையான பயிர் சுழற்சி திட்டத்தை எவ்வாறு செயல்படுத்துவது?'
+  },
+  {
+    heading: 'பயிர் சுழற்சியை மேம்படுத்துதல்',
+    message:
+      'உற்பத்தித்திறனை அதிகரிக்கவும், மண் குறைவதைத் தடுக்கவும், நோய்களின் அபாயத்தைக் குறைக்கவும் ஒரு திறமையான பயிர் சுழற்சி திட்டத்தை எவ்வாறு செயல்படுத்துவது?'
   }
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
-    <div className="mx-auto max-w-2xl px-4">
-      <div className="rounded-lg border bg-background p-8">
-        <h1 className="mb-2 text-lg font-semibold">
-          Welcome to AgroVoiceAI Chatbot!
-        </h1>
-        <p className="mb-2 leading-normal text-muted-foreground"></p>
-        <p className="leading-normal text-muted-foreground">
-          You can start a conversation here or try the following examples:
-        </p>
-        <div className="mt-4 flex flex-col items-start space-y-2">
-          {exampleMessages.map((message, index) => (
-            <Button
-              key={index}
-              variant="link"
-              className="h-auto p-0 text-base"
-              onClick={() => setInput(message.message)}
-            >
-              <IconArrowRight className="mr-2 text-muted-foreground" />
-              {message.heading}
-            </Button>
-          ))}
-        </div>
-      </div>
+    <div className="mx-auto max-w-full flex justify-center ">
+    <div className="max-w-3xl mx-auto pt-[5rem]">
+      <IconOpenAI className="size-16 mx-auto " />
+      <p className="mx-auto flex justify-center pt-4 text-3xl font-semibold">
+        AgroVoiceAI
+      </p>
     </div>
+    <div className="mx-auto max-w-3xl absolute bottom-40 grid grid-cols-2 gap-3 p-4">
+      {exampleMessages.map((message, index) => (
+        <Button
+          key={index}
+          variant="ghost"
+          className="h-auto rounded-2xl px-4 py-6 space-x-4 border justify-start dark:border-gray-800 dark:hover:border-gray-700 bg-background text-base"
+          onClick={() => setInput(message.message)}
+        >
+          {/* <IconArrowRight className="mr-2  text-muted-foreground" /> */}
+          {message.heading}
+        </Button>
+      ))}
+    </div>
+  </div>
+  
   )
 }

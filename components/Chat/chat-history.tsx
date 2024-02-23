@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { SidebarList } from '@/components/Sidebar/sidebar-list'
 import { buttonVariants } from '@/components/ui/button'
 import { IconPlus } from '@/components/ui/icons'
+import { UserMenu } from '../user-menu'
 
 interface ChatHistoryProps {
   userId?: string
@@ -13,7 +14,7 @@ interface ChatHistoryProps {
 
 export async function ChatHistory({ userId }: ChatHistoryProps) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full p-2">
       <div className="px-2 my-4 space-x-2 flex">
         <Link
           href="/"
@@ -42,6 +43,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
         {/* @ts-ignore */}
         <SidebarList userId={userId} />
       </React.Suspense>
+      <UserMenu />
     </div>
   )
 }
