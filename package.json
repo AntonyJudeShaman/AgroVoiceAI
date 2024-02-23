@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "next build && prisma generate",
+    "build": "next build && prisma generate --no-engine",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
