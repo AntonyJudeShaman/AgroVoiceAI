@@ -10,9 +10,7 @@ import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/Chat/chat-message-actions'
-import { auth } from '@/auth'
 import Image from 'next/image'
-import { Session } from 'next-auth'
 
 export interface ChatMessageProps {
   message: Message

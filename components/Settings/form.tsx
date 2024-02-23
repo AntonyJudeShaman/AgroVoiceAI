@@ -30,10 +30,9 @@ export function SettingsForm({
   const router = useRouter()
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
   const [isSavingImage, setIsSavingImage] = React.useState<boolean>(false)
-  const [isSavingPhone, setIsSavingPhone] = React.useState<boolean>(false)
-  const [isSavingGender, setIsSavingGender] = React.useState<boolean>(false)
-  const [isSavingAge, setIsSavingAge] = React.useState<boolean>(false)
+  const [name, setName] = useState('');
 
+  
   return (
     <form
       className={cn(className, 'space-y-4')}

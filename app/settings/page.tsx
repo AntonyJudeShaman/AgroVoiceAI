@@ -1,6 +1,6 @@
 import { SettingsHeader } from '@/components/header'
-import { SettingsForm } from '@/components/settings-form'
-import { SettingsShell } from '@/components/settings-shell'
+import { SettingsForm } from '@/components/Settings/settings-form'
+import { SettingsShell } from '@/components/Settings/settings-shell'
 import React from 'react'
 import { getUser } from '../actions'
 

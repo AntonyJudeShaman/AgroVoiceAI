@@ -3,11 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { auth } from '@/auth'
+import { auth } from '@/lib/auth'
 import { type Chat } from '@/lib/types'
 
 import redis from '@/lib/redis'
-
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
@@ -30,12 +29,12 @@ export async function getChats(userId?: string | null) {
     return []
   }
 }
-
 export async function getUser(){
   const session = await auth()
 
   return session?.user
 }
+
 
 export async function getChat(id: string, userId: string) {
   const chat = await redis.hgetall<Chat>(`chat:${id}`)

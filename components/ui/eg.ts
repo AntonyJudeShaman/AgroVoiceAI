@@ -1,7 +1,7 @@
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
 
-import { auth } from '@/auth'
+import { auth } from '@/lib/auth'
 import { nanoid } from '@/lib/utils'
 import redis from '@/lib/redis'
 // export const runtime = 'nodejs16'

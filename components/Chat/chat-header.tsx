@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
-import { auth } from '@/auth'
+import { auth } from '@/lib/auth'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   IconGitHub,
