@@ -47,18 +47,18 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         ) : (
           <>
             <EmptyScreen setInput={setInput} />{' '}
-            <ChatPanel
-              id={id}
-              isLoading={isLoading}
-              stop={stop}
-              append={append}
-              reload={reload}
-              messages={messages}
-              input={input}
-              setInput={setInput}
-            />
+            
           </>
-        )}
+        )}<ChatPanel
+        id={id}
+        isLoading={isLoading}
+        stop={stop}
+        append={append}
+        reload={reload}
+        messages={messages}
+        input={input}
+        setInput={setInput}
+      />
       </div>
     </>
   )

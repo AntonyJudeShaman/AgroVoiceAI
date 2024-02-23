@@ -7,7 +7,7 @@ import { getUser } from '../actions'
 async function Settings() {
   const session = await getUser()
   return (
-    <SettingsShell>
+    <SettingsShell className=''>
       <SettingsHeader
         heading="Settings"
         text="Manage account and website settings."

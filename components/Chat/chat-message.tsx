@@ -37,7 +37,7 @@ export function ChatMessage({ message, userImage, userName,  ...props }: ChatMes
         {message.role === 'user' ? <Image
                 className="size-7 transition-opacity duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
                 src={userImage ? `${userImage}` : ''}
-                alt={'Avatar'}
+                alt={userName || 'Avatar'}
                 height={48}
                 width={48}
                 title={userName || 'User'}

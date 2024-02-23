@@ -10,7 +10,7 @@ export function SettingsShell({
   ...props
 }: SettingsShellProps) {
   return (
-    <div className={cn("grid container py-10 items-start gap-8", className)} {...props}>
+    <div className={cn("grid container md:pl-40 md:pr-40 p-4 py-10 items-start gap-8", className)} {...props}>
       {children}
     </div>
   )

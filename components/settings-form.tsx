@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Loader2, User } from 'lucide-react'
+import { Loader2, Trash2, User } from 'lucide-react'
 
 export function SettingsForm({
   user,
@@ -62,47 +62,51 @@ export function SettingsForm({
               type="submit"
               className={cn(buttonVariants(), className)}
               disabled={isSaving}
+              variant="outline"
             >
               {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               <span>Save</span>
             </Button>
           </CardFooter>
         </Card>
-        <Card className=" max-w-full">
-          <div className="flex md:flex-row flex-col">
-            <div className="flex-1">
-              <CardHeader>
-                <CardTitle>Profile Image</CardTitle>
-                <CardDescription>
-                  Upload a profile image (optional).
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="">
-                <Label className="sr-only" htmlFor="image">
-                  Image
-                </Label>
-                <Input id="image" type="file" accept="image/*" />
-              </CardContent>
-              <CardFooter>
-                <Button
-                  type="submit"
-                  className={cn(buttonVariants(), className)}
-                  disabled={isSavingImage}
-                >
-                  {isSavingImage && (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  <span>Upload</span>
-                </Button>
-              </CardFooter>
-            </div>
-            <p className="rounded-full flex justify-center p-4 items-center">
-              {user?.image ? (
-                <img src={user?.image} alt={user?.name || ''} className='size-36 rounded-full p-6 flex justify-center items-center'/>
-              ) : (
-                <User className="size-36 bg-slate-700 rounded-full p-6 flex justify-center items-center" />
-              )}
-            </p>
+        <Card className="max-w-full flex md:justify-center">
+            <div className="flex flex-row">
+              <p className="rounded-full flex justify-center items-center">
+                {user?.image ? (
+                  <img
+                    src={user?.image}
+                    alt={user?.name || ''}
+                    className="size-30 rounded-full p-4 flex justify-center items-center"
+                  />
+                ) : (
+                  <User className="size-30 bg-slate-700 rounded-full p-4 flex justify-center items-center" />
+                )}
+              </p>
+              <div className='flex flex-col justify-center'>
+                <CardHeader>
+                  <CardTitle>Profile Picture</CardTitle>
+                  <CardDescription>
+                    Upload a profile image (optional).
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="">
+                  <Label className="sr-only" htmlFor="image">
+                    upload Image
+                  </Label>
+                  <Button
+                    type="submit"
+                    className={cn(className)}
+                    disabled={isSavingImage}
+                    variant="outline"
+                  >
+                    {isSavingImage && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    <span>Upload Avatar</span>
+                  </Button>
+                  {/* <Input id="image" type="file" accept="image/*" /> */}
+                </CardContent>
+              </div>
           </div>
         </Card>
       </div>
@@ -155,16 +159,14 @@ export function SettingsForm({
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Your Phone Number</CardTitle>
-            <CardDescription>
-              Please enter your phone number.
-            </CardDescription>
+            <CardDescription>Please enter your phone number.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-1">
               <Label className="sr-only" htmlFor="name">
                 Phone Number
               </Label>
-              <Input id="name" className="" type='number' size={32} />
+              <Input id="name" className="" type="number" size={32} />
             </div>
           </CardContent>
           <CardFooter>
@@ -179,6 +181,34 @@ export function SettingsForm({
           </CardFooter>
         </Card>
       </div>
+      <Card className="w-full">
+        <CardHeader className="h-">
+          <CardTitle className="text-red-500">Delete account</CardTitle>
+          <CardDescription>
+            This will delete your account and all your data permanently.
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="bg-gray-800/70 rounded-bl-2xl rounded-br-2xl md:-m-2 p-3 justify-end flex">
+          {' '}
+          <Button
+            type="submit"
+            className={cn(
+              buttonVariants(),
+              className,
+              'bg-red-700 text-white border border-red-500 flex justify-center items-center hover:bg-red-600/60 hover:text-white hover:border-red-500'
+            )}
+            size="lg"
+            disabled={isSaving}
+          >
+            {isSaving ? (
+              <Loader2 className="mr-2 size-4 animate-spin" />
+            ) : (
+              <Trash2 className="mr-2 size-4" />
+            )}
+            <span>Delete account</span>
+          </Button>
+        </CardFooter>
+      </Card>
     </form>
   )
 }
