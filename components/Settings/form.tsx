@@ -63,7 +63,7 @@ export function SettingsForm({
               disabled={isSaving}
               variant="outline"
             >
-              {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}
               <span>Save</span>
             </Button>
           </CardFooter>
@@ -99,7 +99,7 @@ export function SettingsForm({
                     variant="outline"
                   >
                     {isSavingImage && (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="mr-2 size-4 animate-spin" />
                     )}
                     <span>Upload Avatar</span>
                   </Button>
@@ -150,7 +150,7 @@ export function SettingsForm({
               className={cn(buttonVariants(), className)}
               disabled={isSaving}
             >
-              {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}
               <span>Save</span>
             </Button>
           </CardFooter>
@@ -174,7 +174,7 @@ export function SettingsForm({
               className={cn(buttonVariants(), className)}
               disabled={isSaving}
             >
-              {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}
               <span>Save</span>
             </Button>
           </CardFooter>
