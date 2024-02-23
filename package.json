@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit",
     "format:write": "prettier --write \"{app,lib,components}/**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"{app,lib,components}**/*.{ts,tsx,mdx}\" --cache",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --no-engine"
   },
   "dependencies": {
     "@google/generative-ai": "^0.2.1",
