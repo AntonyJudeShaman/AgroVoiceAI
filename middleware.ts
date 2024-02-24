@@ -11,8 +11,6 @@ export default async function middleware(req: NextRequest) {
   const session = await getCurrentUser()
   if (!session && path === "/settings") {
     return NextResponse.redirect(new URL("/", req.url));
-  } else if (session && (path === "/sign-in")) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
+  } 
   return NextResponse.next();
 }
