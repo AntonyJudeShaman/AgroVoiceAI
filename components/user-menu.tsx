@@ -37,7 +37,7 @@ export function UserMenu() {
         const sessionData = await getUser()
         setSession(sessionData)
       } catch (error) {
-        console.error('Error fetching user data:', error)
+        // console.error('Error fetching user data:', error)
       }
     }
 

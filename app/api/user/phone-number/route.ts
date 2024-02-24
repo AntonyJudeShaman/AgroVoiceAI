@@ -20,7 +20,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: false, error: "Failed to update phone number" }, { status: 400 });
         }
     } catch (error) {
-        console.error("Error updating phone number:", error);
+        // console.error("Error updating phone number:", error);
         return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
     }
 }

@@ -73,7 +73,7 @@ export function SettingsForm({
     setImageURL(file ? URL.createObjectURL(file) : null)
     // setImage(acceptedFiles)
   }, [])
-  console.log(imageURL)
+  // console.log(imageURL)
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

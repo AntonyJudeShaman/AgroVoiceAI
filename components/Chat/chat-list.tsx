@@ -21,7 +21,7 @@ export function ChatList({ messages }: ChatList) {
         const sessionData = await getCurrentUser();
         setSession(sessionData as User);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        // console.error('Error fetching user data:', error);
       }
     };
 

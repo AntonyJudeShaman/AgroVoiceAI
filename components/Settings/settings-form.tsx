@@ -95,7 +95,7 @@ export function SettingsForm({
     setImageURL(downloadURL)
     toast.dismiss()
   }, [])
-  console.log(imageURL)
+  // console.log(imageURL)
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
