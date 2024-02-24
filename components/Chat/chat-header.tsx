@@ -55,13 +55,13 @@ export function Header() {
     { name: 'Contact', path: '/contact' }
   ]
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 flex items-center w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
       <div className="flex items-center justify-start">
         <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
           <UserOrLogin />
         </React.Suspense>
       </div>
-      <div className="flex justify-center flex-1">
+      <div className="flex justify-center mx-auto">
         <div className="p-2 mt-2 flex flex-row rounded-full">
           {navItems.map((item, index) => (
             <Link
@@ -75,8 +75,8 @@ export function Header() {
         </div>
       </div>
       <div className="flex items-center justify-end space-x-8">
-        {/* <ThemeToggle /> */}
-        <MovingButton className="">Download App</MovingButton>
+        <ThemeToggle />
+        {/* <MovingButton className="">Download App</MovingButton> */}
       </div>
     </header>
   )

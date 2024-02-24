@@ -9,6 +9,7 @@ module.exports = {
         // hostname: 'avatars.githubusercontent.com',
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
+        hostname: 'firebasestorage.googleapis.com',
         port: '',
         pathname: '**'
       }
