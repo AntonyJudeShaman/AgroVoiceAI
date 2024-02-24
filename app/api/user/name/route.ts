@@ -15,17 +15,17 @@ export async function POST(req: Request) {
   return NextResponse.json(userName);
 }
 
-export async function GET(req: Request) {
-    const { userId } = await req.json();
+// export async function GET(req: Request) {
+//     const { userId } = await req.json();
   
-    const userName = await db.user.findFirst({
-        where: {
-            id: userId,
-        },
-        select: {
-            name: true
-        }
-    });
-    return NextResponse.json(userName);
-  }
+//     const userName = await db.user.findFirst({
+//         where: {
+//             id: userId,
+//         },
+//         select: {
+//             name: true
+//         }
+//     });
+//     return NextResponse.json(userName);
+//   }
   

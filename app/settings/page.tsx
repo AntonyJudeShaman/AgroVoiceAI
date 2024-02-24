@@ -2,10 +2,10 @@ import { SettingsHeader } from '@/components/header'
 import { SettingsForm } from '@/components/Settings/settings-form'
 import { SettingsShell } from '@/components/Settings/settings-shell'
 import React from 'react'
-import { getUser } from '../actions'
+import { getCurrentUser } from '../actions'
 
 async function Settings() {
-  const session = await getUser()
+  const session = await getCurrentUser()
   return (
     <SettingsShell className=''>
       <SettingsHeader

@@ -1,12 +1,13 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { auth } from '@/lib/auth'
 import { type Chat } from '@/lib/types'
 
 import redis from '@/lib/redis'
+import { db } from '@/lib/db'
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
@@ -35,6 +36,87 @@ export async function getUser(){
   return session?.user
 }
 
+export async function getCurrentUser() {
+  const session = await auth()
+  const user = await db.user.findFirst({
+    where: {
+      email: session?.user.email,
+    },
+  });
+  return user;
+}
+
+export async function getUserId() {
+  const session = await auth()
+
+  return session?.user?.id
+}
+
+export async function removeImage() {
+  const id = await getUserId()
+
+  if (!id) {
+    return {
+      error: 'Unauthorized'
+    }
+  }
+
+  try {
+    await db.user.update({
+      where: {
+        id: id
+      },
+      data: {
+        image: null
+      }
+    })
+  }
+  catch (error) {
+    return {
+      error: 'Something went wrong'
+    }
+  }
+  revalidateTag('user')
+}
+
+export async function deleteAccount() {
+  const id = await getUserId()
+
+  if (!id) {
+    return {
+      error: 'Unauthorized'
+    }
+  }
+  try {
+    await db.user.delete({
+      where: {
+        id: id
+      }
+    })
+
+    const userAccounts = await db.account.findMany({
+      where: {
+        userId: id
+      }
+    })
+    
+    for (const account of userAccounts) {
+      await db.account.delete({
+        where: {
+          id: account.id
+        }
+      })
+    }
+    
+    // return redirect('/sign-in')
+  }
+  catch (error) {
+    return {
+    error: 'Something went wrong'
+    }
+  }
+}
+
 
 export async function getChat(id: string, userId: string) {
   const chat = await redis.hgetall<Chat>(`chat:${id}`)
@@ -55,7 +137,6 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
     }
   }
 
-  //Convert uid to string for consistent comparison with session.user.id
   const uid = String(await redis.hget(`chat:${id}`, 'userId'))
 
   if (uid !== session?.user?.id) {

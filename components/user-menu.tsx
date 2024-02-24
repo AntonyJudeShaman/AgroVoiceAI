@@ -16,7 +16,7 @@ import {
 import { IconExternalLink } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
 import { ThemeToggle } from './Theme/theme-toggle'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getUser } from '@/app/actions'
 
 export interface UserMenuProps {

@@ -12,7 +12,7 @@ export function Sidebar({ className, children }: SidebarProps) {
 
   return (
     <div
-      data-state={isSidebarOpen && !isLoading ? 'open' : 'closed'}
+      data-state={isSidebarOpen && !isLoading ? 'open' : 'open'}
       className={cn(className, 'h-full flex-col dark:bg-zinc-950')}
     >
       {children}

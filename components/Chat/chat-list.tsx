@@ -3,7 +3,7 @@ import { type Message } from 'ai'
 
 import { Separator } from '@/components/ui/separator'
 import { ChatMessage } from '@/components/Chat/chat-message'
-import { getUser } from '@/app/actions'
+import { getCurrentUser, getUser } from '@/app/actions'
 import { useEffect, useState } from 'react'
 import { User } from 'next-auth'
 
@@ -18,8 +18,8 @@ export function ChatList({ messages }: ChatList) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sessionData = await getUser();
-        setSession(sessionData);
+        const sessionData = await getCurrentUser();
+        setSession(sessionData as User);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }

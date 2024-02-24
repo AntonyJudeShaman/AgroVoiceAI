@@ -16,15 +16,16 @@ import { SidebarToggle } from '../Sidebar/sidebar-toggle'
 import { ChatHistory } from './chat-history'
 import { MovingButton } from '../ui/moving-border'
 import { ThemeToggle } from '../Theme/theme-toggle'
+import { getCurrentUser} from '@/app/actions'
 
 async function UserOrLogin() {
-  const session = await auth()
+  const session = await getCurrentUser()
   return (
     <>
-      {session?.user ? (
+      {session?.id ?  (
         <>
           <SidebarMobile>
-            <ChatHistory userId={session.user.id} />
+            <ChatHistory userId={session.id} />
           </SidebarMobile>
           <SidebarToggle />
         </>
@@ -36,8 +37,8 @@ async function UserOrLogin() {
       )}
       <div className="flex items-center">
         {/* <IconSeparator className="size-6 text-muted-foreground/50" /> */}
-        {!session?.user && (
-          // <UserMenu user={session.user} />
+        {!session?.id && (
+          // <UserMenu user={session} />
           <Button variant="link" asChild className="-ml-2">
             <Link href="/sign-in">Login</Link>
           </Button>

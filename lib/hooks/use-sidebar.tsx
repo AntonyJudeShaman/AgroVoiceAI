@@ -33,14 +33,14 @@ export function SidebarProvider({ children }: SidebarProviderProps) {
   React.useEffect(() => {
     const value = localStorage.getItem(LOCAL_STORAGE_KEY)
     if (value) {
-      setSidebarOpen(JSON.parse(value))
+      setSidebarOpen(true)
     }
     setLoading(false)
   }, [])
 
   const toggleSidebar = () => {
     setSidebarOpen(value => {
-      const newState = !value
+      const newState = true
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newState))
       return newState
     })

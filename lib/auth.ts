@@ -4,8 +4,6 @@ import Google from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { db } from './db';
 
-// export const runtime = 'edge'
-
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -53,6 +51,8 @@ export const {
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
+        phone: dbUser.phone,
+        age: dbUser.age,
       };
     },
   },
