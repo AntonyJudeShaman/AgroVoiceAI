@@ -7,6 +7,8 @@ import redis from '@/lib/redis'
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from 'ai';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
  
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || '');
  
@@ -28,7 +30,11 @@ export async function POST(req: Request) {
   const { messages } = json
   const userId = (await auth())?.user.id
 
+  const router = useRouter()
+
   if (!userId) {
+    toast.error('You must be logged in to use this feature');
+    router.push('/sign-in')
     return new Response('Unauthorized', {
       status: 401
     })

@@ -21,7 +21,7 @@ export function SidebarMobile({ children }: SidebarMobileProps) {
         </Button>
       </SheetTrigger>
       <SheetContent className="inset-y-0 flex h-auto w-[300px] flex-col p-0">
-        <Sidebar className="flex">{children}</Sidebar>
+        <Sidebar className="flex pt-6">{children}</Sidebar>
       </SheetContent>
     </Sheet>
   )

@@ -21,23 +21,6 @@ export function LoginButton({
   const [isLoading, setIsLoading] = React.useState(false)
   return (
     <div className='flex flex-col gap-4'>
-    {/* <Button
-      variant="outline"
-      onClick={() => {
-        setIsLoading(true)
-        signIn('github', { callbackUrl: `/` })
-      }}
-      disabled={isLoading}
-      className={cn(className, "p-5")}
-      {...props}
-    >
-      {isLoading ? (
-        <IconSpinner className="mr-2 animate-spin" />
-      ) : showGoogleIcon ? (
-        <IconGitHub className="mr-2" />
-      ) : null}
-      {text}
-    </Button> */}
     <Button
       variant="outline"
       onClick={() => {

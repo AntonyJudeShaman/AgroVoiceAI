@@ -7,12 +7,21 @@ import { SidebarList } from '@/components/Sidebar/sidebar-list'
 import { buttonVariants } from '@/components/ui/button'
 import { IconPlus } from '@/components/ui/icons'
 import { UserMenu } from '../user-menu'
+import { ClearHistory } from '../clear-history'
+import { cache } from 'react'
+import { clearChats, getChats } from '@/app/actions'
 
 interface ChatHistoryProps {
   userId?: string
 }
 
+const loadChats = cache(async (userId?: string) => {
+  return await getChats(userId)
+})
 export async function ChatHistory({ userId }: ChatHistoryProps) {
+  
+  const chats = await loadChats(userId)
+
   return (
     <div className="flex flex-col h-full p-2">
       <div className="px-2 my-4 space-x-2 flex">
@@ -26,6 +35,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
           <IconPlus className="-translate-x-2 stroke-2" />
           New Chat
         </Link>
+        <ClearHistory clearChats={clearChats} isEnabled={chats?.length > 0} />
         {/* <ThemeToggle /> */}
       </div>
       <React.Suspense
