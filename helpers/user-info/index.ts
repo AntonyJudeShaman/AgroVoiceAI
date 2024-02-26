@@ -14,8 +14,7 @@ const handleNameSubmit = async (
   setIsSaving(true)
 
   try {
-    nameSchema.parse(name); // Validate the name using the nameSchema
-    // If the name is valid, proceed with the fetch request
+    nameSchema.parse(name);
     const response = await fetch(`/api/user/name`, {
       method: 'POST',
       headers: {
