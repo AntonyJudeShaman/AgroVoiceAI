@@ -35,7 +35,7 @@ export function ChatList({ messages }: ChatList) {
   }
   
   return (
-    <div className="relative mx-auto max-w-2xl md:mb-[12%] -mb-[25%] px-4">
+    <div className="relative mx-auto max-w-2xl md:mb-[28%] xl:mb-[14%] -mb-[10%] px-4">
       {messages.map((message, index) => (
         <div key={index} className=''>
           <ChatMessage message={message} userImage={session?.image} userName={session?.name}/>
