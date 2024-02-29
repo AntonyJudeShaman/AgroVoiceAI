@@ -32,7 +32,10 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)']
+        mono: ['var(--font-geist-mono)'],
+				display: ["var(--font-calsans)"],
+        pops: ["var(--font-pops)"],
+        inter: ["var(--font-inter)"]
       },
       colors: {
         border: 'hsl(var(--border))',

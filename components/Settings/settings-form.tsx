@@ -1,6 +1,6 @@
 'use client'
 import { useCallback, useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
@@ -64,6 +64,7 @@ export function SettingsForm({
 
   const firebaseApp = initializeApp(firebaseConfig, 'profile')
   const storage = getStorage(firebaseApp)
+  const router = useRouter()
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
@@ -116,6 +117,7 @@ export function SettingsForm({
         setIsImageChanged,
         toast
       )
+      router.refresh()
     } catch (error) {
       toast.error('Error uploading file. Please try again later.')
     }

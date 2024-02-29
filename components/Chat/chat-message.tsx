@@ -10,15 +10,12 @@ import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/Chat/chat-message-actions'
-import Image from 'next/image'
 
 export interface ChatMessageProps {
   message: Message
-  userImage: string | null | undefined
-  userName: string | null | undefined
 }
 
-export function ChatMessage({ message, userImage, userName,  ...props }: ChatMessageProps) {
+export function ChatMessage({ message, ...props }: ChatMessageProps) {
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -26,20 +23,13 @@ export function ChatMessage({ message, userImage, userName,  ...props }: ChatMes
     >
       <div
         className={cn(
-          'flex size-8 shrink-0 select-none items-center justify-center rounded-full border shadow',
+          'flex size-8 shrink-0 select-none items-center justify-center rounded-md border shadow',
           message.role === 'user'
             ? 'bg-background'
             : 'bg-primary text-primary-foreground'
         )}
       >
-        {message.role === 'user' ? <Image
-                className="size-7 transition-opacity duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
-                src={userImage ? `${userImage}` : ''}
-                alt={userName || 'Avatar'}
-                height={48}
-                width={48}
-                title={userName || 'User'}
-              /> :  <IconOpenAI className='hover:opacity-80 transition-opacity duration-300'/>}
+        {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown

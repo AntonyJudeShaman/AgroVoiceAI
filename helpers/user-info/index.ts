@@ -68,7 +68,6 @@ const handleImageSubmit = async (
     if (response.ok) {
       toast.dismiss()
       toast.success('Profile picture updated.');
-      setIsImageChanged(false);
     } else {
       const errorMessage = await response.text(); 
       toast.dismiss()

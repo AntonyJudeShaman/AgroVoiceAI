@@ -2,15 +2,30 @@ import { Toaster } from 'react-hot-toast'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 
+import LocalFont from 'next/font/local'
 import '@/app/globals.css'
 import { cn } from '@/lib/utils'
 import { Header } from '@/components/Chat/chat-header'
 import { Analytics } from '@vercel/analytics/react'
 import { MovingButton } from '@/components/ui/moving-border'
 import { Providers } from '@/components/Theme/providers'
+import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const poppins = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'latin-ext', 'devanagari'],
+  variable: '--font-pops'
+})
+
+const calSans = LocalFont({
+  src: '../public/fonts/CalSans-SemiBold.ttf',
+  variable: '--font-calsans'
+})
 
 export const metadata = {
-  metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
   title: {
     default: 'AgroVoiceAI',
     template: `%s - AgroVoiceAI`
@@ -42,7 +57,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           'font-sans antialiased',
           GeistSans.variable,
-          GeistMono.variable
+          GeistMono.variable,
+          inter.variable,
+          calSans.variable,
+          poppins.variable
         )}
       >
         <Toaster />
