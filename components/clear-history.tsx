@@ -44,7 +44,7 @@ export function ClearHistory({
           <AlertDialogTrigger asChild>
             <Button
               variant="ghost"
-              className=""
+              className="h-10"
               disabled={!isEnabled || isPending}
             >
               {isPending && <IconSpinner className="mr-2" />}

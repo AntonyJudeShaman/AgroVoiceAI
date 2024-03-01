@@ -17,6 +17,8 @@ import { IconExternalLink } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
 import { ThemeToggle } from './Theme/theme-toggle'
 import React, { useEffect, useState } from 'react'
+import { auth } from '@/lib/auth'
+import Link from 'next/link'
 import { getUser } from '@/app/actions'
 
 export interface UserMenuProps {
@@ -35,9 +37,9 @@ export function UserMenu() {
     const fetchData = async () => {
       try {
         const sessionData = await getUser()
-        setSession(sessionData)
+        setSession(sessionData as unknown as User | undefined)
       } catch (error) {
-        // console.error('Error fetching user data:', error)
+        console.error('Error fetching user data:', error)
       }
     }
 
@@ -54,7 +56,6 @@ export function UserMenu() {
   )
 
   const user = session
-  const router = useRouter()
   const { setTheme, theme } = useTheme()
   return (
     <React.Suspense fallback={<LoadingFallback />}>
@@ -88,12 +89,12 @@ export function UserMenu() {
               <div className="text-sm text-zinc-500 ">{user?.email}</div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+            <Link href="/settings">
             <DropdownMenuItem
-              onClick={() => router.push('/settings')}
               className="flex-col text-sm h-8 items-start cursor-pointer"
             >
               Settings
-            </DropdownMenuItem>
+            </DropdownMenuItem></Link>
             <DropdownMenuItem
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="flex items-center h-8 justify-between text-sm cursor-pointer"
@@ -107,7 +108,7 @@ export function UserMenu() {
             <DropdownMenuItem
               onClick={() =>
                 signOut({
-                  callbackUrl: '/'
+                  callbackUrl: '/home'
                 })
               }
               className="text-sm h-8 cursor-pointer"
