@@ -15,6 +15,8 @@ import { IconGitHub, IconGoogle, IconSpinner } from './ui/icons'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 interface CreateAccountProps {
   text?: string
@@ -26,14 +28,34 @@ export function Account({
   showGoogleIcon = true
 }: CreateAccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
+  const [name, setName] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [isNameChanged, setIsNameChanged] = React.useState<boolean>(false)
+  const [isPasswordChanged, setIsPasswordChanged] =
+    React.useState<boolean>(false)
+  const router = useRouter()
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value)
+    setIsNameChanged(event.target.value !== name)
+  }
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value)
+    setIsPasswordChanged(event.target.value !== password)
+  }
+
   return (
     <Card className="font-pops ">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl bg-clip-text text-transparent bg-gradient-to-bl from-green-600 to-green-500 dark:from-green-500 dark:to-green-400">Sign in to your account</CardTitle>
+        <CardTitle className="text-2xl bg-clip-text text-transparent bg-gradient-to-bl from-green-600 to-green-500 dark:from-green-500 dark:to-green-400">
+          Sign in to your account
+        </CardTitle>
         <CardDescription>
           Please provide your credentials to sign in
         </CardDescription>
       </CardHeader>
+
       <CardContent className="grid gap-4">
         <div className="grid grid-cols-1 gap-6">
           <Button
@@ -63,22 +85,56 @@ export function Account({
             </span>
           </div>
         </div>
-        <div className="grid gap-2">
-          <label htmlFor="name" className="font-pops">
-            Username
-          </label>
-          <Input id="name" type="name" placeholder="Enter your username" />
-        </div>
-        <div className="grid gap-2">
-          <label className="font-pops" htmlFor="password">
-            Password
-          </label>
-          <Input id="password" type="password" placeholder='Enter your password' />
-        </div>
+        <form
+          onSubmit={e => {
+            e.preventDefault()
+            setIsLoading(true)
+
+            signIn('credentials', {
+              redirect: false,
+              email: name,
+              password: password
+              // @ts-ignore
+            }).then(({ error }) => {
+              if (error) {
+                setIsLoading(false)
+                toast.error(error)
+              } else {
+                router.refresh()
+                router.push('/')
+              }
+            })
+          }}
+        >
+          <div className="grid gap-2">
+            <label htmlFor="name" className="font-pops">
+              Username
+            </label>
+            <Input
+              id="name"
+              type="name"
+              placeholder="Enter your username"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+          <div className="grid gap-2">
+            <label className="font-pops" htmlFor="password">
+              Password
+            </label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <Button className="w-full" size="lg" type='submit'>
+          {isLoading ? <IconSpinner className="mr-2 animate-spin" /> : "Sign In"}
+          </Button>
+        </form>
       </CardContent>
-      <CardFooter>
-        <Button className="w-full" size="lg">Sign In</Button>
-      </CardFooter>
     </Card>
   )
 }

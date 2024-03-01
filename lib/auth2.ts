@@ -1,10 +1,8 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import Google from 'next-auth/providers/google'
-import CredentialsProvider from "next-auth/providers/credentials";
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { db } from './db';
-import { compare } from 'bcrypt';
 
 declare module 'next-auth' {
   interface Session {
@@ -19,29 +17,7 @@ export const {
   handlers: { GET, POST },
   auth
 } = NextAuth({
-  providers: [Google,
-  CredentialsProvider({
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
-      },
-      async authorize(credentials:any) {
-        const { email, password } = credentials ?? {}
-        if (!email || !password) {
-          throw new Error("Missing username or password");
-        }
-        const user = await db.user.findUnique({
-          where: {
-            email,
-          },
-        });
-        // if user doesn't exist or password doesn't match
-        if (!user || !(await compare(password as string, user.password as string))) {
-          throw new Error("Invalid username or password");
-        }
-        return user || null;
-      },
-    }),],
+  providers: [Google],
   adapter: PrismaAdapter(db as any),
   session: {
     strategy: "jwt",

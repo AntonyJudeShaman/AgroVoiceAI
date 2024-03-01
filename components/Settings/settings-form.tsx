@@ -144,8 +144,6 @@ export function SettingsForm({
               )
             }
           >
-            {' '}
-            {/* Pass handleNameSubmit as onSubmit handler */}
             <CardHeader>
               <CardTitle>Your Name</CardTitle>
               <CardDescription>
