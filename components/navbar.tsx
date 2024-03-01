@@ -11,11 +11,26 @@ import { IconMenu } from './ui/icons'
 import { ThemeToggle } from './Theme/theme-toggle'
 import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
+
   return (
-    <header className="flex dark:text-white text-black h-20 min-w-full justify-between items-center px-4 md:px-6">
-      <Sheet>
+    <nav className={`flex dark:text-white text-black h-20 transition-transform duration-1000 min-w-full justify-between items-center px-4 md:px-6 ${scrolled ? 'fixed left-0 justify-start w-1/2 backdrop-blur-lg duration-1000 shadow-md z-50' : ''}`}>
+        <Sheet>
         <SheetTrigger asChild>
           <Button
             className="lg:hidden dark:text-white text-black font-pops"
@@ -94,6 +109,6 @@ export default function Navbar() {
           </Link>
         </Button>
       </div>
-    </header>
+    </nav>
   )
 }

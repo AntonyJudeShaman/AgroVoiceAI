@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Header } from './header'
 
 export default function Home() {
   return (
@@ -17,17 +18,19 @@ export default function Home() {
                 ensuring every crop conversation yields success.
               </p>
             </div>
-            <div className="flex gap-2 min-[400px] md:flex-row flex-col">
-              <Button size="lg">
-                <Link href="sign-in">Start Chatting</Link>
-              </Button>
-              <Button
-                size="lg"
-                className="dark:bg-black dark:hover:bg-gray-900 bg-white dark:text-white text-black"
-                variant="outline"
-              >
-                Download Our App
-              </Button>
+            <div className="flex gap-4 md:flex-row flex-col">
+              <Link href="/sign-in">
+                <Button size="lg" variant="default">Start Chatting</Button>
+              </Link>
+              <Link href="#">
+                <Button
+                  size="lg"
+                  className="dark:bg-black dark:hover:bg-gray-900 bg-white dark:text-white text-black"
+                  variant="outline"
+                >
+                  Download Our App
+                </Button>
+              </Link>
             </div>
           </div>
         </main>

@@ -55,12 +55,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'font-sans antialiased',
+          'font-sans antialiased dark:bg-black bg-white transition-transform duration-1000',
           GeistSans.variable,
           GeistMono.variable,
           inter.variable,
           calSans.variable,
-          poppins.variable
+          poppins.variable,
+          `
+          ${
+            process.env.NODE_ENV === 'development' ? 'debug-screens' : undefined
+          }`
         )}
       >
         <Toaster />
@@ -71,9 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            <main className="flex flex-col flex-1 bg-muted/50">
-              {children}
-            </main>{' '}
+            <main className="flex flex-col flex-1 bg-muted/50">{children}</main>{' '}
             <Analytics />
           </div>
         </Providers>

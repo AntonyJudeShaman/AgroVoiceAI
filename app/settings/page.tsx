@@ -1,4 +1,4 @@
-import { SettingsHeader } from '@/components/header'
+import { Header } from '@/components/header'
 import { SettingsForm } from '@/components/Settings/settings-form'
 import { SettingsShell } from '@/components/Settings/settings-shell'
 import React from 'react'
@@ -8,7 +8,7 @@ async function Settings() {
   const session = await auth()
   return (
     <SettingsShell className=''>
-      <SettingsHeader
+      <Header
         heading="Settings"
         text="Manage account and website settings."
       />

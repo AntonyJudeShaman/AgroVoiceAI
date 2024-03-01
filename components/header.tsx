@@ -1,21 +1,24 @@
-interface SettingsHeaderProps {
+import { cn } from "@/lib/utils"
+
+interface HeaderProps {
   heading: string
   text?: string
   children?: React.ReactNode
+  className?: string
 }
 
-export function SettingsHeader({
+export function Header({
   heading,
   text,
   children,
-}: SettingsHeaderProps) {
+  className
+}: HeaderProps) {
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className="flex items-center justify-center px-2">
       <div className="grid gap-1">
-        <h1 className="font-heading text-4xl font-semibold tracking-tighter">{heading}</h1>
+        <h1 className={cn('mx-auto font-display tracking-tight', className)}>{heading}</h1>
         {text && <p className="text-md text-muted-foreground">{text}</p>}
       </div>
-      {children}
     </div>
   )
 }

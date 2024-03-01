@@ -108,7 +108,7 @@ export function UserMenu() {
             <DropdownMenuItem
               onClick={() =>
                 signOut({
-                  callbackUrl: '/home'
+                  callbackUrl: '/'
                 })
               }
               className="text-sm h-8 cursor-pointer"
