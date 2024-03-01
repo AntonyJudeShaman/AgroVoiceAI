@@ -105,6 +105,7 @@ export function Account({
               }
             })
           }}
+          className='grid gap-2'
         >
           <div className="grid gap-2">
             <label htmlFor="name" className="font-pops">
@@ -130,7 +131,7 @@ export function Account({
               onChange={handlePasswordChange}
             />
           </div>
-          <Button className="w-full" size="lg" type='submit'>
+          <Button className="w-full mt-2" size="lg" type='submit'>
           {isLoading ? <IconSpinner className="mr-2 animate-spin" /> : "Sign In"}
           </Button>
         </form>
