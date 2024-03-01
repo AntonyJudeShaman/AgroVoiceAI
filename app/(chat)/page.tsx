@@ -1,8 +1,18 @@
 import { nanoid } from '@/lib/utils'
 import { Chat } from '@/components/Chat/chat'
+import { auth } from '@/lib/auth'
+import { DotBackGround } from '@/components/grid-bg'
 
-export default function IndexPage() {
+export default async function IndexPage() {
   const id = nanoid()
 
-  return <Chat id={id} />
+  const session = await auth()
+
+  return !session ? (
+    <div className='flex justify-center flex-col items-center mt-0'>
+    <DotBackGround/>
+    </div>
+  ) : (
+    <Chat id={id} />
+  )
 }

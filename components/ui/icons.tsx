@@ -89,6 +89,74 @@ function IconNextChat({
   )
 }
 
+function IconContact({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2" />
+      <rect width="18" height="18" x="3" y="4" rx="2" />
+      <circle cx="12" cy="10" r="2" />
+      <line x1="8" x2="8" y1="2" y2="4" />
+      <line x1="16" x2="16" y1="2" y2="4" />
+    </svg>
+  )
+}
+
+
+function IconHome({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  )
+}
+
+
+function IconView({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
+      <path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+      <path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
+      <path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2" />
+    </svg>
+  )
+}
+
+
 function IconOpenAI({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
     <svg
@@ -481,15 +549,41 @@ function IconChevronUpDown({
   )
 }
 
+
+function IconMenu(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  )
+}
+
 export {
   IconEdit,
   IconNextChat,
   IconOpenAI,
+  IconContact,
+  IconHome,
+  IconView,
   IconVercel,
   IconGitHub,
   IconGoogle,
   IconSeparator,
   IconArrowDown,
+  IconMenu,
   IconArrowRight,
   IconUser,
   IconPlus,

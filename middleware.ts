@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCurrentUser } from "./app/actions";
+import { auth } from "./lib/auth";
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
@@ -8,7 +8,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const session = await getCurrentUser()
+  const session = await auth()
   if (!session && path === "/settings") {
     return NextResponse.redirect(new URL("/", req.url));
   } 

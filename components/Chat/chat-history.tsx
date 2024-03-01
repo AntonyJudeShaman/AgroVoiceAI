@@ -29,7 +29,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
           href="/"
           className={cn(
             buttonVariants({ variant: 'outline' }),
-            'h-10 w-full justify-start bg-slate-50 px-4 shadow-none transition-colors hover:bg-slate-200/40 dark:bg-slate-900 dark:hover:bg-slate-300/10'
+            'h-10 w-full z-40 justify-start bg-slate-50 px-4 shadow-none transition-colors hover:bg-slate-200/40 dark:bg-slate-900 dark:hover:bg-slate-300/10'
           )}
         >
           <IconPlus className="-translate-x-2 stroke-2" />

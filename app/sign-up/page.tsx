@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import { AccountsTab } from '@/components/Form/Sign-in'
+import { CreateAccount } from '@/components/sign-up'
 import Navbar from '@/components/navbar'
 
 export default async function SignInPage() {
@@ -17,10 +17,13 @@ export default async function SignInPage() {
         <p className="text-4xl sm:text-7xl w-full 2xl:w-2/3 flex flex-col font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-green-500 to-green-400">
           <div className="min-w-full">
             <Navbar />
+            {/* <Link href="/">
+              <ArrowLeft className="size-8 text-white mt-10 ml-4" />
+            </Link> */}
           </div>
         </p>
         <div className="flex flex-col justify-center flex-grow -mt-20">
-          <AccountsTab />
+          <CreateAccount />
         </div>
       </div>
     </>

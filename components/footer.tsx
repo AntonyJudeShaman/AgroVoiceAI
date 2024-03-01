@@ -3,7 +3,7 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import { ExternalLink } from '@/components/external-link'
 
-export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
+export function FooterText({ className, content, ...props }: React.ComponentProps<'p'>) {
   return (
     <p
       className={cn(
@@ -12,7 +12,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
       )}
       {...props}
     >
-     
+     {content}
     </p>
   )
 }

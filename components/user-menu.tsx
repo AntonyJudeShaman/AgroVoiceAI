@@ -82,7 +82,7 @@ export function UserMenu() {
               <span className="ml-2">{user?.name}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent sideOffset={16} align="center" className="w">
+          <DropdownMenuContent sideOffset={16} align="center" className="bg-gradient-to-bl dark:from-zinc-950 dark:to-indigo-950/30 to-60% from-zinc-300 to-indigo-100/30">
             <DropdownMenuItem className="flex-col items-start flex-wrap">
               {/* <div className="text-xs font-medium">{user?.name}</div> */}
               <div className="text-sm text-zinc-500 ">{user?.email}</div>
