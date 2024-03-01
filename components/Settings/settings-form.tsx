@@ -164,7 +164,7 @@ export function SettingsForm({
                 />
               </div>
             </CardContent>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 rounded-bl-2xl p-3 border dark:border-gray-700/70 border-gray-600 rounded-br-2xl md:-m-2 md:mt-4 justify-end flex">
+            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 p-3 border dark:border-gray-700/70 border-gray-600 rounded-b-2xl md:-m-2 md:mt-4 justify-end flex">
               <Button
                 type="submit"
                 className={cn(
@@ -359,7 +359,7 @@ export function SettingsForm({
                 />
               </div>
             </CardContent>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 border dark:border-gray-700/70 border-gray-600 rounded-bl-2xl rounded-br-2xl md:-m-2 p-3 md:mt-4 items-end justify-end flex">
+            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 border dark:border-gray-700/70 border-gray-600 rounded-b-2xl md:-m-2 p-3 md:mt-4 items-end justify-end flex">
               <Button
                 type="submit"
                 className={cn(
@@ -411,7 +411,7 @@ export function SettingsForm({
                 />
               </div>
             </CardContent>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 border dark:border-gray-700/70 border-gray-600 rounded-bl-2xl rounded-br-2xl md:-m-2 p-3 md:mt-4 justify-end flex">
+            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 border dark:border-gray-700/70 border-gray-600 rounded-b-2xl md:-m-2 p-3 md:mt-4 justify-end flex">
               {' '}
               <Button
                 type="submit"

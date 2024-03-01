@@ -19,7 +19,7 @@ export default async function SignInPage() {
             <Navbar />
           </div>
         </p>
-        <div className="flex flex-col justify-center flex-grow -mt-20">
+        <div className="flex flex-col justify-center grow -mt-20">
           <AccountsTab />
         </div>
       </div>

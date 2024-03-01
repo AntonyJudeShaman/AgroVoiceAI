@@ -35,6 +35,7 @@ export default function Navbar() {
             {navConfig &&
               navConfig.mainNav.map((item, index) => (
                 <Link
+                key={index}
                   className="flex w-full font-pops items-center py-2 text-lg"
                   href={item.href}
                   aria-label={item.title}

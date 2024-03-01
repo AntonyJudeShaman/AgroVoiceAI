@@ -47,7 +47,7 @@ export function DeleteAccount() {
         </CardHeader>
         <AlertDialog open={open} onOpenChange={setOpen}>
           <AlertDialogTrigger className="" asChild>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600  border dark:border-gray-700/70 border-gray-300 rounded-bl-2xl rounded-br-2xl md:-m-2 p-3 justify-end flex">
+            <CardFooter className="dark:bg-gray-800/70 bg-slate-600  border dark:border-gray-700/70 border-gray-300 rounded-b-2xl md:-m-2 p-3 justify-end flex">
               {' '}
               <Button
                 type="button"

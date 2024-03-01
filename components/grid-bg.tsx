@@ -11,7 +11,7 @@ export function DotBackGround() {
           <Navbar />
         </div>
       </p>
-      <div className="flex 2xl:container flex-col justify-center flex-grow -mt-20">
+      <div className="flex 2xl:container flex-col justify-center grow -mt-20">
         <Home />
       </div>
     </div>
