@@ -23,7 +23,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
   const chats = await loadChats(userId)
 
   return (
-    <div className="flex flex-col w-full h-full p-2">
+    <div className="flex flex-col size-full p-2">
       <div className="px-2 my-4 space-x-2 flex">
         <Link
           href="/"
