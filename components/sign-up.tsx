@@ -27,6 +27,7 @@ export function CreateAccount({
   showGoogleIcon = true
 }: CreateAccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
+  const [isFieldLoading, setIsFieldLoading] = React.useState(false)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [isEmailChanged, setIsEmailChanged] = React.useState<boolean>(false)
@@ -88,7 +89,7 @@ export function CreateAccount({
           <form
             onSubmit={e => {
               e.preventDefault()
-              setIsLoading(true)
+              setIsFieldLoading(true)
               fetch('/api/auth/register', {
                 method: 'POST',
                 headers: {
@@ -99,7 +100,7 @@ export function CreateAccount({
                   pswd: password
                 })
               }).then(async res => {
-                setIsLoading(false)
+                setIsFieldLoading(false)
                 if (res.status === 200) {
                   toast.success('Account created! Redirecting to login...')
                   setTimeout(() => {

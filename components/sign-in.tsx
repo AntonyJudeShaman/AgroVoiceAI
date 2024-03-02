@@ -28,6 +28,7 @@ export function Account({
   showGoogleIcon = true
 }: CreateAccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
+  const [isFieldLoading, setIsFieldLoading] = React.useState(false)
   const [name, setName] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [isNameChanged, setIsNameChanged] = React.useState<boolean>(false)
@@ -88,20 +89,22 @@ export function Account({
         <form
           onSubmit={e => {
             e.preventDefault()
-            setIsLoading(true)
+            setIsFieldLoading(true)
 
             signIn('credentials', {
-              redirect: false,
-              email: name,
-              password: password
+              redirect: true,
+                email: name,
+                password: password
+              
               // @ts-ignore
             }).then(({ error }) => {
               if (error) {
-                setIsLoading(false)
+                setIsFieldLoading(false)
                 toast.error(error)
               } else {
-                router.refresh()
-                router.push('/')
+                // router.refresh()
+                // router.push('/')
+                toast.success('Signed in successfully')
               }
             })
           }}
@@ -132,7 +135,7 @@ export function Account({
             />
           </div>
           <Button className="w-full mt-2" size="lg" type='submit'>
-          {isLoading ? <IconSpinner className="mr-2 animate-spin" /> : "Sign In"}
+          {isFieldLoading && <IconSpinner className="mr-2 animate-spin" /> } Sign In
           </Button>
         </form>
       </CardContent>

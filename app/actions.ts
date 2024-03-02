@@ -8,6 +8,10 @@ import { type Chat } from '@/lib/types'
 
 import redis from '@/lib/redis'
 import { db } from '@/lib/db'
+
+import argon2 from 'argon2';
+import { compare } from 'bcrypt'
+
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
@@ -35,6 +39,20 @@ export async function getUser(){
 
   return session?.user
 }
+
+
+export async function verifyPassword(plaintextPassword: string, hashedPassword: string): Promise<boolean> {
+  try {
+    console.log(plaintextPassword)
+    console.log(hashedPassword)
+    const match = await compare(hashedPassword, plaintextPassword);
+    return match;
+  } catch (error) {
+    console.error('Error verifying password:', error);
+    throw error;
+  }
+}
+
 
 export async function getCurrentUser() {
   const session = await auth()
