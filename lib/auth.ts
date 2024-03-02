@@ -46,14 +46,14 @@ export const {
           error:"User not found."
         }
         if (!user) {
-          return userNotFound; // User not found
+          return null; // User not found
         }
 
         const passwordMatch = await compare(credentials.password as string, user.password!);
         if (passwordMatch) {
           return user;
         } else {
-          return {error:"Invalid password"};
+          return null;
         }
       }
     })
