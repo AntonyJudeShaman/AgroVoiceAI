@@ -31,6 +31,9 @@ module.exports = {
       }
     },
     extend: {
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+      },
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
         mono: ['var(--font-geist-mono)'],
@@ -102,7 +105,17 @@ module.exports = {
           '100%': {
             transform: 'translateX(-100%)'
           }
-        }
+        },
+        spotlight: {
+          "0%": {
+            opacity: 0,
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
       },
       animation: {
         'slide-from-left':
@@ -110,7 +123,8 @@ module.exports = {
         'slide-to-left':
           'slide-to-left 0.25s cubic-bezier(0.82, 0.085, 0.395, 0.895)',
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'spotlight': "spotlight 2s ease .75s 1 forwards",
       }
     }
   },

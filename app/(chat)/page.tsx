@@ -13,7 +13,7 @@ export default async function IndexPage() {
 
   return !session ? (
     <>
-      <div className="flex justify-center dark:bg-black flex-col items-center mt-0">
+      <div className="flex justify-center dark:bg-black bg-slate-50 flex-col items-center mt-0">
         <DotBackGround />
         <HomeFeatures />
         <BentoGrid className="max-w-4xl mx-auto py-10">

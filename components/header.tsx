@@ -16,7 +16,7 @@ export function Header({
   return (
     <div className="flex items-center justify-center px-2">
       <div className="grid gap-1">
-        <h1 className={cn('mx-auto font-display tracking-tight', className)}>{heading}</h1>
+        <h1 className={cn('mx-auto font-display px-5 md:px-0 tracking-tight', className)}>{heading}</h1>
         {text && <p className="text-md text-muted-foreground">{text}</p>}
       </div>
     </div>

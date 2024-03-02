@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Header } from './header'
+import { BsDownload } from 'react-icons/bs'
+import { DownloadIcon } from 'lucide-react'
+import { BottomGradient } from './ui/bottom-gradient'
 
 export default function Home() {
   return (
@@ -20,15 +23,17 @@ export default function Home() {
             </div>
             <div className="flex gap-4 md:flex-row flex-col">
               <Link href="/sign-in">
-                <Button size="lg" variant="default">Start Chatting</Button>
+                <Button size="lg"  className=" relative group/btn flex space-x-2 items-center justify-center px-6 py-5 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                  variant="default">Start Chatting</Button>
               </Link>
               <Link href="#">
                 <Button
                   size="lg"
-                  className="dark:bg-black dark:hover:bg-gray-900 bg-white dark:text-white text-black"
+                  className=" relative group/btn bg-zinc-950/70 hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                   variant="outline"
                 >
-                  Download Our App
+                 <DownloadIcon className='size-5 mr-2'/> Download Our App
+                <BottomGradient />
                 </Button>
               </Link>
             </div>

@@ -17,6 +17,8 @@ import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { BsEye, BsEyeSlash } from 'react-icons/bs'
+import { BottomGradient } from './ui/bottom-gradient'
 
 interface CreateAccountProps {
   text?: string
@@ -29,21 +31,26 @@ export function Account({
 }: CreateAccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFieldLoading, setIsFieldLoading] = React.useState(false)
-  const [name, setName] = React.useState('')
+  const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [isNameChanged, setIsNameChanged] = React.useState<boolean>(false)
+  const [isEmailChanged, setIsEmailChanged] = React.useState<boolean>(false)
   const [isPasswordChanged, setIsPasswordChanged] =
     React.useState<boolean>(false)
+    const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
   const router = useRouter()
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value)
-    setIsNameChanged(event.target.value !== name)
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value)
+    setIsEmailChanged(event.target.value !== email)
   }
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value)
     setIsPasswordChanged(event.target.value !== password)
+  }
+  
+  const passwordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible)
   }
 
   return (
@@ -66,14 +73,15 @@ export function Account({
               signIn('google', { callbackUrl: `/` })
             }}
             disabled={isLoading}
-            className={cn('p-5')}
-          >
+            className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            >
             {isLoading ? (
               <IconSpinner className="mr-2 animate-spin" />
             ) : showGoogleIcon ? (
               <IconGoogle className="mr-2" />
             ) : null}
             {text}
+                <BottomGradient />
           </Button>
         </div>
         <div className="relative">
@@ -111,29 +119,44 @@ export function Account({
           className='grid gap-2'
         >
           <div className="grid gap-2">
-            <label htmlFor="name" className="font-pops">
-              Username
-            </label>
-            <Input
-              id="name"
-              type="name"
-              placeholder="Enter your username"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
+              <label htmlFor="name" className="font-pops">
+                Email
+              </label>
+              <div className="relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+                <Input
+                  id="name"
+                  type="name"
+                  placeholder="Enter your Email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
+                />
+                <BottomGradient />
+              </div>
+            </div>
           <div className="grid gap-2">
-            <label className="font-pops" htmlFor="password">
-              Password
-            </label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-          </div>
+              <label className="font-pops" htmlFor="password">
+                Password
+              </label>
+              <div className=" relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+                <Input
+                  id="password"
+                  type={isPasswordVisible ? 'text' : 'password'}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
+                />
+                <div onClick={passwordVisibility}>
+                  {isPasswordVisible ? (
+                    <BsEye className="pr-1 size-6" />
+                  ) : (
+                    <BsEyeSlash className="pr-1 size-6" />
+                  )}
+                </div>
+                <BottomGradient />
+              </div>
+            </div>
           <Button className="w-full mt-2" size="lg" type='submit'>
           {isFieldLoading && <IconSpinner className="mr-2 animate-spin" /> } Sign In
           </Button>
