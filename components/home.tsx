@@ -29,7 +29,7 @@ export default function Home() {
               <Link href="#">
                 <Button
                   size="lg"
-                  className=" relative group/btn bg-zinc-950/70 hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                  className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                   variant="outline"
                 >
                  <DownloadIcon className='size-5 mr-2'/> Download Our App

@@ -55,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'font-sans antialiased dark:bg-black bg-white transition-transform duration-1000',
+          'font-sans antialiased scroll-smooth dark:bg-black bg-white transition-transform duration-1000',
           GeistSans.variable,
           GeistMono.variable,
           inter.variable,

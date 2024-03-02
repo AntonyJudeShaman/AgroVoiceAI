@@ -22,7 +22,11 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@types/node"
+    ],
   },
   "include": [
     "next-env.d.ts",

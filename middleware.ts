@@ -1,8 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "./lib/auth";
 
-export default async function middleware(req: NextRequest) {
-  const path = req.nextUrl.pathname;
+export default function Middleware(req:any, res:any, next:any) {
+  // Do something
+  
+  const { url } = req;
+  const session = req.session;
+  if (url === '/sign-in' || url === '/sign-up' && session.user) {
+    return res.redirect('/');
+  }
+  
+  if (url === '/settings' && !session.user) {
+    return res.redirect('/');
+  }
+}
 
-  return NextResponse.next();
+export const config = {
+  matcher: ['/((?!api|settings|_next/image|favicon.ico).+)']
 }
