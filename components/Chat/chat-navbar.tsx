@@ -65,7 +65,7 @@ export default function ChatNavbar() {
         </NavigationMenuList>
       </NavigationMenu>
       <ThemeToggle />
-      <div className="ml-auto flex gap-2 flex-row md:block">
+      <div className="ml-2 flex gap-2 flex-row md:block">
         <Link href="#">
           <Button
             size="lg"

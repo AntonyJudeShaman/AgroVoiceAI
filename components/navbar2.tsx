@@ -7,13 +7,15 @@ import {
   NavigationMenuList,
   NavigationMenu
 } from '@/components/ui/navigation-menu'
-import { IconMenu } from './ui/icons'
+import { IconLogo, IconMenu } from './ui/icons'
 import { ThemeToggle } from './Theme/theme-toggle'
 import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import { DownloadIcon } from 'lucide-react'
+import { BottomGradient } from './ui/bottom-gradient'
 
-export default function Navbar2() {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function Navbar2() {
         </SheetTrigger>
         <SheetContent side="left">
           <p className="text-2xl pt-8 font-pops font-bold">
-            AgroVoiceAI
+          <IconLogo className='size-28 mb-4 mr-3'/> AgroVoiceAI
             <span className="sr-only">Agrovoiceai</span>
           </p>
           <div className="grid gap-2 py-6">
@@ -61,13 +63,23 @@ export default function Navbar2() {
                 </Link>
               ))}
           </div>
+          <Link href="#">
+                <Button
+                  size="lg"
+                  className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                  variant="outline"
+                >
+                  <DownloadIcon className="size-5 mr-2" /> Download Our App
+                  <BottomGradient />
+                </Button>
+              </Link>
         </SheetContent>
       </Sheet>
       <Link
-        className="mr-6 hidden font-normal font-pops text-2xl dark:text-white text-black lg:flex"
+        className="mr-6 hidden font-normal items-center font-pops text-2xl dark:text-white text-black lg:flex"
         href="/"
       >
-        AgroVoiceAI
+       <IconLogo className='size-12 mr-3'/> AgroVoiceAI
         <span className="sr-only">AgroVoiceAI</span>
       </Link>
       <NavigationMenu className="hidden lg:flex">

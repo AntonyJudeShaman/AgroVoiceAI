@@ -73,7 +73,7 @@ export function CreateAccount({
               type="button"
               onClick={() => {
                 setIsLoading(true)
-                signIn('google', { callbackUrl: `/` })
+                signIn('google', { callbackUrl: `/chat` })
               }}
               disabled={isLoading}
               className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"

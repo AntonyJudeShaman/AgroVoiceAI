@@ -87,12 +87,11 @@ export function DeleteAccount() {
                   try {
                     await deleteAccount()
                     setOpen(false)
-                    signOut()
                     toast.success('Account deleted successfully', {
                       duration: 5000
                     })
-                    router.push('/')
-                    router.replace('/')
+                    window.history.pushState({}, '', `/`)
+                    signOut()
                   } catch (error) {
                     toast.error('Error deleting account')
                     // Handle error here

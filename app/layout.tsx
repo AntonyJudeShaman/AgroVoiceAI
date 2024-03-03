@@ -55,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'font-sans antialiased scroll-smooth dark:bg-black bg-white transition-transform duration-1000',
+          'font-sans antialiased scroll-smooth transition-transform duration-1000',
           GeistSans.variable,
           GeistMono.variable,
           inter.variable,
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            <main className="flex flex-col flex-1 bg-muted/50">{children}</main>{' '}
+            <main className="flex flex-col flex-1 dark:bg-[#020817] bg-muted/20">{children}</main>{' '}
             <Analytics />
           </div>
         </Providers>

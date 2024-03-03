@@ -100,5 +100,6 @@ export const {
   },
   pages: {
     signIn: '/sign-in',
+    error: '/error',
   },
 })

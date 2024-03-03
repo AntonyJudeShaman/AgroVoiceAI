@@ -5,7 +5,7 @@ export default function Middleware(req:any, res:any, next:any) {
   const { url } = req;
   const session = req.session;
   if (url === '/sign-in' || url === '/sign-up' && session.user) {
-    return res.redirect('/');
+    return res.redirect('/chat');
   }
   
   if (url === '/settings' && !session.user) {
