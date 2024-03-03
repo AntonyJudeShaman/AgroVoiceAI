@@ -17,17 +17,17 @@ import { ChatHistory } from './chat-history'
 import { MovingButton } from '../ui/moving-border'
 import { ThemeToggle } from '../Theme/theme-toggle'
 
-async function UserOrLogin() {
+export async function UserOrLogin() {
   const session = await auth()
   return (
     <>
       {session?.user ? (
-        <>
+        <div className=''>
           <SidebarMobile>
             <ChatHistory userId={session.user.id} />
           </SidebarMobile>
           <SidebarToggle />
-        </>
+        </div>
       ) : (
         <Link href="/" target="_blank" rel="nofollow">
           <IconNextChat className="size-6 mr-2 dark:hidden" inverted />

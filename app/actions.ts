@@ -40,6 +40,13 @@ export async function getUser(){
   return session?.user
 }
 
+export async function getSession(){
+  const session = await auth()
+
+  return session
+}
+
+
 
 export async function verifyPassword(plaintextPassword: string, hashedPassword: string): Promise<boolean> {
   try {

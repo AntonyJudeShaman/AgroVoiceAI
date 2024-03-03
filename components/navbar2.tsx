@@ -13,7 +13,7 @@ import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
 
-export default function Navbar() {
+export default function Navbar2() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -95,16 +95,13 @@ export default function Navbar() {
       </NavigationMenu>
       <div className="ml-auto flex gap-2">
         <ThemeToggle />
-        <Link href="/sign-in" className="flex items-center">
-          <Button variant="outline">Sign in</Button>
-        </Link>
         <Button>
-          <Link href="/sign-up">
+          <Link href="/options">
             <Button
               className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
               size="lg"
             >
-              Sign Up
+              Take me to the app
             </Button>
           </Link>
         </Button>

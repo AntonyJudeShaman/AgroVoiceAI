@@ -31,8 +31,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         }
       },
       onFinish() {
-        if (!path.includes('chat')) {
-          window.history.pushState({}, '', `/chat/${id}`)
+        if (!path.includes('chat/c')) {
+          window.history.pushState({}, '', `chat/c/${id}`)
         }
       }
     })

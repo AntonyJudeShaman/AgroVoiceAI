@@ -66,7 +66,7 @@ export function UserMenu() {
               variant="ghost"
               className="rounded-lg border flex justify-start border-transparent w-full hover:border-gray-700"
             >
-              {user?.image ? (
+              {user?.image?.length ? (
                 <Image
                   className="size-9 transition-opacity duration-300 rounded-full justify-start select-none hover:opacity-80"
                   src={user?.image ?? ''}

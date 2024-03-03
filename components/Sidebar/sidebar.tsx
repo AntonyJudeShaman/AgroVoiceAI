@@ -13,7 +13,7 @@ export function Sidebar({ className, children }: SidebarProps) {
   return (
     <div
       data-state={isSidebarOpen && !isLoading ? 'open' : 'closed'}
-      className={cn(className, 'h-full dark:to-emerald-950/70 bg-gradient-to-tr dark:from-background from-60%')}
+      className={cn(className, 'h-full fixed dark:to-emerald-950/70 bg-gradient-to-tr dark:from-background from-60%')}
     >
       {children}
     </div>

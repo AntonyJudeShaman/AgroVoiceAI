@@ -2,7 +2,7 @@ import { UseChatHelpers } from 'ai/react'
 
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/external-link'
-import { IconArrowRight, IconOpenAI } from '@/components/ui/icons'
+import { IconArrowRight, IconLogo } from '@/components/ui/icons'
 
 const exampleMessages = [
   {
@@ -26,12 +26,12 @@ const exampleMessages = [
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
     <div className="mx-auto max-w-2xl px-4">
-      <IconOpenAI className="size-16 mx-auto" />
-      <p className="mx-auto font-display flex justify-center pt-4 text-3xl font-semibold">
+      <IconLogo className="md:size-32 size-28 mx-auto" />
+      <p className="mx-auto font-display flex justify-center pt-4  text-4xl md:text-5xl font-semibold">
         AgroVoiceAI
       </p>
 
-      <div className="mt grid grid-cols-2 mx-auto mt-10 justify-center gap-6 flex-wrap">
+      {/* <div className="mt grid grid-cols-2 mx-auto mt-10 justify-center gap-6 flex-wrap">
         {exampleMessages.map((message, index) => (
           <Button
             key={index}
@@ -41,7 +41,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             {message.heading}
           </Button>
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }

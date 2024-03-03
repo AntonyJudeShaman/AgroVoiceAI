@@ -26,7 +26,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
     <div className="flex flex-col size-full p-2">
       <div className="px-2 my-4 space-x-2 flex">
         <Link
-          href="/"
+          href="/chat"
           className={cn(
             buttonVariants({ variant: 'outline' }),
             'h-10 w-full z-40 justify-start bg-slate-50 px-4 shadow-none transition-colors hover:bg-slate-200/40 dark:bg-slate-900 dark:hover:bg-slate-300/10'

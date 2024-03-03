@@ -4,8 +4,10 @@ import { Header } from './header'
 import { BsDownload } from 'react-icons/bs'
 import { DownloadIcon } from 'lucide-react'
 import { BottomGradient } from './ui/bottom-gradient'
+import { auth } from '@/lib/auth'
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth()
   return (
     <>
       <div className="bg-gray-50/9 font-pops bg-cover bg-center h-full flex justify-center items-center">
@@ -22,9 +24,14 @@ export default function Home() {
               </p>
             </div>
             <div className="flex gap-4 md:flex-row flex-col">
-              <Link href="/sign-in">
-                <Button size="lg"  className=" relative group/btn flex space-x-2 items-center justify-center px-6 py-5 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-                  variant="default">Start Chatting</Button>
+              <Link href={session ? '/chat' : '/sign-in'}>
+                <Button
+                  size="lg"
+                  className=" relative group/btn flex space-x-2 items-center justify-center px-6 py-5 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                  variant="default"
+                >
+                  Start Chatting
+                </Button>
               </Link>
               <Link href="#">
                 <Button
@@ -32,8 +39,8 @@ export default function Home() {
                   className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                   variant="outline"
                 >
-                 <DownloadIcon className='size-5 mr-2'/> Download Our App
-                <BottomGradient />
+                  <DownloadIcon className="size-5 mr-2" /> Download Our App
+                  <BottomGradient />
                 </Button>
               </Link>
             </div>

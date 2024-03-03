@@ -7,11 +7,10 @@ import HomeFeatures from '@/components/home-features'
 import { features } from '@/config/constants'
 
 export default async function IndexPage() {
-  const id = nanoid()
 
   const session = await auth()
 
-  return !session ? (
+  return (
     <>
       <div className="flex justify-center dark:bg-black bg-slate-50 flex-col items-center mt-0">
         <DotBackGround />
@@ -26,6 +25,7 @@ export default async function IndexPage() {
               icon={item.icon}
               className={cn(
                 i === 0 || i === 3 || i === 4 ? 'md:col-span-2' : '',
+                i === 4 || i === 5 ? 'md:mt-[15rem]' : '',
                 i === 6 ? 'md:col-span-3' : ''
               )}
             />
@@ -33,7 +33,5 @@ export default async function IndexPage() {
         </BentoGrid>
       </div>
     </>
-  ) : (
-    <Chat id={id} />
   )
 }
