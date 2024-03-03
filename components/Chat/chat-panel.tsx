@@ -38,7 +38,7 @@ export function ChatPanel({
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
 
   return (
-    <div className="fixed inset-x-0 bottom-0 w-full bg-gradient-to-b from-muted/30 from-0% to-muted/30 to-50% animate-in duration-300 ease-in-out dark:from-background/10 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
+    <div className="fixed inset-x-0 bottom-0 w-full bg-gradient-to-b from-muted/30 from-0% to-muted/30 to-50% animate-in duration-300 ease-in-out dark:from-background/90 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-3xl sm:px-4">
         <div className="flex items-center justify-center h-12">
@@ -84,7 +84,7 @@ export function ChatPanel({
             )
           )}
         </div>
-        <div className="px-4 py-2 space-y-4 border md:mb-10 shadow-lg bg-green-950/20  sm:rounded-tr-[25px] sm:rounded-bl-[25px] dark:sm:border-gray-800 sm:border-gray-300 md:py-4">
+        <div className="px-4 py-2 space-y-4 border md:mb-10 shadow-lg bg-gradient-to-r from-green-500 dark:from-green-700 dark:via-green-900 dark:to-emerald-900 from-10% via-green-500 via-30% to-emerald-500 to-60%  sm:rounded-tr-[25px] sm:rounded-bl-[25px] dark:sm:border-gray-800 sm:border-gray-300 md:py-4">
           <PromptForm
             onSubmit={async value => {
               await append({
