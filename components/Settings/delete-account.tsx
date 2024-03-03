@@ -53,7 +53,7 @@ export function DeleteAccount() {
                 type="button"
                 className={cn(
                   buttonVariants(),
-                  'bg-red-700 text-white border dark:border-gray-700/70 flex justify-center items-center hover:bg-red-600/60 hover:text-white hover:border border-red-500'
+                  'bg-green-700 text-white border dark:border-green-200/70 flex justify-center items-center hover:bg-red-600/60 hover:text-white hover:border border-green-900'
                 )}
                 size="lg"
                 disabled={isSaving}
