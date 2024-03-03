@@ -18,6 +18,7 @@ interface ChatHistoryProps {
 const loadChats = cache(async (userId?: string) => {
   return await getChats(userId)
 })
+
 export async function ChatHistory({ userId }: ChatHistoryProps) {
   
   const chats = await loadChats(userId)

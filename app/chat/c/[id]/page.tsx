@@ -4,7 +4,6 @@ import { notFound, redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { getChat } from '@/app/actions'
 import { Chat } from '@/components/Chat/chat'
-import { Header } from '@/components/Chat/chat-header'
 
 export interface ChatPageProps {
   params: {
@@ -31,7 +30,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
   const session = await auth()
 
   if (!session?.user) {
-    redirect(`/sign-in?next=/chat/${params.id}`)
+    redirect(`/sign-in?next=/chat/c/${params.id}`)
   }
 
   const chat = await getChat(params.id, session.user.id)

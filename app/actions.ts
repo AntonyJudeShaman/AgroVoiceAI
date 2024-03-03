@@ -40,14 +40,6 @@ export async function getUser(){
   return session?.user
 }
 
-export async function getSession(){
-  const session = await auth()
-
-  return session
-}
-
-
-
 export async function verifyPassword(plaintextPassword: string, hashedPassword: string): Promise<boolean> {
   try {
     console.log(plaintextPassword)
@@ -173,8 +165,8 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
   await redis.del(`chat:${id}`)
   await redis.zrem(`user:chat:${session.user.id}`, `chat:${id}`)
 
-  revalidatePath('/')
-  return revalidatePath(path)
+  revalidatePath('/chat')
+  return revalidatePath('/chat')
 }
 
 export async function clearChats() {
@@ -188,7 +180,7 @@ export async function clearChats() {
 
   const chats: string[] = await redis.zrange(`user:chat:${session.user.id}`, 0, -1)
   if (!chats.length) {
-    return redirect('/')
+    return redirect('/chat')
   }
   const pipeline = redis.pipeline()
 
@@ -199,8 +191,8 @@ export async function clearChats() {
 
   await pipeline.exec()
 
-  revalidatePath('/')
-  return redirect('/')
+  revalidatePath('/chat')
+  return redirect('/chat')
 }
 
 export async function getSharedChat(id: string) {
