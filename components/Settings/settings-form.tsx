@@ -131,7 +131,7 @@ export function SettingsForm({
           'flex flex-col md:space-x-4 md:space-y-0 space-y-4 space-x-0 md:flex-row'
         )}
       >
-        <Card className="md:w-2/3 w-full border dark:border-gray-700/70 border-gray-300">
+        <Card className="md:w-2/3 w-full border dark:border-green-900/50 border-green-200">
           <form
             onSubmit={event =>
               handleNameSubmit(
@@ -162,14 +162,14 @@ export function SettingsForm({
                 />
               </div>
             </CardContent>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 p-3 border dark:border-gray-700/70 border-gray-600 rounded-b-2xl md:-m-2 md:mt-4 justify-end flex">
+            <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% p-3 border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 md:mt-4 justify-end flex">
               <Button
                 type="submit"
                 className={cn(
                   buttonVariants(),
                   className,
-                  'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 hover:opacity-85 dark:hover:opacity-100 flex justify-center items-center',
-                  `${isNameChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-gray-600/70'}`
+                  'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 dark:hover:opacity-100 flex justify-center items-center',
+                  `${isNameChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70'}`
                 )}
                 size="lg"
                 disabled={!isNameChanged || isSaving}
@@ -181,14 +181,14 @@ export function SettingsForm({
             </CardFooter>
           </form>
         </Card>
-        <Card className="md:w-2/3 w-full flex md:justify-center border dark:border-gray-700/70 border-gray-300">
-          <div className="flex flex-row">
+        <Card className="md:w-2/3 w-full flex md:justify-center border dark:border-green-900/50 border-green-200">
+          <div className="flex md:flex-row flex-col mx-auto">
             <p className="rounded-full flex justify-center items-center">
               {user?.image ? (
                 <img
                   src={user?.image}
                   alt={user?.name || 'Profile Picture'}
-                  className="md:size-36 size-32 rounded-full p-4 md:p-0 flex justify-center items-center"
+                  className="size-32 rounded-full p-4 md:p-0 flex justify-center items-center"
                   width={60}
                   height={30}
                 />
@@ -196,7 +196,7 @@ export function SettingsForm({
                 <User className="md:size-32 size-24 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
               )}
             </p>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col text-center md:text-left justify-center">
               <CardHeader>
                 <CardTitle>Profile Picture</CardTitle>
                 <CardDescription>
@@ -236,7 +236,7 @@ export function SettingsForm({
                         )}
                         <div
                           {...getRootProps()}
-                          className="flex w-full justify-center rounded-md placeholder:text-white  border-2 border-dashed border-gray-600  h-40 bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex w-full justify-center rounded-md placeholder:text-white  border-2 border-dashed border-green-200  h-40 bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <input
                             {...getInputProps()}
@@ -304,7 +304,7 @@ export function SettingsForm({
           </div>
         </Card>
       </div>
-      <Card className="h-[12rem] flex justify-center flex-col border dark:border-gray-700/70 border-gray-300">
+      <Card className="h-[12rem] flex justify-center flex-col border dark:border-green-900/50 border-green-200">
         <CardHeader>
           <CardTitle>Your Email</CardTitle>
           <CardDescription>Your email cannot be changed.</CardDescription>
@@ -317,7 +317,7 @@ export function SettingsForm({
             </Label>
             <Input
               id="email"
-              className="dark:text-gray-400 text-gray-100"
+              className="text-gray-400"
               size={32}
               value={user?.email}
               readOnly
@@ -326,7 +326,7 @@ export function SettingsForm({
         </CardContent>
       </Card>
       <div className="flex md:flex-row flex-col md:space-x-4 space-x-0 md:space-y-0 space-y-4">
-        <Card className="md:w-2/3 w-full border dark:border-gray-700/70 border-gray-300">
+        <Card className="md:w-2/3 w-full border dark:border-green-900/50 border-green-200">
           <form
             onSubmit={event =>
               handleAgeSubmit(
@@ -357,14 +357,14 @@ export function SettingsForm({
                 />
               </div>
             </CardContent>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 border dark:border-gray-700/70 border-gray-600 rounded-b-2xl md:-m-2 p-3 md:mt-4 items-end justify-end flex">
+            <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 p-3 md:mt-4 items-end justify-end flex">
               <Button
                 type="submit"
                 className={cn(
                   buttonVariants(),
                   className,
-                  ' dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
-                  `${isAgeChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-gray-600/70'}`
+                  ' dark:hover:text-black/80 dark:hover:bg-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:text-white/80 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
+                  `${isAgeChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70'}`
                 )}
                 size="lg"
                 disabled={!isAgeChanged || isSavingAge}
@@ -377,7 +377,7 @@ export function SettingsForm({
             </CardFooter>
           </form>
         </Card>
-        <Card className="w-full border dark:border-gray-700/70 border-gray-300">
+        <Card className="w-full border dark:border-green-900/50 border-green-200">
           <form
             onSubmit={event =>
               handlePhoneNumberSubmit(
@@ -409,15 +409,15 @@ export function SettingsForm({
                 />
               </div>
             </CardContent>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600 border dark:border-gray-700/70 border-gray-600 rounded-b-2xl md:-m-2 p-3 md:mt-4 justify-end flex">
+            <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 p-3 md:mt-4 justify-end flex">
               {' '}
               <Button
                 type="submit"
                 className={cn(
                   buttonVariants(),
                   className,
-                  'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
-                  `${isPhoneChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-gray-600/70 border-gray-300'}`
+                  'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
+                  `${isPhoneChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70 border-green-200'}`
                 )}
                 size="lg"
                 disabled={!isPhoneChanged || isSavingPhone}

@@ -40,14 +40,14 @@ export function DeleteAccount() {
     <Card className="w-full border dark:border-gray-700/70 border-gray-300">
       <form>
         <CardHeader className="h-">
-          <CardTitle className="text-red-500">Delete account</CardTitle>
+          <CardTitle className="text-green-500">Delete account</CardTitle>
           <CardDescription>
             This will delete your account and all your data permanently.
           </CardDescription>
         </CardHeader>
         <AlertDialog open={open} onOpenChange={setOpen}>
           <AlertDialogTrigger className="" asChild>
-            <CardFooter className="dark:bg-gray-800/70 bg-slate-600  border dark:border-gray-700/70 border-gray-300 rounded-b-2xl md:-m-2 p-3 justify-end flex">
+            <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 p-3 justify-end flex">
               {' '}
               <Button
                 type="button"
