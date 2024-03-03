@@ -64,7 +64,7 @@ export function UserMenu() {
           <DropdownMenuTrigger asChild className="p-6">
             <Button
               variant="ghost"
-              className="rounded-lg border flex justify-start border-transparent dark:border-green-950 border-teal-200 dark:bg-teal-950/30 bg-green-200/50 w-full hover:border-gray-700"
+              className="rounded-lg border flex justify-start dark:border-green-950 border-teal-200 dark:bg-teal-950/30 bg-green-200/50 w-full hover:border-gray-700"
             >
               {user?.image?.length ? (
                 <Image
