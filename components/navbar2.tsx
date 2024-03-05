@@ -12,8 +12,9 @@ import { ThemeToggle } from './Theme/theme-toggle'
 import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
-import { DownloadIcon } from 'lucide-react'
+import { ArrowRight, DownloadIcon } from 'lucide-react'
 import { BottomGradient } from './ui/bottom-gradient'
+import { signOut } from 'next-auth/react'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -47,7 +48,7 @@ export default function Navbar() {
         </SheetTrigger>
         <SheetContent side="left">
           <p className="text-2xl pt-8 font-pops font-bold">
-          <IconLogo className='size-28 mb-4 mr-3'/> AgroVoiceAI
+            <IconLogo className="size-28 mb-4 mr-3" /> AgroVoiceAI
             <span className="sr-only">Agrovoiceai</span>
           </p>
           <div className="grid gap-2 py-6">
@@ -64,22 +65,22 @@ export default function Navbar() {
               ))}
           </div>
           <Link href="#">
-                <Button
-                  size="lg"
-                  className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-                  variant="outline"
-                >
-                  <DownloadIcon className="size-5 mr-2" /> Download Our App
-                  <BottomGradient />
-                </Button>
-              </Link>
+            <Button
+              size="lg"
+              className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+              variant="outline"
+            >
+              <DownloadIcon className="size-5 mr-2" /> Download Our App
+              <BottomGradient />
+            </Button>
+          </Link>
         </SheetContent>
       </Sheet>
       <Link
         className="mr-6 hidden font-normal items-center font-pops text-2xl dark:text-white text-black lg:flex"
         href="/"
       >
-       <IconLogo className='size-12 mr-3'/> AgroVoiceAI
+        <IconLogo className="size-12 mr-3" /> AgroVoiceAI
         <span className="sr-only">AgroVoiceAI</span>
       </Link>
       <NavigationMenu className="hidden lg:flex">
@@ -107,13 +108,24 @@ export default function Navbar() {
       </NavigationMenu>
       <div className="ml-auto flex gap-2">
         <ThemeToggle />
+        <Button
+          onClick={() =>
+            signOut({
+              callbackUrl: '/'
+            })
+          }
+          className=""
+          variant="outline"
+        >
+          Logout
+        </Button>
         <Button>
           <Link href="/options">
             <Button
               className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
               size="lg"
             >
-              Take me to the app
+              Explore <ArrowRight className="size-4 ml-2 hidden md:block" />
             </Button>
           </Link>
         </Button>

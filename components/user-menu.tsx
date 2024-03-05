@@ -83,18 +83,21 @@ export function UserMenu() {
               <span className="ml-2">{user?.name}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent sideOffset={16} align="center" className="bg-gradient-to-bl dark:from-zinc-950 dark:to-indigo-950/30 to-60% from-zinc-300 to-indigo-100/30">
+          <DropdownMenuContent
+            sideOffset={16}
+            align="center"
+            className="bg-gradient-to-bl dark:from-zinc-950 dark:to-indigo-950/30 to-60% from-zinc-300 to-indigo-100/30"
+          >
             <DropdownMenuItem className="flex-col items-start flex-wrap">
               {/* <div className="text-xs font-medium">{user?.name}</div> */}
               <div className="text-sm text-zinc-500 ">{user?.email}</div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <Link href="/settings">
-            <DropdownMenuItem
-              className="flex-col text-sm h-8 items-start cursor-pointer"
-            >
-              Settings
-            </DropdownMenuItem></Link>
+              <DropdownMenuItem className="flex-col text-sm h-8 items-start cursor-pointer">
+                Settings
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="flex items-center h-8 justify-between text-sm cursor-pointer"
