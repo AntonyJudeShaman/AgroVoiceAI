@@ -1,12 +1,12 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import Google from 'next-auth/providers/google'
-import Credentials from "next-auth/providers/credentials";
+import Credentials from 'next-auth/providers/credentials'
 
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { db } from './db';
-import argon2 from 'argon2';
-import { verifyPassword } from '@/app/actions';
-import { compare, hash } from 'bcrypt';
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { db } from './db'
+import argon2 from 'argon2'
+import { verifyPassword } from '@/app/actions'
+import { compare, hash } from 'bcrypt'
 
 declare module 'next-auth' {
   interface Session {
@@ -27,66 +27,66 @@ export const {
     Credentials({
       credentials: {
         email: {
-          label: "Email",
-          type: "email",
+          label: 'Email',
+          type: 'email'
         },
         password: {
-          label: "Password",
-          type: "password",
+          label: 'Password',
+          type: 'password'
         }
       },
-      authorize: async (credentials) => {
+      authorize: async credentials => {
         const user = await db.user.findFirst({
           where: {
-            email: credentials.email as string,
-          },
-        });
-      
-        const userNotFound = {
-          error:"User not found."
-        }
+            email: credentials.email as string
+          }
+        })
+
         if (!user) {
-          return null; // User not found
+          return null // User not found
         }
 
-        const passwordMatch = await compare(credentials.password as string, user.password!);
+        const passwordMatch = await compare(
+          credentials.password as string,
+          user.password!
+        )
         if (passwordMatch) {
-          return user;
+          return user
         } else {
-          return null;
+          return null
         }
       }
     })
   ],
   adapter: PrismaAdapter(db as any),
   session: {
-    strategy: "jwt",
+    strategy: 'jwt'
   },
   callbacks: {
     async session({ token, session, user }) {
       if (token) {
-        session.user.id = token?.id as string || user?.id as string;
-        session.user.name = token.name || user?.name as string;
-        session.user.email = token.email || user?.email as string;
-        session.user.image = token.picture;
-        session.user.password = token.password as string;
+        session.user.id = (token?.id as string) || (user?.id as string)
+        session.user.name = token.name || (user?.name as string)
+        session.user.email = token.email || (user?.email as string)
+        session.user.image = token.picture
+        session.user.password = token.password as string
       }
-      return session;
+      return session
     },
     async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
-          email: token.email,
-        },
-      });
-  
+          email: token.email
+        }
+      })
+
       if (!dbUser) {
         if (user) {
-          token.id = user?.id;
+          token.id = user?.id
         }
-        return token;
+        return token
       }
-  
+
       return {
         id: dbUser.id,
         name: dbUser.name,
@@ -94,12 +94,12 @@ export const {
         picture: dbUser.image,
         phone: dbUser.phone,
         age: dbUser.age,
-        password: dbUser.password,
-      };
-    },
+        password: dbUser.password
+      }
+    }
   },
   pages: {
     signIn: '/sign-in',
-    error: '/error',
-  },
+    error: '/error'
+  }
 })

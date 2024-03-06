@@ -32,7 +32,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       },
       onFinish() {
         if (!path.includes('chat/c')) {
-          window.history.pushState({}, '', `chat/c/${id}`)
+          router.refresh()
+          router.push(`chat/c/${id}`)
         }
       }
     })

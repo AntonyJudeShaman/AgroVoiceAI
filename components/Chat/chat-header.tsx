@@ -20,9 +20,9 @@ import { ThemeToggle } from '../Theme/theme-toggle'
 export async function UserOrLogin() {
   const session = await auth()
   return (
-    <>
+    <div className="w-full">
       {session?.user ? (
-        <div className=''>
+        <div className="">
           <SidebarMobile>
             <ChatHistory userId={session.user.id} />
           </SidebarMobile>
@@ -43,7 +43,7 @@ export async function UserOrLogin() {
           </Button>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

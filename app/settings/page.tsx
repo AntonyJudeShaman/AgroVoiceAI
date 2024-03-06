@@ -13,7 +13,7 @@ async function Settings() {
   const user = await getCurrentUser()
   return session ? (
     <SettingsShell className="">
-      <div className='flex items-end justify-between'>
+      <div className="flex items-end justify-between">
         <SettingsHeader
           heading="Settings"
           text="Manage account and website settings."
@@ -23,7 +23,7 @@ async function Settings() {
           className=" hidden items-center font-normal font-pops text-3xl dark:text-white text-black lg:flex"
           href="/"
         >
-         AgroVoiceAI <IconLogo className='size-16 ml-3'/>
+          AgroVoiceAI <IconLogo className="size-16 ml-3" />
           <span className="sr-only">AgroVoiceAI</span>
         </Link>
       </div>

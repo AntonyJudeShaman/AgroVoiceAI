@@ -78,10 +78,12 @@ export function SidebarActions({
         onOpenChange={setShareDialogOpen}
         onCopy={() => setShareDialogOpen(false)}
       />
-      <AlertDialog open={deleteDialogOpen}  onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent className='border dark:border-red-900 border-red-500'>
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent className="border dark:border-red-900 border-red-500">
           <AlertDialogHeader>
-            <AlertDialogTitle className='text-red-600'>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle className="text-red-600">
+              Are you absolutely sure?
+            </AlertDialogTitle>
             <AlertDialogDescription>
               This will permanently delete your chat message.
             </AlertDialogDescription>
@@ -91,7 +93,7 @@ export function SidebarActions({
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
-            className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
+              className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
               disabled={isRemovePending}
               onClick={event => {
                 event.preventDefault()
