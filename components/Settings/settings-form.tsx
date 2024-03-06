@@ -57,10 +57,12 @@ export function SettingsForm({
   const [isImageChanged, setIsImageChanged] = useState<boolean>(false)
   const [isAgeChanged, setIsAgeChanged] = useState<boolean>(false)
   const [isPhoneChanged, setIsPhoneChanged] = useState<boolean>(false)
+  const [isUploaded, setIsUploaded] = useState<boolean>(true)
   const [name, setName] = useState(user?.name || '')
   const [imageURL, setImageURL] = useState(user?.image || '')
   const [age, setAge] = useState(user?.age || '')
   const [phoneNumber, setPhoneNumber] = useState(user?.phone || '')
+  const [open, setOpen] = useState(false)
 
   const firebaseApp = initializeApp(firebaseConfig, 'profile')
   const storage = getStorage(firebaseApp)
@@ -95,6 +97,7 @@ export function SettingsForm({
     const downloadURL = await getDownloadURL(storageRef)
     setImageURL(downloadURL)
     toast.dismiss()
+    setIsUploaded(false)
   }, [])
   // console.log(imageURL)
 
@@ -108,6 +111,7 @@ export function SettingsForm({
 
   const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setIsImageChanged(false)
     try {
       handleImageSubmit(
         event,
@@ -118,6 +122,8 @@ export function SettingsForm({
         toast
       )
       router.refresh()
+      setIsUploaded(true)
+      setOpen(false)
     } catch (error) {
       toast.error('Error uploading file. Please try again later.')
     }
@@ -188,12 +194,12 @@ export function SettingsForm({
                 <img
                   src={user?.image}
                   alt={user?.name || 'Profile Picture'}
-                  className="size-32 rounded-full p-4 md:p-0 flex justify-center items-center"
+                  className="size-32 rounded-full  p-4 md:p-0 flex justify-center items-center"
                   width={60}
                   height={30}
                 />
               ) : (
-                <User className="md:size-32 size-24 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
+                <User className="md:size-32 size-24 mt-4 md:mt-0 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
               )}
             </p>
             <div className="flex flex-col text-center md:text-left justify-center">
@@ -208,7 +214,7 @@ export function SettingsForm({
                   upload Image
                 </Label>
 
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger>
                     <Button
                       className={cn(className, 'p-3')}
@@ -232,6 +238,7 @@ export function SettingsForm({
                             width={40}
                             className="rounded-full size-20 mx-auto m-6"
                             height={40}
+                            onChange={() => handleImageChange}
                           />
                         )}
                         <div
@@ -267,7 +274,7 @@ export function SettingsForm({
                           </Button>
                         </DialogClose>
                         <Button
-                          disabled={isSavingImage}
+                          disabled={isUploaded}
                           className="m-1 mt-4"
                           variant="default"
                           type="submit"

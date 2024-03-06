@@ -11,6 +11,7 @@ import { MovingButton } from '@/components/ui/moving-border'
 import { Providers } from '@/components/Theme/providers'
 import { Inter } from 'next/font/google'
 import { Poppins } from 'next/font/google'
+import { TailwindIndicator } from '@/components/Theme/tailwind-indicator'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const poppins = Poppins({
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
       >
         <Toaster />
+        <TailwindIndicator />
         <Providers
           attribute="class"
           defaultTheme="system"
@@ -75,7 +77,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            <main className="flex flex-col flex-1 dark:bg-[#020817] bg-muted/20">{children}</main>{' '}
+            <main className="flex flex-col flex-1 dark:bg-[#020817] bg-muted/20">
+              {children}
+            </main>{' '}
             <Analytics />
           </div>
         </Providers>
