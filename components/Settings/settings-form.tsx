@@ -348,7 +348,7 @@ export function SettingsForm({
           >
             <CardHeader>
               <CardTitle>Your Age</CardTitle>
-              <CardDescription>Please enter your Age.</CardDescription>
+              <CardDescription>Please enter your age.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-1">

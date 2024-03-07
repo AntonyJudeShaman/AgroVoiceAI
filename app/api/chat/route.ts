@@ -4,6 +4,7 @@ import OpenAI from 'openai'
 import { auth } from '@/lib/auth'
 import { nanoid } from '@/lib/utils'
 import redis from '@/lib/redis'
+import { getChatbotPreference } from '@/app/actions'
 // export const runtime = 'nodejs16'
 
 const openai = new OpenAI({
@@ -12,8 +13,9 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   const json = await req.json()
-  const { messages} = json
+  const { messages } = json
   const userId = (await auth())?.user.id
+  const preferences = await getChatbotPreference()
 
   if (!userId) {
     return new Response('Unauthorized', {
@@ -21,9 +23,16 @@ export async function POST(req: Request) {
     })
   }
 
+  const extraMessages = []
+  if (preferences) {
+    extraMessages.push({ content: preferences, role: 'user' })
+  }
+
+  const allMessages = messages.concat(extraMessages)
+
   const res = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
-    messages,
+    messages: allMessages,
     temperature: 0.7,
     stream: true
   })

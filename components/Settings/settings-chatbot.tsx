@@ -28,7 +28,8 @@ import {
   handleAgeSubmit,
   handleImageSubmit,
   handleNameSubmit,
-  handlePhoneNumberSubmit
+  handlePhoneNumberSubmit,
+  handlePrefSubmit
 } from '@/helpers/user-info'
 import {
   getStorage,
@@ -50,17 +51,17 @@ export function SettingsChatbot({
   user: any
   className: string
 }) {
-  const [isSaving, setIsSaving] = useState<boolean>(false)
-  const [isDetailsChanged, setIsDetailsChanged] = useState<boolean>(false)
-  const [details, setDetails] = useState(user?.name || '')
+  const [isSavingPref, setIsSavingPref] = useState<boolean>(false)
+  const [isPreferenceChanged, setIsPreferenceChanged] = useState<boolean>(false)
+  const [preference, setPreference] = useState(user?.chatbotPreference || '')
 
   const firebaseApp = initializeApp(firebaseConfig, 'profile')
   const storage = getStorage(firebaseApp)
   const router = useRouter()
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDetails(event.target.value)
-    setIsDetailsChanged(event.target.value !== user?.name)
+  const handlePrefChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPreference(event.target.value)
+    setIsPreferenceChanged(event.target.value !== user?.chatbotPreference)
   }
 
   return (
@@ -74,30 +75,33 @@ export function SettingsChatbot({
         <Card className="w-full border dark:border-green-900/50 border-green-200">
           <form
             onSubmit={event =>
-              handleNameSubmit(
+              handlePrefSubmit(
                 event,
                 user,
-                details,
-                setIsSaving,
-                setIsDetailsChanged,
+                preference,
+                setIsSavingPref,
+                setIsPreferenceChanged,
                 toast
               )
             }
           >
             <CardHeader>
-              <CardTitle>Additional Details</CardTitle>
+              <CardTitle>Additional Information</CardTitle>
               <CardDescription>
                 Please provide extra information for the chatbot to give more
-                precise suggestions.
+                precise suggestions for your crop.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-1">
                 <Textarea
-                  id="name"
-                  className=""
-                  value={details}
-                  onChange={() => handleNameChange}
+                  id="preference"
+                  className="placeholder:text-zinc-500/50"
+                  value={preference}
+                  onChange={handlePrefChange}
+                  spellCheck="true"
+                  autoCorrect="true"
+                  placeholder='Type "I like to grow tomatoes" or "I am interested in organic farming" or tell about the current method carried out for your crops to get better suggestions.'
                 />
               </div>
             </CardContent>
@@ -108,13 +112,19 @@ export function SettingsChatbot({
                   buttonVariants(),
                   className,
                   'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 dark:hover:opacity-100 flex justify-center items-center',
-                  `${isDetailsChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70'}`
+                  `${
+                    isPreferenceChanged
+                      ? ''
+                      : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70'
+                  }`
                 )}
                 size="lg"
-                disabled={!isDetailsChanged || isSaving}
+                disabled={!isPreferenceChanged || isSavingPref}
                 variant="outline"
               >
-                {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}
+                {isSavingPref && (
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                )}
                 <span>Save</span>
               </Button>
             </CardFooter>

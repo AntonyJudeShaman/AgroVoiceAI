@@ -9,7 +9,7 @@ import { type Chat } from '@/lib/types'
 import redis from '@/lib/redis'
 import { db } from '@/lib/db'
 
-import argon2 from 'argon2';
+import argon2 from 'argon2'
 import { compare } from 'bcrypt'
 
 export async function getChats(userId?: string | null) {
@@ -34,39 +34,47 @@ export async function getChats(userId?: string | null) {
     return []
   }
 }
-export async function getUser(){
+export async function getUser() {
   const session = await auth()
 
   return session?.user
 }
 
-export async function verifyPassword(plaintextPassword: string, hashedPassword: string): Promise<boolean> {
+export async function verifyPassword(
+  plaintextPassword: string,
+  hashedPassword: string
+): Promise<boolean> {
   try {
     console.log(plaintextPassword)
     console.log(hashedPassword)
-    const match = await compare(hashedPassword, plaintextPassword);
-    return match;
+    const match = await compare(hashedPassword, plaintextPassword)
+    return match
   } catch (error) {
-    console.error('Error verifying password:', error);
-    throw error;
+    console.error('Error verifying password:', error)
+    throw error
   }
 }
-
 
 export async function getCurrentUser() {
   const session = await auth()
   const user = await db.user.findFirst({
     where: {
-      email: session?.user.email,
-    },
-  });
-  return user;
+      email: session?.user.email
+    }
+  })
+  return user
 }
 
 export async function getUserId() {
   const session = await auth()
 
   return session?.user?.id
+}
+
+export async function getChatbotPreference() {
+  const user = await getCurrentUser()
+
+  return user?.chatbotPreference
 }
 
 export async function removeImage() {
@@ -87,8 +95,7 @@ export async function removeImage() {
         image: null
       }
     })
-  }
-  catch (error) {
+  } catch (error) {
     return {
       error: 'Something went wrong'
     }
@@ -116,7 +123,7 @@ export async function deleteAccount() {
         userId: id
       }
     })
-    
+
     for (const account of userAccounts) {
       await db.account.delete({
         where: {
@@ -124,16 +131,14 @@ export async function deleteAccount() {
         }
       })
     }
-    
+
     // return redirect('/sign-in')
-  }
-  catch (error) {
+  } catch (error) {
     return {
-    error: 'Something went wrong'
+      error: 'Something went wrong'
     }
   }
 }
-
 
 export async function getChat(id: string, userId: string) {
   const chat = await redis.hgetall<Chat>(`chat:${id}`)
@@ -178,7 +183,11 @@ export async function clearChats() {
     }
   }
 
-  const chats: string[] = await redis.zrange(`user:chat:${session.user.id}`, 0, -1)
+  const chats: string[] = await redis.zrange(
+    `user:chat:${session.user.id}`,
+    0,
+    -1
+  )
   if (!chats.length) {
     return redirect('/chat')
   }

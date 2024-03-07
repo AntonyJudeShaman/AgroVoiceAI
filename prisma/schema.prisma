@@ -43,18 +43,19 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  password      String?
-  role          String?   @default("user")
-  phone         String?   @unique
-  age           String?
-  gender        String?
-  emailVerified DateTime?
-  image         String?   @db.Text
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  id                String    @id @default(cuid())
+  name              String?
+  email             String?   @unique
+  password          String?
+  role              String?   @default("user")
+  phone             String?   @unique
+  age               String?
+  gender            String?
+  emailVerified     DateTime?
+  image             String?   @db.Text
+  chatbotPreference String?   @db.LongText
+  createdAt         DateTime  @default(now()) @map(name: "created_at")
+  updatedAt         DateTime  @default(now()) @map(name: "updated_at")
 
   accounts Account[]
   sessions Session[]

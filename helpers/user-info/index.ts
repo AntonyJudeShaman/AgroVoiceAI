@@ -2,7 +2,9 @@ import {
   ageSchema,
   imageURLSchema,
   nameSchema,
-  phoneNumberSchema
+  phoneNumberSchema,
+  prefSchema,
+  validateInput
 } from '@/lib/schema'
 import { User } from '@prisma/client/edge'
 import { z } from 'zod'
@@ -17,36 +19,39 @@ const handleNameSubmit = async (
 ) => {
   event.preventDefault()
   setIsSaving(true)
-
-  try {
-    nameSchema.parse(name)
-    const response = await fetch(`/api/user/name`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ userId: user.id, name })
-    })
-
-    if (response.ok) {
-      toast.success('Name updated successfully')
-      setIsNameChanged(false)
-    } else {
-      toast.error('Failed to update name')
-    }
-  } catch (error: any) {
-    if (error instanceof z.ZodError) {
-      // const validationError = error.errors[0].message;
-      toast.error(`Name must contain at least 3 characters.`)
-    } else {
-      toast.error('An error occurred. Please try again later.')
-    }
-  } finally {
+  if (!validateInput(name)) {
+    toast.error('Dont try to inject code. 😒')
     setIsSaving(false)
+  } else {
+    try {
+      nameSchema.parse(name)
+      const response = await fetch(`/api/user/name`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: user.id, name })
+      })
+
+      if (response.ok) {
+        toast.success('Name updated successfully')
+        setIsNameChanged(false)
+        setIsSaving(false)
+      } else {
+        toast.error('Failed to update name')
+      }
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        // const validationError = error.errors[0].message;
+        toast.error(`Name must contain at least 3 characters.`)
+      } else {
+        toast.error('An error occurred. Please try again later.')
+      }
+    } finally {
+      setIsSaving(false)
+    }
   }
 }
-
-export { handleNameSubmit }
 
 const handleImageSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
@@ -91,8 +96,6 @@ const handleImageSubmit = async (
   }
 }
 
-export { handleImageSubmit }
-
 const handleAgeSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
   user: User,
@@ -133,8 +136,6 @@ const handleAgeSubmit = async (
   }
 }
 
-export { handleAgeSubmit }
-
 const handlePhoneNumberSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
   user: User,
@@ -174,4 +175,53 @@ const handlePhoneNumberSubmit = async (
   }
 }
 
-export { handlePhoneNumberSubmit }
+const handlePrefSubmit = async (
+  event: React.FormEvent<HTMLFormElement>,
+  user: User,
+  pref: string,
+  setIsSavingPref: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsPrefChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  toast: any
+) => {
+  event.preventDefault()
+  setIsSavingPref(true)
+  prefSchema.parse(pref)
+  if (!validateInput(pref)) {
+    toast.error('Dont try to inject code. 😒')
+    setIsSavingPref(false)
+  } else {
+    try {
+      const response = await fetch(`/api/user/pref`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: user.id, pref: pref })
+      })
+
+      if (response.ok) {
+        toast.success('Chabot Preference updated successfully')
+        setIsPrefChanged(false)
+      } else {
+        toast.error('Failed to update preference.')
+      }
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        // const validationError = error.errors[0].message;
+        toast.error(`Not Valid.`)
+      } else {
+        toast.error('An error occurred. Please try again later.')
+      }
+    } finally {
+      setIsSavingPref(false)
+    }
+  }
+}
+
+export {
+  handleNameSubmit,
+  handleImageSubmit,
+  handleAgeSubmit,
+  handlePhoneNumberSubmit,
+  handlePrefSubmit
+}
