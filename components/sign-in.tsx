@@ -36,7 +36,7 @@ export function Account({
   const [isEmailChanged, setIsEmailChanged] = React.useState<boolean>(false)
   const [isPasswordChanged, setIsPasswordChanged] =
     React.useState<boolean>(false)
-    const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
   const router = useRouter()
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ export function Account({
     setPassword(event.target.value)
     setIsPasswordChanged(event.target.value !== password)
   }
-  
+
   const passwordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible)
   }
@@ -74,17 +74,17 @@ export function Account({
             }}
             disabled={isLoading}
             className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            >
+          >
             {isLoading ? (
               <IconSpinner className="mr-2 animate-spin" />
             ) : showGoogleIcon ? (
               <IconGoogle className="mr-2" />
             ) : null}
             {text}
-                <BottomGradient />
+            <BottomGradient />
           </Button>
         </div>
-        <div className="relative">
+        {/* <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
@@ -160,7 +160,7 @@ export function Account({
           <Button className="w-full mt-2" size="lg" type='submit'>
           {isFieldLoading && <IconSpinner className="mr-2 animate-spin" /> } Sign In
           </Button>
-        </form>
+        </form> */}
       </CardContent>
     </Card>
   )

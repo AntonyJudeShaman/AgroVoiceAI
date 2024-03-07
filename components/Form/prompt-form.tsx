@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/tooltip'
 import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
+import { inputSchema, validateInput } from '@/lib/schema'
+import toast from 'react-hot-toast'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -40,13 +42,17 @@ export function PromptForm({
         if (!input?.trim()) {
           return
         }
-        setInput('')
-        await onSubmit(input)
+        inputSchema.parse(input)
+        if (!validateInput(input)) {
+          toast.error('Dont try to inject code. 😒')
+        } else {
+          setInput('')
+          await onSubmit(input)
+        }
       }}
       ref={formRef}
     >
       <div className="relative w-[46rem] flex flex-col px-8 overflow-hidden max-h-60 grow md:dark:bg-black dark:bg-transparent bg-gray-100 sm:rounded-md sm:border dark:sm:border-gray-600 sm:border-gray-400 sm:px-12 dark:focus-within:border-blue-500 focus-within:border-blue-700">
- 
         <Tooltip>
           <TooltipTrigger asChild>
             <button
@@ -74,7 +80,7 @@ export function PromptForm({
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
-          spellCheck={false}
+          spellCheck={true}
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
         <div className="absolute right-0 top-4 sm:right-4">
