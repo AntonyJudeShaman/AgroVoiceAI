@@ -12,8 +12,8 @@ export default async function HomeOptions() {
         <main className="w-full py-6 md:py-12">
           <div className="container flex flex-col items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
-              <h1 className="text-5xl mt-[5rem] md:mt-0 mb-10 font-bold tracking-tighter p-3 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% sm:text-5xl md:text-6xl 2xl:text-6xl">
-                Explore our services
+              <h1 className="text-5xl mb-10 font-bold tracking-tighter p-3 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% sm:text-5xl md:text-6xl 2xl:text-6xl">
+                Explore our Options
               </h1>
               <div className="grid md:grid-cols-3 gap-6">
                 {options.map((option, index) => (

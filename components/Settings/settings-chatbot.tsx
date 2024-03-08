@@ -96,7 +96,7 @@ export function SettingsChatbot({
               <div className="grid gap-1">
                 <Textarea
                   id="preference"
-                  className="placeholder:text-zinc-500/50"
+                  className="placeholder:text-gray-400/70"
                   value={preference}
                   onChange={handlePrefChange}
                   spellCheck="true"

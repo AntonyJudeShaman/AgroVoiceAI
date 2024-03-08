@@ -17,7 +17,7 @@ async function OptionsPage() {
               <Navbar session={session} />
             </div>
           </p>
-          <div className="flex 2xl:container flex-col justify-center grow -mt-20">
+          <div className="flex 2xl:container flex-col justify-center grow mt-0 md:-mt-20">
             <HomeOptions />
           </div>
         </div>
