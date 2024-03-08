@@ -1,10 +1,8 @@
 import {
   BugOffIcon,
   CloudDrizzle,
-  CropIcon,
   HeartPulseIcon,
   IndianRupee,
-  InspectIcon,
   TractorIcon,
   WheatIcon
 } from 'lucide-react'
@@ -22,31 +20,39 @@ const Skeleton = () => (
 )
 
 export function CropField() {
-  return <Image src={cropfield.src} className='rounded-md' alt="" height={220} width={1024} />
+  return (
+    <Image
+      src={cropfield.src}
+      className="rounded-md"
+      alt=""
+      height={220}
+      width={1024}
+    />
+  )
 }
 
 export function PestField() {
-  return <img src={pestdetection.src} className='rounded-md' alt=""  />
+  return <img src={pestdetection.src} className="rounded-md" alt="" />
 }
 
 export function WeeatherField() {
-  return <img src={weather.src} className='rounded-md' alt=""  />
+  return <img src={weather.src} className="rounded-md" alt="" />
 }
 
 export function CropMgmtField() {
-  return <img src={cropMgmt.src} className='rounded-md' alt=""  />
+  return <img src={cropMgmt.src} className="rounded-md" alt="" />
 }
 
 export function MarketField() {
-  return <img src={market.src} className='rounded-md' alt=""  />
+  return <img src={market.src} className="rounded-md" alt="" />
 }
 
 export function FarmingField() {
-  return <img src={farmqa.src} className='rounded-md' alt=""  />
+  return <img src={farmqa.src} className="rounded-md" alt="" />
 }
 
 export function SoilField() {
-  return <img src={soil.src} className='rounded-md' alt=""  />
+  return <img src={soil.src} className="rounded-md" alt="" />
 }
 
 export const features = [
@@ -92,8 +98,7 @@ export const features = [
 
   {
     title: 'Farming Q&A',
-    description:
-      'Ask farming questions, get accurate answers instantly.',
+    description: 'Ask farming questions, get accurate answers instantly.',
     icon: <TractorIcon />,
     header: <FarmingField />
   },
@@ -104,5 +109,52 @@ export const features = [
       'Assess soil health, including soil testing recommendations and interpretation of soil test results, to optimize crop yield and sustainability.',
     icon: <HeartPulseIcon />,
     header: <SoilField />
+  }
+]
+
+export const options = [
+  {
+    title: 'Personalized Chatting',
+    description:
+      'Receive personalized crop recommendations tailored to your soil type, climate, and available resources, maximizing your yield potential.',
+    icon: <WheatIcon />,
+    header: <CropField />,
+    url: '/chat'
+  },
+
+  {
+    title: 'Pest Identification & Recommendations',
+    description:
+      'Spot crop pests and diseases in user-uploaded images, get quick solutions.',
+    icon: <BugOffIcon />,
+    header: <PestField />,
+    url: '/chat'
+  },
+
+  {
+    title: 'Weather Forecasting',
+    description:
+      'Get precise weather updates for your location, perfect for planning your farm activities.',
+    icon: <CloudDrizzle />,
+    header: <WeeatherField />,
+    url: '/weather'
+  },
+
+  {
+    title: 'Soil Health Assessment',
+    description:
+      'Assess soil health, including soil testing recommendations and interpretation of soil test results, to optimize crop yield and sustainability.',
+    icon: <HeartPulseIcon />,
+    header: <SoilField />,
+    url: '/soiltest'
+  },
+
+  {
+    title: 'Market Prices and Trends',
+    description:
+      'Get market prices and trends for agricultural commodities, aiding your sales decisions.',
+    icon: <IndianRupee />,
+    header: <MarketField />,
+    url: '/market'
   }
 ]

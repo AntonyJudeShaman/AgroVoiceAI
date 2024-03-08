@@ -3,7 +3,7 @@
 import { useChat, type Message } from 'ai/react'
 
 import { cn } from '@/lib/utils'
-import { EmptyScreen } from '@/components/empty-screen'
+import { EmptyScreen } from '@/components/Chat/chat-empty-screen'
 import { toast } from 'react-hot-toast'
 import { usePathname, useRouter } from 'next/navigation'
 import { ChatList } from './chat-list'

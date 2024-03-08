@@ -1,5 +1,5 @@
 import { clearChats, getChats } from '@/app/actions'
-import { ClearHistory } from '@/components/clear-history'
+import { ClearHistory } from '@/components/Chat/chat-clear-history'
 import { SidebarItems } from '@/components/Sidebar/sidebar-items'
 import { cache } from 'react'
 

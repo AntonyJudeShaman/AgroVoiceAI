@@ -1,15 +1,13 @@
 import { Chat } from '@/components/Chat/chat'
-import { SidebarDesktop } from '@/components/Sidebar/sidebar-desktop'
 import { auth } from '@/lib/auth'
 import { nanoid } from '@/lib/utils'
 import React from 'react'
+import NotFound from '../not-found'
 
-function page() {
-    const id = nanoid()
-  return (
-    <div className=''>
-    <Chat id={id} />
-    </div>)
+async function page() {
+  const id = nanoid()
+  const session = await auth()
+  return <>{session ? <Chat id={id} /> : <NotFound />}</>
 }
 
 export default page

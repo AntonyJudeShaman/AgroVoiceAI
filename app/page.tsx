@@ -1,15 +1,12 @@
 import { cn, nanoid } from '@/lib/utils'
 import { Chat } from '@/components/Chat/chat'
 import { auth } from '@/lib/auth'
-import { DotBackGround } from '@/components/grid-bg'
-import { BentoGrid, BentoGridItem } from '@/components/grid-layout'
-import HomeFeatures from '@/components/home-features'
+import { DotBackGround } from '@/components/Home/grid-bg'
+import { BentoGrid, BentoGridItem } from '@/components/Home/grid-layout'
+import HomeFeatures from '@/components/Home/home-features'
 import { features } from '@/config/constants'
 
 export default async function IndexPage() {
-
-  const session = await auth()
-
   return (
     <>
       <div className="flex justify-center dark:bg-black bg-slate-50 flex-col items-center mt-0">

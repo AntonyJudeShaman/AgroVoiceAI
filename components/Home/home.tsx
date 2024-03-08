@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Header } from './header'
-import { BsDownload } from 'react-icons/bs'
 import { DownloadIcon } from 'lucide-react'
-import { BottomGradient } from './ui/bottom-gradient'
+import { BottomGradient } from '../ui/bottom-gradient'
 import { auth } from '@/lib/auth'
 
 export default async function Home() {

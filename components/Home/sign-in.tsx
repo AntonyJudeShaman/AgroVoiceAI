@@ -8,17 +8,17 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import { Label } from '@radix-ui/react-dropdown-menu'
-import { Input } from './ui/input'
-import { IconGitHub, IconGoogle, IconSpinner } from './ui/icons'
+import { Input } from '../ui/input'
+import { IconGitHub, IconGoogle, IconSpinner } from '../ui/icons'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
-import { BottomGradient } from './ui/bottom-gradient'
+import { BottomGradient } from '../ui/bottom-gradient'
 
 interface CreateAccountProps {
   text?: string

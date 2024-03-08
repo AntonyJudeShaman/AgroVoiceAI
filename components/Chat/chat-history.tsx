@@ -7,7 +7,7 @@ import { SidebarList } from '@/components/Sidebar/sidebar-list'
 import { buttonVariants } from '@/components/ui/button'
 import { IconPlus } from '@/components/ui/icons'
 import { UserMenu } from '../user-menu'
-import { ClearHistory } from '../clear-history'
+import { ClearHistory } from './chat-clear-history'
 import { cache } from 'react'
 import { clearChats, getChats } from '@/app/actions'
 
@@ -20,7 +20,6 @@ const loadChats = cache(async (userId?: string) => {
 })
 
 export async function ChatHistory({ userId }: ChatHistoryProps) {
-  
   const chats = await loadChats(userId)
 
   return (
@@ -53,7 +52,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
       >
         {/* @ts-ignore */}
         <SidebarList userId={userId} />
-      <UserMenu />
+        <UserMenu />
       </React.Suspense>
     </div>
   )

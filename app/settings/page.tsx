@@ -7,6 +7,7 @@ import NotFound from '../not-found'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SettingsChatbot } from '@/components/Settings/settings-chatbot'
 import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 
 async function Settings() {
   const session = await auth()
@@ -17,7 +18,9 @@ async function Settings() {
         defaultValue="profile"
         className="md:w-full flex xl:flex-row flex-col p-4 xl:px-40 justify-center"
       >
-        <ArrowLeft className="size-8 xl:mt-[7rem] mb-6 xl:mb-0" />
+        <Link href="/chat">
+          <ArrowLeft className="size-8 xl:mt-[7rem] mb-6 xl:mb-0" />
+        </Link>
         <TabsList className="font-pops p-2 w-full xl:w-[300px] mx-auto xl:mx-0 h-[100px] xl:mt-[13rem] flex flex-col border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
           <TabsTrigger
             value="profile"

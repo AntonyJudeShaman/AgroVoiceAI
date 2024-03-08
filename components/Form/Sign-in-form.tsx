@@ -1,11 +1,6 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { CreateAccount } from "../sign-up"
-import { Account } from "../sign-in"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { CreateAccount } from '../Settings/sign-up'
+import { Account } from '../Home/sign-in'
 
 export function AccountsTab() {
   return (
@@ -15,10 +10,10 @@ export function AccountsTab() {
         <TabsTrigger value="signup">Sign up</TabsTrigger>
       </TabsList>
       <TabsContent value="signin">
-        <Account/>
+        <Account />
       </TabsContent>
       <TabsContent value="signup">
-        <CreateAccount/>
+        <CreateAccount />
       </TabsContent>
     </Tabs>
   )

@@ -46,7 +46,7 @@ export default function ChatNavbar() {
                       aria-label={item.title}
                       href={item.href}
                       className={cn(
-                        'text-lg dark:hover:text-white items-center overflow-hidden mr-4 dark:text-zinc-300 text-zinc-900 rounded-md p-2 font-pops'
+                        '2xl:text-md text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-zinc-300 text-zinc-900 rounded-md p-2 font-pops'
                       )}
                     >
                       <span className="">{item.title}</span>

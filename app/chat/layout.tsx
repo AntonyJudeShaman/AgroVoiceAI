@@ -17,13 +17,13 @@ export default async function ChatLayout({ children }: ChatLayoutProps) {
         {session && (
           <div className="flex justify-between">
             <div className="flex items-center ml-5 md:ml-3 justify-start">
-              
-                <UserOrLogin />
+              <UserOrLogin />
             </div>{' '}
             <div>
-            <ChatNavbar />
-          </div></div>
-        )}{' '}
+              <ChatNavbar />
+            </div>
+          </div>
+        )}
         {children}
       </div>
     </div>

@@ -7,17 +7,20 @@ import {
   NavigationMenuList,
   NavigationMenu
 } from '@/components/ui/navigation-menu'
-import { IconLogo, IconMenu } from './ui/icons'
-import { ThemeToggle } from './Theme/theme-toggle'
+import { IconLogo, IconMenu } from '../ui/icons'
+import { ThemeToggle } from '../Theme/theme-toggle'
 import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
 import { ArrowRight, DownloadIcon } from 'lucide-react'
-import { BottomGradient } from './ui/bottom-gradient'
+import { BottomGradient } from '../ui/bottom-gradient'
+import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 
-export default function Navbar() {
+export default function Navbar({ session }: { session: any }) {
   const [scrolled, setScrolled] = useState(false)
+  const path = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +36,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex dark:text-white text-black h-20 transition-transform duration-1000 min-w-full justify-between items-center px-4 md:px-6 ${scrolled ? 'fixed left-0 justify-start w-1/2 backdrop-blur-lg duration-1000 shadow-md z-50' : ''}`}
+      className={`flex dark:text-white text-black h-20 w-full justify-between items-center px-4 md:px-6 ${scrolled ? 'fixed right-0 backdrop-blur-lg shadow-md z-50' : ''}`}
     >
       <Sheet>
         <SheetTrigger asChild>
@@ -106,30 +109,61 @@ export default function Navbar() {
           </NavigationMenuLink>
         </NavigationMenuList>
       </NavigationMenu>
-      <div className="ml-auto flex gap-2">
-        <ThemeToggle />
-        <Button
-          onClick={() =>
-            signOut({
-              callbackUrl: '/'
-            })
-          }
-          className=""
-          variant="outline"
-        >
-          Logout
-        </Button>
-        <Button>
-          <Link href="/options">
+      {!session ? (
+        <div className="ml-auto flex gap-2">
+          <ThemeToggle />
+          <Button variant="outline" onClick={() => router.push('/sign-in')}>
+            Sign in
+          </Button>
+          <Button onClick={() => router.push('/sign-up')}>
+            <Button
+              className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
+              size="lg"
+            >
+              Sign Up
+            </Button>
+          </Button>
+        </div>
+      ) : path === '/options' ? (
+        <div className="ml-auto flex gap-2">
+          <ThemeToggle />
+          <Button
+            onClick={() =>
+              signOut({
+                callbackUrl: '/'
+              })
+            }
+            variant="outline"
+            className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
+            size="lg"
+          >
+            Logout
+          </Button>
+        </div>
+      ) : (
+        <div className="ml-auto flex gap-2">
+          <ThemeToggle />
+          <Button
+            onClick={() =>
+              signOut({
+                callbackUrl: '/'
+              })
+            }
+            className=""
+            variant="outline"
+          >
+            Logout
+          </Button>
+          <Button onClick={() => router.push('/options')}>
             <Button
               className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
               size="lg"
             >
               Explore <ArrowRight className="size-4 ml-2 hidden md:block" />
             </Button>
-          </Link>
-        </Button>
-      </div>
+          </Button>
+        </div>
+      )}
     </nav>
   )
 }

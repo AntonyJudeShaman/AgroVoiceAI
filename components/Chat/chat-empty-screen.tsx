@@ -1,8 +1,6 @@
 import { UseChatHelpers } from 'ai/react'
 
-import { Button } from '@/components/ui/button'
-import { ExternalLink } from '@/components/external-link'
-import { IconArrowRight, IconLogo } from '@/components/ui/icons'
+import { IconLogo } from '@/components/ui/icons'
 
 const exampleMessages = [
   {
@@ -30,7 +28,6 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
       <p className="mx-auto font-display bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% flex justify-center pt-4  text-4xl md:text-5xl font-semibold">
         AgroVoiceAI
       </p>
-
     </div>
   )
 }

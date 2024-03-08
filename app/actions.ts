@@ -45,8 +45,8 @@ export async function verifyPassword(
   hashedPassword: string
 ): Promise<boolean> {
   try {
-    console.log(plaintextPassword)
-    console.log(hashedPassword)
+    // console.log(plaintextPassword)
+    // console.log(hashedPassword)
     const match = await compare(hashedPassword, plaintextPassword)
     return match
   } catch (error) {

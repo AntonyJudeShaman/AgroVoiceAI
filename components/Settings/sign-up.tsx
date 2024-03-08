@@ -8,10 +8,10 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { BottomGradient } from './ui/bottom-gradient'
-import { IconGoogle, IconSpinner } from './ui/icons'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { BottomGradient } from '../ui/bottom-gradient'
+import { IconGoogle, IconSpinner } from '../ui/icons'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
