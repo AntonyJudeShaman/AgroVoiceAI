@@ -4,9 +4,7 @@ import Credentials from 'next-auth/providers/credentials'
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { db } from './db'
-import argon2 from 'argon2'
-import { verifyPassword } from '@/app/actions'
-import { compare, hash } from 'bcrypt'
+import { compare } from 'bcrypt'
 
 declare module 'next-auth' {
   interface Session {

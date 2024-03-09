@@ -1,10 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 
-import { ServerActionResult } from '@/lib/types'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   AlertDialog,

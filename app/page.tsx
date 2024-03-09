@@ -1,6 +1,4 @@
-import { cn, nanoid } from '@/lib/utils'
-import { Chat } from '@/components/Chat/chat'
-import { auth } from '@/lib/auth'
+import { cn } from '@/lib/utils'
 import { DotBackGround } from '@/components/Home/grid-bg'
 import { BentoGrid, BentoGridItem } from '@/components/Home/grid-layout'
 import HomeFeatures from '@/components/Home/home-features'

@@ -25,7 +25,6 @@ import {
 import { firebaseConfig } from '@/lib/firebase'
 import { initializeApp } from 'firebase/app'
 import { removeImage } from '@/app/actions'
-import { Label } from '@radix-ui/react-dropdown-menu'
 
 export default function GettingStartedForm({
   user,

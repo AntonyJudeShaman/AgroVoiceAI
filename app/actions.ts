@@ -9,9 +9,6 @@ import { type Chat } from '@/lib/types'
 import redis from '@/lib/redis'
 import { db } from '@/lib/db'
 
-import argon2 from 'argon2'
-import { compare } from 'bcrypt'
-
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []

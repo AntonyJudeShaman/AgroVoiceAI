@@ -12,7 +12,7 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Loader2, Trash2, User } from 'lucide-react'
+import { Loader2, User } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { Label } from '../ui/label'
 import {
@@ -33,7 +33,6 @@ import {
   getStorage,
   ref as reff,
   uploadBytes,
-  listAll,
   getDownloadURL
 } from 'firebase/storage'
 import { firebaseConfig } from '@/lib/firebase'

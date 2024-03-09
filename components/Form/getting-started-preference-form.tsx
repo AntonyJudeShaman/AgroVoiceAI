@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { ArrowRight, Info, Loader2 } from 'lucide-react'
+import { Info, Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { handlePrefSubmit } from '@/helpers/user-info'
 import { Textarea } from '../ui/textarea'

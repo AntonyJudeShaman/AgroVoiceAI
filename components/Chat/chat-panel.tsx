@@ -6,9 +6,7 @@ import { Button } from '@/components/ui/button'
 import { PromptForm } from '@/components/Form/prompt-form'
 import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
 import { IconRefresh, IconShare, IconStop } from '@/components/ui/icons'
-import { FooterText } from '@/components/footer'
 import { ChatShareDialog } from '@/components/Chat/chat-share-dialog'
-import { ButtonScrollToTop } from '../button-scroll-to-top'
 
 export interface ChatPanelProps
   extends Pick<

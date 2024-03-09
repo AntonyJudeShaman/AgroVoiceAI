@@ -1,4 +1,4 @@
-import { Header, UserOrLogin } from '@/components/Chat/chat-header'
+import { UserOrLogin } from '@/components/Chat/chat-header'
 import ChatNavbar from '@/components/Chat/chat-navbar'
 import { SidebarDesktop } from '@/components/Sidebar/sidebar-desktop'
 import { auth } from '@/lib/auth'
