@@ -77,11 +77,6 @@ export function SettingsForm({
     setIsImageChanged(event.target.value !== user?.image)
   }
 
-  const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAge(event.target.value)
-    setIsAgeChanged(event.target.value !== user?.age)
-  }
-
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(event.target.value)
     setIsPhoneChanged(event.target.value !== user?.phone)

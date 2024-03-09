@@ -106,22 +106,31 @@ export default function GettingStartedForm({
         'flex flex-col m-4 items-center dark:bg-slate-900/10 bg-white/80 shadow-none'
       )}
     >
-      <Card className="w-full flex md:justify-center md:m-4 border-none bg-transparent shadow-none">
-        <div className="flex md:flex-row flex-col mx-auto">
-          <p className="rounded-full md:border flex justify-center items-center">
-            {user?.image ? (
-              <img
-                src={user?.image}
-                alt={user?.name || 'Profile Picture'}
-                className="size-32 rounded-full  p-4 md:p-0 flex justify-center items-center"
-                width={60}
-                height={30}
-              />
-            ) : (
-              <User className="md:size-32 size-24 mt-4 md:mt-0 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
-            )}
-          </p>
-          <div className="flex flex-col text-center md:text-left justify-center">
+      {' '}
+      <p className="md:text-4xl text-3xl mt-4 bg-clip-text text-center text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-display px-8">
+        Welcome to AgroVoiceAI
+      </p>
+      {/* <p className="flex justify-start font-pops px-8">
+        Let's create your profile.
+      </p> */}
+      <Card className="w-full flex justify-center md:m-4 border-none bg-transparent shadow-none">
+        <div className="justify-start">
+          <div className="flex md:flex-row flex-col mx-auto justify-center">
+            <p className="rounded-full md:border flex justify-center items-center">
+              {user?.image ? (
+                <img
+                  src={user?.image}
+                  alt={user?.name || 'Profile Picture'}
+                  className="size-32 rounded-full  p-4 md:p-0 flex justify-center items-center"
+                  width={60}
+                  height={30}
+                />
+              ) : (
+                <User className="md:size-32 size-24 mt-4 md:mt-0 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
+              )}
+            </p>
+          </div>
+          <div className="flex flex-col text-center items-center md:text-left justify-center">
             <CardHeader>
               <CardTitle>Profile Picture (optional)</CardTitle>
             </CardHeader>
@@ -226,18 +235,25 @@ export default function GettingStartedForm({
         <form
           onSubmit={event => {
             event.preventDefault()
-            handleNameSubmit(
-              event,
-              user,
-              name,
-              setIsSaving,
-              setIsNameChanged,
-              toast
-            ).then(() => {
+            if (isNameChanged) {
+              handleNameSubmit(
+                event,
+                user,
+                name,
+                setIsSaving,
+                setIsNameChanged,
+                toast
+              ).then(() => {
+                setNext(true)
+                setIsNameChanged(false)
+                router.push('/getting-started/location')
+              })
+            } else {
               setNext(true)
+              setIsSaving(true)
               setIsNameChanged(false)
-              router.push('/getting-started/preferences')
-            })
+              router.push('/getting-started/location')
+            }
           }}
         >
           <CardHeader>
@@ -255,19 +271,10 @@ export default function GettingStartedForm({
             </div>
             <div className="flex justify-end mt-5">
               <Button
-                className="flex mr-3 h-full"
-                onClick={() => router.push('/getting-started/preferences')}
-                variant="outline"
-                disabled={next || isSaving}
-                type="button"
-              >
-                Skip
-              </Button>
-              <Button
                 type="submit"
                 className={cn(buttonVariants(), className, 'ml-2 h-full')}
                 size="lg"
-                disabled={!isNameChanged || isSaving}
+                disabled={isSaving}
                 variant="default"
               >
                 {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}

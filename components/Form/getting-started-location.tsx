@@ -33,7 +33,11 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { Loader2 } from 'lucide-react'
+import { Info, Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { AlertDialogTrigger } from '../ui/alert-dialog'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+import { Dialog } from '../ui/dialog'
 
 const FormSchema = z.object({
   district: z
@@ -45,10 +49,13 @@ const FormSchema = z.object({
     })
 })
 
-export function DistrictForm({ user }: { user: any }) {
+export function GettingStartedLocationForm({ user }: { user: any }) {
   const [district, setDistrict] = useState<string>(user?.userDistrict || '')
   const [isDistrictChanged, setIsDistrictChanged] = useState<boolean>(false)
   const [isSavingDistrict, setIsSavingDistrict] = useState<boolean>(false)
+  const [next, setNext] = useState(false)
+
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
@@ -68,15 +75,29 @@ export function DistrictForm({ user }: { user: any }) {
       setIsDistrictChanged,
       toast
     ).then(() => {
-      setIsDistrictChanged(false)
+      setIsSavingDistrict(true)
+      router.push('/getting-started/preferences')
+      setIsSavingDistrict(false)
     })
   }
 
   return (
-    <Card className="md:w-2/3 w-full border dark:border-green-900/50 border-green-200">
-      <CardHeader>
-        <CardTitle>Your District</CardTitle>
-        <CardDescription>Please select a district.</CardDescription>
+    <Card className="w-1/3 border">
+      <CardHeader className="flex flex-row justify-between">
+        <div className="space-y-1">
+          <CardTitle>Your District</CardTitle>
+          <CardDescription>Please select a district.</CardDescription>
+        </div>
+        <p className="flex justify-start text-sm pb-4 dark:text-gray-500 text-gray-700">
+          <Tooltip>
+            <TooltipTrigger>
+              <Info className="size-5 mr-3" />
+            </TooltipTrigger>
+            <TooltipContent>
+              It helps in recommendations based on your region.
+            </TooltipContent>
+          </Tooltip>
+        </p>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -115,22 +136,27 @@ export function DistrictForm({ user }: { user: any }) {
               )}
             />
           </CardContent>
-          <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 p-3 md:mt-4 justify-end flex">
+          <CardFooter className="justify-between flex">
             {' '}
             <Button
+              className="flex mr-3 h-full"
+              onClick={() => router.push('/getting-started')}
+              variant="outline"
+              disabled={next || isSavingDistrict}
+              type="button"
+            >
+              Back
+            </Button>
+            <Button
               type="submit"
-              className={cn(
-                buttonVariants(),
-                'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
-                `${isDistrictChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70 border-green-200'}`
-              )}
+              className={cn(buttonVariants())}
               size="lg"
-              disabled={!isDistrictChanged || isSavingDistrict}
+              disabled={isSavingDistrict}
             >
               {isSavingDistrict && (
                 <Loader2 className="mr-2 size-4 animate-spin" />
               )}
-              <span>Save</span>
+              <span>Save & Next</span>
             </Button>
           </CardFooter>
         </form>

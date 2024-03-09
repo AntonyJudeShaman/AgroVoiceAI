@@ -3,6 +3,8 @@ import ChatNavbar from '@/components/Chat/chat-navbar'
 import { SidebarDesktop } from '@/components/Sidebar/sidebar-desktop'
 import { auth } from '@/lib/auth'
 import React from 'react'
+import { getCurrentUser } from '../actions'
+import { redirect } from 'next/navigation'
 
 interface ChatLayoutProps {
   children: React.ReactNode
@@ -10,6 +12,10 @@ interface ChatLayoutProps {
 
 export default async function ChatLayout({ children }: ChatLayoutProps) {
   const session = await auth()
+  const user = await getCurrentUser()
+  if (!user?.pageShown && user) {
+    redirect('/getting-started')
+  }
   return (
     <div className="relative min-h-screen flex overflow-hidden dark:bg-[#020817]">
       {session && <SidebarDesktop />}

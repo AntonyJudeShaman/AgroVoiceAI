@@ -46,21 +46,29 @@ export default function GettingStartedPreferenceForm({
     >
       <Card className="w-full border-none bg-transparent shadow-none">
         <form
-          onSubmit={event =>
-            handlePrefSubmit(
-              event,
-              user,
-              preference,
-              setIsSavingPref,
-              setIsPreferenceChanged,
-              toast
-            ).then(() => {
+          onSubmit={event => {
+            event.preventDefault()
+            if (isPreferenceChanged) {
+              handlePrefSubmit(
+                event,
+                user,
+                preference,
+                setIsSavingPref,
+                setIsPreferenceChanged,
+                toast
+              ).then(() => {
+                setNext(true)
+                setIsSavingPref(true)
+                updatePageShown(user.id)
+                router.push('/chat')
+              })
+            } else {
               setNext(true)
-              setIsPreferenceChanged(false)
+              setIsSavingPref(true)
               updatePageShown(user.id)
               router.push('/chat')
-            })
-          }
+            }
+          }}
         >
           <CardHeader>
             <CardTitle>Additional Information</CardTitle>
@@ -98,7 +106,7 @@ export default function GettingStartedPreferenceForm({
                 type="submit"
                 className={cn(buttonVariants())}
                 size="lg"
-                disabled={!isPreferenceChanged || isSavingPref}
+                disabled={isSavingPref}
                 variant="outline"
               >
                 {isSavingPref && (
