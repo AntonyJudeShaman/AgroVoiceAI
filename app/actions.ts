@@ -40,19 +40,28 @@ export async function getUser() {
   return session?.user
 }
 
-export async function verifyPassword(
-  plaintextPassword: string,
-  hashedPassword: string
-): Promise<boolean> {
-  try {
-    // console.log(plaintextPassword)
-    // console.log(hashedPassword)
-    const match = await compare(hashedPassword, plaintextPassword)
-    return match
-  } catch (error) {
-    console.error('Error verifying password:', error)
-    throw error
-  }
+export async function updatePageShown(userId: string) {
+  await db.user.update({
+    where: {
+      id: userId
+    },
+    data: {
+      pageShown: true
+    }
+  })
+}
+
+export async function getDistrict(userId: string) {
+  const district = await db.user.findMany({
+    where: {
+      id: userId
+    },
+    select: {
+      userDistrict: true
+    }
+  })
+
+  return district
 }
 
 export async function getCurrentUser() {

@@ -50,10 +50,13 @@ model User {
   role              String?   @default("user")
   phone             String?   @unique
   age               String?
+  userDistrict      String?
   gender            String?
   emailVerified     DateTime?
   image             String?   @db.Text
   chatbotPreference String?   @db.LongText
+  pageShown         Boolean?  @default(false)
+  prefPageShown     Boolean?  @default(false)
   createdAt         DateTime  @default(now()) @map(name: "created_at")
   updatedAt         DateTime  @default(now()) @map(name: "updated_at")
 

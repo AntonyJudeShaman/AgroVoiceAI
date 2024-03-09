@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -11,36 +11,9 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Loader2, Trash2, User } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { Label } from '../ui/label'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogTrigger
-} from '../ui/dialog'
-import { useDropzone } from 'react-dropzone'
-import { DeleteAccount } from './delete-account'
-import {
-  handleAgeSubmit,
-  handleImageSubmit,
-  handleNameSubmit,
-  handlePhoneNumberSubmit,
-  handlePrefSubmit
-} from '@/helpers/user-info'
-import {
-  getStorage,
-  ref as reff,
-  uploadBytes,
-  listAll,
-  getDownloadURL
-} from 'firebase/storage'
-import { firebaseConfig } from '@/lib/firebase'
-import { initializeApp } from 'firebase/app'
-import { removeImage } from '@/app/actions'
+import { handlePrefSubmit } from '@/helpers/user-info'
 import { Textarea } from '../ui/textarea'
 
 export function SettingsChatbot({
@@ -55,8 +28,6 @@ export function SettingsChatbot({
   const [isPreferenceChanged, setIsPreferenceChanged] = useState<boolean>(false)
   const [preference, setPreference] = useState(user?.chatbotPreference || '')
 
-  const firebaseApp = initializeApp(firebaseConfig, 'profile')
-  const storage = getStorage(firebaseApp)
   const router = useRouter()
 
   const handlePrefChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -1,5 +1,6 @@
 import {
   ageSchema,
+  districtSchema,
   imageURLSchema,
   nameSchema,
   phoneNumberSchema,
@@ -35,7 +36,7 @@ const handleNameSubmit = async (
 
       if (response.ok) {
         toast.success('Name updated successfully')
-        setIsNameChanged(false)
+        setIsNameChanged(true)
         setIsSaving(false)
       } else {
         toast.error('Failed to update name')
@@ -96,43 +97,41 @@ const handleImageSubmit = async (
   }
 }
 
-const handleAgeSubmit = async (
-  event: React.FormEvent<HTMLFormElement>,
+const handleDistrictSubmit = async (
   user: User,
-  age: string,
-  setIsSavingAge: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsAgeChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  district: string,
+  setIsSavingDistrict: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsDistrictChanged: React.Dispatch<React.SetStateAction<boolean>>,
   toast: any
 ) => {
-  event.preventDefault()
-  setIsSavingAge(true)
+  setIsSavingDistrict(true)
 
   try {
-    ageSchema.parse(age)
-    const response = await fetch(`/api/user/age`, {
+    districtSchema.parse(district)
+    const response = await fetch(`/api/user/district`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: user.id, age })
+      body: JSON.stringify({ userId: user.id, district })
     })
 
     if (response.ok) {
-      toast.success('Age updated successfully')
-      setIsAgeChanged(false)
+      toast.success('District updated successfully')
+      setIsDistrictChanged(false)
     } else {
       const errorMessage = await response.text()
-      toast.error(`Failed to update age: ${errorMessage}`)
+      toast.error(`Failed to update district: ${errorMessage}`)
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
       const validationError = error.errors[0].message
-      toast.error(`Age must be a number between 18 and 120.`)
+      toast.error(`Select a valid district.`)
     } else {
       toast.error('An error occurred. Please try again later.')
     }
   } finally {
-    setIsSavingAge(false)
+    setIsSavingDistrict(false)
   }
 }
 
@@ -221,7 +220,7 @@ const handlePrefSubmit = async (
 export {
   handleNameSubmit,
   handleImageSubmit,
-  handleAgeSubmit,
+  handleDistrictSubmit,
   handlePhoneNumberSubmit,
   handlePrefSubmit
 }

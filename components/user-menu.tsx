@@ -61,14 +61,14 @@ export function UserMenu() {
     <React.Suspense fallback={<LoadingFallback />}>
       <div className="p-2 mb-6">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild className="p-6">
+          <DropdownMenuTrigger asChild className="px-4 py-7">
             <Button
               variant="ghost"
-              className="rounded-lg border flex justify-start dark:border-green-950 border-teal-200 dark:bg-teal-950/30 bg-green-200/50 w-full hover:border-gray-700"
+              className="rounded-2xl hover:border-none flex justify-start hover:dark:bg-teal-950/30 hover:bg-green-200/50 w-full"
             >
               {user?.image?.length ? (
                 <Image
-                  className="size-9 transition-opacity duration-300 rounded-full justify-start select-none hover:opacity-80"
+                  className="size-9 transition-opacity duration-300 rounded-full my-4 justify-start select-none hover:opacity-80"
                   src={user?.image ?? ''}
                   alt={user.name ?? 'Avatar'}
                   height={44}
@@ -86,7 +86,7 @@ export function UserMenu() {
           <DropdownMenuContent
             sideOffset={16}
             align="center"
-            className="bg-gradient-to-bl dark:from-zinc-950 dark:to-indigo-950/30 to-60% from-zinc-300 to-indigo-100/30"
+            className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 to-indigo-100/30"
           >
             <DropdownMenuItem className="flex-col items-start flex-wrap">
               {/* <div className="text-xs font-medium">{user?.name}</div> */}

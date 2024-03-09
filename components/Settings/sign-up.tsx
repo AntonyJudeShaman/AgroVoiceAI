@@ -13,13 +13,10 @@ import { Input } from '../ui/input'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { IconGoogle, IconSpinner } from '../ui/icons'
 import React from 'react'
-import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { EyeIcon, EyeOffIcon } from 'lucide-react'
-import { IoEye, IoEyeOff } from 'react-icons/io5'
-import { BsEye, BsEyeFill, BsEyeSlash } from 'react-icons/bs'
+import { BsEye, BsEyeSlash } from 'react-icons/bs'
 
 interface CreateAccountProps {
   text?: string
@@ -73,7 +70,7 @@ export function CreateAccount({
               type="button"
               onClick={() => {
                 setIsLoading(true)
-                signIn('google', { callbackUrl: `/chat` })
+                signIn('google', { callbackUrl: `/getting-started` })
               }}
               disabled={isLoading}
               className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"

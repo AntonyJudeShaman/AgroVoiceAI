@@ -25,7 +25,6 @@ import {
 import { useDropzone } from 'react-dropzone'
 import { DeleteAccount } from './delete-account'
 import {
-  handleAgeSubmit,
   handleImageSubmit,
   handleNameSubmit,
   handlePhoneNumberSubmit
@@ -40,6 +39,7 @@ import {
 import { firebaseConfig } from '@/lib/firebase'
 import { initializeApp } from 'firebase/app'
 import { removeImage } from '@/app/actions'
+import { DistrictForm } from '../Form/district-form'
 
 export function SettingsForm({
   user,
@@ -147,7 +147,9 @@ export function SettingsForm({
                 setIsSaving,
                 setIsNameChanged,
                 toast
-              )
+              ).then(() => {
+                setIsNameChanged(false)
+              })
             }
           >
             <CardHeader>
@@ -230,7 +232,7 @@ export function SettingsForm({
                   </DialogTrigger>
                   <DialogContent className="">
                     <form onSubmit={event => handleFileUpload(event)}>
-                      <div className="">
+                      <div className="mt-10">
                         {imageURL && (
                           <img
                             src={imageURL}
@@ -333,57 +335,7 @@ export function SettingsForm({
         </CardContent>
       </Card>
       <div className="flex md:flex-row flex-col md:space-x-4 space-x-0 md:space-y-0 space-y-4">
-        <Card className="md:w-2/3 w-full border dark:border-green-900/50 border-green-200">
-          <form
-            onSubmit={event =>
-              handleAgeSubmit(
-                event,
-                user,
-                age,
-                setIsSavingAge,
-                setIsAgeChanged,
-                toast
-              )
-            }
-          >
-            <CardHeader>
-              <CardTitle>Your Age</CardTitle>
-              <CardDescription>Please enter your age.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-1">
-                <Label className="sr-only" htmlFor="name">
-                  Age
-                </Label>
-                <Input
-                  id="name"
-                  className=""
-                  size={32}
-                  onChange={handleAgeChange}
-                  value={age}
-                />
-              </div>
-            </CardContent>
-            <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 p-3 md:mt-4 items-end justify-end flex">
-              <Button
-                type="submit"
-                className={cn(
-                  buttonVariants(),
-                  className,
-                  ' dark:hover:text-black/80 dark:hover:bg-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:text-white/80 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
-                  `${isAgeChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70'}`
-                )}
-                size="lg"
-                disabled={!isAgeChanged || isSavingAge}
-              >
-                {isSavingAge && (
-                  <Loader2 className="mr-2 size-4 animate-spin" />
-                )}
-                <span>Save</span>
-              </Button>
-            </CardFooter>
-          </form>
-        </Card>
+        <DistrictForm user={user} />
         <Card className="w-full border dark:border-green-900/50 border-green-200">
           <form
             onSubmit={event =>
@@ -394,7 +346,9 @@ export function SettingsForm({
                 setIsSavingPhone,
                 setIsPhoneChanged,
                 toast
-              )
+              ).then(() => {
+                setIsPhoneChanged(false)
+              })
             }
           >
             <CardHeader>
