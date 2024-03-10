@@ -20,6 +20,7 @@ import React, { useEffect, useState } from 'react'
 import { auth } from '@/lib/auth'
 import Link from 'next/link'
 import { getUser } from '@/app/actions'
+import { LogOut, Settings, SunMoon } from 'lucide-react'
 
 export interface UserMenuProps {
   user: Session['user']
@@ -94,7 +95,8 @@ export function UserMenu() {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <Link href="/settings">
-              <DropdownMenuItem className="flex-col text-sm h-8 items-start cursor-pointer">
+              <DropdownMenuItem className="flex text-sm h-8 items-center cursor-pointer">
+                <Settings className="size-4 mr-2" />
                 Settings
               </DropdownMenuItem>
             </Link>
@@ -102,7 +104,10 @@ export function UserMenu() {
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="flex items-center h-8 justify-between text-sm cursor-pointer"
             >
-              <span> Appearance </span>
+              <span className="flex items-center">
+                {' '}
+                <SunMoon className="size-4 mr-2" /> Appearance{' '}
+              </span>
               <span>
                 <ThemeToggle />
               </span>
@@ -114,9 +119,9 @@ export function UserMenu() {
                   callbackUrl: '/'
                 })
               }
-              className="text-sm h-8 cursor-pointer"
+              className="text-sm h-8 flex items-center cursor-pointer"
             >
-              Log Out
+              <LogOut className="size-4 mr-2" /> Log Out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

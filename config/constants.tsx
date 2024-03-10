@@ -123,7 +123,7 @@ export const options = [
   },
 
   {
-    title: 'Pest Identification & Recommendations',
+    title: 'Pest Identification',
     description:
       'Spot crop pests and diseases in user-uploaded images, get quick solutions.',
     icon: <BugOffIcon />,

@@ -6,7 +6,12 @@ import {
   CloudSnow,
   Cloud,
   Haze,
-  Droplet
+  Droplet,
+  ThermometerSun,
+  SunSnow,
+  Droplets,
+  Wind,
+  GaugeCircle
 } from 'lucide-react'
 import { formatTime12hr } from '@/lib/utils'
 import { Card, CardContent, CardHeader } from '../ui/card'
@@ -14,9 +19,9 @@ import { Card, CardContent, CardHeader } from '../ui/card'
 function getWeatherGradientClass(weatherMain: any) {
   switch (weatherMain) {
     case 'Clear':
-      return 'bg-gradient-to-br from-blue-200 to-blue-500 dark:from-blue-900 dark:to-blue-700'
+      return 'bg-gradient-to-br from-blue-300 to-blue-500 dark:from-blue-900 dark:to-blue-700'
     case 'Rain':
-      return 'bg-gradient-to-br from-gray-500 to-gray-700 dark:from-gray-800 dark:to-gray-600'
+      return 'bg-gradient-to-br from-green-300 to-green-500 dark:from-green-800 dark:to-green-600'
     case 'Thunderstorm':
       return 'bg-gradient-to-br from-gray-200 to-brown-500 dark:from-gray-700 dark:to-brown-300'
     case 'Snow':
@@ -33,7 +38,7 @@ function getWeatherGradientClass(weatherMain: any) {
 function WeatherForecastCard({ forecast, forecastIndex }: any) {
   return (
     <Card
-      className={`rounded-lg mt-8 flex justify-center duration-500 dark:text-gray-300 dark:hover:text-white border dark:hover:border-gray-700 dark:border-gray-800 border-gray-200 hover:border-gray-300 shadow-lg p-6 ${getWeatherGradientClass(
+      className={`rounded-lg mt-8 flex justify-center duration-500 dark:text-gray-300 dark:hover:text-white border dark:hover:border-green-200 dark:border-gray-800 border-gray-200 hover:border-green-900 shadow-lg lg:p-4 p-3 ${getWeatherGradientClass(
         forecast.weather[0].main
       )}`}
       key={forecastIndex}
@@ -46,10 +51,10 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
           <div className="flex items-center">
             <span className="mr-4">
               {forecast.weather[0].main === 'Clear' && (
-                <Sun className="size-12 text-yellow-500 dark:text-yellow-300" />
+                <Sun className="size-12 text-yellow-400 dark:text-yellow-400" />
               )}
               {forecast.weather[0].main === 'Rain' && (
-                <CloudRain className="size-12 text-gray-500 dark:text-gray-300" />
+                <CloudRain className="size-12 text-green-900 dark:text-green-400" />
               )}
               {forecast.weather[0].main === 'Thunderstorm' && (
                 <CloudLightning className="size-12 text-yellow-500 dark:text-yellow-300" />
@@ -58,7 +63,7 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
                 <CloudSnow className="size-12 text-gray-500 dark:text-gray-300" />
               )}
               {forecast.weather[0].main === 'Clouds' && (
-                <Cloud className="size-12 text-gray-500 dark:text-gray-300" />
+                <Cloud className="size-12 text-blue-700 dark:text-blue-500" />
               )}
               {forecast.weather[0].main === 'Mist' && (
                 <Droplet className="size-12 text-gray-500 dark:text-gray-300" />
@@ -77,18 +82,26 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
         </CardHeader>
         <CardContent>
           <div className="font-pops space-y-2">
-            <p className="text-md">
-              Temperature: {Math.round(forecast.main.temp - 273.15)}°C
+            <p className="text-md flex items-center">
+              <ThermometerSun className="size-5 mr-2" /> Temperature:{' '}
+              {Math.round(forecast.main.temp - 273.15)}°C
             </p>{' '}
-            <p className="text-md">
-              Feels like: {Math.round(forecast.main.feels_like - 273.15)}°C
+            <p className="text-md flex items-center">
+              <SunSnow className="size-5 mr-2" /> Feels like:{' '}
+              {Math.round(forecast.main.feels_like - 273.15)}°C
             </p>
-            <p className="text-md">Humidity: {forecast.main.humidity}%</p>
-            <p className="text-md">Wind Speed: {forecast.wind.speed} m/s</p>
-            <p className="text-md">
-              Visibility: {Math.round(forecast.visibility / 1000)} km
+            <p className="text-md flex items-center">
+              <Droplets className="size-5 mr-2" /> Humidity:{' '}
+              {forecast.main.humidity}%
             </p>
-            <p className="text-md">Pressure: {forecast.main.pressure} hPa</p>
+            <p className="text-md flex items-center">
+              <Wind className="size-5 mr-2" /> Wind Speed: {forecast.wind.speed}{' '}
+              m/s
+            </p>
+            <p className="text-md flex items-center">
+              <GaugeCircle className="size-5 mr-2" /> Pressure:{' '}
+              {forecast.main.pressure} hPa
+            </p>
           </div>
         </CardContent>
       </div>
