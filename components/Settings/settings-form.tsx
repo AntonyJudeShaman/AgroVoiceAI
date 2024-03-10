@@ -39,6 +39,8 @@ import { firebaseConfig } from '@/lib/firebase'
 import { initializeApp } from 'firebase/app'
 import { removeImage } from '@/app/actions'
 import { DistrictForm } from '../Form/district-form'
+import { IconClose } from '../ui/icons'
+import useLockBody from '@/lib/hooks/use-lock-body'
 
 export function SettingsForm({
   user,
@@ -62,6 +64,20 @@ export function SettingsForm({
   const [age, setAge] = useState(user?.age || '')
   const [phoneNumber, setPhoneNumber] = useState(user?.phone || '')
   const [open, setOpen] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [modalImage, setModalImage] = useState('')
+
+  useLockBody(modalVisible)
+
+  const handleImageClick = (imageUrl: string) => {
+    setModalImage(imageUrl)
+    setModalVisible(true)
+  }
+
+  const closeModal = () => {
+    setModalVisible(false)
+    setModalImage('')
+  }
 
   const firebaseApp = initializeApp(firebaseConfig, 'profile')
   const storage = getStorage(firebaseApp)
@@ -190,14 +206,31 @@ export function SettingsForm({
                 <img
                   src={user?.image}
                   alt={user?.name || 'Profile Picture'}
-                  className="size-32 rounded-full  p-4 md:p-0 flex justify-center items-center"
+                  className="size-32 rounded-full cursor-pointer p-4 md:p-0 flex justify-center items-center"
                   width={60}
                   height={30}
+                  onClick={() => handleImageClick(user?.image)}
                 />
               ) : (
                 <User className="md:size-32 size-24 mt-4 md:mt-0 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
               )}
             </p>
+            {modalVisible && (
+              <div
+                className="fixed inset-0 z-50 p-6 flex animate-in duration-500 justify-center items-center bg-black bg-opacity-60"
+                onClick={closeModal}
+              >
+                <div className="max-w-3/4 bg-background p-8 border rounded-full shadow-lg">
+                  <button
+                    className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-700"
+                    onClick={closeModal}
+                  >
+                    <IconClose className="z-40 size-8 dark:text-white text-black" />
+                  </button>
+                  <img src={modalImage} alt="Modal" className="w-full h-auto" />
+                </div>
+              </div>
+            )}
             <div className="flex flex-col text-center md:text-left justify-center">
               <CardHeader>
                 <CardTitle>Profile Picture</CardTitle>
