@@ -5,8 +5,12 @@ import { getCurrentUser } from '../actions'
 export default async function Weather() {
   const user = await getCurrentUser()
   return (
-    <div>
-      <WeatherHome user={user} />
-    </div>
+    <>
+      {user?.pageShown && (
+        <div>
+          <WeatherHome user={user} />
+        </div>
+      )}
+    </>
   )
 }
