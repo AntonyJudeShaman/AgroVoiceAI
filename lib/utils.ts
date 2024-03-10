@@ -60,22 +60,3 @@ export function formatTime12hr(time: string): string {
   hour12 = hour12 % 12 || 12
   return `${hour12}:${minute} ${suffix}`
 }
-
-export function getWeatherGradientClass(weatherMain: any) {
-  switch (weatherMain) {
-    case 'Clear':
-      return 'bg-gradient-to-br from-blue-200 to-blue-500 dark:from-blue-900 dark:to-blue-700'
-    case 'Rain':
-      return 'bg-gradient-to-br from-gray-500 to-gray-700 dark:from-gray-800 dark:to-gray-600'
-    case 'Thunderstorm':
-      return 'bg-gradient-to-br from-gray-200 to-brown-500 dark:from-gray-700 dark:to-brown-300'
-    case 'Snow':
-      return 'bg-gradient-to-br from-white to-white/80 dark:from-gray-700 dark:to-gray-500'
-    case 'Haze':
-      return 'bg-gradient-to-br from-yellow-300 to-yellow-500 dark:from-yellow-600 dark:to-yellow-800'
-    case 'Mist':
-      return 'bg-gradient-to-br from-purple-200 to-purple-400 dark:from-purple-400 dark:to-purple-800'
-    default:
-      return 'bg-gradient-to-br dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 to-indigo-100/30'
-  }
-}

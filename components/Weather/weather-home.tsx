@@ -1,19 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import {
-  Sun,
-  CloudRain,
-  CloudLightning,
-  CloudSnow,
-  Cloud,
-  Haze,
-  Droplet
-} from 'lucide-react'
-import { Card, CardContent, CardHeader } from '../ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { formatDateWithDay, formatTime12hr } from '@/lib/utils'
+import { formatDateWithDay } from '@/lib/utils'
 import WeatherForecastCard from './weather-forecast-card'
-import Navbar from '../Home/home-navbar'
 import WeatherCardsSkeleton from './weather-card-skeleton'
 
 interface ForecastData {
