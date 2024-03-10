@@ -8,6 +8,7 @@ import { type Chat } from '@/lib/types'
 
 import redis from '@/lib/redis'
 import { db } from '@/lib/db'
+import { NextResponse } from 'next/server'
 
 export async function getChats(userId?: string | null) {
   if (!userId) {
@@ -48,7 +49,7 @@ export async function updatePageShown(userId: string) {
   })
 }
 
-export async function getDistrict(userId: string) {
+export async function getLocation(userId: string) {
   const district = await db.user.findMany({
     where: {
       id: userId
@@ -58,7 +59,7 @@ export async function getDistrict(userId: string) {
     }
   })
 
-  return district
+  return district // Directly return the district data
 }
 
 export async function getCurrentUser() {
