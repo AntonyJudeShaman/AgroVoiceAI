@@ -84,3 +84,17 @@
   background: rgba(0, 201, 140, 0.959);
   border-radius: 12px;
 }
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-slide {
+  animation: slide 2s linear infinite;
+  background-color: black;
+}

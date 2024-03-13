@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import { AccountsTab } from '@/components/Form/Sign-in-form'
+import { AccountsTab } from '@/components/Form/auth-tab'
 import Navbar from '@/components/Home/home-navbar'
 import { Spotlight } from '@/components/ui/spotlight'
 

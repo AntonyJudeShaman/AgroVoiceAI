@@ -60,13 +60,13 @@ export default function GettingStartedPreferenceForm({
                 setNext(true)
                 setIsSavingPref(true)
                 updatePageShown(user.id)
-                router.push('/chat')
+                router.push('/options')
               })
             } else {
               setNext(true)
               setIsSavingPref(true)
               updatePageShown(user.id)
-              router.push('/chat')
+              router.push('/options')
             }
           }}
         >
@@ -94,7 +94,7 @@ export default function GettingStartedPreferenceForm({
                 className="flex mr-3"
                 onClick={() => {
                   updatePageShown(user.id)
-                  router.push('/chat')
+                  router.push('/options')
                 }}
                 variant="outline"
                 disabled={next || isSavingPref}
