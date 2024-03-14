@@ -74,8 +74,14 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
             </span>
 
             <div>
-              <p className="text-3xl font-semibold">
-                {forecast.weather[0].main}
+              <p className="flex flex-col">
+                <span className="text-3xl font-semibold">
+                  {forecast.weather[0].main}
+                </span>
+                <span className="text-sm pl-1">
+                  {' '}
+                  {forecast.weather[0].description}
+                </span>{' '}
               </p>
             </div>
           </div>

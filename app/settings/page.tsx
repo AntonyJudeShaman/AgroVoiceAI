@@ -20,9 +20,6 @@ async function Settings() {
         defaultValue="profile"
         className="md:w-full flex xl:flex-row flex-col p-4 lg:px-28 xl:px-20 justify-center"
       >
-        <Link href="/chat">
-          <ArrowLeft className="size-8 xl:mt-[4rem] mb-6 xl:mb-0" />
-        </Link>
         <TabsList className="font-pops p-2 w-full xl:w-[300px] mx-auto xl:mx-0 h-[100px] xl:mt-[10.5rem] flex flex-col border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
           <TabsTrigger
             value="profile"

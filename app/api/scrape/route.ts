@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { JSDOM } from 'jsdom'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET() {
+export async function POST(req: NextRequest) {
   try {
-    const websiteUrl: string =
-      'https://www.livechennai.com/Vegetable_price_chennai.asp'
+    const { location } = await req.json()
+    const websiteUrl: string = `https://www.livechennai.com/Vegetable_price_${location}.asp`
+    // 'https://market.todaypricerates.com/${location}-vegetables-price-in-Tamil-Nadu'
     const response = await axios.get(websiteUrl)
 
     if (response.status === 200) {

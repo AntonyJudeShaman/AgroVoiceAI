@@ -109,7 +109,7 @@ export default function Weather({ user }: { user: any }) {
   const todayDate = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`
 
   return (
-    <div className="flex flex-col items-center justify-center mt-[8rem] pb-10">
+    <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
       <p className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
         Weather in {user?.userDistrict}
         <Tooltip>
@@ -133,7 +133,7 @@ export default function Weather({ user }: { user: any }) {
         </TabsList>
         {Object.keys(groupedData).map((date, index) => (
           <TabsContent key={index} value={date}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
               <React.Fragment key={index}>
                 {groupedData[date].map((forecast, forecastIndex) => (
                   <WeatherForecastCard

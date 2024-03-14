@@ -49,7 +49,8 @@ export async function updatePageShown(userId: string) {
   })
 }
 
-export async function getLocation(userId: string) {
+export async function getLocation() {
+  const userId = await getUserId()
   const district = await db.user.findMany({
     where: {
       id: userId
@@ -59,7 +60,7 @@ export async function getLocation(userId: string) {
     }
   })
 
-  return district // Directly return the district data
+  return district
 }
 
 export async function getCurrentUser() {
