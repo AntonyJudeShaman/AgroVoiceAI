@@ -88,7 +88,7 @@ export default function MarketHome({ user }: { user: User }) {
       {items.length > 0 && (
         <div className="md:w-[50%] z-10 p-6">
           <h1 className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
-            Today's Price in Chennai
+            Today&apos;s Price in Chennai
             <Tooltip>
               <TooltipTrigger>
                 <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
