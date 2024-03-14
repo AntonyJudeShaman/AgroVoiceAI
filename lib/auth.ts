@@ -64,10 +64,6 @@ export const {
     async session({ token, session, user }) {
       if (token) {
         session.user.id = (token?.id as string) || (user?.id as string)
-        session.user.name = token.name || (user?.name as string)
-        session.user.email = token.email || (user?.email as string)
-        session.user.image = token.picture
-        session.user.password = token.password as string
       }
       return session
     },

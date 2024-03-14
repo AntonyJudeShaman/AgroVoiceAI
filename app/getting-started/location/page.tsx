@@ -8,7 +8,7 @@ import { GettingStartedLocationForm } from '@/components/Form/getting-started-lo
 export default async function GettingStartedLocation() {
   const users = await getCurrentUser()
   if (users?.pageShown && users) {
-    redirect('/chat')
+    redirect('/options')
   }
   return (
     <>

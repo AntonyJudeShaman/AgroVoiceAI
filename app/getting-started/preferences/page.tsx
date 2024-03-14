@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 export default async function GettingStartedPreference() {
   const user = await getCurrentUser()
   if (user?.pageShown && user) {
-    redirect('/chat')
+    redirect('/options')
   }
   return (
     <>

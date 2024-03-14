@@ -75,7 +75,7 @@ export default function MarketHome({ user }: { user: User }) {
   if (error) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="p-10 bg-black border border-red-600 text-lg text-white rounded-2xl">
+        <p className="p-10 bg-black border border-red-600 text-xl text-white rounded-2xl">
           Some error occurred. Please try again later.
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function MarketHome({ user }: { user: User }) {
       {items.length > 0 && (
         <div className="md:w-[50%] z-10 p-6">
           <h1 className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
-            Today's Prices in Chennai
+            Today's Price in Chennai
             <Tooltip>
               <TooltipTrigger>
                 <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
@@ -98,17 +98,24 @@ export default function MarketHome({ user }: { user: User }) {
               </TooltipContent>
             </Tooltip>
           </h1>
+          <p className="flex justify-center mb-6 -mt-6">
+            {new Date().toLocaleDateString('en-US', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            })}
+          </p>
           <div className="border dark:border-green-900 border-green-500 rounded-2xl">
-            <Table className=" w-full rounded-2xl font-pops dark:bg-slate-900 bg-white">
+            <Table className=" w-full rounded-2xl font-pops bg-gradient-to-tr dark:from-slate-900/90 dark:to-slate-900/90 to-60% from-zinc-100 to-indigo-50">
               <TableHeader className="">
                 <TableRow className="rounded-t-2xl">
-                  <TableHead className="p-6 font-bold text-lg text-green-600 d0">
+                  <TableHead className="p-6 font-bold text-xl text-green-600 d0">
                     Name
                   </TableHead>
-                  <TableHead className="p-6 font-bold text-lg text-green-600">
+                  <TableHead className="p-6 font-bold text-xl text-green-600">
                     Price
                   </TableHead>
-                  <TableHead className="p-6 font-bold text-lg text-green-600 d0">
+                  <TableHead className="p-6 font-bold text-xl text-green-600 d0">
                     Unit
                   </TableHead>
                 </TableRow>
@@ -122,7 +129,7 @@ export default function MarketHome({ user }: { user: User }) {
                     <TableCell className="p-6">
                       {item.price.substring(2)}
                     </TableCell>
-                    <TableCell className="p-6">{item.unit || 'N/A'}</TableCell>{' '}
+                    <TableCell className="p-6">{item.unit}</TableCell>{' '}
                   </TableRow>
                 ))}
               </TableBody>

@@ -84,7 +84,7 @@ export function Account({
             <BottomGradient />
           </Button>
         </div>
-        {/* <div className="relative">
+        <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
@@ -101,9 +101,9 @@ export function Account({
 
             signIn('credentials', {
               redirect: true,
-                email: name,
-                password: password
-              
+              email: name,
+              password: password
+
               // @ts-ignore
             }).then(({ error }) => {
               if (error) {
@@ -116,51 +116,52 @@ export function Account({
               }
             })
           }}
-          className='grid gap-2'
+          className="grid gap-2"
         >
           <div className="grid gap-2">
-              <label htmlFor="name" className="font-pops">
-                Email
-              </label>
-              <div className="relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                <Input
-                  id="name"
-                  type="name"
-                  placeholder="Enter your Email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
-                />
-                <BottomGradient />
-              </div>
+            <label htmlFor="name" className="font-pops">
+              Email
+            </label>
+            <div className="relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+              <Input
+                id="name"
+                type="name"
+                placeholder="Enter your Email"
+                value={email}
+                onChange={handleEmailChange}
+                className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
+              />
+              <BottomGradient />
             </div>
+          </div>
           <div className="grid gap-2">
-              <label className="font-pops" htmlFor="password">
-                Password
-              </label>
-              <div className=" relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                <Input
-                  id="password"
-                  type={isPasswordVisible ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
-                />
-                <div onClick={passwordVisibility}>
-                  {isPasswordVisible ? (
-                    <BsEye className="pr-1 size-6" />
-                  ) : (
-                    <BsEyeSlash className="pr-1 size-6" />
-                  )}
-                </div>
-                <BottomGradient />
+            <label className="font-pops" htmlFor="password">
+              Password
+            </label>
+            <div className=" relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+              <Input
+                id="password"
+                type={isPasswordVisible ? 'text' : 'password'}
+                placeholder="Enter your password"
+                value={password}
+                onChange={handlePasswordChange}
+                className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
+              />
+              <div onClick={passwordVisibility}>
+                {isPasswordVisible ? (
+                  <BsEye className="pr-1 size-6" />
+                ) : (
+                  <BsEyeSlash className="pr-1 size-6" />
+                )}
               </div>
+              <BottomGradient />
             </div>
-          <Button className="w-full mt-2" size="lg" type='submit'>
-          {isFieldLoading && <IconSpinner className="mr-2 animate-spin" /> } Sign In
+          </div>
+          <Button className="w-full mt-2" size="lg" type="submit">
+            {isFieldLoading && <IconSpinner className="mr-2 animate-spin" />}{' '}
+            Sign In
           </Button>
-        </form> */}
+        </form>
       </CardContent>
     </Card>
   )
