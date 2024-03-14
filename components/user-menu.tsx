@@ -1,10 +1,9 @@
 'use client'
-
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { User, type Session } from 'next-auth'
+import { User, Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { useTheme } from 'next-themes'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -13,14 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { IconExternalLink } from '@/components/ui/icons'
-import { useRouter } from 'next/navigation'
-import { ThemeToggle } from './Theme/theme-toggle'
-import React, { useEffect, useState } from 'react'
-import { auth } from '@/lib/auth'
+import { Settings, SunMoon, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { getUser } from '@/app/actions'
-import { LogOut, Settings, SunMoon } from 'lucide-react'
+import { ThemeToggle } from './Theme/theme-toggle'
 
 export interface UserMenuProps {
   user: Session['user']
@@ -33,6 +28,8 @@ function getUserInitials(name: string) {
 
 export function UserMenu() {
   const [session, setSession] = useState<User | undefined>(undefined)
+  const [open, setOpen] = useState(false)
+  const { setTheme, theme } = useTheme()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,15 +54,16 @@ export function UserMenu() {
   )
 
   const user = session
-  const { setTheme, theme } = useTheme()
+
   return (
-    <React.Suspense fallback={<LoadingFallback />}>
-      <div className="p-2 mb-6">
-        <DropdownMenu>
+    <div>
+      <div className="p-2 mb-6" onMouseEnter={() => setOpen(true)}>
+        <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild className="px-4 py-7">
             <Button
               variant="ghost"
               className="rounded-2xl hover:border-none flex justify-start hover:dark:bg-teal-950/30 hover:bg-green-200/50 w-full"
+              onMouseEnter={() => setOpen(true)}
             >
               {user?.image?.length ? (
                 <Image
@@ -77,7 +75,6 @@ export function UserMenu() {
                 />
               ) : (
                 <div className="flex items-center  justify-center text-xs font-medium uppercase rounded-full select-none size-7 shrink-0 bg-muted/50 text-muted-foreground">
-                  {/* {user?.name ? getUserInitials(user?.name) : null} */}
                   {getUserInitials(user?.name || '')}
                 </div>
               )}
@@ -88,24 +85,23 @@ export function UserMenu() {
             sideOffset={16}
             align="center"
             className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 to-indigo-100/30"
+            onMouseLeave={() => setOpen(false)}
           >
-            <DropdownMenuItem className="flex-col items-start flex-wrap">
-              {/* <div className="text-xs font-medium">{user?.name}</div> */}
-              <div className="text-sm text-zinc-500 ">{user?.email}</div>
+            <DropdownMenuItem className="flex-col items-start flex-wrap rounded-lg">
+              <div className="text-sm text-zinc-500">{user?.email}</div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <Link href="/settings">
-              <DropdownMenuItem className="flex text-sm h-8 items-center cursor-pointer">
+              <DropdownMenuItem className="flex text-sm h-8 rounded-lg items-center cursor-pointer">
                 <Settings className="size-4 mr-2" />
                 Settings
               </DropdownMenuItem>
             </Link>
             <DropdownMenuItem
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="flex items-center h-8 justify-between text-sm cursor-pointer"
+              className="flex items-center h-8 justify-between rounded-lg text-sm cursor-pointer"
             >
               <span className="flex items-center">
-                {' '}
                 <SunMoon className="size-4 mr-2" /> Appearance{' '}
               </span>
               <span>
@@ -119,13 +115,13 @@ export function UserMenu() {
                   callbackUrl: '/'
                 })
               }
-              className="text-sm h-8 flex items-center cursor-pointer"
+              className="text-sm h-8 flex items-center rounded-lg cursor-pointer"
             >
               <LogOut className="size-4 mr-2" /> Log Out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </React.Suspense>
+    </div>
   )
 }

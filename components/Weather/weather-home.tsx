@@ -6,6 +6,7 @@ import WeatherForecastCard from './weather-forecast-card'
 import WeatherCardsSkeleton from './weather-card-skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { Info } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface ForecastData {
   list: {
@@ -136,10 +137,17 @@ export default function Weather({ user }: { user: any }) {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
               <React.Fragment key={index}>
                 {groupedData[date].map((forecast, forecastIndex) => (
-                  <WeatherForecastCard
+                  <motion.div
                     key={forecastIndex}
-                    forecast={forecast}
-                  />
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: forecastIndex * 0.15 }}
+                  >
+                    <WeatherForecastCard
+                      key={forecastIndex}
+                      forecast={forecast}
+                    />
+                  </motion.div>
                 ))}
               </React.Fragment>
             </div>

@@ -12,6 +12,7 @@ import {
 import MarketTableSkeleton from './market-table-skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { Info } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface Item {
   name: string
@@ -125,12 +126,35 @@ export default function MarketHome({ user }: { user: User }) {
                 {items.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className="p-6">
-                      {item.name.substring(2)}
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        {item.name.substring(2)}
+                      </motion.div>
                     </TableCell>
                     <TableCell className="p-6">
-                      {item.price.substring(2)}
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        {item.price.substring(2)}
+                      </motion.div>
                     </TableCell>
-                    <TableCell className="p-6">{item.unit}</TableCell>
+                    <TableCell className="p-6">
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        {item.unit}
+                      </motion.div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
