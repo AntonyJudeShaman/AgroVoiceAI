@@ -115,13 +115,13 @@ export default function Navbar({ session }: { session: any }) {
           <Button variant="outline" onClick={() => router.push('/sign-in')}>
             Sign in
           </Button>
-          <Button onClick={() => router.push('/sign-up')}>
-            <Button
-              className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
-              size="lg"
-            >
+          <Button
+            onClick={() => router.push('/sign-up')}
+            className="hover:bg-primary/80"
+          >
+            <div className="md:text-[1.6vh] z-10 flex items-center h-11 px-8 bg-primary text-primary-foreground shadow-md rounded-2xl border-gray-500 border">
               Sign Up
-            </Button>
+            </div>
           </Button>
         </div>
       ) : path === '/options' ? (
@@ -154,13 +154,13 @@ export default function Navbar({ session }: { session: any }) {
           >
             Logout
           </Button>
-          <Button onClick={() => router.push('/options')}>
-            <Button
-              className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
-              size="lg"
-            >
+          <Button
+            onClick={() => router.push('/options')}
+            className="hover:bg-primary/80"
+          >
+            <div className="md:text-[1.6vh] z-10 flex items-center h-11 px-8 bg-primary text-primary-foreground shadow-md rounded-2xl border-gray-500 border">
               Explore <ArrowRight className="size-4 ml-2 hidden md:block" />
-            </Button>
+            </div>
           </Button>
         </div>
       )}

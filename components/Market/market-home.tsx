@@ -84,29 +84,29 @@ export default function MarketHome({ user }: { user: User }) {
 
   return (
     <div className="flex flex-col items-center justify-center md:mt-[4rem] mt-[6rem] pb-10">
-      <div className="absolute h-full pointer-events-none inset-0 flex items-center justify-center dark:[background:radial-gradient(ellipse_at_center,black,transparent_60%)] [background:radial-gradient(ellipse_at_center,#c0f0ef,transparent_60%)]"></div>
-      {items.length > 0 && (
-        <div className="md:w-[50%] z-10 p-6">
-          <h1 className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
-            Today&apos;s Price in Chennai
-            <Tooltip>
-              <TooltipTrigger>
-                <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
-              </TooltipTrigger>
-              <TooltipContent className="text-sm font-pops tracking-normal">
-                Daily prices of vegetables in Chennai.
-              </TooltipContent>
-            </Tooltip>
-          </h1>
-          <p className="flex justify-center mb-6 -mt-6">
-            {new Date().toLocaleDateString('en-US', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            })}
-          </p>
-          <div className="border dark:border-green-900 border-green-500 rounded-2xl">
-            <Table className=" w-full rounded-2xl font-pops bg-gradient-to-tr dark:from-slate-900/90 dark:to-slate-900/90 to-60% from-zinc-100 to-indigo-50">
+      <div className="md:w-[50%] z-10 p-6">
+        <h1 className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
+          Today&apos;s Price in Chennai
+          <Tooltip>
+            <TooltipTrigger>
+              <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
+            </TooltipTrigger>
+            <TooltipContent className="text-sm font-pops tracking-normal">
+              Daily prices of vegetables in Chennai.
+            </TooltipContent>
+          </Tooltip>
+        </h1>
+        <p className="flex justify-center mb-6 text-lg -mt-6">
+          {new Date().toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          })}
+        </p>
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 opacity-30 -z-10 min-h-full filter blur-2xl mix-blend-screen"></div>
+          <div className="border dark:border-green-900 border-green-500 rounded-2xl overflow-hidden">
+            <Table className="w-full rounded-2xl font-pops bg-gradient-to-tr dark:from-slate-900/90 dark:to-slate-900/90 to-60% from-zinc-50 to-teal-50">
               <TableHeader className="">
                 <TableRow className="rounded-t-2xl">
                   <TableHead className="p-6 font-bold text-xl text-green-600 d0">
@@ -129,14 +129,14 @@ export default function MarketHome({ user }: { user: User }) {
                     <TableCell className="p-6">
                       {item.price.substring(2)}
                     </TableCell>
-                    <TableCell className="p-6">{item.unit}</TableCell>{' '}
+                    <TableCell className="p-6">{item.unit}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }

@@ -52,6 +52,7 @@ export function SettingsForm({
 }) {
   const [isSaving, setIsSaving] = useState<boolean>(false)
   const [isSavingImage, setIsSavingImage] = useState<boolean>(false)
+  const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false)
   const [isSavingAge, setIsSavingAge] = useState<boolean>(false)
   const [isSavingPhone, setIsSavingPhone] = useState<boolean>(false)
   const [isNameChanged, setIsNameChanged] = useState<boolean>(false)
@@ -98,25 +99,26 @@ export function SettingsForm({
     setIsPhoneChanged(event.target.value !== user?.phone)
   }
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0]
-    const uniqueFileName = `${Date.now()}_${file.name}`
-    const storageRef = reff(storage, 'Profile/' + uniqueFileName)
-    toast.loading('Please wait...')
-    await uploadBytes(storageRef, file)
-    const downloadURL = await getDownloadURL(storageRef)
-    setImageURL(downloadURL)
-    toast.dismiss()
-    setIsUploaded(false)
-  }, [])
-  // console.log(imageURL)
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      setIsUploadingImage(true)
+      const file = acceptedFiles[0]
+      const fileName = `${Date.now()}_${file.name}`
+      const storageRef = reff(storage, 'Profile/' + fileName)
+      toast.loading('Please wait...')
+      await uploadBytes(storageRef, file)
+      const downloadURL = await getDownloadURL(storageRef)
+      setImageURL(downloadURL)
+      toast.dismiss()
+      setIsUploaded(false)
+      setIsUploadingImage(false)
+    },
+    [storage]
+  )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    multiple: false,
-    onDragEnter: () => {},
-    onDragOver: () => {},
-    onDragLeave: () => {}
+    multiple: false
   })
 
   const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -270,9 +272,11 @@ export function SettingsForm({
                             onChange={() => handleImageChange}
                           />
                         )}
-                        <div
+                        <button
+                          type="button"
                           {...getRootProps()}
-                          className="flex w-full justify-center rounded-md placeholder:text-white  border-2 border-dashed border-green-200  h-40 bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled={isUploadingImage}
+                          className="flex w-full justify-center items-center rounded-md placeholder:text-white  border-2 border-dashed border-green-200  h-40 bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <input
                             {...getInputProps()}
@@ -289,12 +293,12 @@ export function SettingsForm({
                               a file
                             </p>
                           )}
-                        </div>
+                        </button>
                       </div>
                       <DialogFooter>
                         <DialogClose>
                           <Button
-                            disabled={isSavingImage}
+                            disabled={isSavingImage || isUploadingImage}
                             className="m-1 mt-4"
                             variant="outline"
                             type="button"
@@ -303,7 +307,7 @@ export function SettingsForm({
                           </Button>
                         </DialogClose>
                         <Button
-                          disabled={isUploaded}
+                          disabled={isUploaded || isUploadingImage}
                           className="m-1 mt-4"
                           variant="default"
                           type="submit"
@@ -330,9 +334,6 @@ export function SettingsForm({
                     }
                   }}
                 >
-                  {isSavingImage && (
-                    <Loader2 className="mr-2 size-4 animate-spin" />
-                  )}
                   Remove
                 </Button>
               </CardContent>

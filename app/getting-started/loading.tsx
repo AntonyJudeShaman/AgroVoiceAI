@@ -7,7 +7,7 @@ function Loading() {
         <div className="flex justify-center">
           <div className="h-10 w-full mx-10 mt-4 dark:bg-slate-800/10 bg-white/80 border animate-pulse rounded-md"></div>
         </div>{' '}
-        <div className="bg-white/40 rounded-full h-32 w-32 mx-auto mt-5 animate-pulse"></div>
+        <div className="bg-white/40 rounded-full size-32 mx-auto mt-5 animate-pulse"></div>
         <div className="flex justify-center w-full">
           <div className="h-9 w-1/2 mt-4 dark:bg-slate-800/10 bg-white/80 border animate-pulse rounded-md"></div>
         </div>

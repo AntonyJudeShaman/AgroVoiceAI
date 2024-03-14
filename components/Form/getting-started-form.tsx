@@ -58,25 +58,24 @@ export default function GettingStartedForm({
     setIsImageChanged(event.target.value !== user?.image)
   }
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0]
-    const uniqueFileName = `${Date.now()}_${file.name}`
-    const storageRef = reff(storage, 'Profile/' + uniqueFileName)
-    toast.loading('Please wait...')
-    await uploadBytes(storageRef, file)
-    const downloadURL = await getDownloadURL(storageRef)
-    setImageURL(downloadURL)
-    toast.dismiss()
-    setIsUploaded(false)
-  }, [])
-  // console.log(imageURL)
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0]
+      const uniqueFileName = `${Date.now()}_${file.name}`
+      const storageRef = reff(storage, 'Profile/' + uniqueFileName)
+      toast.loading('Please wait...')
+      await uploadBytes(storageRef, file)
+      const downloadURL = await getDownloadURL(storageRef)
+      setImageURL(downloadURL)
+      toast.dismiss()
+      setIsUploaded(false)
+    },
+    [storage]
+  )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    multiple: false,
-    onDragEnter: () => {},
-    onDragOver: () => {},
-    onDragLeave: () => {}
+    multiple: false
   })
 
   const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
