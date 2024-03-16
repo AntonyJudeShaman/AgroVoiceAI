@@ -65,8 +65,8 @@ export default function MarketHome2({ user }: { user: User }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center md:mt-[4rem] mt-[6rem] pb-10">
-      <div className="md:w-[60%] 2xl:w-[50%] z-10 md:p-6 p-3 ">
+    <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
+      <div className="md:w-[60%] z-10 md:p-6 p-3 ">
         <h1 className="md:text-5xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
           Today&apos;s Price in {user.userDistrict}
           <Tooltip>
@@ -90,7 +90,7 @@ export default function MarketHome2({ user }: { user: User }) {
           <div className="border dark:border-green-900 border-green-500 rounded-2xl overflow-hidden">
             <Table className="w-full rounded-2xl font-pops bg-gradient-to-tr dark:from-slate-900/90 dark:to-slate-900/90 to-60% from-zinc-50 to-teal-50">
               <TableHeader className="">
-                <TableRow className="rounded-t-2xl">
+                <TableRow className="rounded-t-2xl hover:bg-slate-200 dark:hover:bg-slate-800">
                   {tableHeader.map((item, index) => (
                     <TableHead
                       key={index}
@@ -103,7 +103,10 @@ export default function MarketHome2({ user }: { user: User }) {
               </TableHeader>
               <TableBody>
                 {items.map((item, index) => (
-                  <TableRow key={index}>
+                  <TableRow
+                    key={index}
+                    className="hover:bg-slate-200 dark:hover:bg-slate-800"
+                  >
                     <TableCell className="md:p-6 p-3 md:text-md text-sm">
                       <motion.div
                         key={index}

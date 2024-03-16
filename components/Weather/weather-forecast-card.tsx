@@ -101,8 +101,8 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
               {forecast.main.humidity}%
             </p>
             <p className="text-md flex items-center">
-              <Wind className="size-5 mr-2" /> Wind Speed: {forecast.wind.speed}{' '}
-              m/s
+              <Wind className="size-5 mr-2" /> Wind Speed:{' '}
+              {forecast.wind.speed.toFixed(1)} m/s
             </p>
             <p className="text-md flex items-center">
               <GaugeCircle className="size-5 mr-2" /> Pressure:{' '}

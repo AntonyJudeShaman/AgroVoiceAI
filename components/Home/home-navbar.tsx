@@ -134,7 +134,7 @@ export default function Navbar({ session }: { session: any }) {
               })
             }
             variant="outline"
-            className="md:text-[1.6vh] rounded-2xl border-gray-500 border"
+            className="rounded-2xl md:text-md border-gray-500 border"
             size="lg"
           >
             Logout
@@ -158,7 +158,7 @@ export default function Navbar({ session }: { session: any }) {
             onClick={() => router.push('/options')}
             className="hover:bg-primary/80"
           >
-            <div className="md:text-[1.6vh] z-10 flex items-center h-11 px-8 bg-primary text-primary-foreground shadow-md rounded-2xl border-gray-500 border">
+            <div className="md:text-md z-10 flex items-center h-11 px-8 bg-primary text-primary-foreground shadow-md rounded-2xl border-gray-500 border">
               Explore <ArrowRight className="size-4 ml-2 hidden md:block" />
             </div>
           </Button>

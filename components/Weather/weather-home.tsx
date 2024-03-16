@@ -59,7 +59,7 @@ export default function Weather({ user }: { user: any }) {
 
   if (!forecastData || !forecastData.list) {
     return (
-      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 mx-auto">
+      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-20 mx-auto">
         <div className="md:p-10 p-6 w-full bg-black border border-green-600 text-lg text-white rounded-2xl">
           <p className="md:text-2xl text-center text-lg flex justify-center font-pops pb-10">
             No forecast data available. But you can check for other locations.
