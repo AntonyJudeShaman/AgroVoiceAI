@@ -78,7 +78,7 @@ export default function MarketHome({ user }: { user: User }) {
     return (
       <div className="flex items-center justify-center h-screen">
         <p className="p-10 bg-black border border-red-600 text-xl text-white rounded-2xl">
-          Data might not be available.
+          Data might not be available for your location.
         </p>
       </div>
     )
@@ -86,8 +86,8 @@ export default function MarketHome({ user }: { user: User }) {
 
   return (
     <div className="flex flex-col items-center justify-center md:mt-[4rem] mt-[6rem] pb-10">
-      <div className="md:w-[50%] z-10 p-6">
-        <h1 className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
+      <div className="md:w-[60%] 2xl:w-[50%] z-10 p-6">
+        <h1 className="2xl:text-5xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
           Today&apos;s Price in {user.userDistrict}
           <Tooltip>
             <TooltipTrigger>

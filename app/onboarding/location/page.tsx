@@ -1,11 +1,11 @@
 import { getCurrentUser } from '@/app/actions'
-import GettingStartedPreferenceForm from '@/components/Form/getting-started-preference-form'
+import OnboardingPreferenceForm from '@/components/Form/onboarding-preference-form'
 import React from 'react'
 import { redirect } from 'next/navigation'
 import { DistrictForm } from '@/components/Form/district-form'
-import { GettingStartedLocationForm } from '@/components/Form/getting-started-location'
+import { OnboardingLocationForm } from '@/components/Form/onboarding-location'
 
-export default async function GettingStartedLocation() {
+export default async function OnboardingLocation() {
   const users = await getCurrentUser()
   if (users?.pageShown && users) {
     redirect('/options')
@@ -14,7 +14,7 @@ export default async function GettingStartedLocation() {
     <>
       {!users?.pageShown && (
         <div className="flex justify-center items-center min-h-screen">
-          <GettingStartedLocationForm user={users} />
+          <OnboardingLocationForm user={users} />
         </div>
       )}
     </>

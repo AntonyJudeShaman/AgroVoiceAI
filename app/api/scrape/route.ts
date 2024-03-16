@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(req: NextRequest) {
   try {
     const { location } = await req.json()
-    const websiteUrl: string = `https://www.livechennai.com/Vegetable_price_${location}.asp`
+    const websiteUrl: string = `https://market.todaypricerates.com/${location}-vegetables-price-in-Tamil-Nadu`
     // 'https://market.todaypricerates.com/${location}-vegetables-price-in-Tamil-Nadu'
     const response = await axios.get(websiteUrl)
 

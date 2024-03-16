@@ -7,34 +7,14 @@ import WeatherCardsSkeleton from './weather-card-skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { Info } from 'lucide-react'
 import { motion } from 'framer-motion'
-
-interface ForecastData {
-  list: {
-    dt_txt: string
-    weather: {
-      main: string
-      description: string
-    }[]
-    main: {
-      temp: number
-      feels_like: number
-      humidity: number
-      pressure: number
-    }
-    wind: {
-      speed: number
-    }
-    visibility: number
-  }[]
-  city: {
-    name: string
-  }
-}
+import { WeatherLocationNotAvailable } from './weather-location-not-available'
+import { ForecastData } from '@/lib/types'
 
 export default function Weather({ user }: { user: any }) {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [location, setLocation] = useState(user?.userDistrict)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,10 +59,19 @@ export default function Weather({ user }: { user: any }) {
 
   if (!forecastData || !forecastData.list) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="p-10 bg-black border border-green-600 text-lg text-white rounded-2xl">
-          No forecast data available.
-        </p>
+      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 mx-auto">
+        <div className="md:p-10 p-6 w-full bg-black border border-green-600 text-lg text-white rounded-2xl">
+          <p className="md:text-2xl text-center text-lg flex justify-center font-pops pb-10">
+            No forecast data available. But you can check for other locations.
+          </p>
+          <div className="flex justify-center">
+            <WeatherLocationNotAvailable
+              user={user}
+              setForecastData={setForecastData}
+              setLocation={setLocation}
+            />
+          </div>
+        </div>
       </div>
     )
   }
@@ -112,13 +101,13 @@ export default function Weather({ user }: { user: any }) {
   return (
     <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
       <p className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
-        Weather in {user?.userDistrict}
+        Weather in {location}
         <Tooltip>
           <TooltipTrigger>
             <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
           </TooltipTrigger>
           <TooltipContent className="text-sm font-pops tracking-normal">
-            Weather forecast for the next 4 days in {user?.userDistrict}
+            Weather forecast for 4 days in {location}
           </TooltipContent>
         </Tooltip>
       </p>

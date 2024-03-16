@@ -26,7 +26,7 @@ import { firebaseConfig } from '@/lib/firebase'
 import { initializeApp } from 'firebase/app'
 import { removeImage } from '@/app/actions'
 
-export default function GettingStartedForm({
+export default function OnboardingForm({
   user,
   className,
   ...props
@@ -245,13 +245,13 @@ export default function GettingStartedForm({
               ).then(() => {
                 setNext(true)
                 setIsNameChanged(false)
-                router.push('/getting-started/location')
+                router.push('/onboarding/location')
               })
             } else {
               setNext(true)
               setIsSaving(true)
               setIsNameChanged(false)
-              router.push('/getting-started/location')
+              router.push('/onboarding/location')
             }
           }}
         >

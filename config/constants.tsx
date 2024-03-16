@@ -15,10 +15,20 @@ import market from '../public/images/market.jpeg'
 import farmqa from '../public/images/farmqa.jpeg'
 import soil from '../public/images/soil.jpg'
 
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
-)
-
+export const tableHeader = [
+  {
+    label: 'Name'
+  },
+  {
+    label: 'Unit'
+  },
+  {
+    label: 'Market Price'
+  },
+  {
+    label: 'Retail Price'
+  }
+]
 export function CropField() {
   return (
     <Image
@@ -169,7 +179,7 @@ export const tnDistricts = [
   { label: 'Dindigul', value: 'Dindigul' },
   { label: 'Erode', value: 'Erode' },
   { label: 'Kallakurichi', value: 'Kallakurichi' },
-  { label: 'Kancheepuram', value: 'Kancheepuram' },
+  { label: 'Kanchipuram', value: 'Kanchipuram' },
   { label: 'Kanyakumari', value: 'Kanyakumari' },
   { label: 'Karur', value: 'Karur' },
   { label: 'Krishnagiri', value: 'Krishnagiri' },

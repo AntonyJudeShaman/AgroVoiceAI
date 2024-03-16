@@ -21,7 +21,6 @@ import {
 } from '@/components/ui/select'
 import { tnDistricts } from '@/config/constants'
 import { useState } from 'react'
-import { User } from '@prisma/client'
 import toast from 'react-hot-toast'
 import { handleDistrictSubmit } from '@/helpers/user-info'
 import {
@@ -60,7 +59,6 @@ export function DistrictForm({ user }: { user: any }) {
   }
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data.district)
     handleDistrictSubmit(
       user,
       data.district,

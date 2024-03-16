@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
+import { Item } from './types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -59,4 +60,29 @@ export function formatTime12hr(time: string): string {
   const suffix: string = hour12 >= 12 ? 'PM' : 'AM'
   hour12 = hour12 % 12 || 12
   return `${hour12}:${minute} ${suffix}`
+}
+
+export function parseItems(scrapedData: string[]): Item[] {
+  const items: Item[] = []
+
+  for (const entry of scrapedData) {
+    if (entry.trim() !== '') {
+      const parts = entry.split(',')
+      const name = parts.slice(0, -4).join(',').trim()
+      const unit = parts[parts.length - 4].trim()
+      const marketPrice = parts[parts.length - 3].trim()
+      const retailPrice = parts[parts.length - 2].trim()
+      const mallPrice = parts[parts.length - 1].trim()
+
+      items.push({
+        name,
+        unit,
+        marketPrice,
+        retailPrice,
+        mallPrice
+      })
+    }
+  }
+
+  return items
 }

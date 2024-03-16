@@ -29,3 +29,33 @@ export type NavConfig = {
   mainNav: MainNavItem[]
 }
 
+export type Item = {
+  name: string
+  unit: string
+  marketPrice: string
+  retailPrice: string
+  mallPrice: string
+}
+
+export type ForecastData = {
+  list: {
+    dt_txt: string
+    weather: {
+      main: string
+      description: string
+    }[]
+    main: {
+      temp: number
+      feels_like: number
+      humidity: number
+      pressure: number
+    }
+    wind: {
+      speed: number
+    }
+    visibility: number
+  }[]
+  city: {
+    name: string
+  }
+}

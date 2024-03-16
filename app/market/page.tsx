@@ -3,6 +3,7 @@ import { getCurrentUser } from '../actions'
 import { auth } from '@/lib/auth'
 import Navbar from '@/components/Home/home-navbar'
 import MarketHome from '@/components/Market/market-home'
+import MarketHome2 from '@/components/Market/market-home-api-2'
 
 export default async function Market() {
   const user = await getCurrentUser()
@@ -17,7 +18,7 @@ export default async function Market() {
             </div>
           </p>
           <div className="grow -mt-20 md:mt-0">
-            <MarketHome user={user} />
+            <MarketHome2 user={user} />
           </div>
         </div>
       )}

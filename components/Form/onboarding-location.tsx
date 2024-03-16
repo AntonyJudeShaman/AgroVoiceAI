@@ -49,7 +49,7 @@ const FormSchema = z.object({
     })
 })
 
-export function GettingStartedLocationForm({ user }: { user: any }) {
+export function OnboardingLocationForm({ user }: { user: any }) {
   const [district, setDistrict] = useState<string>(user?.userDistrict || '')
   const [isDistrictChanged, setIsDistrictChanged] = useState<boolean>(false)
   const [isSavingDistrict, setIsSavingDistrict] = useState<boolean>(false)
@@ -76,7 +76,7 @@ export function GettingStartedLocationForm({ user }: { user: any }) {
       toast
     ).then(() => {
       setIsSavingDistrict(true)
-      router.push('/getting-started/preferences')
+      router.push('/onboarding/preferences')
       setIsSavingDistrict(false)
     })
   }
@@ -140,7 +140,7 @@ export function GettingStartedLocationForm({ user }: { user: any }) {
             {' '}
             <Button
               className="flex mr-3 h-full"
-              onClick={() => router.push('/getting-started')}
+              onClick={() => router.push('/onboarding')}
               variant="outline"
               disabled={next || isSavingDistrict}
               type="button"

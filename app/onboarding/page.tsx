@@ -1,9 +1,9 @@
-import GettingStartedForm from '@/components/Form/getting-started-form'
+import OnboardingForm from '@/components/Form/onboarding-form'
 import React from 'react'
 import { getCurrentUser } from '../actions'
 import { redirect } from 'next/navigation'
 
-export default async function GettingStarted() {
+export default async function Onboarding() {
   const user = await getCurrentUser()
   if (user?.pageShown && user) {
     redirect('/options')
@@ -12,7 +12,7 @@ export default async function GettingStarted() {
     <>
       {!user?.pageShown && (
         <div className="flex justify-center items-center min-h-screen">
-          <GettingStartedForm user={user} className="" />
+          <OnboardingForm user={user} className="" />
         </div>
       )}
     </>

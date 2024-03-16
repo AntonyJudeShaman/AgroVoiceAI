@@ -1,9 +1,9 @@
 import { getCurrentUser } from '@/app/actions'
-import GettingStartedPreferenceForm from '@/components/Form/getting-started-preference-form'
+import OnboardingPreferenceForm from '@/components/Form/onboarding-preference-form'
 import React from 'react'
 import { redirect } from 'next/navigation'
 
-export default async function GettingStartedPreference() {
+export default async function OnboardingPreference() {
   const user = await getCurrentUser()
   if (user?.pageShown && user) {
     redirect('/options')
@@ -12,7 +12,7 @@ export default async function GettingStartedPreference() {
     <>
       {!user?.pageShown && (
         <div className="flex justify-center items-center min-h-screen">
-          <GettingStartedPreferenceForm user={user} className="" />
+          <OnboardingPreferenceForm user={user} className="" />
         </div>
       )}
     </>

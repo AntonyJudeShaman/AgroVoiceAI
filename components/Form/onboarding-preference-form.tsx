@@ -17,7 +17,7 @@ import { handlePrefSubmit } from '@/helpers/user-info'
 import { Textarea } from '../ui/textarea'
 import { updatePageShown } from '@/app/actions'
 
-export default function GettingStartedPreferenceForm({
+export default function OnboardingPreferenceForm({
   user,
   className,
   ...props

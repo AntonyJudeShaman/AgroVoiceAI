@@ -14,7 +14,7 @@ export default async function ChatLayout({ children }: ChatLayoutProps) {
   const session = await auth()
   const user = await getCurrentUser()
   if (!user?.pageShown && user) {
-    redirect('/getting-started')
+    redirect('/onboarding')
   }
   return (
     <div className="relative min-h-screen flex overflow-hidden dark:bg-[#020817]">
