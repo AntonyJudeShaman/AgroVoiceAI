@@ -89,7 +89,7 @@ export default function MarketHome({ user }: { user: User }) {
       <div className="md:w-[60%] 2xl:w-[50%] z-10 p-6">
         <h1 className="2xl:text-5xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
           Today&apos;s Price in {user.userDistrict}
-          <Tooltip>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger>
               <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
             </TooltipTrigger>

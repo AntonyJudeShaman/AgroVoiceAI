@@ -53,7 +53,7 @@ export function PromptForm({
       ref={formRef}
     >
       <div className="relative md:w-[46rem] flex flex-col px-8 overflow-hidden max-h-60 grow md:dark:bg-black dark:bg-transparent bg-gray-100 sm:rounded-md sm:border dark:sm:border-gray-600 sm:border-gray-400 sm:px-12 dark:focus-within:border-blue-500 focus-within:border-blue-700">
-        <Tooltip>
+        <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
             <button
               onClick={e => {
@@ -84,7 +84,7 @@ export function PromptForm({
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
         <div className="absolute right-0 top-4 sm:right-4">
-          <Tooltip>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <Button
                 type="submit"

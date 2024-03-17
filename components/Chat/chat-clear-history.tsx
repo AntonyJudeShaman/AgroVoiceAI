@@ -39,7 +39,7 @@ export function ClearHistory({
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <Tooltip>
+      <Tooltip delayDuration={0}>
         <TooltipTrigger>
           <AlertDialogTrigger asChild>
             <Button
@@ -48,15 +48,17 @@ export function ClearHistory({
               disabled={!isEnabled || isPending}
             >
               {isPending && <IconSpinner className="mr-2" />}
-              <IconTrash className='size-5'/>
+              <IconTrash className="size-5" />
             </Button>
           </AlertDialogTrigger>
         </TooltipTrigger>
         <TooltipContent>Clear Chat History</TooltipContent>
       </Tooltip>
-      <AlertDialogContent className='border dark:border-red-900 border-red-500'>
+      <AlertDialogContent className="border dark:border-red-900 border-red-500">
         <AlertDialogHeader>
-          <AlertDialogTitle className='text-red-600'>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle className="text-red-600">
+            Are you absolutely sure?
+          </AlertDialogTitle>
           <AlertDialogDescription>
             This will permanently delete your chat history.
           </AlertDialogDescription>

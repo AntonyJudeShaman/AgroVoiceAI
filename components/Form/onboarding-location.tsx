@@ -89,7 +89,7 @@ export function OnboardingLocationForm({ user }: { user: any }) {
           <CardDescription>Please select a district.</CardDescription>
         </div>
         <p className="flex justify-start text-sm pb-4 dark:text-gray-500 text-gray-700">
-          <Tooltip>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger>
               <Info className="size-5 mr-3" />
             </TooltipTrigger>

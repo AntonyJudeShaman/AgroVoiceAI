@@ -105,7 +105,7 @@ export default function Weather({ user }: { user: any }) {
         <div className="flex items-center justify-center md:justify-between w-3/4 md:flex-row flex-col">
           <p className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
             Weather in {location}
-            <Tooltip>
+            <Tooltip delayDuration={0}>
               <TooltipTrigger>
                 <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
               </TooltipTrigger>
@@ -124,7 +124,7 @@ export default function Weather({ user }: { user: any }) {
               })
             }
           >
-            View other location?
+            View other location
           </Button>
         </div>
         <Tabs defaultValue={todayDate} className="w-3/4">
