@@ -17,7 +17,7 @@ import { tableHeader } from '@/config/constants'
 import { parseItems } from '@/lib/utils'
 import { Item } from '@/lib/types'
 
-export default function MarketHome2({ user }: { user: User }) {
+export default function MarketHome2({ user }: { user: any }) {
   const [items, setItems] = useState<Item[]>([])
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)

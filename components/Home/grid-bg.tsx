@@ -14,7 +14,7 @@ export async function DotBackGround() {
           <Navbar session={session} />
         </div>
       </p>
-      <div className="flex 2xl:container flex-col justify-center grow -mt-20">
+      <div className="flex 2xl:container flex-col justify-center grow">
         <Home />
       </div>
     </div>

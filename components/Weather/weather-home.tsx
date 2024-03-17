@@ -9,6 +9,7 @@ import { Info } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { WeatherLocationNotAvailable } from './weather-location-not-available'
 import { ForecastData } from '@/lib/types'
+import { Button } from '../ui/button'
 
 export default function Weather({ user }: { user: any }) {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null)
@@ -59,9 +60,9 @@ export default function Weather({ user }: { user: any }) {
 
   if (!forecastData || !forecastData.list) {
     return (
-      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-20 mx-auto">
-        <div className="md:p-10 p-6 w-full bg-black border border-green-600 text-lg text-white rounded-2xl">
-          <p className="md:text-2xl text-center text-lg flex justify-center font-pops pb-10">
+      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
+        <div className="md:p-10 p-6 w-full bg-gray-50 dark:bg-gray-950 border border-green-600/60 dark:border-green-800/60 text-lg text-white rounded-2xl">
+          <p className="md:text-2xl text-center dark:text-white text-black text-lg flex justify-center font-pops pb-10">
             No forecast data available. But you can check for other locations.
           </p>
           <div className="flex justify-center">
@@ -99,50 +100,76 @@ export default function Weather({ user }: { user: any }) {
   const todayDate = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`
 
   return (
-    <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
-      <p className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
-        Weather in {location}
-        <Tooltip>
-          <TooltipTrigger>
-            <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
-          </TooltipTrigger>
-          <TooltipContent className="text-sm font-pops tracking-normal">
-            Weather forecast for 4 days in {location}
-          </TooltipContent>
-        </Tooltip>
-      </p>
-      <Tabs defaultValue={todayDate} className="w-3/4">
-        <TabsList className="grid font-pops w-full md:grid-cols-4 grid-cols-2 md:h-full h-20 border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
-          {Object.keys(groupedData).map((date, index) => {
-            return (
-              <TabsTrigger key={index} value={date}>
-                {formatDateWithDay(date)}
-              </TabsTrigger>
-            )
-          })}
-        </TabsList>
-        {Object.keys(groupedData).map((date, index) => (
-          <TabsContent key={index} value={date}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-              <React.Fragment key={index}>
-                {groupedData[date].map((forecast, forecastIndex) => (
-                  <motion.div
-                    key={forecastIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: forecastIndex * 0.15 }}
-                  >
-                    <WeatherForecastCard
+    <>
+      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
+        <div className="flex items-center justify-center md:justify-between w-3/4 md:flex-row flex-col">
+          <p className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
+            Weather in {location}
+            <Tooltip>
+              <TooltipTrigger>
+                <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
+              </TooltipTrigger>
+              <TooltipContent className="text-sm font-pops tracking-normal">
+                Weather forecast for 4 days in {location}
+              </TooltipContent>
+            </Tooltip>
+          </p>
+          <Button
+            variant="link"
+            className="mb-4 md:mb-0 text-red-600 dark:text-red-600/90 cursor-pointer px-4 py-6 font-pops text-lg"
+            onClick={() =>
+              window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth'
+              })
+            }
+          >
+            View other location?
+          </Button>
+        </div>
+        <Tabs defaultValue={todayDate} className="w-3/4">
+          <TabsList className="grid font-pops w-full md:grid-cols-4 grid-cols-2 md:h-full h-20 border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
+            {Object.keys(groupedData).map((date, index) => {
+              return (
+                <TabsTrigger key={index} value={date}>
+                  {formatDateWithDay(date)}
+                </TabsTrigger>
+              )
+            })}
+          </TabsList>
+          {Object.keys(groupedData).map((date, index) => (
+            <TabsContent key={index} value={date}>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                <React.Fragment key={index}>
+                  {groupedData[date].map((forecast, forecastIndex) => (
+                    <motion.div
                       key={forecastIndex}
-                      forecast={forecast}
-                    />
-                  </motion.div>
-                ))}
-              </React.Fragment>
-            </div>
-          </TabsContent>
-        ))}
-      </Tabs>
-    </div>
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: forecastIndex * 0.15 }}
+                    >
+                      <WeatherForecastCard
+                        key={forecastIndex}
+                        forecast={forecast}
+                      />
+                    </motion.div>
+                  ))}
+                </React.Fragment>
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
+      <div className="mt-12 mx-auto w-[82%] lg:w-[70%] flex justify-start flex-col text-center">
+        <p className="text-3xl tracking-tighter font-pops mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
+          View weather in other locations
+        </p>
+        <WeatherLocationNotAvailable
+          user={user}
+          setForecastData={setForecastData}
+          setLocation={setLocation}
+        />
+      </div>
+    </>
   )
 }

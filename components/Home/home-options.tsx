@@ -27,7 +27,7 @@ export default async function HomeOptions() {
                     </CardHeader>
                     <CardFooter>
                       <Link href={option.url}>
-                        <Button className="bg-primary/90 group-hover:bg-primary">
+                        <Button className="bg-primary/90 group-hover:bg-primary button-glow">
                           Try now!!
                         </Button>
                       </Link>

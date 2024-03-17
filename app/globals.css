@@ -98,3 +98,7 @@
   animation: slide 2s linear infinite;
   background-color: black;
 }
+
+.button-glow:hover {
+  filter: drop-shadow(0 0 4px rgba(18, 247, 227, 0.8));
+}

@@ -78,6 +78,7 @@ export function WeatherLocationNotAvailable({
           toast.error('Some error occurred. Please try again later.')
         } finally {
           setIsLoadingDistrict(false)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
         }
       }
 
@@ -96,7 +97,7 @@ export function WeatherLocationNotAvailable({
   }
 
   return (
-    <Card className="w-full border-none bg-transparent">
+    <Card className="w-full border-none bg-transparent shadow-none">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
           <CardContent className="2xl:w-[90%] mx-auto">
