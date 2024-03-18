@@ -66,7 +66,7 @@ export function WeatherLocationNotAvailable({
           })
 
           if (!res.ok) {
-            throw new Error('Failed to fetch weather data')
+            toast.error('Failed to fetch weather data')
           }
 
           const forecastData = await res.json()

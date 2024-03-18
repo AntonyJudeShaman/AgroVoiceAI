@@ -59,10 +59,12 @@ export default function MarketHome2({ user }: { user: any }) {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="p-10 bg-black border border-red-600 text-xl text-white rounded-2xl">
-          Data might not be available for your location.
-        </p>
+      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
+        <div className="md:p-10 p-6 w-full bg-gray-50 dark:bg-gray-950 border border-red-600/80 text-lg text-white rounded-2xl">
+          <p className="md:text-2xl text-center text-lg text-red-600 flex justify-center font-pops">
+            Data might not be available for your location.
+          </p>
+        </div>
       </div>
     )
   }

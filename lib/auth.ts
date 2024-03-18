@@ -5,6 +5,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { db } from './db'
 import { compare } from 'bcrypt'
+import { verify } from 'argon2'
 
 declare module 'next-auth' {
   interface Session {
@@ -44,9 +45,10 @@ export const {
           return null // User not found
         }
 
-        const passwordMatch = await compare(
+        console.log(credentials.password, user.password)
+        const passwordMatch = await verify(
           credentials.password as string,
-          user.password!
+          user.password! as string
         )
         if (passwordMatch) {
           return user
@@ -58,7 +60,9 @@ export const {
   ],
   adapter: PrismaAdapter(db as any),
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
+    maxAge: 10 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60
   },
   callbacks: {
     async session({ token, session, user }) {

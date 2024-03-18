@@ -27,7 +27,7 @@ export default async function SessionPageContainer({
               <Navbar session={session} />
             </div>
           </p>
-          <div className="grow mt-20 md:mt-[10rem]">{component}</div>
+          <div className="grow mt-20 md:mt-[10%]">{component}</div>
         </div>
       )}
     </>

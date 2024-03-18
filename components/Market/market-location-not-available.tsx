@@ -21,7 +21,7 @@ import {
 import { tnDistricts } from '@/config/constants'
 import { Card, CardContent } from '@/components/ui/card'
 import { Loader2 } from 'lucide-react'
-import { ForecastData, Item } from '@/lib/types'
+import { Item } from '@/lib/types'
 import { User } from '@prisma/client/edge'
 import { cn, parseItems } from '@/lib/utils'
 import toast from 'react-hot-toast'
@@ -66,7 +66,7 @@ export function MarketLocationNotAvailable({
           })
 
           if (!res.ok) {
-            throw new Error('Failed to fetch weather data')
+            toast.error('Failed to fetch price data')
           }
 
           const data = await res.json()

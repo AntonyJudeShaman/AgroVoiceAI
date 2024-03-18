@@ -50,10 +50,12 @@ export default function Weather({ user }: { user: any }) {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="p-10 bg-black border border-red-600 text-lg text-white rounded-2xl">
-          Some error occurred. Please try again later.
-        </p>
+      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
+        <div className="md:p-10 p-6 w-full bg-gray-50 dark:bg-gray-950 border border-red-600/80 text-lg text-white rounded-2xl">
+          <p className="md:text-2xl text-center text-lg text-red-600 flex justify-center font-pops">
+            Some error occurred. Please try again later.
+          </p>
+        </div>
       </div>
     )
   }
@@ -103,7 +105,7 @@ export default function Weather({ user }: { user: any }) {
     <>
       <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
         <div className="flex items-center justify-center md:justify-between w-3/4 md:flex-row flex-col">
-          <p className="md:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
+          <p className="md:text-5xl 2xl:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
             Weather in {location}
             <Tooltip delayDuration={0}>
               <TooltipTrigger>
@@ -116,7 +118,7 @@ export default function Weather({ user }: { user: any }) {
           </p>
           <Button
             variant="link"
-            className="mb-4 md:mb-0 text-red-600 dark:text-red-600/90 cursor-pointer px-4 py-6 font-pops text-lg"
+            className=" text-red-600 dark:text-red-600/90 cursor-pointer px-4 mb-3 font-pops text-lg"
             onClick={() =>
               window.scrollTo({
                 top: document.documentElement.scrollHeight,
