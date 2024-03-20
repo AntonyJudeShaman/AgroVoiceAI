@@ -59,7 +59,7 @@ export function PromptForm({
               onClick={e => {
                 e.preventDefault()
                 router.refresh()
-                router.push('/chat')
+                router.push('/new')
               }}
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),
