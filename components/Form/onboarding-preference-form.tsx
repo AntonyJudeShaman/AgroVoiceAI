@@ -104,7 +104,7 @@ export default function OnboardingPreferenceForm({
               </Button>
               <Button
                 type="submit"
-                className={cn(buttonVariants())}
+                className={cn(buttonVariants(), '')}
                 size="lg"
                 disabled={isSavingPref}
                 variant="outline"

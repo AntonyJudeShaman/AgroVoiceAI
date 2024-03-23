@@ -102,7 +102,7 @@ export default function OnboardingForm({
     <Card
       className={cn(
         className,
-        'flex flex-col m-4 items-center dark:bg-slate-900/10 bg-white/80 shadow-none'
+        'flex flex-col m-4 items-center dark:bg-slate-900/10 bg-white/80 shadow-2xl'
       )}
     >
       {' '}
@@ -125,7 +125,7 @@ export default function OnboardingForm({
                   height={30}
                 />
               ) : (
-                <User className="md:size-32 size-24 mt-4 md:mt-0 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
+                <User className="md:size-32 size-24 mt-4 md:mt-0 dark:bg-slate-700 bg-slate-200 dark:text-white text-gray-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
               )}
             </p>
           </div>
@@ -221,9 +221,6 @@ export default function OnboardingForm({
                   }
                 }}
               >
-                {isSavingImage && (
-                  <Loader2 className="mr-2 size-4 animate-spin" />
-                )}
                 Remove
               </Button>
             </CardContent>
@@ -234,6 +231,13 @@ export default function OnboardingForm({
         <form
           onSubmit={event => {
             event.preventDefault()
+
+            if (!name.trim()) {
+              toast.error('Name cannot be empty.')
+              setIsSaving(false)
+              return false
+            }
+
             if (isNameChanged) {
               handleNameSubmit(
                 event,
@@ -244,8 +248,12 @@ export default function OnboardingForm({
                 toast
               ).then(() => {
                 setNext(true)
-                setIsNameChanged(false)
-                router.push('/onboarding/location')
+                setIsSaving(true)
+                if (name.length > 3) {
+                  router.push('/onboarding/location')
+                  setIsSaving(false)
+                }
+                setIsSaving(false)
               })
             } else {
               setNext(true)
@@ -274,7 +282,7 @@ export default function OnboardingForm({
                 className={cn(buttonVariants(), className, 'ml-2 h-full')}
                 size="lg"
                 disabled={isSaving}
-                variant="default"
+                variant="outline"
               >
                 {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}
                 <span>Save & Next</span>

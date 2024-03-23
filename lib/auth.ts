@@ -4,8 +4,9 @@ import Credentials from 'next-auth/providers/credentials'
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { db } from './db'
-import { compare } from 'bcrypt'
-import { verify } from 'argon2'
+import { getStringFromBuffer } from './utils'
+import toast from 'react-hot-toast'
+import { NextResponse } from 'next/server'
 
 declare module 'next-auth' {
   interface Session {
@@ -24,35 +25,37 @@ export const {
   providers: [
     Google,
     Credentials({
-      credentials: {
-        email: {
-          label: 'Email',
-          type: 'email'
-        },
-        password: {
-          label: 'Password',
-          type: 'password'
-        }
-      },
       authorize: async credentials => {
+        console.log('inside authorize')
+        console.log(credentials)
         const user = await db.user.findFirst({
           where: {
             email: credentials.email as string
           }
         })
 
-        if (!user) {
-          return null // User not found
-        }
-
-        console.log(credentials.password, user.password)
-        const passwordMatch = await verify(
-          credentials.password as string,
-          user.password! as string
+        console.log('after user check')
+        const encoder = new TextEncoder()
+        const saltedPassword = encoder.encode(
+          (credentials.password as string) + 10
         )
-        if (passwordMatch) {
-          return user
+        const hashedPasswordBuffer = await crypto.subtle.digest(
+          'SHA-512',
+          saltedPassword
+        )
+        const hashedPassword = getStringFromBuffer(hashedPasswordBuffer)
+        if (user) {
+          if (hashedPassword === user?.password) {
+            console.log('User found')
+            return user
+          } else {
+            console.error('Invalid credentials')
+            // throw new Error('Invalid credentials')
+            return null
+          }
         } else {
+          console.error('User not found')
+          // throw new Error('User not found')
           return null
         }
       }

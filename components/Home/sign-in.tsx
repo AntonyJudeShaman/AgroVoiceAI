@@ -16,9 +16,11 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { BottomGradient } from '../ui/bottom-gradient'
+import { revalidatePath } from 'next/cache'
+import { AuthError } from 'next-auth'
 
 interface CreateAccountProps {
   text?: string
@@ -95,26 +97,37 @@ export function Account({
           </div>
         </div>
         <form
-          onSubmit={e => {
+          onSubmit={async e => {
             e.preventDefault()
             setIsFieldLoading(true)
+            try {
+              const res = await signIn('credentials', {
+                redirect: true,
+                email: email,
+                password: password,
+                callbackUrl: '/onboarding'
 
-            signIn('credentials', {
-              redirect: true,
-              email: name,
-              password: password
-
-              // @ts-ignore
-            }).then(({ error }) => {
-              if (error) {
-                setIsFieldLoading(false)
-                toast.error(error)
-              } else {
-                // router.refresh()
-                // router.push('/')
-                toast.success('Signed in successfully')
+                // @ts-ignore
+              })
+              e.preventDefault()
+              console.log(res)
+              setIsFieldLoading(false)
+              redirect('/onboarding')
+            } catch (error) {
+              if (error instanceof AuthError) {
+                switch (error.type) {
+                  case 'CredentialsSignin':
+                    toast.error('Invalid credentials')
+                    break
+                  case 'CallbackRouteError':
+                    toast.error('Invalid credentials')
+                    break
+                  default:
+                    toast.error('An error occurred')
+                }
               }
-            })
+              throw error
+            }
           }}
           className="grid gap-2"
         >
@@ -124,8 +137,8 @@ export function Account({
             </label>
             <div className="relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
               <Input
-                id="name"
-                type="name"
+                id="email"
+                type="text"
                 placeholder="Enter your Email"
                 value={email}
                 onChange={handleEmailChange}

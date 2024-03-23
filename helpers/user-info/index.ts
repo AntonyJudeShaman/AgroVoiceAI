@@ -1,5 +1,4 @@
 import {
-  ageSchema,
   districtSchema,
   imageURLSchema,
   nameSchema,

@@ -152,6 +152,7 @@ export function OnboardingLocationForm({ user }: { user: any }) {
               className={cn(buttonVariants())}
               size="lg"
               disabled={isSavingDistrict}
+              variant="outline"
             >
               {isSavingDistrict && (
                 <Loader2 className="mr-2 size-4 animate-spin" />
