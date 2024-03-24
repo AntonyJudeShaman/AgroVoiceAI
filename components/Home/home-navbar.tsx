@@ -50,10 +50,10 @@ export default function Navbar({ session }: { session: any }) {
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
-          <p className="text-2xl pt-8 font-pops font-bold">
+          <div className="text-2xl pt-8 font-pops font-bold">
             <IconLogo className="size-28 mb-4 mr-3" /> AgroVoiceAI
             <span className="sr-only">Agrovoiceai</span>
-          </p>
+          </div>
           <div className="grid gap-2 py-6">
             {navConfig &&
               navConfig.mainNav.map((item, index) => (

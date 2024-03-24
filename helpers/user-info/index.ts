@@ -2,7 +2,7 @@ import {
   districtSchema,
   imageURLSchema,
   nameSchema,
-  emailSchema,
+  phoneNumberSchema,
   prefSchema,
   validateInput
 } from '@/lib/schema'
@@ -137,86 +137,42 @@ const handleDistrictSubmit = async (
   }
 }
 
-const handleUserNameSubmit = async (
+const handlePhoneNumberSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
   user: User,
-  userName: string,
-  setIsSavingUserName: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsUserNameChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  phoneNumber: string,
+  setIsSavingPhone: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsPhoneChanged: React.Dispatch<React.SetStateAction<boolean>>,
   toast: any
 ) => {
   event.preventDefault()
-  setIsSavingUserName(true)
-  if (!validateInput(userName)) {
-    toast.error('Dont try to inject code. 😒')
-    setIsSavingUserName(false)
-  } else {
-    try {
-      nameSchema.parse(userName)
-      const response = await fetch(`/api/user/username`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ userId: user.id, userName })
-      })
-
-      if (response.ok) {
-        toast.success('Name updated successfully')
-        setIsUserNameChanged(true)
-        setIsSavingUserName(false)
-      } else {
-        toast.error('Failed to update name')
-      }
-    } catch (error: any) {
-      if (error instanceof z.ZodError) {
-        // const validationError = error.errors[0].message;
-        toast.error(`Name must contain at least 3 characters.`)
-      } else {
-        toast.error('An error occurred. Please try again later.')
-      }
-    } finally {
-      setIsSavingUserName(false)
-    }
-  }
-}
-
-const handleEmailSubmit = async (
-  event: React.FormEvent<HTMLFormElement>,
-  user: User,
-  email: string,
-  setIsSavingEmail: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsEmailChanged: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
-) => {
-  event.preventDefault()
-  setIsSavingEmail(true)
+  setIsSavingPhone(true)
 
   try {
-    emailSchema.parse(email)
-    const response = await fetch(`/api/user/email`, {
+    phoneNumberSchema.parse(phoneNumber)
+    const response = await fetch(`/api/user/phone-number`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: user.id, email: email })
+      body: JSON.stringify({ userId: user.id, phone: phoneNumber })
     })
 
     if (response.ok) {
-      toast.success('Email updated successfully')
-      setIsEmailChanged(false)
+      toast.success('Phone number updated successfully')
+      setIsPhoneChanged(false)
     } else {
-      const errorMessage = await response.text()
-      toast.error(`Failed to update email`)
+      const errorMessage = await response.text() // Get error message from response body
+      toast.error(`Failed to update phone number: ${errorMessage}`)
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
-      toast.error('Enter a valid email.')
+      toast.error('Enter a valid 10-digit phone number.')
     } else {
-      toast.error('An error occurred. Please try again later.')
+      toast.error('An error occurred. Please try again later.') // Display a generic error message
     }
   } finally {
-    setIsSavingEmail(false)
+    setIsSavingPhone(false)
   }
 }
 
@@ -273,18 +229,16 @@ const handleSubmit = async (
   e.preventDefault()
   setIsFieldLoading(true)
   try {
+    e.preventDefault()
     const res = await signIn('credentials', {
       redirect: false,
       name: name,
       password: password,
       callbackUrl: '/onboarding'
     })
-
-    if (res?.url?.includes('onboarding')) {
-      toast.success('Signed in successfully. Redirecting...')
+    if (res?.url?.includes('/onboarding')) {
       return true
     } else {
-      toast.error('Invalid credentials. Please try again.')
       return false
     }
   } catch (error: any) {
@@ -298,8 +252,7 @@ export {
   handleNameSubmit,
   handleImageSubmit,
   handleDistrictSubmit,
-  handleEmailSubmit,
-  handleUserNameSubmit,
+  handlePhoneNumberSubmit,
   handlePrefSubmit,
   handleSubmit
 }

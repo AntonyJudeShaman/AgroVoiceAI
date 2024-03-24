@@ -101,8 +101,7 @@ export function Account({
               setIsLoading(true)
               signIn('google', { callbackUrl: `/onboarding` })
             }}
-            // disabled={isLoading}
-            disabled
+            disabled={isLoading}
             className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
           >
             {isLoading ? (
@@ -134,7 +133,10 @@ export function Account({
               toast
             )
             if (res) {
+              toast.success('Signed in successfully. Redirecting...')
               router.push('/onboarding')
+            } else {
+              toast.error('Invalid credentials. Please try again.')
             }
           }}
           className="grid gap-2"
@@ -147,7 +149,7 @@ export function Account({
               <Input
                 id="name"
                 type="text"
-                placeholder="Enter your Username"
+                placeholder="Enter your Name"
                 value={name}
                 onChange={handleNameChange}
                 className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
@@ -163,7 +165,7 @@ export function Account({
               <Input
                 id="password"
                 type={isPasswordVisible ? 'text' : 'password'}
-                placeholder="Enter your Password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={handlePasswordChange}
                 className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
