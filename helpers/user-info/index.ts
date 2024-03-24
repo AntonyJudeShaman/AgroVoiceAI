@@ -7,9 +7,7 @@ import {
   validateInput
 } from '@/lib/schema'
 import { User } from '@prisma/client/edge'
-import { AuthError } from 'next-auth'
 import { signIn } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const handleNameSubmit = async (
