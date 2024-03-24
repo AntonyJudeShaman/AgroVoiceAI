@@ -4,7 +4,9 @@ import Credentials from 'next-auth/providers/credentials'
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { db } from './db'
-import { hashPassword } from './utils'
+import { getStringFromBuffer } from './utils'
+import toast from 'react-hot-toast'
+import { NextResponse } from 'next/server'
 
 declare module 'next-auth' {
   interface Session {
@@ -26,9 +28,9 @@ export const {
       authorize: async credentials => {
         console.log('inside authorize')
         console.log(credentials)
-        const user = await db.user.findUnique({
+        const user = await db.user.findFirst({
           where: {
-            userName: credentials.name as string
+            email: credentials.email as string
           }
         })
 
@@ -41,19 +43,19 @@ export const {
           'SHA-512',
           saltedPassword
         )
-        const hashedPassword = await hashPassword(
-          credentials.password as string
-        )
+        const hashedPassword = getStringFromBuffer(hashedPasswordBuffer)
         if (user) {
           if (hashedPassword === user?.password) {
             console.log('User found')
             return user
           } else {
             console.error('Invalid credentials')
+            // throw new Error('Invalid credentials')
             return null
           }
         } else {
           console.error('User not found')
+          // throw new Error('User not found')
           return null
         }
       }
@@ -66,25 +68,16 @@ export const {
     updateAge: 24 * 60 * 60
   },
   callbacks: {
-    async session({
-      token,
-      session,
-      user
-    }: {
-      token?: null | undefined | { id?: string }
-      session: any
-      user: any
-    }) {
+    async session({ token, session, user }) {
       if (token) {
         session.user.id = (token?.id as string) || (user?.id as string)
       }
       return session
     },
     async jwt({ token, user }) {
-      console.log('inside jwt')
       const dbUser = await db.user.findFirst({
         where: {
-          userName: token.email
+          email: token.email
         }
       })
 
