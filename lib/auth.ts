@@ -66,7 +66,15 @@ export const {
     updateAge: 24 * 60 * 60
   },
   callbacks: {
-    async session({ token, session, user }) {
+    async session({
+      token,
+      session,
+      user
+    }: {
+      token?: null | undefined | { id?: string }
+      session: any
+      user: any
+    }) {
       if (token) {
         session.user.id = (token?.id as string) || (user?.id as string)
       }
