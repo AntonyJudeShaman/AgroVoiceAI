@@ -7,6 +7,9 @@ import {
   validateInput
 } from '@/lib/schema'
 import { User } from '@prisma/client/edge'
+import { AuthError } from 'next-auth'
+import { signIn } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const handleNameSubmit = async (
@@ -216,10 +219,34 @@ const handlePrefSubmit = async (
   }
 }
 
+const handleSubmit = async (
+  e: React.FormEvent<HTMLFormElement>,
+  email: string,
+  password: string,
+  setIsFieldLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  e.preventDefault()
+  setIsFieldLoading(true)
+  try {
+    await signIn('credentials', {
+      redirect: true,
+      email: email,
+      password: password,
+      callbackUrl: '/onboarding'
+    })
+    setIsFieldLoading(false)
+  } catch (error: any) {
+    // skipping
+  } finally {
+    setIsFieldLoading(false)
+  }
+}
+
 export {
   handleNameSubmit,
   handleImageSubmit,
   handleDistrictSubmit,
   handlePhoneNumberSubmit,
-  handlePrefSubmit
+  handlePrefSubmit,
+  handleSubmit
 }

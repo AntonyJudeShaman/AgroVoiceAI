@@ -12,7 +12,7 @@ import { Button } from '../ui/button'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { Input } from '../ui/input'
 import { IconGitHub, IconGoogle, IconSpinner } from '../ui/icons'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
@@ -21,6 +21,7 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { revalidatePath } from 'next/cache'
 import { AuthError } from 'next-auth'
+import { handleSubmit } from '@/helpers/user-info'
 
 interface CreateAccountProps {
   text?: string
@@ -39,7 +40,31 @@ export function Account({
   const [isPasswordChanged, setIsPasswordChanged] =
     React.useState<boolean>(false)
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
-  const router = useRouter()
+
+  const urlParams = new URLSearchParams(window.location.search)
+  const [errorType, setErrorType] = useState<string | null>(null)
+
+  useEffect(() => {
+    const errorFromUrl = urlParams.get('error')
+    if (errorFromUrl) {
+      setErrorType(errorFromUrl)
+    }
+  }, [urlParams])
+
+  useEffect(() => {
+    if (errorType) {
+      switch (errorType) {
+        case 'CredentialsSignin':
+          toast.error('Invalid credentials')
+          break
+        case 'CallbackRouteError':
+          toast.error('Callback route error')
+          break
+        default:
+          toast.error('An error occurred')
+      }
+    }
+  }, [errorType, toast])
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
@@ -97,38 +122,7 @@ export function Account({
           </div>
         </div>
         <form
-          onSubmit={async e => {
-            e.preventDefault()
-            setIsFieldLoading(true)
-            try {
-              const res = await signIn('credentials', {
-                redirect: true,
-                email: email,
-                password: password,
-                callbackUrl: '/onboarding'
-
-                // @ts-ignore
-              })
-              e.preventDefault()
-              console.log(res)
-              setIsFieldLoading(false)
-              redirect('/onboarding')
-            } catch (error) {
-              if (error instanceof AuthError) {
-                switch (error.type) {
-                  case 'CredentialsSignin':
-                    toast.error('Invalid credentials')
-                    break
-                  case 'CallbackRouteError':
-                    toast.error('Invalid credentials')
-                    break
-                  default:
-                    toast.error('An error occurred')
-                }
-              }
-              throw error
-            }
-          }}
+          onSubmit={e => handleSubmit(e, email, password, setIsFieldLoading)}
           className="grid gap-2"
         >
           <div className="grid gap-2">

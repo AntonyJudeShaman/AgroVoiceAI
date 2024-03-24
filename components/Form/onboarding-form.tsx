@@ -249,7 +249,7 @@ export default function OnboardingForm({
               ).then(() => {
                 setNext(true)
                 setIsSaving(true)
-                if (name.length > 3) {
+                if (name.length >= 3) {
                   router.push('/onboarding/location')
                   setIsSaving(false)
                 }
