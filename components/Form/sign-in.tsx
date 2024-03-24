@@ -4,23 +4,18 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
 import { Button } from '../ui/button'
-import { Label } from '@radix-ui/react-dropdown-menu'
 import { Input } from '../ui/input'
-import { IconGitHub, IconGoogle, IconSpinner } from '../ui/icons'
+import { IconGoogle, IconSpinner } from '../ui/icons'
 import React, { useEffect, useState } from 'react'
-import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { BottomGradient } from '../ui/bottom-gradient'
-import { revalidatePath } from 'next/cache'
-import { AuthError } from 'next-auth'
 import { handleSubmit } from '@/helpers/user-info'
 
 interface CreateAccountProps {
