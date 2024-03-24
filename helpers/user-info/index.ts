@@ -2,7 +2,7 @@ import {
   districtSchema,
   imageURLSchema,
   nameSchema,
-  phoneNumberSchema,
+  emailSchema,
   prefSchema,
   validateInput
 } from '@/lib/schema'
@@ -23,7 +23,7 @@ const handleNameSubmit = async (
   event.preventDefault()
   setIsSaving(true)
   if (!validateInput(name)) {
-    toast.error('Dont try to inject code. 😒')
+    toast.error('Dont try to inject code. ð')
     setIsSaving(false)
   } else {
     try {
@@ -137,42 +137,86 @@ const handleDistrictSubmit = async (
   }
 }
 
-const handlePhoneNumberSubmit = async (
+const handleUserNameSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
   user: User,
-  phoneNumber: string,
-  setIsSavingPhone: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsPhoneChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  userName: string,
+  setIsSavingUserName: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsUserNameChanged: React.Dispatch<React.SetStateAction<boolean>>,
   toast: any
 ) => {
   event.preventDefault()
-  setIsSavingPhone(true)
+  setIsSavingUserName(true)
+  if (!validateInput(userName)) {
+    toast.error('Dont try to inject code. ð')
+    setIsSavingUserName(false)
+  } else {
+    try {
+      nameSchema.parse(userName)
+      const response = await fetch(`/api/user/username`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: user.id, userName })
+      })
+
+      if (response.ok) {
+        toast.success('Name updated successfully')
+        setIsUserNameChanged(true)
+        setIsSavingUserName(false)
+      } else {
+        toast.error('Failed to update name')
+      }
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        // const validationError = error.errors[0].message;
+        toast.error(`Name must contain at least 3 characters.`)
+      } else {
+        toast.error('An error occurred. Please try again later.')
+      }
+    } finally {
+      setIsSavingUserName(false)
+    }
+  }
+}
+
+const handleEmailSubmit = async (
+  event: React.FormEvent<HTMLFormElement>,
+  user: User,
+  email: string,
+  setIsSavingEmail: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsEmailChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  toast: any
+) => {
+  event.preventDefault()
+  setIsSavingEmail(true)
 
   try {
-    phoneNumberSchema.parse(phoneNumber)
-    const response = await fetch(`/api/user/phone-number`, {
+    emailSchema.parse(email)
+    const response = await fetch(`/api/user/email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: user.id, phone: phoneNumber })
+      body: JSON.stringify({ userId: user.id, email: email })
     })
 
     if (response.ok) {
-      toast.success('Phone number updated successfully')
-      setIsPhoneChanged(false)
+      toast.success('Email updated successfully')
+      setIsEmailChanged(false)
     } else {
-      const errorMessage = await response.text() // Get error message from response body
-      toast.error(`Failed to update phone number: ${errorMessage}`)
+      const errorMessage = await response.text()
+      toast.error(`Failed to update email`)
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
-      toast.error('Enter a valid 10-digit phone number.')
+      toast.error('Enter a valid email.')
     } else {
-      toast.error('An error occurred. Please try again later.') // Display a generic error message
+      toast.error('An error occurred. Please try again later.')
     }
   } finally {
-    setIsSavingPhone(false)
+    setIsSavingEmail(false)
   }
 }
 
@@ -188,7 +232,7 @@ const handlePrefSubmit = async (
   setIsSavingPref(true)
   prefSchema.parse(pref)
   if (!validateInput(pref)) {
-    toast.error('Dont try to inject code. 😒')
+    toast.error('Dont try to inject code. ð')
     setIsSavingPref(false)
   } else {
     try {
@@ -229,14 +273,14 @@ const handleSubmit = async (
   e.preventDefault()
   setIsFieldLoading(true)
   try {
-    e.preventDefault()
     const res = await signIn('credentials', {
       redirect: false,
       name: name,
       password: password,
       callbackUrl: '/onboarding'
     })
-    if (res?.url?.includes('/onboarding')) {
+
+    if (res?.url?.includes('onboarding')) {
       return true
     } else {
       return false
@@ -252,7 +296,8 @@ export {
   handleNameSubmit,
   handleImageSubmit,
   handleDistrictSubmit,
-  handlePhoneNumberSubmit,
+  handleEmailSubmit,
+  handleUserNameSubmit,
   handlePrefSubmit,
   handleSubmit
 }
