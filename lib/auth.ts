@@ -33,14 +33,7 @@ export const {
         })
 
         console.log('after user check')
-        const encoder = new TextEncoder()
-        const saltedPassword = encoder.encode(
-          (credentials.password as string) + 10
-        )
-        const hashedPasswordBuffer = await crypto.subtle.digest(
-          'SHA-512',
-          saltedPassword
-        )
+
         const hashedPassword = await hashPassword(
           credentials.password as string
         )
