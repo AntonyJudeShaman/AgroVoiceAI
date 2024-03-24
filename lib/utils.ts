@@ -91,3 +91,19 @@ export const getStringFromBuffer = (buffer: ArrayBuffer) =>
   Array.from(new Uint8Array(buffer))
     .map(b => b.toString(16).padStart(2, '0'))
     .join('')
+
+export const hashPassword = async (pswd: string) => {
+  const encoder = new TextEncoder()
+  const saltedPassword = encoder.encode(pswd + 10)
+  const hashedPasswordBuffer = await crypto.subtle.digest(
+    'SHA-512',
+    saltedPassword
+  )
+  return getStringFromBuffer(hashedPasswordBuffer)
+}
+
+export const getPathFromUrl = (url: string) => {
+  const parts = url.split('/')
+  const path = parts.pop()
+  return path
+}

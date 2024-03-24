@@ -34,9 +34,9 @@ export function Account({
 }: CreateAccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFieldLoading, setIsFieldLoading] = React.useState(false)
-  const [email, setEmail] = React.useState('')
+  const [name, setName] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [isEmailChanged, setIsEmailChanged] = React.useState<boolean>(false)
+  const [isnameChanged, setIsNameChanged] = React.useState<boolean>(false)
   const [isPasswordChanged, setIsPasswordChanged] =
     React.useState<boolean>(false)
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
@@ -51,24 +51,24 @@ export function Account({
     }
   }, [urlParams])
 
-  useEffect(() => {
-    if (errorType) {
-      switch (errorType) {
-        case 'CredentialsSignin':
-          toast.error('Invalid credentials')
-          break
-        case 'CallbackRouteError':
-          toast.error('Callback route error')
-          break
-        default:
-          toast.error('An error occurred')
-      }
-    }
-  }, [errorType, toast])
+  // useEffect(() => {
+  //   if (errorType) {
+  //     switch (errorType) {
+  //       case 'CredentialsSignin':
+  //         toast.error('Invalid credentials')
+  //         break
+  //       case 'CallbackRouteError':
+  //         toast.error('Callback route error')
+  //         break
+  //       default:
+  //         toast.error('An error occurred')
+  //     }
+  //   }
+  // }, [errorType, toast])
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-    setIsEmailChanged(event.target.value !== email)
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value)
+    setIsNameChanged(event.target.value !== name)
   }
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,20 +122,22 @@ export function Account({
           </div>
         </div>
         <form
-          onSubmit={e => handleSubmit(e, email, password, setIsFieldLoading)}
+          onSubmit={e =>
+            handleSubmit(e, name, password, setIsFieldLoading, toast)
+          }
           className="grid gap-2"
         >
           <div className="grid gap-2">
             <label htmlFor="name" className="font-pops">
-              Email
+              Username
             </label>
             <div className="relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
               <Input
-                id="email"
+                id="name"
                 type="text"
-                placeholder="Enter your Email"
-                value={email}
-                onChange={handleEmailChange}
+                placeholder="Enter your Name"
+                value={name}
+                onChange={handleNameChange}
                 className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
               />
               <BottomGradient />

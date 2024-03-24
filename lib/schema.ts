@@ -7,6 +7,7 @@ export const phoneNumberSchema = z.string().regex(/^\d{10}$/)
 export const inputSchema = z.string()
 export const prefSchema = z.string()
 export const districtSchema = z.string()
+export const emailSchema = z.string().email()
 
 export function validateInput(input: string) {
   const harmfulPattern = /<script>|<\/script>/i

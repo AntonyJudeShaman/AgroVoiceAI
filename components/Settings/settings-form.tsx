@@ -27,7 +27,7 @@ import { DeleteAccount } from './delete-account'
 import {
   handleImageSubmit,
   handleNameSubmit,
-  handlePhoneNumberSubmit
+  handleEmailSubmit
 } from '@/helpers/user-info'
 import {
   getStorage,
@@ -54,16 +54,16 @@ export function SettingsForm({
   const [isSavingImage, setIsSavingImage] = useState<boolean>(false)
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false)
   const [isSavingAge, setIsSavingAge] = useState<boolean>(false)
-  const [isSavingPhone, setIsSavingPhone] = useState<boolean>(false)
+  const [isSavingEmail, setIsSavingEmail] = useState<boolean>(false)
   const [isNameChanged, setIsNameChanged] = useState<boolean>(false)
   const [isImageChanged, setIsImageChanged] = useState<boolean>(false)
   const [isAgeChanged, setIsAgeChanged] = useState<boolean>(false)
-  const [isPhoneChanged, setIsPhoneChanged] = useState<boolean>(false)
+  const [isEmailChanged, setIsEmailChanged] = useState<boolean>(false)
   const [isUploaded, setIsUploaded] = useState<boolean>(true)
   const [name, setName] = useState(user?.name || '')
   const [imageURL, setImageURL] = useState(user?.image || '')
   const [age, setAge] = useState(user?.age || '')
-  const [phoneNumber, setPhoneNumber] = useState(user?.phone || '')
+  const [email, setemail] = useState(user?.phone || '')
   const [open, setOpen] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [modalImage, setModalImage] = useState('')
@@ -94,9 +94,9 @@ export function SettingsForm({
     setIsImageChanged(event.target.value !== user?.image)
   }
 
-  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(event.target.value)
-    setIsPhoneChanged(event.target.value !== user?.phone)
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setemail(event.target.value)
+    setIsEmailChanged(event.target.value !== user?.phone)
   }
 
   const onDrop = useCallback(
@@ -343,20 +343,20 @@ export function SettingsForm({
       </div>
       <Card className="h-[12rem] flex justify-center flex-col border dark:border-green-900/50 border-green-200">
         <CardHeader>
-          <CardTitle>Your Email</CardTitle>
-          <CardDescription>Your email cannot be changed.</CardDescription>
+          <CardTitle>Your Username</CardTitle>
+          <CardDescription>Your username cannot be changed.</CardDescription>
         </CardHeader>
 
         <CardContent>
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
-              Email
+              Username
             </Label>
             <Input
               id="email"
               className="text-gray-400"
               size={32}
-              value={user?.email}
+              value={user?.userName}
               readOnly
             />
           </div>
@@ -367,34 +367,34 @@ export function SettingsForm({
         <Card className="w-full border dark:border-green-900/50 border-green-200">
           <form
             onSubmit={event =>
-              handlePhoneNumberSubmit(
+              handleEmailSubmit(
                 event,
                 user,
-                phoneNumber,
-                setIsSavingPhone,
-                setIsPhoneChanged,
+                email,
+                setIsSavingEmail,
+                setIsEmailChanged,
                 toast
               ).then(() => {
-                setIsPhoneChanged(false)
+                setIsEmailChanged(false)
               })
             }
           >
             <CardHeader>
-              <CardTitle>Your Phone Number</CardTitle>
-              <CardDescription>Please enter your phone number.</CardDescription>
+              <CardTitle>Your Email</CardTitle>
+              <CardDescription>Please enter your email.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-1">
                 <Label className="sr-only" htmlFor="name">
-                  Phone Number
+                  Email
                 </Label>
                 <Input
                   id="name"
                   className=""
-                  type="number"
+                  type="text"
                   size={32}
-                  value={phoneNumber}
-                  onChange={handlePhoneChange}
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </div>
             </CardContent>
@@ -406,12 +406,12 @@ export function SettingsForm({
                   buttonVariants(),
                   className,
                   'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
-                  `${isPhoneChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70 border-green-200'}`
+                  `${isEmailChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70 border-green-200'}`
                 )}
                 size="lg"
-                disabled={!isPhoneChanged || isSavingPhone}
+                disabled={!isEmailChanged || isSavingEmail}
               >
-                {isSavingPhone && (
+                {isSavingEmail && (
                   <Loader2 className="mr-2 size-4 animate-spin" />
                 )}
                 <span>Save</span>

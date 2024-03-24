@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { CreateAccount } from '../Settings/sign-up'
-import { Account } from '../Home/sign-in'
+import { CreateAccount } from './sign-up'
+import { Account } from './sign-in'
 
 export function AccountsTab() {
   return (

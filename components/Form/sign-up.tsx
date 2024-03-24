@@ -28,17 +28,17 @@ export function CreateAccount({
 }: CreateAccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFieldLoading, setIsFieldLoading] = React.useState(false)
-  const [email, setEmail] = React.useState('')
+  const [name, setName] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [isEmailChanged, setIsEmailChanged] = React.useState<boolean>(false)
+  const [isnameChanged, setIsnameChanged] = React.useState<boolean>(false)
   const [isPasswordChanged, setIsPasswordChanged] =
     React.useState<boolean>(false)
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
   const router = useRouter()
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-    setIsEmailChanged(event.target.value !== email)
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value)
+    setIsnameChanged(event.target.value !== name)
   }
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,13 +103,13 @@ export function CreateAccount({
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  email: email,
+                  name: name,
                   pswd: password
                 })
               }).then(async res => {
                 setIsFieldLoading(false)
                 if (res.status === 200) {
-                  toast.success('Account created! Redirecting to login...')
+                  toast.success('Account created! Please sign in.')
                   setTimeout(() => {
                     router.push('/sign-in')
                   }, 2000)
@@ -123,15 +123,15 @@ export function CreateAccount({
           >
             <div className="grid gap-2">
               <label htmlFor="name" className="font-pops">
-                Email
+                Username
               </label>
               <div className=" relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
                 <Input
                   id="name"
                   type="name"
-                  placeholder="Enter your Email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  placeholder="Enter a Username"
+                  value={name}
+                  onChange={handleNameChange}
                   className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
                 />
                 <BottomGradient />

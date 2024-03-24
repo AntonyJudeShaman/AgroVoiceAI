@@ -2,7 +2,7 @@ import {
   districtSchema,
   imageURLSchema,
   nameSchema,
-  phoneNumberSchema,
+  emailSchema,
   prefSchema,
   validateInput
 } from '@/lib/schema'
@@ -137,42 +137,42 @@ const handleDistrictSubmit = async (
   }
 }
 
-const handlePhoneNumberSubmit = async (
+const handleEmailSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
   user: User,
-  phoneNumber: string,
-  setIsSavingPhone: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsPhoneChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  email: string,
+  setIsSavingEmail: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsEmailChanged: React.Dispatch<React.SetStateAction<boolean>>,
   toast: any
 ) => {
   event.preventDefault()
-  setIsSavingPhone(true)
+  setIsSavingEmail(true)
 
   try {
-    phoneNumberSchema.parse(phoneNumber)
-    const response = await fetch(`/api/user/phone-number`, {
+    emailSchema.parse(email)
+    const response = await fetch(`/api/user/email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: user.id, phone: phoneNumber })
+      body: JSON.stringify({ userId: user.id, email: email })
     })
 
     if (response.ok) {
-      toast.success('Phone number updated successfully')
-      setIsPhoneChanged(false)
+      toast.success('Email updated successfully')
+      setIsEmailChanged(false)
     } else {
-      const errorMessage = await response.text() // Get error message from response body
-      toast.error(`Failed to update phone number: ${errorMessage}`)
+      const errorMessage = await response.text()
+      toast.error(`Failed to update email: ${errorMessage}`)
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
-      toast.error('Enter a valid 10-digit phone number.')
+      toast.error('Enter a valid email.')
     } else {
-      toast.error('An error occurred. Please try again later.') // Display a generic error message
+      toast.error('An error occurred. Please try again later.')
     }
   } finally {
-    setIsSavingPhone(false)
+    setIsSavingEmail(false)
   }
 }
 
@@ -221,19 +221,27 @@ const handlePrefSubmit = async (
 
 const handleSubmit = async (
   e: React.FormEvent<HTMLFormElement>,
-  email: string,
+  name: string,
   password: string,
-  setIsFieldLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setIsFieldLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  toast: any
 ) => {
   e.preventDefault()
   setIsFieldLoading(true)
   try {
-    await signIn('credentials', {
-      redirect: true,
-      email: email,
+    const res = await signIn('credentials', {
+      redirect: false,
+      name: name,
       password: password,
       callbackUrl: '/onboarding'
     })
+
+    if (res?.url?.includes('onboarding')) {
+      toast.success('Signed in successfully. Redirecting...')
+      redirect('/onboarding')
+    } else {
+      toast.error('Invalid credentials. Please try again.')
+    }
     setIsFieldLoading(false)
   } catch (error: any) {
     // skipping
@@ -246,7 +254,7 @@ export {
   handleNameSubmit,
   handleImageSubmit,
   handleDistrictSubmit,
-  handlePhoneNumberSubmit,
+  handleEmailSubmit,
   handlePrefSubmit,
   handleSubmit
 }
