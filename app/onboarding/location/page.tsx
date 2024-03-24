@@ -1,14 +1,12 @@
 import { getCurrentUser } from '@/app/actions'
-import OnboardingPreferenceForm from '@/components/Form/onboarding-preference-form'
 import React from 'react'
 import { redirect } from 'next/navigation'
-import { DistrictForm } from '@/components/Form/district-form'
 import { OnboardingLocationForm } from '@/components/Form/onboarding-location'
 
 export default async function OnboardingLocation() {
   const users = await getCurrentUser()
   if (users?.pageShown && users) {
-    redirect('/options')
+    redirect('/onboarding/preferences')
   }
   return (
     <>

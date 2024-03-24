@@ -41,6 +41,8 @@ export function Account({
     React.useState<boolean>(false)
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
 
+  const router = useRouter()
+
   const urlParams = new URLSearchParams(window.location.search)
   const [errorType, setErrorType] = useState<string | null>(null)
 
@@ -99,7 +101,8 @@ export function Account({
               setIsLoading(true)
               signIn('google', { callbackUrl: `/onboarding` })
             }}
-            disabled={isLoading}
+            // disabled={isLoading}
+            disabled
             className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
           >
             {isLoading ? (
@@ -122,9 +125,18 @@ export function Account({
           </div>
         </div>
         <form
-          onSubmit={e =>
-            handleSubmit(e, name, password, setIsFieldLoading, toast)
-          }
+          onSubmit={async e => {
+            const res = await handleSubmit(
+              e,
+              name,
+              password,
+              setIsFieldLoading,
+              toast
+            )
+            if (res) {
+              router.push('/onboarding')
+            }
+          }}
           className="grid gap-2"
         >
           <div className="grid gap-2">
@@ -135,7 +147,7 @@ export function Account({
               <Input
                 id="name"
                 type="text"
-                placeholder="Enter your Name"
+                placeholder="Enter your Username"
                 value={name}
                 onChange={handleNameChange}
                 className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
@@ -151,7 +163,7 @@ export function Account({
               <Input
                 id="password"
                 type={isPasswordVisible ? 'text' : 'password'}
-                placeholder="Enter your password"
+                placeholder="Enter your Password"
                 value={password}
                 onChange={handlePasswordChange}
                 className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"

@@ -73,9 +73,10 @@ export const {
       return session
     },
     async jwt({ token, user }) {
+      console.log('inside jwt')
       const dbUser = await db.user.findFirst({
         where: {
-          email: token.email
+          userName: token.email
         }
       })
 

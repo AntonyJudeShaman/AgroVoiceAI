@@ -2,7 +2,7 @@ import React from 'react'
 
 function Loading() {
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen m-4">
       <div className="h-[35rem] dark:bg-slate-800/10 bg-white/80 w-[28rem] rounded-2xl flex flex-col border border-slate-800">
         <div className="flex justify-center">
           <div className="h-10 w-full mx-10 mt-4 dark:bg-slate-800/10 bg-white/80 border animate-pulse rounded-md"></div>

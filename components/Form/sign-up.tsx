@@ -71,7 +71,8 @@ export function CreateAccount({
                 setIsLoading(true)
                 signIn('google', { callbackUrl: `/onboarding` })
               }}
-              disabled={isLoading}
+              // disabled={isLoading}
+              disabled
               className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             >
               {isLoading ? (
@@ -145,7 +146,7 @@ export function CreateAccount({
                 <Input
                   id="password"
                   type={isPasswordVisible ? 'text' : 'password'}
-                  placeholder="Enter your password"
+                  placeholder="Enter a Password"
                   value={password}
                   onChange={handlePasswordChange}
                   className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"

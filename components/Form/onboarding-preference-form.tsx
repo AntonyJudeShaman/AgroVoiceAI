@@ -41,7 +41,7 @@ export default function OnboardingPreferenceForm({
     <Card
       className={cn(
         className,
-        'flex flex-col m-4 items-center dark:bg-slate-900/10 bg-white/80 shadow-none'
+        'flex flex-col md:w-2/3 xl:w-2/4 m-4 w-full items-center dark:bg-slate-900/10 bg-white/80 shadow-none'
       )}
     >
       <Card className="w-full border-none bg-transparent shadow-none">
@@ -89,18 +89,17 @@ export default function OnboardingPreferenceForm({
                 placeholder='Type "I like to grow tomatoes" or "I am interested in organic farming" or tell about the current method carried out for your crops to get better suggestions.'
               />
             </div>
-            <div className="flex justify-end mt-5">
+            <div className="flex justify-between mt-5">
               <Button
                 className="flex mr-3"
                 onClick={() => {
-                  updatePageShown(user.id)
-                  router.push('/options')
+                  router.push('/onboarding/location')
                 }}
                 variant="outline"
                 disabled={next || isSavingPref}
                 type="button"
               >
-                Skip
+                Back
               </Button>
               <Button
                 type="submit"

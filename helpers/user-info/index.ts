@@ -137,6 +137,50 @@ const handleDistrictSubmit = async (
   }
 }
 
+const handleUserNameSubmit = async (
+  event: React.FormEvent<HTMLFormElement>,
+  user: User,
+  userName: string,
+  setIsSavingUserName: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsUserNameChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  toast: any
+) => {
+  event.preventDefault()
+  setIsSavingUserName(true)
+  if (!validateInput(userName)) {
+    toast.error('Dont try to inject code. 😒')
+    setIsSavingUserName(false)
+  } else {
+    try {
+      nameSchema.parse(userName)
+      const response = await fetch(`/api/user/username`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: user.id, userName })
+      })
+
+      if (response.ok) {
+        toast.success('Name updated successfully')
+        setIsUserNameChanged(true)
+        setIsSavingUserName(false)
+      } else {
+        toast.error('Failed to update name')
+      }
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        // const validationError = error.errors[0].message;
+        toast.error(`Name must contain at least 3 characters.`)
+      } else {
+        toast.error('An error occurred. Please try again later.')
+      }
+    } finally {
+      setIsSavingUserName(false)
+    }
+  }
+}
+
 const handleEmailSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
   user: User,
@@ -163,7 +207,7 @@ const handleEmailSubmit = async (
       setIsEmailChanged(false)
     } else {
       const errorMessage = await response.text()
-      toast.error(`Failed to update email: ${errorMessage}`)
+      toast.error(`Failed to update email`)
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
@@ -238,11 +282,11 @@ const handleSubmit = async (
 
     if (res?.url?.includes('onboarding')) {
       toast.success('Signed in successfully. Redirecting...')
-      redirect('/onboarding')
+      return true
     } else {
       toast.error('Invalid credentials. Please try again.')
+      return false
     }
-    setIsFieldLoading(false)
   } catch (error: any) {
     // skipping
   } finally {
@@ -255,6 +299,7 @@ export {
   handleImageSubmit,
   handleDistrictSubmit,
   handleEmailSubmit,
+  handleUserNameSubmit,
   handlePrefSubmit,
   handleSubmit
 }

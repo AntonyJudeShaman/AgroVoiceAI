@@ -64,10 +64,10 @@ export async function getLocation() {
 }
 
 export async function getCurrentUser() {
-  const session = await auth()
+  const id = await getUserId()
   const user = await db.user.findFirst({
     where: {
-      email: session?.user.email
+      id: id
     }
   })
   return user

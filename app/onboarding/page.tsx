@@ -5,7 +5,8 @@ import { redirect } from 'next/navigation'
 
 export default async function Onboarding() {
   const user = await getCurrentUser()
-  if (user?.pageShown && user) {
+  console.log(user)
+  if (user?.pageShown) {
     redirect('/options')
   }
   return (

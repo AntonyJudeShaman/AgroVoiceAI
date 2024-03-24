@@ -27,7 +27,8 @@ import { DeleteAccount } from './delete-account'
 import {
   handleImageSubmit,
   handleNameSubmit,
-  handleEmailSubmit
+  handleEmailSubmit,
+  handleUserNameSubmit
 } from '@/helpers/user-info'
 import {
   getStorage,
@@ -51,19 +52,22 @@ export function SettingsForm({
   className: string
 }) {
   const [isSaving, setIsSaving] = useState<boolean>(false)
+  const [IsSavingUserName, setIsSavingUserName] = useState<boolean>(false)
   const [isSavingImage, setIsSavingImage] = useState<boolean>(false)
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false)
   const [isSavingAge, setIsSavingAge] = useState<boolean>(false)
   const [isSavingEmail, setIsSavingEmail] = useState<boolean>(false)
   const [isNameChanged, setIsNameChanged] = useState<boolean>(false)
+  const [isUserNameChanged, setIsUserNameChanged] = useState<boolean>(false)
   const [isImageChanged, setIsImageChanged] = useState<boolean>(false)
   const [isAgeChanged, setIsAgeChanged] = useState<boolean>(false)
   const [isEmailChanged, setIsEmailChanged] = useState<boolean>(false)
   const [isUploaded, setIsUploaded] = useState<boolean>(true)
+  const [userName, setUserName] = useState(user?.userName || '')
   const [name, setName] = useState(user?.name || '')
   const [imageURL, setImageURL] = useState(user?.image || '')
   const [age, setAge] = useState(user?.age || '')
-  const [email, setemail] = useState(user?.phone || '')
+  const [email, setemail] = useState(user?.email || '')
   const [open, setOpen] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [modalImage, setModalImage] = useState('')
@@ -87,6 +91,11 @@ export function SettingsForm({
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
     setIsNameChanged(event.target.value !== user?.name)
+  }
+
+  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value)
+    setIsUserNameChanged(event.target.value !== user?.name)
   }
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -341,26 +350,72 @@ export function SettingsForm({
           </div>
         </Card>
       </div>
-      <Card className="h-[12rem] flex justify-center flex-col border dark:border-green-900/50 border-green-200">
-        <CardHeader>
-          <CardTitle>Your Username</CardTitle>
-          <CardDescription>Your username cannot be changed.</CardDescription>
-        </CardHeader>
+      <Card className="flex justify-center flex-col border dark:border-green-900/50 border-green-200">
+        <form
+          onSubmit={event =>
+            handleUserNameSubmit(
+              event,
+              user,
+              userName,
+              setIsSavingUserName,
+              setIsUserNameChanged,
+              toast
+            ).then(() => {
+              setIsUserNameChanged(false)
+            })
+          }
+        >
+          <CardHeader>
+            <CardTitle>Your Username</CardTitle>
+            <CardDescription>
+              {user?.userName
+                ? 'Your username cannot be changed.'
+                : 'Enter a username.'}
+            </CardDescription>
+          </CardHeader>
 
-        <CardContent>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Username
-            </Label>
-            <Input
-              id="email"
-              className="text-gray-400"
-              size={32}
-              value={user?.userName}
-              readOnly
-            />
-          </div>
-        </CardContent>
+          <CardContent>
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="email">
+                Username
+              </Label>
+              <Input
+                id="email"
+                className={cn(
+                  `${user?.userName?.length > 0 ? 'text-gray-400' : ''}`
+                )}
+                size={32}
+                value={userName}
+                onChange={handleUserNameChange}
+                readOnly={user?.userName?.length > 0 ? true : false}
+              />
+            </div>
+          </CardContent>
+          <CardFooter
+            className={cn(
+              'bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 p-3 md:mt-4 justify-end flex',
+              `${user?.userName?.length > 0 ? 'hidden' : ''}`
+            )}
+          >
+            {' '}
+            <Button
+              type="submit"
+              className={cn(
+                buttonVariants(),
+                className,
+                'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 border dark:hover:opacity-100 flex justify-center items-center',
+                `${isUserNameChanged ? '' : 'bg-transparent dark:text-gray-300 text-gray-100 border dark:border-green-200/70 border-green-200'}`
+              )}
+              size="lg"
+              disabled={!isUserNameChanged || IsSavingUserName}
+            >
+              {isSavingEmail && (
+                <Loader2 className="mr-2 size-4 animate-spin" />
+              )}
+              <span>Save</span>
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
       <div className="flex md:flex-row flex-col md:space-x-4 space-x-0 md:space-y-0 space-y-4">
         <DistrictForm user={user} />
