@@ -110,13 +110,35 @@ export function CreateAccount({
               }).then(async res => {
                 setIsFieldLoading(false)
                 if (res.status === 200) {
-                  toast.success('Account created! Please sign in.')
+                  toast.success('Account created! Please sign in.', {
+                    style: {
+                      borderRadius: '10px',
+                      background: '#333',
+                      color: '#fff',
+                      fontSize: '14px'
+                    },
+                    iconTheme: {
+                      primary: 'lightgreen',
+                      secondary: 'black'
+                    }
+                  })
                   setTimeout(() => {
                     router.push('/sign-in')
                   }, 2000)
                 } else {
                   const { error } = await res.json()
-                  toast.error(error)
+                  toast.error(error, {
+                    style: {
+                      borderRadius: '10px',
+                      background: '#d83030',
+                      color: '#fff',
+                      fontSize: '14px'
+                    },
+                    iconTheme: {
+                      primary: 'white',
+                      secondary: 'black'
+                    }
+                  })
                 }
               })
             }}

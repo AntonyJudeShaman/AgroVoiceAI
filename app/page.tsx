@@ -7,7 +7,7 @@ import { features } from '@/config/constants'
 export default async function IndexPage() {
   return (
     <>
-      <div className="flex justify-center dark:bg-black bg-slate-50 flex-col items-center mt-0">
+      <div className="flex justify-center dark:bg-black bg-green-100/20 flex-col items-center mt-0">
         <DotBackGround />
         <HomeFeatures />
         <BentoGrid className="max-w-4xl mx-auto py-10">
@@ -20,7 +20,7 @@ export default async function IndexPage() {
               icon={item.icon}
               className={cn(
                 i === 0 || i === 3 || i === 4 ? 'md:col-span-2' : '',
-                i === 4 || i === 5 ? 'md:mt-[15rem]' : '',
+                i === 4 || i === 5 ? '' : '',
                 i === 6 ? 'md:col-span-3' : ''
               )}
             />

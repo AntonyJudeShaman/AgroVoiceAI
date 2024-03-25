@@ -66,7 +66,18 @@ export function WeatherLocationNotAvailable({
           })
 
           if (!res.ok) {
-            toast.error('Failed to fetch weather data')
+            toast.error('Failed to fetch weather data', {
+              style: {
+                borderRadius: '10px',
+                background: '#d83030',
+                color: '#fff',
+                fontSize: '14px'
+              },
+              iconTheme: {
+                primary: 'white',
+                secondary: 'black'
+              }
+            })
           }
 
           const forecastData = await res.json()
@@ -75,7 +86,18 @@ export function WeatherLocationNotAvailable({
             setLocation(district)
           }
         } catch (error: any) {
-          toast.error('Some error occurred. Please try again later.')
+          toast.error('Some error occurred. Please try again later.', {
+            style: {
+              borderRadius: '10px',
+              background: '#d83030',
+              color: '#fff',
+              fontSize: '14px'
+            },
+            iconTheme: {
+              primary: 'white',
+              secondary: 'black'
+            }
+          })
         } finally {
           setIsLoadingDistrict(false)
           window.scrollTo({ top: 0, behavior: 'smooth' })

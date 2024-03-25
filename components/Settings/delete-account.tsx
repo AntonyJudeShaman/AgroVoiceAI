@@ -87,12 +87,33 @@ export function DeleteAccount() {
                     await deleteAccount()
                     setOpen(false)
                     toast.success('Account deleted successfully', {
+                      style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                        fontSize: '14px'
+                      },
+                      iconTheme: {
+                        primary: 'lightgreen',
+                        secondary: 'black'
+                      },
                       duration: 5000
                     })
                     window.history.pushState({}, '', `/`)
                     signOut()
                   } catch (error) {
-                    toast.error('Error deleting account')
+                    toast.error('Error deleting account', {
+                      style: {
+                        borderRadius: '10px',
+                        background: '#d83030',
+                        color: '#fff',
+                        fontSize: '14px'
+                      },
+                      iconTheme: {
+                        primary: 'white',
+                        secondary: 'black'
+                      }
+                    })
                     // Handle error here
                   } finally {
                     setIsSaving(false)

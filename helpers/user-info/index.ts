@@ -21,7 +21,18 @@ const handleNameSubmit = async (
   event.preventDefault()
   setIsSaving(true)
   if (!validateInput(name)) {
-    toast.error('Dont try to inject code. ð')
+    toast.error('Dont try to inject code. ð', {
+      style: {
+        borderRadius: '10px',
+        background: '#d83030',
+        color: '#fff',
+        fontSize: '14px'
+      },
+      iconTheme: {
+        primary: 'white',
+        secondary: 'black'
+      }
+    })
     setIsSaving(false)
   } else {
     try {
@@ -35,18 +46,62 @@ const handleNameSubmit = async (
       })
 
       if (response.ok) {
-        toast.success('Name updated successfully')
+        toast.success('Name updated successfully', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'lightgreen',
+            secondary: 'black'
+          }
+        })
         setIsNameChanged(true)
         setIsSaving(false)
       } else {
-        toast.error('Failed to update name')
+        toast.error('Failed to update name', {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         // const validationError = error.errors[0].message;
-        toast.error(`Name must contain at least 3 characters.`)
+        toast.error(`Name must contain at least 3 characters.`, {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       } else {
-        toast.error('An error occurred. Please try again later.')
+        toast.error('An error occurred. Please try again later.', {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       }
     } finally {
       setIsSaving(false)
@@ -78,19 +133,63 @@ const handleImageSubmit = async (
 
     if (response.ok) {
       toast.dismiss()
-      toast.success('Profile picture updated.')
+      toast.success('Profile picture updated.', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'lightgreen',
+          secondary: 'black'
+        }
+      })
     } else {
       const errorMessage = await response.text()
       toast.dismiss()
-      toast.error(`Failed to upload image: ${errorMessage}`)
+      toast.error(`Failed to upload image: ${errorMessage}`, {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
       toast.dismiss()
-      toast.error(`Image format not supported.`)
+      toast.error(`Image format not supported.`, {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     } else {
       toast.dismiss()
-      toast.error('An error occurred. Please try again later.')
+      toast.error('An error occurred. Please try again later.', {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   } finally {
     setIsSavingImage(false)
@@ -117,18 +216,62 @@ const handleDistrictSubmit = async (
     })
 
     if (response.ok) {
-      toast.success('District updated successfully')
+      toast.success('District updated successfully', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'lightgreen',
+          secondary: 'black'
+        }
+      })
       setIsDistrictChanged(false)
     } else {
       const errorMessage = await response.text()
-      toast.error(`Failed to update district: ${errorMessage}`)
+      toast.error(`Failed to update district: ${errorMessage}`, {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
       const validationError = error.errors[0].message
-      toast.error(`Select a valid district.`)
+      toast.error(`Select a valid district.`, {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     } else {
-      toast.error('An error occurred. Please try again later.')
+      toast.error('An error occurred. Please try again later.', {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   } finally {
     setIsSavingDistrict(false)
@@ -160,18 +303,62 @@ const handleUserNameSubmit = async (
       })
 
       if (response.ok) {
-        toast.success('Name updated successfully')
+        toast.success('Name updated successfully', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'lightgreen',
+            secondary: 'black'
+          }
+        })
         setIsUserNameChanged(true)
         setIsSavingUserName(false)
       } else {
-        toast.error('Failed to update name')
+        toast.error('Failed to update name', {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         // const validationError = error.errors[0].message;
-        toast.error(`Name must contain at least 3 characters.`)
+        toast.error(`Name must contain at least 3 characters.`, {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       } else {
-        toast.error('An error occurred. Please try again later.')
+        toast.error('An error occurred. Please try again later.', {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       }
     } finally {
       setIsSavingUserName(false)
@@ -201,17 +388,61 @@ const handleEmailSubmit = async (
     })
 
     if (response.ok) {
-      toast.success('Email updated successfully')
+      toast.success('Email updated successfully', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'lightgreen',
+          secondary: 'black'
+        }
+      })
       setIsEmailChanged(false)
     } else {
       const errorMessage = await response.text()
-      toast.error(`Failed to update email`)
+      toast.error(`Failed to update email`, {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
-      toast.error('Enter a valid email.')
+      toast.error('Enter a valid email.', {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     } else {
-      toast.error('An error occurred. Please try again later.')
+      toast.error('An error occurred. Please try again later.', {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   } finally {
     setIsSavingEmail(false)
@@ -230,7 +461,18 @@ const handlePrefSubmit = async (
   setIsSavingPref(true)
   prefSchema.parse(pref)
   if (!validateInput(pref)) {
-    toast.error('Dont try to inject code. ð')
+    toast.error('Dont try to inject code. ð', {
+      style: {
+        borderRadius: '10px',
+        background: '#d83030',
+        color: '#fff',
+        fontSize: '14px'
+      },
+      iconTheme: {
+        primary: 'white',
+        secondary: 'black'
+      }
+    })
     setIsSavingPref(false)
   } else {
     try {
@@ -243,17 +485,61 @@ const handlePrefSubmit = async (
       })
 
       if (response.ok) {
-        toast.success('Chabot Preference updated successfully')
+        toast.success('Chabot Preference updated successfully', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'lightgreen',
+            secondary: 'black'
+          }
+        })
         setIsPrefChanged(false)
       } else {
-        toast.error('Failed to update preference.')
+        toast.error('Failed to update preference.', {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         // const validationError = error.errors[0].message;
-        toast.error(`Not Valid.`)
+        toast.error(`Not Valid.`, {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       } else {
-        toast.error('An error occurred. Please try again later.')
+        toast.error('An error occurred. Please try again later.', {
+          style: {
+            borderRadius: '10px',
+            background: '#d83030',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'white',
+            secondary: 'black'
+          }
+        })
       }
     } finally {
       setIsSavingPref(false)

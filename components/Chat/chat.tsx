@@ -27,7 +27,18 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       },
       onResponse(response) {
         if (response.status === 401) {
-          toast.error(response.statusText)
+          toast.error('Something went wrong. Please try again later.', {
+            style: {
+              borderRadius: '10px',
+              background: '#d83030',
+              color: '#fff',
+              fontSize: '14px'
+            },
+            iconTheme: {
+              primary: 'white',
+              secondary: 'black'
+            }
+          })
         }
       },
       onFinish() {

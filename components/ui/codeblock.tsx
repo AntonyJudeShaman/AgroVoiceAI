@@ -27,7 +27,7 @@ export const programmingLanguages: languageMap = {
   xml: '.xml',
   svg: '.svg',
   txt: '.txt',
-  markdown: '.md',
+  markdown: '.md'
 }
 
 export const generateRandomString = (length: number, lowercase = false) => {
@@ -72,7 +72,18 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
 
   const onCopy = () => {
     if (isCopied) return
-    toast.success("Code copied to Clipboard.")
+    toast.success('Code copied to Clipboard.', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontSize: '14px'
+      },
+      iconTheme: {
+        primary: 'lightgreen',
+        secondary: 'black'
+      }
+    })
     copyToClipboard(value)
   }
 
@@ -113,7 +124,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
           padding: '1.5rem 1rem'
         }}
         lineNumberStyle={{
-          userSelect: "none",
+          userSelect: 'none'
         }}
         codeTagProps={{
           style: {

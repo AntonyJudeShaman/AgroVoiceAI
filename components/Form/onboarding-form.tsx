@@ -94,7 +94,18 @@ export default function OnboardingForm({
       setIsUploaded(true)
       setOpen(false)
     } catch (error) {
-      toast.error('Error uploading file. Please try again later.')
+      toast.error('Error uploading file. Please try again later.', {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   }
 
@@ -215,9 +226,31 @@ export default function OnboardingForm({
                     toast.loading('Please wait...')
                     await removeImage()
                     toast.dismiss()
-                    toast.success('Profile picture updated.')
+                    toast.success('Profile picture updated.', {
+                      style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                        fontSize: '14px'
+                      },
+                      iconTheme: {
+                        primary: 'lightgreen',
+                        secondary: 'black'
+                      }
+                    })
                   } else {
-                    toast.error('No image to remove.')
+                    toast.error('No image to remove.', {
+                      style: {
+                        borderRadius: '10px',
+                        background: '#d83030',
+                        color: '#fff',
+                        fontSize: '14px'
+                      },
+                      iconTheme: {
+                        primary: 'white',
+                        secondary: 'black'
+                      }
+                    })
                   }
                 }}
               >
@@ -233,7 +266,18 @@ export default function OnboardingForm({
             event.preventDefault()
 
             if (!name.trim()) {
-              toast.error('Name cannot be empty.')
+              toast.error('Name cannot be empty.', {
+                style: {
+                  borderRadius: '10px',
+                  background: '#d83030',
+                  color: '#fff',
+                  fontSize: '14px'
+                },
+                iconTheme: {
+                  primary: 'white',
+                  secondary: 'black'
+                }
+              })
               setIsSaving(false)
               return false
             }

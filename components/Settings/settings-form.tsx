@@ -146,7 +146,18 @@ export function SettingsForm({
       setIsUploaded(true)
       setOpen(false)
     } catch (error) {
-      toast.error('Error uploading file. Please try again later.')
+      toast.error('Error uploading file. Please try again later.', {
+        style: {
+          borderRadius: '10px',
+          background: '#d83030',
+          color: '#fff',
+          fontSize: '14px'
+        },
+        iconTheme: {
+          primary: 'white',
+          secondary: 'black'
+        }
+      })
     }
   }
 
@@ -223,7 +234,7 @@ export function SettingsForm({
                   onClick={() => handleImageClick(user?.image)}
                 />
               ) : (
-                <User className="md:size-32 size-24 mt-4 md:mt-0 bg-slate-700 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
+                <User className="md:size-32 size-24 mt-4 md:mt-0 dark:bg-slate-700 bg-slate-300 rounded-full md:ml-0 ml-4 p-4 flex justify-center items-center" />
               )}
             </p>
             {modalVisible && (
@@ -337,9 +348,31 @@ export function SettingsForm({
                       toast.loading('Please wait...')
                       await removeImage()
                       toast.dismiss()
-                      toast.success('Profile picture updated.')
+                      toast.success('Profile picture updated.', {
+                        style: {
+                          borderRadius: '10px',
+                          background: '#333',
+                          color: '#fff',
+                          fontSize: '14px'
+                        },
+                        iconTheme: {
+                          primary: 'lightgreen',
+                          secondary: 'black'
+                        }
+                      })
                     } else {
-                      toast.error('No image to remove.')
+                      toast.error('No image to remove.', {
+                        style: {
+                          borderRadius: '10px',
+                          background: '#d83030',
+                          color: '#fff',
+                          fontSize: '14px'
+                        },
+                        iconTheme: {
+                          primary: 'white',
+                          secondary: 'black'
+                        }
+                      })
                     }
                   }}
                 >

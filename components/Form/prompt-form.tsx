@@ -44,7 +44,18 @@ export function PromptForm({
         }
         inputSchema.parse(input)
         if (!validateInput(input)) {
-          toast.error('Dont try to inject code. 😒')
+          toast.error('Dont try to inject code. 😒', {
+            style: {
+              borderRadius: '10px',
+              background: '#d83030',
+              color: '#fff',
+              fontSize: '14px'
+            },
+            iconTheme: {
+              primary: 'white',
+              secondary: 'black'
+            }
+          })
         } else {
           setInput('')
           await onSubmit(input)

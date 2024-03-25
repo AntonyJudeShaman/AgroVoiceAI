@@ -73,7 +73,18 @@ export function ClearHistory({
               startTransition(() => {
                 clearChats().then(result => {
                   if (result && 'error' in result) {
-                    toast.error(result.error)
+                    toast.error(result.error, {
+                      style: {
+                        borderRadius: '10px',
+                        background: '#d83030',
+                        color: '#fff',
+                        fontSize: '14px'
+                      },
+                      iconTheme: {
+                        primary: 'white',
+                        secondary: 'black'
+                      }
+                    })
                     return
                   }
 

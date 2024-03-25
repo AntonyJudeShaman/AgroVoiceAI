@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Settings, SunMoon, LogOut } from 'lucide-react'
 import Link from 'next/link'
-import { getUser } from '@/app/actions'
+import { getCurrentUser, getUser } from '@/app/actions'
 import { ThemeToggle } from './Theme/theme-toggle'
 
 export interface UserMenuProps {
@@ -34,7 +34,7 @@ export function UserMenu() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sessionData = await getUser()
+        const sessionData = await getCurrentUser()
         setSession(sessionData as unknown as User | undefined)
       } catch (error) {
         console.error('Error fetching user data:', error)
@@ -56,7 +56,7 @@ export function UserMenu() {
   const user = session
 
   return (
-    <div>
+    <div className="w-full">
       <div className="p-2 mb-6" onMouseEnter={() => setOpen(true)}>
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild className="px-4 py-7">
@@ -74,52 +74,54 @@ export function UserMenu() {
                   width={44}
                 />
               ) : (
-                <div className="flex items-center  justify-center text-xs font-medium uppercase rounded-full select-none size-7 shrink-0 bg-muted/50 text-muted-foreground">
+                <div className="flex items-center  justify-center text-xs font-medium dark:bg-teal-600 dark:text-white bg-teal-300 text-black uppercase rounded-full select-none size-7 shrink-0 bg-muted/50 text-muted-foreground">
                   {getUserInitials(user?.name || '')}
                 </div>
               )}
               <span className="ml-2">{user?.name}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            sideOffset={16}
-            align="center"
-            className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 to-indigo-100/30"
-            onMouseLeave={() => setOpen(false)}
-          >
-            <DropdownMenuItem className="flex-col items-start flex-wrap rounded-lg">
-              <div className="text-sm text-zinc-500">{user?.email}</div>
+          <div className="w-full">
+            <DropdownMenuContent
+              sideOffset={16}
+              align="center"
+              className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 w-[250px] lg:w-[220px] xl:w-[250px]  to-indigo-100/30"
+              onMouseLeave={() => setOpen(false)}
+            >
+              {/* <DropdownMenuItem className="flex-col items-start flex-wrap rounded-lg">
+              <div className="text-sm text-zinc-500">{user?.name}</div>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <Link href="/settings">
-              <DropdownMenuItem className="flex text-sm h-8 rounded-lg items-center cursor-pointer">
-                <Settings className="size-4 mr-2" />
-                Settings
+            <DropdownMenuSeparator /> */}
+              <Link href="/settings">
+                <DropdownMenuItem className="flex text-sm h-8 rounded-lg items-center cursor-pointer">
+                  <Settings className="size-4 mr-2" />
+                  Settings
+                </DropdownMenuItem>
+              </Link>
+              <DropdownMenuItem
+                onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                className="flex items-center h-8 justify-between rounded-lg text-sm cursor-pointer"
+              >
+                <span className="flex items-center">
+                  <SunMoon className="size-4 mr-2" /> Appearance{' '}
+                </span>
+                <span>
+                  <ThemeToggle />
+                </span>
               </DropdownMenuItem>
-            </Link>
-            <DropdownMenuItem
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="flex items-center h-8 justify-between rounded-lg text-sm cursor-pointer"
-            >
-              <span className="flex items-center">
-                <SunMoon className="size-4 mr-2" /> Appearance{' '}
-              </span>
-              <span>
-                <ThemeToggle />
-              </span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() =>
-                signOut({
-                  callbackUrl: '/'
-                })
-              }
-              className="text-sm h-8 flex items-center rounded-lg cursor-pointer"
-            >
-              <LogOut className="size-4 mr-2" /> Log Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() =>
+                  signOut({
+                    callbackUrl: '/'
+                  })
+                }
+                className="text-sm h-8 flex items-center rounded-lg cursor-pointer"
+              >
+                <LogOut className="size-4 mr-2" /> Log Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </div>
         </DropdownMenu>
       </div>
     </div>

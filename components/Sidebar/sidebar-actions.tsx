@@ -43,7 +43,7 @@ export function SidebarActions({
   return (
     <>
       <div className="space-x-1">
-        <Tooltip delayDuration={0}>
+        {/* <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
             <Button
               variant="ghost"
@@ -55,7 +55,7 @@ export function SidebarActions({
             </Button>
           </TooltipTrigger>
           <TooltipContent>Share chat</TooltipContent>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
             <Button
@@ -105,14 +105,36 @@ export function SidebarActions({
                   })
 
                   if (result && 'error' in result) {
-                    toast.error(result.error)
+                    toast.error(result.error, {
+                      style: {
+                        borderRadius: '10px',
+                        background: '#d83030',
+                        color: '#fff',
+                        fontSize: '14px'
+                      },
+                      iconTheme: {
+                        primary: 'white',
+                        secondary: 'black'
+                      }
+                    })
                     return
                   }
 
                   setDeleteDialogOpen(false)
                   router.refresh()
                   router.push('/chat')
-                  toast.success('Chat deleted')
+                  toast.success('Chat deleted', {
+                    style: {
+                      borderRadius: '10px',
+                      background: '#333',
+                      color: '#fff',
+                      fontSize: '14px'
+                    },
+                    iconTheme: {
+                      primary: 'lightgreen',
+                      secondary: 'black'
+                    }
+                  })
                 })
               }}
             >

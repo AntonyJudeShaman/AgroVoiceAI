@@ -128,10 +128,32 @@ export function Account({
               toast
             )
             if (res) {
-              toast.success('Signed in successfully. Redirecting...')
+              toast.success('Signed in successfully. Redirecting...', {
+                style: {
+                  borderRadius: '10px',
+                  background: '#333',
+                  color: '#fff',
+                  fontSize: '14px'
+                },
+                iconTheme: {
+                  primary: 'lightgreen',
+                  secondary: 'black'
+                }
+              })
               router.push('/onboarding')
             } else {
-              toast.error('Invalid credentials. Please try again.')
+              toast.error('Invalid credentials. Please try again.', {
+                style: {
+                  borderRadius: '10px',
+                  background: '#d83030',
+                  color: '#fff',
+                  fontSize: '14px'
+                },
+                iconTheme: {
+                  primary: 'white',
+                  secondary: 'black'
+                }
+              })
             }
           }}
           className="grid gap-2"

@@ -21,7 +21,18 @@ export function ChatMessageActions({
 
   const onCopy = () => {
     if (isCopied) return
-    toast.success('Text copied to Clipboard.')
+    toast.success('Text copied to Clipboard.', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontSize: '14px'
+      },
+      iconTheme: {
+        primary: 'lightgreen',
+        secondary: 'black'
+      }
+    })
     copyToClipboard(message.content)
   }
 
