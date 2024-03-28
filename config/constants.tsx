@@ -1,11 +1,17 @@
 import {
+  Bot,
   BugOffIcon,
   CloudDrizzle,
   HeartPulseIcon,
+  Home,
+  HomeIcon,
   IndianRupee,
+  RadarIcon,
+  Settings,
   TractorIcon,
   WheatIcon
 } from 'lucide-react'
+import { NavConfig } from '@/lib/types'
 import Image from 'next/image'
 import cropfield from '../public/images/crop-field.jpeg'
 import pestdetection from '../public/images/pests.jpeg'
@@ -14,6 +20,8 @@ import cropMgmt from '../public/images/crop-mgmt.jpeg'
 import market from '../public/images/market.jpeg'
 import farmqa from '../public/images/farmqa.jpeg'
 import soil from '../public/images/soil.jpg'
+import { IoHome, IoHomeOutline } from 'react-icons/io5'
+import { BsCloudRain } from 'react-icons/bs'
 
 export const tableHeader = [
   {
@@ -39,6 +47,36 @@ export function CropField() {
       width={1024}
     />
   )
+}
+
+export const navConfig: NavConfig = {
+  mainNav: [
+    {
+      title: 'Home',
+      href: '/',
+      icon: <IoHomeOutline className="size-4 mr-2" />
+    },
+    {
+      title: 'Chat',
+      href: '/chat',
+      icon: <Bot className="size-5 mr-2" />
+    },
+    {
+      title: 'Weather',
+      href: '/weather',
+      icon: <BsCloudRain className="size-5 mr-2" />
+    },
+    {
+      title: 'Market',
+      href: '/market',
+      icon: <IndianRupee className="size-5 mr-2" />
+    },
+    {
+      title: 'Settings',
+      href: '/settings',
+      icon: <Settings className="size-5 mr-2" />
+    }
+  ]
 }
 
 export function PestField() {

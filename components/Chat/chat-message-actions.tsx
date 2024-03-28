@@ -7,6 +7,7 @@ import { IconCheck, IconCopy } from '@/components/ui/icons'
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
+import MyToast from '../ui/my-toast'
 
 interface ChatMessageActionsProps extends React.ComponentProps<'div'> {
   message: Message
@@ -21,18 +22,8 @@ export function ChatMessageActions({
 
   const onCopy = () => {
     if (isCopied) return
-    toast.success('Text copied to Clipboard.', {
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-        fontSize: '14px'
-      },
-      iconTheme: {
-        primary: 'lightgreen',
-        secondary: 'black'
-      }
-    })
+
+    MyToast({ message: 'Text copied to Clipboard.', type: 'success' })
     copyToClipboard(message.content)
   }
 

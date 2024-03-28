@@ -23,11 +23,11 @@ export default async function NoSessionPageContainer({
             fill="purple"
           />
           <div className="min-h-screen w-full items-center justify-center">
-            <p className="text-4xl sm:text-7xl min-w-full flex flex-col font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-green-500 to-green-400">
+            <div className="text-4xl sm:text-7xl min-w-full flex flex-col font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-green-500 to-green-400">
               <div>
                 <Navbar session={session} />
               </div>
-            </p>
+            </div>
             <div className="grow mt-[13rem] flex justify-center items-center">
               {component}
             </div>

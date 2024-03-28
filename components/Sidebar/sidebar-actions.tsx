@@ -23,6 +23,7 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import MyToast from '../ui/my-toast'
 
 interface SidebarActionsProps {
   chat: Chat
@@ -134,6 +135,10 @@ export function SidebarActions({
                       primary: 'lightgreen',
                       secondary: 'black'
                     }
+                  })
+                  MyToast({
+                    message: 'Chat deleted successfully',
+                    type: 'success'
                   })
                 })
               }}

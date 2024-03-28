@@ -16,16 +16,11 @@ import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
+import MyToast from '../ui/my-toast'
+import { z } from 'zod'
+import { nameSchema, validateInput } from '@/lib/schema'
 
-interface CreateAccountProps {
-  text?: string
-  showGoogleIcon?: boolean
-}
-
-export function CreateAccount({
-  text = 'Register with Google',
-  showGoogleIcon = true
-}: CreateAccountProps) {
+export function CreateAccount() {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFieldLoading, setIsFieldLoading] = React.useState(false)
   const [name, setName] = React.useState('')
@@ -63,7 +58,7 @@ export function CreateAccount({
         </CardHeader>
 
         <CardContent className="grid gap-4">
-          <div className="grid grid-cols-1 gap-6">
+          {/* <div className="grid grid-cols-1 gap-6">
             <Button
               variant="outline"
               type="button"
@@ -93,54 +88,60 @@ export function CreateAccount({
                 Or continue with
               </span>
             </div>
-          </div>
+          </div> */}
           <form
-            onSubmit={e => {
+            onSubmit={async e => {
               e.preventDefault()
-              setIsFieldLoading(true)
-              fetch('/api/auth/register', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  name: name,
-                  pswd: password
-                })
-              }).then(async res => {
-                setIsFieldLoading(false)
-                if (res.status === 200) {
-                  toast.success('Account created! Please sign in.', {
-                    style: {
-                      borderRadius: '10px',
-                      background: '#333',
-                      color: '#fff',
-                      fontSize: '14px'
-                    },
-                    iconTheme: {
-                      primary: 'lightgreen',
-                      secondary: 'black'
-                    }
+              try {
+                nameSchema.parse(name)
+                nameSchema.parse(password)
+                if (!validateInput(name) || !validateInput(password)) {
+                  MyToast({
+                    message: 'Dont try to inject code. 😒',
+                    type: 'error'
                   })
-                  setTimeout(() => {
-                    router.push('/sign-in')
-                  }, 2000)
-                } else {
-                  const { error } = await res.json()
-                  toast.error(error, {
-                    style: {
-                      borderRadius: '10px',
-                      background: '#d83030',
-                      color: '#fff',
-                      fontSize: '14px'
+                  setIsFieldLoading(false)
+                  fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
                     },
-                    iconTheme: {
-                      primary: 'white',
-                      secondary: 'black'
+                    body: JSON.stringify({
+                      name: name,
+                      pswd: password
+                    })
+                  }).then(async res => {
+                    setIsFieldLoading(false)
+                    if (res.status === 200) {
+                      MyToast({
+                        message: 'Account created! Please sign in.',
+                        type: 'success'
+                      })
+                      setTimeout(() => {
+                        router.push('/sign-in')
+                      }, 2000)
+                    } else {
+                      MyToast({
+                        message: 'Invalid credentials. Please try again.',
+                        type: 'error'
+                      })
                     }
                   })
                 }
-              })
+              } catch (error: any) {
+                if (error instanceof z.ZodError) {
+                  MyToast({
+                    message:
+                      'Username & Password must contain at least 4 characters.',
+                    type: 'error'
+                  })
+                } else {
+                  MyToast({
+                    message: 'An error occurred. Please try again later.',
+                    type: 'error'
+                  })
+                }
+              }
             }}
             className="grid gap-2"
           >
@@ -183,7 +184,12 @@ export function CreateAccount({
                 <BottomGradient />
               </div>
             </div>
-            <Button className="w-full mt-2" type="submit" size="lg">
+            <Button
+              className="w-full mt-2"
+              type="submit"
+              size="lg"
+              disabled={isFieldLoading}
+            >
               {isFieldLoading && <IconSpinner className="mr-2 animate-spin" />}
               Register
             </Button>

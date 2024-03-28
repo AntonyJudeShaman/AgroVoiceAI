@@ -1,3 +1,4 @@
+import MyToast from '@/components/ui/my-toast'
 import {
   districtSchema,
   imageURLSchema,
@@ -21,18 +22,7 @@ const handleNameSubmit = async (
   event.preventDefault()
   setIsSaving(true)
   if (!validateInput(name)) {
-    toast.error('Dont try to inject code. ð', {
-      style: {
-        borderRadius: '10px',
-        background: '#d83030',
-        color: '#fff',
-        fontSize: '14px'
-      },
-      iconTheme: {
-        primary: 'white',
-        secondary: 'black'
-      }
-    })
+    MyToast({ message: 'Dont try to inject code. 😒', type: 'error' })
     setIsSaving(false)
   } else {
     try {
@@ -46,61 +36,23 @@ const handleNameSubmit = async (
       })
 
       if (response.ok) {
-        toast.success('Name updated successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'lightgreen',
-            secondary: 'black'
-          }
-        })
+        MyToast({ message: 'Name updated successfully', type: 'success' })
         setIsNameChanged(true)
         setIsSaving(false)
       } else {
-        toast.error('Failed to update name', {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
-        })
+        MyToast({ message: 'Failed to update name', type: 'error' })
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         // const validationError = error.errors[0].message;
-        toast.error(`Name must contain at least 3 characters.`, {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'Name must contain at least 3 characters.',
+          type: 'error'
         })
       } else {
-        toast.error('An error occurred. Please try again later.', {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'An error occurred. Please try again later.',
+          type: 'error'
         })
       }
     } finally {
@@ -133,62 +85,21 @@ const handleImageSubmit = async (
 
     if (response.ok) {
       toast.dismiss()
-      toast.success('Profile picture updated.', {
-        style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'lightgreen',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Profile picture updated.', type: 'success' })
     } else {
       const errorMessage = await response.text()
       toast.dismiss()
-      toast.error(`Failed to upload image: ${errorMessage}`, {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Failed to upload image.', type: 'error' })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
       toast.dismiss()
-      toast.error(`Image format not supported.`, {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Image format not supported.', type: 'error' })
     } else {
       toast.dismiss()
-      toast.error('An error occurred. Please try again later.', {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
+      MyToast({
+        message: 'An error occurred. Please try again later.',
+        type: 'error'
       })
     }
   } finally {
@@ -216,61 +127,19 @@ const handleDistrictSubmit = async (
     })
 
     if (response.ok) {
-      toast.success('District updated successfully', {
-        style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'lightgreen',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'District updated successfully', type: 'success' })
       setIsDistrictChanged(false)
     } else {
-      const errorMessage = await response.text()
-      toast.error(`Failed to update district: ${errorMessage}`, {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Failed to update district', type: 'error' })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
       const validationError = error.errors[0].message
-      toast.error(`Select a valid district.`, {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Select a valid district.', type: 'error' })
     } else {
-      toast.error('An error occurred. Please try again later.', {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
+      MyToast({
+        message: 'An error occurred. Please try again later.',
+        type: 'error'
       })
     }
   } finally {
@@ -289,7 +158,7 @@ const handleUserNameSubmit = async (
   event.preventDefault()
   setIsSavingUserName(true)
   if (!validateInput(userName)) {
-    toast.error('Dont try to inject code. ð')
+    MyToast({ message: 'Dont try to inject code. 😒', type: 'error' })
     setIsSavingUserName(false)
   } else {
     try {
@@ -303,61 +172,22 @@ const handleUserNameSubmit = async (
       })
 
       if (response.ok) {
-        toast.success('Name updated successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'lightgreen',
-            secondary: 'black'
-          }
-        })
+        MyToast({ message: 'UserName updated successfully', type: 'success' })
         setIsUserNameChanged(true)
         setIsSavingUserName(false)
       } else {
-        toast.error('Failed to update name', {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
-        })
+        MyToast({ message: 'Failed to update name', type: 'error' })
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
-        // const validationError = error.errors[0].message;
-        toast.error(`Name must contain at least 3 characters.`, {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'UserName must contain at least 3 characters.',
+          type: 'error'
         })
       } else {
-        toast.error('An error occurred. Please try again later.', {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'An error occurred. Please try again later.',
+          type: 'error'
         })
       }
     } finally {
@@ -388,60 +218,18 @@ const handleEmailSubmit = async (
     })
 
     if (response.ok) {
-      toast.success('Email updated successfully', {
-        style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'lightgreen',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Email updated successfully', type: 'success' })
       setIsEmailChanged(false)
     } else {
-      const errorMessage = await response.text()
-      toast.error(`Failed to update email`, {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Failed to update email', type: 'error' })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
-      toast.error('Enter a valid email.', {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
-      })
+      MyToast({ message: 'Enter a valid email.', type: 'error' })
     } else {
-      toast.error('An error occurred. Please try again later.', {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
+      MyToast({
+        message: 'An error occurred. Please try again later.',
+        type: 'error'
       })
     }
   } finally {
@@ -461,18 +249,7 @@ const handlePrefSubmit = async (
   setIsSavingPref(true)
   prefSchema.parse(pref)
   if (!validateInput(pref)) {
-    toast.error('Dont try to inject code. ð', {
-      style: {
-        borderRadius: '10px',
-        background: '#d83030',
-        color: '#fff',
-        fontSize: '14px'
-      },
-      iconTheme: {
-        primary: 'white',
-        secondary: 'black'
-      }
-    })
+    MyToast({ message: 'Dont try to inject code. 😒', type: 'error' })
     setIsSavingPref(false)
   } else {
     try {
@@ -485,60 +262,24 @@ const handlePrefSubmit = async (
       })
 
       if (response.ok) {
-        toast.success('Chabot Preference updated successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'lightgreen',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'Chabot Preference updated successfully',
+          type: 'success'
         })
         setIsPrefChanged(false)
       } else {
-        toast.error('Failed to update preference.', {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
-        })
+        MyToast({ message: 'Failed to update preference', type: 'error' })
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
-        // const validationError = error.errors[0].message;
-        toast.error(`Not Valid.`, {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'Preference must contain at least 3 characters.',
+          type: 'error'
         })
       } else {
-        toast.error('An error occurred. Please try again later.', {
-          style: {
-            borderRadius: '10px',
-            background: '#d83030',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black'
-          }
+        MyToast({
+          message: 'An error occurred. Please try again later.',
+          type: 'error'
         })
       }
     } finally {

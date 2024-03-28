@@ -20,6 +20,7 @@ export type ServerActionResult<Result> = Promise<
 export type NavItem = {
   title: string
   href: string
+  icon?: React.ReactNode
   disabled?: boolean
 }
 

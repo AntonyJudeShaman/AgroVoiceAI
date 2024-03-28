@@ -11,6 +11,7 @@ import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { IconCheck, IconCopy, IconDownload } from '@/components/ui/icons'
 import { Button } from '@/components/ui/button'
 import toast from 'react-hot-toast'
+import MyToast from './my-toast'
 
 interface Props {
   language: string
@@ -72,17 +73,10 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
 
   const onCopy = () => {
     if (isCopied) return
-    toast.success('Code copied to Clipboard.', {
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-        fontSize: '14px'
-      },
-      iconTheme: {
-        primary: 'lightgreen',
-        secondary: 'black'
-      }
+
+    MyToast({
+      message: 'Copied to Clipboard.',
+      type: 'success'
     })
     copyToClipboard(value)
   }

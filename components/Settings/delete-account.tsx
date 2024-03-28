@@ -28,6 +28,7 @@ import { cn } from '@/lib/utils'
 import { Loader2, Trash2 } from 'lucide-react'
 import { deleteAccount } from '@/app/actions'
 import { signOut } from 'next-auth/react'
+import MyToast from '../ui/my-toast'
 
 export function DeleteAccount() {
   const [open, setOpen] = React.useState(false)
@@ -86,33 +87,16 @@ export function DeleteAccount() {
                   try {
                     await deleteAccount()
                     setOpen(false)
-                    toast.success('Account deleted successfully', {
-                      style: {
-                        borderRadius: '10px',
-                        background: '#333',
-                        color: '#fff',
-                        fontSize: '14px'
-                      },
-                      iconTheme: {
-                        primary: 'lightgreen',
-                        secondary: 'black'
-                      },
-                      duration: 5000
+                    MyToast({
+                      message: 'Account deleted successfully',
+                      type: 'success'
                     })
                     window.history.pushState({}, '', `/`)
                     signOut()
                   } catch (error) {
-                    toast.error('Error deleting account', {
-                      style: {
-                        borderRadius: '10px',
-                        background: '#d83030',
-                        color: '#fff',
-                        fontSize: '14px'
-                      },
-                      iconTheme: {
-                        primary: 'white',
-                        secondary: 'black'
-                      }
+                    MyToast({
+                      message: 'Error deleting account',
+                      type: 'error'
                     })
                     // Handle error here
                   } finally {

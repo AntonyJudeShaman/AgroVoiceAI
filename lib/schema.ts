@@ -10,7 +10,7 @@ export const districtSchema = z.string()
 export const emailSchema = z.string().email()
 
 export function validateInput(input: string) {
-  const harmfulPattern = /<script>|<\/script>/i
+  const harmfulPattern = /<script>|script|<|>|<\/script>/i
 
   if (harmfulPattern.test(input)) {
     return false

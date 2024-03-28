@@ -7,13 +7,13 @@ import {
   NavigationMenuList,
   NavigationMenu
 } from '@/components/ui/navigation-menu'
-import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
 import { IconLogo, IconMenu } from '../ui/icons'
 import { ThemeToggle } from '../Theme/theme-toggle'
 import { DownloadIcon } from 'lucide-react'
 import { BottomGradient } from '../ui/bottom-gradient'
+import { navConfig } from '@/config/constants'
 
 export default function ChatNavbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -49,7 +49,10 @@ export default function ChatNavbar() {
                         '2xl:text-md text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-zinc-300 text-zinc-900 rounded-md p-2 font-pops'
                       )}
                     >
-                      <span className="">{item.title}</span>
+                      <p className="flex items-center">
+                        {item.icon}{' '}
+                        <span className="text-[0.95rem]">{item.title}</span>
+                      </p>
                     </Link>
                   </>
                 ))}

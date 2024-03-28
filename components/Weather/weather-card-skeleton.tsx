@@ -27,7 +27,7 @@ export default function WeatherCardsSkeleton() {
               style={{ width: '90%', height: '20px' }}
             ></div>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             <div
               className="dark:bg-gray-800 bg-gray-300 mt-[20px] rounded-xl animate-pulse border border-gray-400 dark:border-gray-600"
               style={{ height: '350px', width: '100%' }}

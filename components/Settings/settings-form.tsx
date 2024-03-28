@@ -42,6 +42,7 @@ import { removeImage } from '@/app/actions'
 import { DistrictForm } from '../Form/district-form'
 import { IconClose } from '../ui/icons'
 import useLockBody from '@/lib/hooks/use-lock-body'
+import MyToast from '../ui/my-toast'
 
 export function SettingsForm({
   user,
@@ -146,17 +147,9 @@ export function SettingsForm({
       setIsUploaded(true)
       setOpen(false)
     } catch (error) {
-      toast.error('Error uploading file. Please try again later.', {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
+      MyToast({
+        message: 'Error uploading file. Please try again later.',
+        type: 'error'
       })
     }
   }
@@ -348,30 +341,15 @@ export function SettingsForm({
                       toast.loading('Please wait...')
                       await removeImage()
                       toast.dismiss()
-                      toast.success('Profile picture updated.', {
-                        style: {
-                          borderRadius: '10px',
-                          background: '#333',
-                          color: '#fff',
-                          fontSize: '14px'
-                        },
-                        iconTheme: {
-                          primary: 'lightgreen',
-                          secondary: 'black'
-                        }
+
+                      MyToast({
+                        message: 'Profile picture updated.',
+                        type: 'success'
                       })
                     } else {
-                      toast.error('No image to remove.', {
-                        style: {
-                          borderRadius: '10px',
-                          background: '#d83030',
-                          color: '#fff',
-                          fontSize: '14px'
-                        },
-                        iconTheme: {
-                          primary: 'white',
-                          secondary: 'black'
-                        }
+                      MyToast({
+                        message: 'No image to remove.',
+                        type: 'error'
                       })
                     }
                   }}

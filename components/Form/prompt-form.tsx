@@ -13,6 +13,7 @@ import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
 import { inputSchema, validateInput } from '@/lib/schema'
 import toast from 'react-hot-toast'
+import MyToast from '../ui/my-toast'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -44,18 +45,7 @@ export function PromptForm({
         }
         inputSchema.parse(input)
         if (!validateInput(input)) {
-          toast.error('Dont try to inject code. 😒', {
-            style: {
-              borderRadius: '10px',
-              background: '#d83030',
-              color: '#fff',
-              fontSize: '14px'
-            },
-            iconTheme: {
-              primary: 'white',
-              secondary: 'black'
-            }
-          })
+          MyToast({ message: 'Dont try to inject code. 😒', type: 'error' })
         } else {
           setInput('')
           await onSubmit(input)

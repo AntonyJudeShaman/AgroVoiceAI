@@ -23,6 +23,7 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import MyToast from '../ui/my-toast'
 
 interface ClearHistoryProps {
   isEnabled: boolean
@@ -73,17 +74,9 @@ export function ClearHistory({
               startTransition(() => {
                 clearChats().then(result => {
                   if (result && 'error' in result) {
-                    toast.error(result.error, {
-                      style: {
-                        borderRadius: '10px',
-                        background: '#d83030',
-                        color: '#fff',
-                        fontSize: '14px'
-                      },
-                      iconTheme: {
-                        primary: 'white',
-                        secondary: 'black'
-                      }
+                    MyToast({
+                      message: 'Error clearing chat history',
+                      type: 'error'
                     })
                     return
                   }

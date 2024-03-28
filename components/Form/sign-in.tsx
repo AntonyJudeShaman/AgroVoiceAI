@@ -17,16 +17,12 @@ import { useRouter } from 'next/navigation'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { handleSubmit } from '@/helpers/user-info'
+import MyToast from '../ui/my-toast'
+import { nameSchema, validateInput } from '@/lib/schema'
+import { z } from 'zod'
+import Link from 'next/link'
 
-interface CreateAccountProps {
-  text?: string
-  showGoogleIcon?: boolean
-}
-
-export function Account({
-  text = 'Sign in with Google',
-  showGoogleIcon = true
-}: CreateAccountProps) {
+export function Account() {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFieldLoading, setIsFieldLoading] = React.useState(false)
   const [name, setName] = React.useState('')
@@ -37,31 +33,6 @@ export function Account({
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
 
   const router = useRouter()
-
-  const urlParams = new URLSearchParams(window.location.search)
-  const [errorType, setErrorType] = useState<string | null>(null)
-
-  useEffect(() => {
-    const errorFromUrl = urlParams.get('error')
-    if (errorFromUrl) {
-      setErrorType(errorFromUrl)
-    }
-  }, [urlParams])
-
-  // useEffect(() => {
-  //   if (errorType) {
-  //     switch (errorType) {
-  //       case 'CredentialsSignin':
-  //         toast.error('Invalid credentials')
-  //         break
-  //       case 'CallbackRouteError':
-  //         toast.error('Callback route error')
-  //         break
-  //       default:
-  //         toast.error('An error occurred')
-  //     }
-  //   }
-  // }, [errorType, toast])
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
@@ -89,7 +60,7 @@ export function Account({
       </CardHeader>
 
       <CardContent className="grid gap-4">
-        <div className="grid grid-cols-1 gap-6">
+        {/* <div className="grid grid-cols-1 gap-6">
           <Button
             variant="outline"
             onClick={() => {
@@ -117,43 +88,53 @@ export function Account({
               Or continue with
             </span>
           </div>
-        </div>
+        </div> */}
         <form
           onSubmit={async e => {
-            const res = await handleSubmit(
-              e,
-              name,
-              password,
-              setIsFieldLoading,
-              toast
-            )
-            if (res) {
-              toast.success('Signed in successfully. Redirecting...', {
-                style: {
-                  borderRadius: '10px',
-                  background: '#333',
-                  color: '#fff',
-                  fontSize: '14px'
-                },
-                iconTheme: {
-                  primary: 'lightgreen',
-                  secondary: 'black'
+            e.preventDefault()
+            try {
+              nameSchema.parse(name)
+              nameSchema.parse(password)
+              if (!validateInput(name) || !validateInput(password)) {
+                MyToast({
+                  message: 'Dont try to inject code. 😒',
+                  type: 'error'
+                })
+                setIsFieldLoading(false)
+              } else {
+                const res = await handleSubmit(
+                  e,
+                  name,
+                  password,
+                  setIsFieldLoading,
+                  toast
+                )
+                if (res) {
+                  MyToast({
+                    message: 'Signed in successfully. Redirecting...',
+                    type: 'success'
+                  })
+                  router.push('/onboarding')
+                } else {
+                  MyToast({
+                    message: 'Invalid credentials. Please try again.',
+                    type: 'error'
+                  })
                 }
-              })
-              router.push('/onboarding')
-            } else {
-              toast.error('Invalid credentials. Please try again.', {
-                style: {
-                  borderRadius: '10px',
-                  background: '#d83030',
-                  color: '#fff',
-                  fontSize: '14px'
-                },
-                iconTheme: {
-                  primary: 'white',
-                  secondary: 'black'
-                }
-              })
+              }
+            } catch (error: any) {
+              if (error instanceof z.ZodError) {
+                MyToast({
+                  message:
+                    'Username & Password must contain at least 4 characters.',
+                  type: 'error'
+                })
+              } else {
+                MyToast({
+                  message: 'An error occurred. Please try again later.',
+                  type: 'error'
+                })
+              }
             }
           }}
           className="grid gap-2"
@@ -197,7 +178,22 @@ export function Account({
               <BottomGradient />
             </div>
           </div>
-          <Button className="w-full mt-2" size="lg" type="submit">
+          <div className="flex justify-end">
+            <Link
+              href="forgot_password"
+              className="text-sm text-red-600 flex items-center"
+            >
+              <Button variant="link" className="px-0">
+                Forgot password?
+              </Button>
+            </Link>
+          </div>
+          <Button
+            className="w-full mt-2"
+            size="lg"
+            type="submit"
+            disabled={isFieldLoading}
+          >
             {isFieldLoading && <IconSpinner className="mr-2 animate-spin" />}{' '}
             Sign In
           </Button>

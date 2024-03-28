@@ -25,6 +25,7 @@ import { ForecastData } from '@/lib/types'
 import { User } from '@prisma/client/edge'
 import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
+import MyToast from '../ui/my-toast'
 
 const FormSchema = z.object({
   district: z
@@ -66,18 +67,7 @@ export function WeatherLocationNotAvailable({
           })
 
           if (!res.ok) {
-            toast.error('Failed to fetch weather data', {
-              style: {
-                borderRadius: '10px',
-                background: '#d83030',
-                color: '#fff',
-                fontSize: '14px'
-              },
-              iconTheme: {
-                primary: 'white',
-                secondary: 'black'
-              }
-            })
+            MyToast({ message: 'Failed to fetch weather data', type: 'error' })
           }
 
           const forecastData = await res.json()
@@ -86,17 +76,9 @@ export function WeatherLocationNotAvailable({
             setLocation(district)
           }
         } catch (error: any) {
-          toast.error('Some error occurred. Please try again later.', {
-            style: {
-              borderRadius: '10px',
-              background: '#d83030',
-              color: '#fff',
-              fontSize: '14px'
-            },
-            iconTheme: {
-              primary: 'white',
-              secondary: 'black'
-            }
+          MyToast({
+            message: 'Some error occurred. Please try again later.',
+            type: 'error'
           })
         } finally {
           setIsLoadingDistrict(false)

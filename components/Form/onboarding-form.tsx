@@ -25,6 +25,7 @@ import {
 import { firebaseConfig } from '@/lib/firebase'
 import { initializeApp } from 'firebase/app'
 import { removeImage } from '@/app/actions'
+import MyToast from '../ui/my-toast'
 
 export default function OnboardingForm({
   user,
@@ -94,17 +95,9 @@ export default function OnboardingForm({
       setIsUploaded(true)
       setOpen(false)
     } catch (error) {
-      toast.error('Error uploading file. Please try again later.', {
-        style: {
-          borderRadius: '10px',
-          background: '#d83030',
-          color: '#fff',
-          fontSize: '14px'
-        },
-        iconTheme: {
-          primary: 'white',
-          secondary: 'black'
-        }
+      MyToast({
+        message: 'Error uploading file. Please try again later.',
+        type: 'error'
       })
     }
   }
@@ -116,7 +109,6 @@ export default function OnboardingForm({
         'flex flex-col m-4 items-center dark:bg-slate-900/10 bg-white/80 shadow-2xl'
       )}
     >
-      {' '}
       <p className="md:text-4xl text-3xl mt-4 bg-clip-text text-center text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-display px-8">
         Welcome to AgroVoiceAI
       </p>
@@ -226,30 +218,15 @@ export default function OnboardingForm({
                     toast.loading('Please wait...')
                     await removeImage()
                     toast.dismiss()
-                    toast.success('Profile picture updated.', {
-                      style: {
-                        borderRadius: '10px',
-                        background: '#333',
-                        color: '#fff',
-                        fontSize: '14px'
-                      },
-                      iconTheme: {
-                        primary: 'lightgreen',
-                        secondary: 'black'
-                      }
+
+                    MyToast({
+                      message: 'Profile picture updated.',
+                      type: 'success'
                     })
                   } else {
-                    toast.error('No image to remove.', {
-                      style: {
-                        borderRadius: '10px',
-                        background: '#d83030',
-                        color: '#fff',
-                        fontSize: '14px'
-                      },
-                      iconTheme: {
-                        primary: 'white',
-                        secondary: 'black'
-                      }
+                    MyToast({
+                      message: 'No image to remove.',
+                      type: 'error'
                     })
                   }
                 }}
@@ -266,17 +243,9 @@ export default function OnboardingForm({
             event.preventDefault()
 
             if (!name.trim()) {
-              toast.error('Name cannot be empty.', {
-                style: {
-                  borderRadius: '10px',
-                  background: '#d83030',
-                  color: '#fff',
-                  fontSize: '14px'
-                },
-                iconTheme: {
-                  primary: 'white',
-                  secondary: 'black'
-                }
+              MyToast({
+                message: 'Name cannot be empty.',
+                type: 'error'
               })
               setIsSaving(false)
               return false

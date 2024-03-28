@@ -9,13 +9,13 @@ import {
 } from '@/components/ui/navigation-menu'
 import { IconLogo, IconMenu } from '../ui/icons'
 import { ThemeToggle } from '../Theme/theme-toggle'
-import { navConfig } from 'config/site'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
 import { ArrowRight, DownloadIcon } from 'lucide-react'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
+import { navConfig } from '@/config/constants'
 
 export default function Navbar({ session }: { session: any }) {
   const [scrolled, setScrolled] = useState(false)
@@ -36,7 +36,7 @@ export default function Navbar({ session }: { session: any }) {
 
   return (
     <nav
-      className={`flex dark:text-white text-black h-20 fixed backdrop-blur-lg  w-full justify-between items-center px-4 md:px-6 ${scrolled ? ' backdrop-blur-lg shadow-md z-50' : ''}`}
+      className={`flex dark:text-white text-black h-20 fixed backdrop-blur-lg  w-full mx-auto justify-center items-center px-4 md:px-6 ${scrolled ? ' backdrop-blur-lg shadow-md z-50' : ''}`}
     >
       <Sheet>
         <SheetTrigger asChild>
@@ -63,7 +63,7 @@ export default function Navbar({ session }: { session: any }) {
                   href={item.href}
                   aria-label={item.title}
                 >
-                  {item.title}
+                  {item.icon} {item.title}
                 </Link>
               ))}
           </div>
@@ -101,7 +101,10 @@ export default function Navbar({ session }: { session: any }) {
                         'group relative flex flex-col justify-center text-right text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-zinc-300 text-zinc-900 md:inline-block rounded-md p-2 font-medium'
                       )}
                     >
-                      <span className="">{item.title}</span>
+                      <p className="flex items-center text-[1rem]">
+                        {item.icon}
+                        {item.title}
+                      </p>
                     </Link>
                   </>
                 ))}
