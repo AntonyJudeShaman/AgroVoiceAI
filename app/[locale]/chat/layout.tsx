@@ -3,7 +3,7 @@ import ChatNavbar from '@/components/Chat/chat-navbar'
 import { SidebarDesktop } from '@/components/Sidebar/sidebar-desktop'
 import { auth } from '@/lib/auth'
 import React from 'react'
-import { getCurrentUser } from '../actions'
+import { getCurrentUser } from '../../actions'
 import { redirect } from 'next/navigation'
 
 interface ChatLayoutProps {

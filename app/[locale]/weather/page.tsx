@@ -1,5 +1,5 @@
 import WeatherHome from '@/components/Weather/weather-home'
-import { getCurrentUser } from '../actions'
+import { getCurrentUser } from '../../actions'
 import SessionPageContainer from '@/components/session-page-container'
 
 export default async function Weather() {

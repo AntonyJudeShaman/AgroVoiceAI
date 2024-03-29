@@ -1,4 +1,4 @@
-import { getCurrentUser } from '../actions'
+import { getCurrentUser } from '../../actions'
 import MarketHome2 from '@/components/Market/market-home-api-2'
 import SessionPageContainer from '@/components/session-page-container'
 

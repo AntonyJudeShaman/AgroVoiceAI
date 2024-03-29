@@ -10,17 +10,31 @@ import {
 import { IconLogo, IconMenu } from '../ui/icons'
 import { ThemeToggle } from '../Theme/theme-toggle'
 import { cn } from '@/lib/utils'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { ArrowRight, DownloadIcon } from 'lucide-react'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { navConfig } from '@/config/constants'
+import LocaleSwitcher from '../locale-switcher'
+import { useTranslations } from 'next-intl'
 
-export default function Navbar({ session }: { session: any }) {
+export default function Navbar({
+  session,
+  title,
+  home,
+  chat,
+  weather,
+  market,
+  settings,
+  signin,
+  signup
+}: any) {
   const [scrolled, setScrolled] = useState(false)
   const path = usePathname()
   const router = useRouter()
+
+  const navItems = [home, chat, weather, market, settings]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +65,7 @@ export default function Navbar({ session }: { session: any }) {
         </SheetTrigger>
         <SheetContent side="left">
           <div className="text-2xl pt-8 font-pops font-bold">
-            <IconLogo className="size-28 mb-4 mr-3" /> AgroVoiceAI
+            <IconLogo className="size-28 mb-4 mr-3" /> {title}
             <span className="sr-only">Agrovoiceai</span>
           </div>
           <div className="grid gap-2 py-6">
@@ -63,9 +77,12 @@ export default function Navbar({ session }: { session: any }) {
                   href={item.href}
                   aria-label={item.title}
                 >
-                  {item.icon} {item.title}
+                  {item.icon} {navItems[index]}
                 </Link>
               ))}
+          </div>
+          <div className="mb-4">
+            <LocaleSwitcher />
           </div>
           <Link href="#">
             <Button
@@ -83,7 +100,7 @@ export default function Navbar({ session }: { session: any }) {
         className="mr-6 hidden font-normal items-center font-pops text-2xl dark:text-white text-black lg:flex"
         href="/"
       >
-        <IconLogo className="size-12 mr-3" /> AgroVoiceAI
+        <IconLogo className="size-12 mr-3" /> {title}
         <span className="sr-only">AgroVoiceAI</span>
       </Link>
       <NavigationMenu className="hidden lg:flex">
@@ -103,7 +120,7 @@ export default function Navbar({ session }: { session: any }) {
                     >
                       <p className="flex items-center text-[1rem]">
                         {item.icon}
-                        {item.title}
+                        {navItems[index]}
                       </p>
                     </Link>
                   </>
@@ -114,21 +131,27 @@ export default function Navbar({ session }: { session: any }) {
       </NavigationMenu>
       {!session ? (
         <div className="ml-auto flex gap-2">
+          <div className="hidden md:flex">
+            <LocaleSwitcher />
+          </div>
           <ThemeToggle />
           <Button variant="outline" onClick={() => router.push('/sign-in')}>
-            Sign in
+            {signin}
           </Button>
           <Button
             onClick={() => router.push('/sign-up')}
             className="hover:bg-primary/80"
           >
             <div className="md:text-[1.6vh] z-10 flex items-center h-11 px-8 bg-primary text-primary-foreground shadow-md rounded-2xl border-gray-500 border">
-              Sign Up
+              {signup}
             </div>
           </Button>
         </div>
       ) : path === '/options' ? (
         <div className="ml-auto flex gap-2">
+          <div className="hidden md:flex">
+            <LocaleSwitcher />
+          </div>
           <ThemeToggle />
           <Button
             onClick={() =>
@@ -145,6 +168,9 @@ export default function Navbar({ session }: { session: any }) {
         </div>
       ) : (
         <div className="ml-auto flex gap-2">
+          <div className="hidden md:flex">
+            <LocaleSwitcher />
+          </div>
           <ThemeToggle />
           <Button
             onClick={() =>

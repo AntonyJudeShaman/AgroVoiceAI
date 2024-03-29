@@ -3,13 +3,15 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 
 import LocalFont from 'next/font/local'
-import '@/app/globals.css'
+import './globals.css'
 import { cn } from '@/lib/utils'
 import { Analytics } from '@vercel/analytics/react'
 import { Providers } from '@/components/Theme/providers'
 import { Inter } from 'next/font/google'
 import { Poppins } from 'next/font/google'
 import { TailwindIndicator } from '@/components/Theme/tailwind-indicator'
+import { notFound } from 'next/navigation'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const poppins = Poppins({
@@ -20,7 +22,7 @@ const poppins = Poppins({
 })
 
 const calSans = LocalFont({
-  src: '../public/fonts/CalSans-SemiBold.ttf',
+  src: '../../public/fonts/CalSans-SemiBold.ttf',
   variable: '--font-calsans'
 })
 
@@ -47,11 +49,15 @@ export const viewport = {
 
 interface RootLayoutProps {
   children: React.ReactNode
+  params: { locale: string }
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+  params: { locale }
+}: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           'font-sans antialiased scroll-smooth transition-transform duration-1000',
@@ -66,21 +72,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }`
         )}
       >
-        <Toaster />
-        <TailwindIndicator />
-        <Providers
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex flex-col min-h-screen">
-            <main className="flex flex-col flex-1 dark:bg-[#020817] bg-muted/20">
-              {children}
-            </main>{' '}
-            <Analytics />
-          </div>
-        </Providers>
+        <NextIntlClientProvider locale={locale}>
+          {' '}
+          <Toaster />
+          <TailwindIndicator />
+          <Providers
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex flex-col min-h-screen">
+              <main className="flex flex-col flex-1 dark:bg-[#020817] bg-muted/20">
+                {children}
+              </main>{' '}
+              <Analytics />
+            </div>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

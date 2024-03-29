@@ -1,17 +1,24 @@
-export default function Middleware(req: any, res: any, next: any) {
-  // Do something
+import createMiddleware from 'next-intl/middleware'
+import { pathnames, locales, localePrefix } from './config'
 
-  const { url } = req
-  const session = req.session
-  if (url === '/sign-in' || (url === '/sign-up' && session.user)) {
-    return res.redirect('/chat')
-  }
-
-  if (url === '/settings' && !session.user) {
-    return res.redirect('/')
-  }
-}
+export default createMiddleware({
+  defaultLocale: 'en',
+  locales,
+  pathnames,
+  localePrefix
+})
 
 export const config = {
-  matcher: ['/((?!api|settings|_next/image|favicon.ico).+)']
+  matcher: [
+    // Enable a redirect to a matching locale at the root
+    '/',
+
+    // Set a cookie to remember the previous locale for
+    // all requests that have a locale prefix
+    '/(ta|en)/:path*',
+
+    // Enable redirects that add missing locales
+    // (e.g. `/pathnames` -> `/en/pathnames`)
+    '/((?!_next|_vercel|.*\\..*).*)'
+  ]
 }

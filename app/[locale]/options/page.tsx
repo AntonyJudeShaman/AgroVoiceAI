@@ -3,7 +3,7 @@ import NotFound from '../not-found'
 import HomeOptions from '@/components/Home/home-options'
 import SessionPageContainer from '@/components/session-page-container'
 import { auth } from '@/lib/auth'
-import { getCurrentUser } from '../actions'
+import { getCurrentUser } from '../../actions'
 
 async function OptionsPage() {
   const session = await auth()
