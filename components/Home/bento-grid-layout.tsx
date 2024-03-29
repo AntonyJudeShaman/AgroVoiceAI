@@ -9,6 +9,7 @@ export async function BentoGridItem() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 xl:min-w-[80rem] container max-w-4xl mx-auto py-10">
       {features.map((feature, i) => (
         <div
+          key={i}
           className={cn(
             'md:col-span-1',
             i === 0 || i === 3 || i === 4 ? 'md:col-span-2 md:mt-20' : '',
