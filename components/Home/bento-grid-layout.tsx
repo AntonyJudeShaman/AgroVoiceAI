@@ -1,39 +1,9 @@
-import { features } from '@/config/constants'
+import { features, translations } from '@/config/constants'
 import { cn } from '@/lib/utils'
 import { getTranslations } from 'next-intl/server'
 
 export async function BentoGridItem() {
   const t = await getTranslations('Index')
-  const translations = [
-    {
-      title: 'home.crop.title',
-      description: 'home.crop.desc'
-    },
-    {
-      title: 'home.pest.title',
-      description: 'home.pest.desc'
-    },
-    {
-      title: 'home.weather.title',
-      description: 'home.weather.desc'
-    },
-    {
-      title: 'home.tips.title',
-      description: 'home.tips.desc'
-    },
-    {
-      title: 'home.market.title',
-      description: 'home.market.desc'
-    },
-    {
-      title: 'home.farming.title',
-      description: 'home.farming.desc'
-    },
-    {
-      title: 'home.soil.title',
-      description: 'home.soil.desc'
-    }
-  ]
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 xl:min-w-[80rem] container max-w-4xl mx-auto py-10">
@@ -41,9 +11,9 @@ export async function BentoGridItem() {
         <div
           className={cn(
             'md:col-span-1',
-            i === 0 || i === 3 || i === 4 ? 'md:col-span-2 mt-20' : '',
+            i === 0 || i === 3 || i === 4 ? 'md:col-span-2 md:mt-20' : '',
             i === 4 || i === 5 ? '' : '',
-            i === 6 ? 'md:col-span-3 mt-10 mx-auto' : ''
+            i === 6 ? 'md:col-span-3 md:mt-10 mx-auto' : ''
           )}
         >
           <div

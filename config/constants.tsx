@@ -247,3 +247,50 @@ export const tnDistricts = [
   { label: 'Viluppuram', value: 'Viluppuram' },
   { label: 'Virudhunagar', value: 'Virudhunagar' }
 ] as const
+
+export const navItems = [
+  'navigation.home',
+  'navigation.chat',
+  'navigation.weather',
+  'navigation.market',
+  'navigation.settings'
+]
+
+export const translations = [
+  {
+    title: 'home.crop.title',
+    description: 'home.crop.desc'
+  },
+  {
+    title: 'home.pest.title',
+    description: 'home.pest.desc'
+  },
+  {
+    title: 'home.weather.title',
+    description: 'home.weather.desc'
+  },
+  {
+    title: 'home.tips.title',
+    description: 'home.tips.desc'
+  },
+  {
+    title: 'home.market.title',
+    description: 'home.market.desc'
+  },
+  {
+    title: 'home.farming.title',
+    description: 'home.farming.desc'
+  },
+  {
+    title: 'home.soil.title',
+    description: 'home.soil.desc'
+  }
+]
+
+export const translateOptions = [
+  'explore.chat',
+  'explore.pest',
+  'explore.weather',
+  'explore.soil',
+  'explore.market'
+]
