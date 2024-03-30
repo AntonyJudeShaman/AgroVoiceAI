@@ -20,24 +20,22 @@ export default async function HomeOptions() {
               </h1>
               <div className="grid md:grid-cols-3 gap-6">
                 {options.map((option, index) => (
-                  <>
-                    <Card
-                      key={index}
-                      className="border-2 border-gray-200 group dark:border-gray-700 group hover:dark:border-green-900 hover:border-green-300 duration-300"
-                    >
-                      <CardHeader className="text-gray-500 text-left flex flex-row justify-between items-center duration-300 group-hover:dark:text-white/90 group-hover:text-black md:text-2xl/relaxed lg:text-2xl/relaxed xl:text-2xl/relaxed dark:text-gray-400">
-                        <p>{t(translateOptions[index])}</p>
-                        <p className="ml-2">{option.icon}</p>
-                      </CardHeader>
-                      <CardFooter>
-                        <Link href={option.url}>
-                          <Button className="bg-primary/90 group-hover:bg-primary button-glow">
-                            {t('explore.try')}
-                          </Button>
-                        </Link>
-                      </CardFooter>
-                    </Card>
-                  </>
+                  <Card
+                    key={index}
+                    className="border-2 border-gray-200 group flex flex-col justify-between h-full dark:border-gray-700 group hover:dark:border-green-900 hover:border-green-300 duration-300"
+                  >
+                    <CardHeader className="text-gray-500 text-left flex flex-row justify-between items-center duration-300 group-hover:dark:text-white/90 group-hover:text-black md:text-2xl/relaxed lg:text-2xl/relaxed xl:text-2xl/relaxed dark:text-gray-400">
+                      <p>{t(translateOptions[index])}</p>
+                      <p className="ml-2">{option.icon}</p>
+                    </CardHeader>
+                    <CardFooter>
+                      <Link href={option.url}>
+                        <Button className="bg-primary/90 group-hover:bg-primary button-glow">
+                          {t('explore.try')}
+                        </Button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
                 ))}
               </div>
             </div>

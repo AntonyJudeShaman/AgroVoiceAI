@@ -17,7 +17,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { navConfig } from '@/config/constants'
 import LocaleSwitcher from '../locale-switcher'
-import { useTranslations } from 'next-intl'
 
 export default function Navbar({
   session,
@@ -28,7 +27,9 @@ export default function Navbar({
   market,
   settings,
   signin,
-  signup
+  signup,
+  logout,
+  explore
 }: any) {
   const [scrolled, setScrolled] = useState(false)
   const path = usePathname()
@@ -148,7 +149,7 @@ export default function Navbar({
             </div>
           </Button>
         </div>
-      ) : path === '/options' ? (
+      ) : path.includes('/options') ? (
         <div className="ml-auto flex gap-2 items-center">
           <div className="hidden md:flex">
             <LocaleSwitcher />
@@ -164,7 +165,7 @@ export default function Navbar({
             className="rounded-2xl md:text-md border-gray-500 border"
             size="lg"
           >
-            Logout
+            {logout}
           </Button>
         </div>
       ) : (
@@ -182,14 +183,15 @@ export default function Navbar({
             className=""
             variant="outline"
           >
-            Logout
+            {logout}
           </Button>
           <Button
             onClick={() => router.push('/options')}
             className="hover:bg-primary/80"
           >
             <div className="md:text-md z-10 flex items-center h-11 px-8 bg-primary text-primary-foreground shadow-md rounded-2xl border-gray-500 border">
-              Explore <ArrowRight className="size-4 ml-2 hidden md:block" />
+              {explore}
+              <ArrowRight className="size-4 ml-2 hidden md:block" />
             </div>
           </Button>
         </div>

@@ -25,6 +25,8 @@ export async function DotBackGround() {
             settings={t(navItems[4])}
             signin={t('signin')}
             signup={t('signup')}
+            logout={t('logout')}
+            explore={t('explore.explore')}
           />
         </div>
       </div>

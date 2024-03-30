@@ -1,8 +1,4 @@
 {
-  "LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unknown}}"
-  },
   "Index": {
     "title": "AgroVoiceAI",
     "desc": "Meet AgroVoiceAI: Your virtual agronomy expert, revolutionizing farming with AI-driven insights and personalized guidance, ensuring every crop conversation yields success.",
@@ -18,6 +14,7 @@
     "chat": "Start Chatting",
     "app": "Download Our App",
     "mode": "appearance",
+    "logout": "Logout",
     "home": {
       "topic": "Everything you need in a chatbot",
       "crop": {
