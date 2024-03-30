@@ -253,24 +253,21 @@
     "Signup": {
       "account": "Register for an Account",
       "details": "Please provide your details to register",
-      "continue": "OR CONTINUE WITH",
-      "google": "Register with Google",
-      "email": "Email",
+      "username": "Username",
       "password": "Password",
-      "enter1": "Enter your Email",
-      "enter2": "Enter your password",
+      "placeholder1": "Enter your Email",
+      "placeholder2": "Enter your password",
       "register": "Register"
     },
     "Signin": {
       "account": "Sign in to your account",
       "details": "Please provide your credentials to sign in",
-      "google": "Sign in with Google",
-      "continue": "OR CONTINUE WITH",
-      "email": "Email",
+      "username": "Username",
       "password": "Password",
-      "enter1": "Enter your Email",
-      "enter2": "Enter your password",
-      "signin": "Sign In"
+      "placeholder1": "Enter your Email",
+      "placeholder2": "Enter your password",
+      "signin": "Sign In",
+      "forgot": "Forgot Password?"
     }
   }
 }

@@ -19,8 +19,17 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import MyToast from '../ui/my-toast'
 import { z } from 'zod'
 import { nameSchema, validateInput } from '@/lib/schema'
+import { AccountProps } from '@/lib/types'
 
-export function CreateAccount() {
+export function CreateAccount({
+  title,
+  details,
+  register,
+  placeholder1,
+  placeholder2,
+  username,
+  pswd
+}: AccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFieldLoading, setIsFieldLoading] = React.useState(false)
   const [name, setName] = React.useState('')
@@ -50,11 +59,9 @@ export function CreateAccount() {
       <Card className="font-pops w-full">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl bg-clip-text text-transparent bg-gradient-to-bl from-green-600 to-green-500 dark:from-green-500 dark:to-green-400">
-            Register for an Account
+            {title}
           </CardTitle>
-          <CardDescription>
-            Please provide your details to register
-          </CardDescription>
+          <CardDescription>{details}</CardDescription>
         </CardHeader>
 
         <CardContent className="grid gap-4">
@@ -147,13 +154,13 @@ export function CreateAccount() {
           >
             <div className="grid gap-2">
               <label htmlFor="name" className="font-pops">
-                Username
+                {username}
               </label>
               <div className=" relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
                 <Input
                   id="name"
                   type="name"
-                  placeholder="Enter a Username"
+                  placeholder={placeholder1}
                   value={name}
                   onChange={handleNameChange}
                   className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
@@ -163,13 +170,13 @@ export function CreateAccount() {
             </div>
             <div className="grid gap-2">
               <label className="font-pops" htmlFor="password">
-                Password
+                {pswd}
               </label>
               <div className=" relative group/btn flex space-x-2 items-center justify-center px-1 w-full  rounded-md h-10 font-medium shadow-input hover:bg-transparent dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
                 <Input
                   id="password"
                   type={isPasswordVisible ? 'text' : 'password'}
-                  placeholder="Enter a Password"
+                  placeholder={placeholder2}
                   value={password}
                   onChange={handlePasswordChange}
                   className="border-none focus-visible:ring-0 focus-visible:ring-transparent focus-within:none"
@@ -191,7 +198,7 @@ export function CreateAccount() {
               disabled={isFieldLoading}
             >
               {isFieldLoading && <IconSpinner className="mr-2 animate-spin" />}
-              Register
+              {register}
             </Button>
           </form>
         </CardContent>

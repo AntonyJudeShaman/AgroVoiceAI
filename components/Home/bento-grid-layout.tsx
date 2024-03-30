@@ -12,15 +12,15 @@ export async function BentoGridItem() {
           key={i}
           className={cn(
             'md:col-span-1',
-            i === 0 || i === 3 || i === 4 ? 'md:col-span-2 md:mt-20' : '',
+            i === 0 || i === 3 || i === 4 ? 'md:col-span-2 ' : '',
             i === 4 || i === 5 ? '' : '',
-            i === 6 ? 'md:col-span-3 md:mt-10 mx-auto' : ''
+            i === 6 ? 'md:col-span-3 mx-auto md:w-2/3' : ''
           )}
         >
           <div
             key={i}
             className={cn(
-              'row-span-1 rounded-xl max-w-1/2 group/bento hover:border hover:dark:border-green-700 hover:border-green-500 duration-500 hover:shadow-xl transition shadow-input dark:shadow-none p-4 dark:bg-zinc-900/40 dark:border-white/[0.2] bg-white border border-gray-300 justify-between flex flex-col space-y-4'
+              'row-span-1 rounded-xl h-full max-w-1/2 group/bento hover:border hover:dark:border-green-700 hover:border-green-500 duration-500 hover:shadow-xl transition shadow-input dark:shadow-none p-4 dark:bg-zinc-900/40 dark:border-white/[0.2] bg-white border border-gray-300 justify-between flex flex-col space-y-4'
             )}
           >
             {feature.header && <p key={'header'}>{feature.header}</p>}

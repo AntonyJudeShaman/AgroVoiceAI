@@ -60,3 +60,15 @@ export type ForecastData = {
     name: string
   }
 }
+
+export type AccountProps = {
+  title: string
+  details: string
+  placeholder1: string
+  placeholder2: string
+  register?: string
+  signin?: string
+  username: string
+  pswd: string
+  forgot?: string
+}

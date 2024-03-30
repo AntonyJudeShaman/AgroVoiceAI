@@ -17,7 +17,7 @@ export default async function SessionPageContainer({
     redirect('/sign-in')
   }
 
-  if (!user?.pageShown && user) {
+  if (!user?.pageShown && session) {
     redirect('/onboarding')
   }
 

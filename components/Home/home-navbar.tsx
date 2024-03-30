@@ -55,7 +55,7 @@ export default function Navbar({
       <Sheet>
         <SheetTrigger asChild>
           <Button
-            className="lg:hidden dark:text-white text-black font-pops"
+            className="xl:hidden dark:text-white text-black font-pops"
             size="icon"
             variant="outline"
           >
@@ -87,7 +87,7 @@ export default function Navbar({
           <Link href="#">
             <Button
               size="lg"
-              className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+              className="relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
               variant="outline"
             >
               <DownloadIcon className="size-5 mr-2" /> Download Our App
@@ -97,13 +97,13 @@ export default function Navbar({
         </SheetContent>
       </Sheet>
       <Link
-        className="mr-6 hidden font-normal items-center font-pops text-2xl dark:text-white text-black lg:flex"
+        className="mr-6 hidden font-normal items-center font-pops text-2xl dark:text-white text-black xl:flex"
         href="/"
       >
         <IconLogo className="size-12 mr-3" /> {title}
         <span className="sr-only">AgroVoiceAI</span>
       </Link>
-      <NavigationMenu className="hidden lg:flex">
+      <NavigationMenu className="hidden xl:flex">
         <NavigationMenuList>
           <NavigationMenuLink asChild>
             <div className="flex font-pops items-center">
@@ -130,7 +130,7 @@ export default function Navbar({
         </NavigationMenuList>
       </NavigationMenu>
       {!session ? (
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex gap-2 items-center">
           <div className="hidden md:flex">
             <LocaleSwitcher />
           </div>
@@ -148,7 +148,7 @@ export default function Navbar({
           </Button>
         </div>
       ) : path === '/options' ? (
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex gap-2 items-center">
           <div className="hidden md:flex">
             <LocaleSwitcher />
           </div>
@@ -167,7 +167,7 @@ export default function Navbar({
           </Button>
         </div>
       ) : (
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex gap-2 items-center">
           <div className="hidden md:flex">
             <LocaleSwitcher />
           </div>

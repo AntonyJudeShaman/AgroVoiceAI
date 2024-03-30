@@ -19,13 +19,11 @@ import { IconChevronUpDown } from './ui/icons'
 type Props = {
   children: ReactNode
   defaultValue: string
-  label: string
 }
 
 export default function LocaleSwitcherSelect({
   children,
-  defaultValue,
-  label
+  defaultValue
 }: Props) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
@@ -37,9 +35,7 @@ export default function LocaleSwitcherSelect({
     const nextLocale = event.target.value
     startTransition(() => {
       router.replace(
-        // @ts-expect-error -- TypeScript will validate that only known `params`
-        // are used in combination with a given `pathname`. Since the two will
-        // always match for the current route, we can skip runtime checks.
+        // @ts-expect-error
         { pathname, params },
         { locale: nextLocale }
       )
@@ -47,17 +43,18 @@ export default function LocaleSwitcherSelect({
   }
 
   return (
-    <div className={clsx('font-sans font-medium')}>
-      <p className="sr-only">{label}</p>
+    <div className={clsx('relative')}>
       <select
-        className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        className="appearance-none flex w-full mr-4 bg-transparent text-sm font-sans font-medium justify-evenly ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none items-center rounded-md hover:text-accent-foreground hover:bg-accent py-2 px-4 border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50"
         defaultValue={defaultValue}
         disabled={isPending}
         onChange={onSelectChange}
       >
         {children}
-        <IconChevronUpDown className="opacity-50 ml-4" />
       </select>
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+        <IconChevronUpDown className="w-4 h-4 text-gray-400" />
+      </div>
     </div>
   )
 }
