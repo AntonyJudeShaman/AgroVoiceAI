@@ -12,10 +12,12 @@ async function OptionsPage() {
   return (
     <>
       {session ? (
-        <>
-          <div className="absolute pointer-events-none h-full inset-0 flex items-center justify-center dark:bg-black bg-green-100 [mask-image:radial-gradient(ellipse_at_center,transparent_100%,white)] md:[mask-image:radial-gradient(ellipse_at_center,transparent_40%,white)]"></div>
-          <SessionPageContainer component={<HomeOptions />} />
-        </>
+        <div className="min-h-screen dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]">
+          <div className="absolute pointer-events-none h-full inset-0 flex items-center justify-center dark:bg-black bg-green-50 [mask-image:radial-gradient(ellipse_at_center,transparent_100%,white)] md:[mask-image:radial-gradient(ellipse_at_center,transparent_30%,white)]"></div>
+          <div className="" style={{ zIndex: 9999 }}>
+            <SessionPageContainer component={<HomeOptions />} />
+          </div>
+        </div>
       ) : (
         <NotFound />
       )}

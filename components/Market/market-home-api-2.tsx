@@ -114,7 +114,7 @@ export default function MarketHome2({ user }: { user: any }) {
             </p>
             <Button
               variant="link"
-              className="text-red-600 dark:text-red-600/90 cursor-pointer font-pops -mt-[2px] text-lg justify-end"
+              className="text-red-600 dark:text-red-600/90 cursor-pointer font-pops -mt-[2px] text-lg justify-end px-0 after:bg-current"
               onClick={() =>
                 window.scrollTo({
                   top: document.documentElement.scrollHeight,

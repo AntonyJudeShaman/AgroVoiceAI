@@ -13,7 +13,7 @@ export default function NotFound() {
         Sorry, the page you are looking for does not exist. Please check if you
         are{' '}
         <Link href="/sign-in" className="duration-300">
-          <Button variant="link" className="px-0 text-lg">
+          <Button variant="link" className="px-0 text-lg after:bg-current">
             <span className="text-green-500 font-bold">signed in</span>
           </Button>
         </Link>

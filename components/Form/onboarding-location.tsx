@@ -82,7 +82,7 @@ export function OnboardingLocationForm({ user }: { user: any }) {
   }
 
   return (
-    <Card className="md:w-2/3 xl:w-2/4 m-4 w-full border">
+    <Card className="md:w-2/3 xl:w-2/4 m-4 w-full border z-20 bg-transparent">
       <CardHeader className="flex flex-row justify-between">
         <div className="space-y-1">
           <CardTitle>Your District</CardTitle>

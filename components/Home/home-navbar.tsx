@@ -51,7 +51,7 @@ export default function Navbar({
 
   return (
     <nav
-      className={`flex dark:text-white text-black h-20 fixed backdrop-blur-lg  w-full mx-auto justify-center items-center px-4 md:px-6 ${scrolled ? ' backdrop-blur-lg shadow-md z-50' : ''}`}
+      className={`flex dark:text-white text-black h-20 fixed  w-full mx-auto justify-center items-center px-4 md:px-6 ${scrolled ? ' backdrop-blur-lg shadow-md z-50' : ''}`}
     >
       <Sheet>
         <SheetTrigger asChild>

@@ -11,7 +11,7 @@ export default async function HomeOptions() {
 
   return (
     <>
-      <div className="font-pops bg-cover bg-center h-full flex justify-center items-center">
+      <div className="font-pops bg-cover bg-center h-full flex justify-center items-center z-40">
         <main className="w-full py-6 md:py-12">
           <div className="container flex flex-col items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">

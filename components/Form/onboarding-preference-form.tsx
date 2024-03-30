@@ -41,7 +41,7 @@ export default function OnboardingPreferenceForm({
     <Card
       className={cn(
         className,
-        'flex flex-col md:w-2/3 xl:w-2/4 m-4 w-full items-center dark:bg-slate-900/10 bg-white/80 shadow-none'
+        'flex flex-col md:w-2/3 xl:w-2/4 m-4 w-full items-center shadow-none z-20 bg-transparent'
       )}
     >
       <Card className="w-full border-none bg-transparent shadow-none">
