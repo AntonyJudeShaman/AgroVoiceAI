@@ -19,7 +19,8 @@ const MyToast: React.FC<MyToastProps> = ({ message, type }) => {
     iconTheme: {
       primary: type === 'success' ? 'lightgreen' : 'white',
       secondary: 'black'
-    }
+    },
+    className: 'font-pops'
   }
 
   return (

@@ -12,12 +12,10 @@ import { Input } from '../ui/input'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { IconGoogle, IconSpinner } from '../ui/icons'
 import React from 'react'
-import { signIn } from 'next-auth/react'
-import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import MyToast from '../ui/my-toast'
-import { z } from 'zod'
+import { set, z } from 'zod'
 import { nameSchema, validateInput } from '@/lib/schema'
 import { AccountProps } from '@/lib/types'
 
@@ -31,7 +29,6 @@ export function CreateAccount({
   pswd
 }: AccountProps) {
   const [isLoading, setIsLoading] = React.useState(false)
-  const [isFieldLoading, setIsFieldLoading] = React.useState(false)
   const [name, setName] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [isnameChanged, setIsnameChanged] = React.useState<boolean>(false)
@@ -99,16 +96,17 @@ export function CreateAccount({
           <form
             onSubmit={async e => {
               e.preventDefault()
+              setIsLoading(true)
               try {
                 nameSchema.parse(name)
                 nameSchema.parse(password)
                 if (!validateInput(name) || !validateInput(password)) {
                   MyToast({
-                    message: 'Dont try to inject code. 😒',
+                    message: "Don't try to inject code. 😒",
                     type: 'error'
                   })
-                  setIsFieldLoading(false)
-                  fetch('/api/auth/register', {
+                } else {
+                  const response = await fetch('/api/auth/register', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json'
@@ -117,23 +115,23 @@ export function CreateAccount({
                       name: name,
                       pswd: password
                     })
-                  }).then(async res => {
-                    setIsFieldLoading(false)
-                    if (res.status === 200) {
-                      MyToast({
-                        message: 'Account created! Please sign in.',
-                        type: 'success'
-                      })
-                      setTimeout(() => {
-                        router.push('/sign-in')
-                      }, 2000)
-                    } else {
-                      MyToast({
-                        message: 'Invalid credentials. Please try again.',
-                        type: 'error'
-                      })
-                    }
                   })
+
+                  if (response.status === 200) {
+                    MyToast({
+                      message: 'Account created! Please sign in.',
+                      type: 'success'
+                    })
+                    setTimeout(() => {
+                      router.refresh()
+                      router.push('/sign-in')
+                    }, 2000)
+                  } else {
+                    MyToast({
+                      message: 'The user already exists. Please sign in',
+                      type: 'error'
+                    })
+                  }
                 }
               } catch (error: any) {
                 if (error instanceof z.ZodError) {
@@ -148,6 +146,8 @@ export function CreateAccount({
                     type: 'error'
                   })
                 }
+              } finally {
+                setIsLoading(false)
               }
             }}
             className="grid gap-2"
@@ -195,10 +195,15 @@ export function CreateAccount({
               className="w-full mt-2"
               type="submit"
               size="lg"
-              disabled={isFieldLoading}
+              disabled={isLoading}
             >
-              {isFieldLoading && <IconSpinner className="mr-2 animate-spin" />}
-              {register}
+              {isLoading ? (
+                <>
+                  <IconSpinner className="mr-2 animate-spin" /> {register}
+                </>
+              ) : (
+                register
+              )}
             </Button>
           </form>
         </CardContent>

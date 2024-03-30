@@ -184,18 +184,20 @@ export function Account({
                 )}
               </div>
               <BottomGradient />
+            </div>{' '}
+            <div className="flex justify-end">
+              <Button
+                variant="link"
+                onClick={() => router.push('/forgot_password')}
+                className="text-sm text-red-600 flex items-center px-0"
+              >
+                <p className="text-primary shadow-none cursor-pointer">
+                  {forgot}
+                </p>
+              </Button>
             </div>
           </div>
-          <div className="flex justify-end">
-            <Link
-              href="forgot_password"
-              className="text-sm text-red-600 flex items-center"
-            >
-              <Button variant="link" className="px-0">
-                {forgot}
-              </Button>
-            </Link>
-          </div>
+
           <Button
             className="w-full mt-2"
             size="lg"

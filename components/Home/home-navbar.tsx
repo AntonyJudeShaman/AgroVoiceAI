@@ -109,21 +109,22 @@ export default function Navbar({
             <div className="flex font-pops items-center">
               {navConfig &&
                 navConfig.mainNav.map((item, index) => (
-                  <>
-                    <Link
-                      key={index}
-                      aria-label={item.title}
-                      href={item.href}
-                      className={cn(
-                        'group relative flex flex-col justify-center text-right text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-zinc-300 text-zinc-900 md:inline-block rounded-md p-2 font-medium'
-                      )}
+                  <Link
+                    key={index}
+                    aria-label={item.title}
+                    href={item.href}
+                    className={cn(
+                      'group relative flex flex-col justify-center text-right text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-gray-400 text-zinc-700 hover:text-black md:inline-block rounded-md p-2 font-medium'
+                    )}
+                  >
+                    <Button
+                      variant="link"
+                      className="flex items-center text-[1rem] px-0 after:bg-current shadow-none"
                     >
-                      <p className="flex items-center text-[1rem]">
-                        {item.icon}
-                        {navItems[index]}
-                      </p>
-                    </Link>
-                  </>
+                      {item.icon}
+                      {navItems[index]}
+                    </Button>
+                  </Link>
                 ))}
             </div>
           </NavigationMenuLink>
