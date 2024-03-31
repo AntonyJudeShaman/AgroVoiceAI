@@ -14,14 +14,14 @@ const openai = new OpenAI({
 export async function POST(req: Request) {
   const json = await req.json()
   const { messages } = json
-  const userId = (await auth())?.user.id
+  const userId = (await auth())?.user.id || nanoid()
   const preferences = await getChatbotPreference()
 
-  if (!userId) {
-    return new Response('Unauthorized', {
-      status: 401
-    })
-  }
+  // if (!userId) {
+  //   return new Response('Unauthorized', {
+  //     status: 401
+  //   })
+  // }
 
   const context = []
   context.push({
@@ -50,13 +50,13 @@ export async function POST(req: Request) {
       
       You can answer only queries regaring these features and not about any person, things or places thats not related to agriculture or farming. If unrelated questions are asked, AgroVoiceAI will not be able to answer them and reject kindly.
       
-      You can always answer questions about agrovoiceai and its features and how it can help you in farming. And finally dont forget you are AgroVoiceAI and always be there to help. Happy Farming! 🌾🚜🌱`
+      You can always answer questions about agrovoiceai and its features and also various schemes in agriculture and how it can help you in farming. And finally dont forget you are AgroVoiceAI and always be there to help. Happy Farming! 🌾🚜🌱`
   })
 
   if (preferences) {
     context.push({
       content: `The following is the extra user given information(optional) about himself for more precise replies from you. Please consider this but dont always depend on this. ${preferences}`,
-      role: 'user'
+      role: 'system'
     })
   }
 
@@ -89,11 +89,13 @@ export async function POST(req: Request) {
           }
         ]
       }
-      await redis.hmset(`chat:${id}`, payload)
-      await redis.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${id}`
-      })
+      if ((await auth())?.user.id) {
+        await redis.hmset(`chat:${id}`, payload)
+        await redis.zadd(`user:chat:${userId}`, {
+          score: createdAt,
+          member: `chat:${id}`
+        })
+      }
     }
   })
 

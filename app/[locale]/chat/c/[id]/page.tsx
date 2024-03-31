@@ -29,11 +29,11 @@ export async function generateMetadata({
 export default async function ChatPage({ params }: ChatPageProps) {
   const session = await auth()
 
-  if (!session?.user) {
-    redirect(`/sign-in?next=/chat/c/${params.id}`)
-  }
+  // if (!session?.user) {
+  //   redirect(`/sign-in?next=/chat/c/${params.id}`)
+  // }
 
-  const chat = await getChat(params.id, session.user.id)
+  const chat = await getChat(params.id, session?.user.id || '')
 
   if (!chat) {
     notFound()
@@ -45,7 +45,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   return (
     <>
-      <Chat id={chat.id} initialMessages={chat.messages} />
+      <Chat id={chat.id} initialMessages={chat.messages} session={session} />
     </>
   )
 }

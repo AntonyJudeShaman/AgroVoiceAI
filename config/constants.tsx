@@ -294,3 +294,53 @@ export const translateOptions = [
   'explore.soil',
   'explore.market'
 ]
+
+export const exampleMessagesEnglish = [
+  {
+    heading: 'How can I',
+    subheading: 'maximize limited space for crop cultivation?',
+    message:
+      'How can small-scale farmers maximize limited space for crop cultivation?'
+  },
+  {
+    heading: 'How do I',
+    subheading: 'improve soil condition using natural methods?',
+    message: 'How do I improve soil condition using natural methods?'
+  },
+  {
+    heading: 'How can I',
+    subheading: 'prevent pests and diseases in my paddy?',
+    message: 'How can I prevent pests and diseases in my paddy?'
+  },
+  {
+    heading: 'Can you provide',
+    subheading: 'more details about PM Kissan Samman Yojna?',
+    message: 'Can you provide more detail about PM Kissan Samman Yojna?'
+  }
+]
+
+export const exampleMessagesTamil = [
+  {
+    heading: 'பயிர் சாகுபடிக்கு குறைந்த',
+    subheading: 'இடத்தில் விவசாயிகள் எவ்வாறு லாபத்தை அதிகரிக்க முடியும்?',
+    message:
+      'பயிர் சாகுபடிக்கு குறைந்த இடத்தில் விவசாயிகள் எவ்வாறு லாபத்தை அதிகரிக்க முடியும்?'
+  },
+  {
+    heading: 'இயற்கை முறைகளைப்',
+    subheading: 'பயன்படுத்தி மண்ணின் நிலையை எவ்வாறு மேம்படுத்துவது?',
+    message:
+      'இயற்கை முறைகளைப் பயன்படுத்தி மண்ணின் நிலையை எவ்வாறு மேம்படுத்துவது?'
+  },
+  {
+    heading: 'எனது நெற்பயிரில்',
+    subheading: 'பூச்சிகள் மற்றும் நோய்களை எவ்வாறு தடுக்கலாம்?',
+    message: 'எனது நெற்பயிரில் பூச்சிகள் மற்றும் நோய்களை எவ்வாறு தடுக்கலாம்?'
+  },
+  {
+    heading: 'பிரதம மந்திரி கிசான்',
+    subheading: 'சம்மான் யோஜனா பற்றி மேலும் விவரங்களை வழங்க முடியுமா?',
+    message:
+      'பிரதம மந்திரி கிசான் சம்மான் யோஜனா பற்றி மேலும் விவரங்களை வழங்க முடியுமா?'
+  }
+]

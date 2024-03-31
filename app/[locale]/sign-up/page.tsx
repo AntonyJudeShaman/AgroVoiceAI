@@ -7,7 +7,7 @@ import { getTranslations } from 'next-intl/server'
 export default async function SignInPage() {
   const session = await auth()
   if (session?.user) {
-    redirect('/')
+    redirect('/options')
   }
 
   const t = await getTranslations('Index')

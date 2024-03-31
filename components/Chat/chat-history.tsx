@@ -11,17 +11,15 @@ import { ClearHistory } from './chat-clear-history'
 import { cache } from 'react'
 import { clearChats, getChats } from '@/app/actions'
 import { getTranslations } from 'next-intl/server'
-
-interface ChatHistoryProps {
-  userId?: string
-}
+import { auth } from '@/lib/auth'
 
 const loadChats = cache(async (userId?: string) => {
   return await getChats(userId)
 })
 
-export async function ChatHistory({ userId }: ChatHistoryProps) {
-  const chats = await loadChats(userId)
+export async function ChatHistory() {
+  const session = await auth()
+  const chats = await loadChats(session?.user.id)
   const t = await getTranslations('Index')
 
   return (
@@ -60,7 +58,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
         }
       >
         {/* @ts-ignore */}
-        <SidebarList userId={userId} />
+        <SidebarList userId={session?.user.id} />
         <UserMenu />
       </React.Suspense>
     </div>

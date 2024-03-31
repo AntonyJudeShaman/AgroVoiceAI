@@ -9,9 +9,10 @@ import { IconSidebar } from '@/components/ui/icons'
 
 interface SidebarMobileProps {
   children: React.ReactNode
+  session?: any
 }
 
-export function SidebarMobile({ children }: SidebarMobileProps) {
+export function SidebarMobile({ children, session }: SidebarMobileProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,7 +22,9 @@ export function SidebarMobile({ children }: SidebarMobileProps) {
         </Button>
       </SheetTrigger>
       <SheetContent className="inset-y-0 flex h-auto w-[300px] flex-col p-0">
-        <Sidebar className="flex pt-6 w-[300px]">{children}</Sidebar>
+        <Sidebar session={session} className="flex pt-6 w-[300px]">
+          {children}
+        </Sidebar>
       </SheetContent>
     </Sheet>
   )

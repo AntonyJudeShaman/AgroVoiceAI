@@ -22,7 +22,7 @@ export default async function Home() {
               </p>
             </div>
             <div className="flex gap-4 md:flex-row flex-col">
-              <Link href={session ? '/chat' : '/sign-in'}>
+              <Link href={'/chat'}>
                 <Button
                   size="lg"
                   className=" relative group/btn flex space-x-2 items-center justify-center px-6 py-5 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"

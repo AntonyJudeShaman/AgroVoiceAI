@@ -77,7 +77,9 @@ export default function ChatNavbar({
         </NavigationMenu>
       </div>
       <div className="flex justify-end items-center">
-        <LocaleSwitcher />
+        <div className="pr-2">
+          <LocaleSwitcher />
+        </div>
         <ThemeToggle />
         <div className="ml-2 gap-2 flex-row md:block hidden">
           <Link href="#">

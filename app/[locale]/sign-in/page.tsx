@@ -7,7 +7,7 @@ import SessionPageContainer from '@/components/no-session-page-container'
 export default async function SignInPage() {
   const session = await auth()
   if (session?.user) {
-    redirect('/')
+    redirect('/options')
   }
 
   return <SessionPageContainer component={<AccountsTab />} />

@@ -21,9 +21,10 @@ export default async function ChatLayout({ children }: ChatLayoutProps) {
   }
   return (
     <div className="relative min-h-screen flex overflow-hidden dark:bg-[#020817]">
-      {session && <SidebarDesktop />}
+      {<SidebarDesktop />}
+
       <div className="group w-full overflow-auto items-center pl-0 animate-in duration-300 ease-in-out peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]">
-        {session && (
+        {
           <div className="flex items-center md:ml-3 w-full">
             <UserOrLogin />
             <ChatNavbar
@@ -36,7 +37,7 @@ export default async function ChatLayout({ children }: ChatLayoutProps) {
               download={t('app')}
             />
           </div>
-        )}
+        }
         {children}
       </div>
     </div>

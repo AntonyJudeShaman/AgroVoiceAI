@@ -13,9 +13,10 @@ import MyToast from '../ui/my-toast'
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
   id?: string
+  session?: any
 }
 
-export function Chat({ id, initialMessages, className }: ChatProps) {
+export function Chat({ id, initialMessages, className, session }: ChatProps) {
   const router = useRouter()
   const path = usePathname()
   const { messages, append, reload, stop, isLoading, input, setInput } =
@@ -34,9 +35,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         }
       },
       onFinish() {
-        if (!path.includes('chat/c')) {
+        if (!path.includes('chat/c') && session?.user.id) {
           router.push(`chat/c/${id}`)
           router.refresh()
+        } else {
+          // do nothing
         }
       }
     })
