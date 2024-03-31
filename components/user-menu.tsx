@@ -18,7 +18,10 @@ import { getCurrentUser, getUser } from '@/app/actions'
 import { ThemeToggle } from './Theme/theme-toggle'
 
 export interface UserMenuProps {
-  user: Session['user']
+  user?: Session['user']
+  settings: string
+  appearance: string
+  logout: string
 }
 
 function getUserInitials(name: string) {
@@ -26,7 +29,7 @@ function getUserInitials(name: string) {
   return lastName ? `${firstName[0]}${lastName[0]}` : firstName.slice(0, 2)
 }
 
-export function UserMenu() {
+export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
   const [session, setSession] = useState<User | undefined>(undefined)
   const [open, setOpen] = useState(false)
   const { setTheme, theme } = useTheme()
@@ -95,7 +98,7 @@ export function UserMenu() {
               <Link href="/settings">
                 <DropdownMenuItem className="flex text-sm h-8 rounded-lg items-center cursor-pointer">
                   <Settings className="size-4 mr-2" />
-                  Settings
+                  {settings}
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuItem
@@ -103,7 +106,7 @@ export function UserMenu() {
                 className="flex items-center h-8 justify-between rounded-lg text-sm cursor-pointer"
               >
                 <span className="flex items-center">
-                  <SunMoon className="size-4 mr-2" /> Appearance{' '}
+                  <SunMoon className="size-4 mr-2" /> {appearance}{' '}
                 </span>
                 <span>
                   <ThemeToggle />
@@ -118,7 +121,7 @@ export function UserMenu() {
                 }
                 className="text-sm h-8 flex items-center rounded-lg cursor-pointer"
               >
-                <LogOut className="size-4 mr-2" /> Log Out
+                <LogOut className="size-4 mr-2" /> {logout}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </div>

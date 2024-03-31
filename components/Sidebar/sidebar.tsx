@@ -55,7 +55,7 @@ export function Sidebar({ className, children, session }: SidebarProps) {
                 </div>
               </div>{' '}
               <Link href="/sign-up">
-                <Button className="w-full rounded-sm">
+                <Button className="w-full rounded-sm" variant="outline">
                   {locale === 'en' ? 'Sign up' : 'பதிவு செய்க'}
                 </Button>
               </Link>

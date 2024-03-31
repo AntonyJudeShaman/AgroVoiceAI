@@ -13,8 +13,9 @@
     "signup": "Sign up",
     "chat": "Start Chatting",
     "app": "Download Our App",
-    "mode": "appearance",
+    "mode": "Appearance",
     "logout": "Logout",
+    "logout2": "Log Out",
     "home": {
       "topic": "Everything you need in a chatbot",
       "crop": {

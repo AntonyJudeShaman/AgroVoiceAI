@@ -300,7 +300,7 @@ export const exampleMessagesEnglish = [
     heading: 'How can I',
     subheading: 'maximize limited space for crop cultivation?',
     message:
-      'How can small-scale farmers maximize limited space for crop cultivation?'
+      'How can I small-scale farmers maximize limited space for crop cultivation?'
   },
   {
     heading: 'How do I',

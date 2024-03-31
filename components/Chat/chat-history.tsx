@@ -59,7 +59,11 @@ export async function ChatHistory() {
       >
         {/* @ts-ignore */}
         <SidebarList userId={session?.user.id} />
-        <UserMenu />
+        <UserMenu
+          settings={t('settings.setting')}
+          appearance={t('mode')}
+          logout={t('logout2')}
+        />
       </React.Suspense>
     </div>
   )
