@@ -72,3 +72,18 @@ export type AccountProps = {
   pswd: string
   forgot?: string
 }
+
+export type NavbarProps = {
+  session?: any
+  title?: string
+  home: string
+  chat: string
+  weather: string
+  market: string
+  settings: string
+  signin?: string
+  signup?: string
+  logout?: string
+  explore?: string
+  download?: string
+}

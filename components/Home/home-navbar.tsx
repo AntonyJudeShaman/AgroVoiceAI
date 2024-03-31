@@ -17,6 +17,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { navConfig } from '@/config/constants'
 import LocaleSwitcher from '../locale-switcher'
+import { NavbarProps } from '@/lib/types'
 
 export default function Navbar({
   session,
@@ -30,7 +31,7 @@ export default function Navbar({
   signup,
   logout,
   explore
-}: any) {
+}: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const path = usePathname()
   const router = useRouter()

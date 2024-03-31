@@ -4,6 +4,7 @@ import { nanoid } from '@/lib/utils'
 import React from 'react'
 import NotFound from '../not-found'
 import { redirect } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
 async function page() {
   const id = nanoid()

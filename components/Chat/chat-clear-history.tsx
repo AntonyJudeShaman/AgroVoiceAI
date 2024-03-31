@@ -24,19 +24,31 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import MyToast from '../ui/my-toast'
+import { useLocale } from 'next-intl'
 
 interface ClearHistoryProps {
   isEnabled: boolean
   clearChats: () => ServerActionResult<void>
+  delete_text: string
+  tooltip_delete_history: string
+  confirm: string
+  delete_history: string
+  cancel: string
 }
 
 export function ClearHistory({
   isEnabled = false,
-  clearChats
+  clearChats,
+  delete_text,
+  tooltip_delete_history,
+  confirm,
+  delete_history,
+  cancel
 }: ClearHistoryProps) {
   const [open, setOpen] = React.useState(false)
   const [isPending, startTransition] = React.useTransition()
   const router = useRouter()
+  const locale = useLocale()
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -53,42 +65,44 @@ export function ClearHistory({
             </Button>
           </AlertDialogTrigger>
         </TooltipTrigger>
-        <TooltipContent>Clear Chat History</TooltipContent>
+        <TooltipContent>{tooltip_delete_history}</TooltipContent>
       </Tooltip>
       <AlertDialogContent className="border dark:border-red-900 border-red-500">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-red-600">
-            Are you absolutely sure?
+            {confirm}
           </AlertDialogTitle>
-          <AlertDialogDescription>
-            This will permanently delete your chat history.
-          </AlertDialogDescription>
+          <AlertDialogDescription>{delete_history}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>{cancel}</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
             className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
             onClick={event => {
               event.preventDefault()
-              startTransition(() => {
-                clearChats().then(result => {
-                  if (result && 'error' in result) {
-                    MyToast({
-                      message: 'Error clearing chat history',
-                      type: 'error'
-                    })
-                    return
-                  }
+              startTransition(async () => {
+                const result = await clearChats()
+                if (result && 'error' in result) {
+                  MyToast({
+                    message: 'Error clearing chat history',
+                    type: 'error'
+                  })
+                  return
+                }
 
-                  setOpen(false)
-                  router.push('/chat')
+                setOpen(false)
+                router.refresh()
+                router.push(`/chat`)
+                MyToast({
+                  message: 'Chat history cleared successfully',
+                  type: 'success'
                 })
               })
             }}
           >
             {isPending && <IconSpinner className="mr-2 animate-spin" />}
-            Delete
+            {delete_text}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

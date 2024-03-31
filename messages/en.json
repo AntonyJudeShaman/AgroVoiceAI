@@ -56,10 +56,19 @@
       "market": "Market Prices and Trends",
       "try": "Try now!!"
     },
-    "chatpg": {
-      "new": "New Chat",
-      "history": "No chat history",
-      "msg": "Send a message"
+    "sidebar": {
+      "new_chat": "New Chat",
+      "no_history": "No chat history",
+      "msg": "Send a message",
+      "delete": "Delete",
+      "tooltip_delete_history": "Clear chat history",
+      "tooltip_delete_chat": "Delete chat",
+      "confirm": "Are you absolutely sure?",
+      "cancel": "Cancel",
+      "delete_chat": "This will permanently delete your chat messages.",
+      "delete_history": "This will permanently delete your chat history.",
+      "stop": "Stop generating",
+      "regenerate": "Regenerate response"
     },
     "settings": {
       "setting": "Settings",

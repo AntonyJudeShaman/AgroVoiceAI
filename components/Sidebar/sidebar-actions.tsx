@@ -29,12 +29,22 @@ interface SidebarActionsProps {
   chat: Chat
   removeChat: (args: { id: string; path: string }) => ServerActionResult<void>
   shareChat: (id: string) => ServerActionResult<Chat>
+  delete_text: string
+  tooltip_delete_chat: string
+  confirm: string
+  delete_chat: string
+  cancel: string
 }
 
 export function SidebarActions({
   chat,
   removeChat,
-  shareChat
+  shareChat,
+  delete_text,
+  tooltip_delete_chat,
+  confirm,
+  delete_chat,
+  cancel
 }: SidebarActionsProps) {
   const router = useRouter()
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
@@ -66,10 +76,10 @@ export function SidebarActions({
               onClick={() => setDeleteDialogOpen(true)}
             >
               <IconTrash />
-              <span className="sr-only">Delete</span>
+              <span className="sr-only">{delete_text}</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Delete chat</TooltipContent>
+          <TooltipContent>{tooltip_delete_chat}</TooltipContent>
         </Tooltip>
       </div>
       <ChatShareDialog
@@ -80,18 +90,16 @@ export function SidebarActions({
         onCopy={() => setShareDialogOpen(false)}
       />
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent className="border dark:border-red-900 border-red-500">
+        <AlertDialogContent className="border dark:border-red-900 border-red-500 rounded-2xl">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-red-600">
-              Are you absolutely sure?
+              {confirm}
             </AlertDialogTitle>
-            <AlertDialogDescription>
-              This will permanently delete your chat message.
-            </AlertDialogDescription>
+            <AlertDialogDescription>{delete_chat}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isRemovePending}>
-              Cancel
+              {cancel}
             </AlertDialogCancel>
             <AlertDialogAction
               className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
@@ -106,17 +114,9 @@ export function SidebarActions({
                   })
 
                   if (result && 'error' in result) {
-                    toast.error(result.error, {
-                      style: {
-                        borderRadius: '10px',
-                        background: '#d83030',
-                        color: '#fff',
-                        fontSize: '14px'
-                      },
-                      iconTheme: {
-                        primary: 'white',
-                        secondary: 'black'
-                      }
+                    MyToast({
+                      message: 'Error deleting chat',
+                      type: 'error'
                     })
                     return
                   }
@@ -124,18 +124,6 @@ export function SidebarActions({
                   setDeleteDialogOpen(false)
                   router.refresh()
                   router.push('/chat')
-                  toast.success('Chat deleted', {
-                    style: {
-                      borderRadius: '10px',
-                      background: '#333',
-                      color: '#fff',
-                      fontSize: '14px'
-                    },
-                    iconTheme: {
-                      primary: 'lightgreen',
-                      secondary: 'black'
-                    }
-                  })
                   MyToast({
                     message: 'Chat deleted successfully',
                     type: 'success'
@@ -144,7 +132,7 @@ export function SidebarActions({
               }}
             >
               {isRemovePending && <IconSpinner className="mr-2 animate-spin" />}
-              Delete
+              {delete_text}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -10,6 +10,7 @@ import { UserMenu } from '../user-menu'
 import { ClearHistory } from './chat-clear-history'
 import { cache } from 'react'
 import { clearChats, getChats } from '@/app/actions'
+import { getTranslations } from 'next-intl/server'
 
 interface ChatHistoryProps {
   userId?: string
@@ -21,6 +22,7 @@ const loadChats = cache(async (userId?: string) => {
 
 export async function ChatHistory({ userId }: ChatHistoryProps) {
   const chats = await loadChats(userId)
+  const t = await getTranslations('Index')
 
   return (
     <div className="flex flex-col size-full p-2">
@@ -33,9 +35,17 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
           )}
         >
           <IconPlus className="-translate-x-2 stroke-2" />
-          New Chat
+          {t('sidebar.new_chat')}
         </Link>
-        <ClearHistory clearChats={clearChats} isEnabled={chats?.length > 0} />
+        <ClearHistory
+          clearChats={clearChats}
+          isEnabled={chats?.length > 0}
+          delete_text={t('sidebar.delete')}
+          tooltip_delete_history={t('sidebar.tooltip_delete_history')}
+          confirm={t('sidebar.confirm')}
+          delete_history={t('sidebar.delete_history')}
+          cancel={t('sidebar.cancel')}
+        />
       </div>
       <React.Suspense
         fallback={
