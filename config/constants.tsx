@@ -23,7 +23,7 @@ import soil from '../public/images/soil.jpg'
 import { IoHome, IoHomeOutline } from 'react-icons/io5'
 import { BsCloudRain } from 'react-icons/bs'
 
-export const tableHeader = [
+export const tableHeaderInEnglish = [
   {
     label: 'Name'
   },
@@ -37,6 +37,22 @@ export const tableHeader = [
     label: 'Retail Price'
   }
 ]
+
+export const tableHeaderInTamil = [
+  {
+    label: 'பெயர்'
+  },
+  {
+    label: 'அலகு'
+  },
+  {
+    label: 'சந்தை விலை'
+  },
+  {
+    label: 'சில்லறை விலை'
+  }
+]
+
 export function CropField() {
   return (
     <Image
@@ -246,7 +262,89 @@ export const tnDistricts = [
   { label: 'Vellore', value: 'Vellore' },
   { label: 'Viluppuram', value: 'Viluppuram' },
   { label: 'Virudhunagar', value: 'Virudhunagar' }
-] as const
+]
+
+export const tnDistrictsInEnglish = {
+  Ariyalur: 'Ariyalur',
+  Chengalpattu: 'Chengalpattu',
+  Chennai: 'Chennai',
+  Coimbatore: 'Coimbatore',
+  Cuddalore: 'Cuddalore',
+  Dharmapuri: 'Dharmapuri',
+  Dindigul: 'Dindigul',
+  Erode: 'Erode',
+  Kallakurichi: 'Kallakurichi',
+  Kanchipuram: 'Kanchipuram',
+  Kanyakumari: 'Kanyakumari',
+  Karur: 'Karur',
+  Krishnagiri: 'Krishnagiri',
+  Madurai: 'Madurai',
+  Mayiladuthurai: 'Mayiladuthurai',
+  Nagapattinam: 'Nagapattinam',
+  Namakkal: 'Namakkal',
+  Nilgiris: 'Nilgiris',
+  Perambalur: 'Perambalur',
+  Pudukkottai: 'Pudukkottai',
+  Ramanathapuram: 'Ramanathapuram',
+  Ranipet: 'Ranipet',
+  Salem: 'Salem',
+  Sivaganga: 'Sivaganga',
+  Tenkasi: 'Tenkasi',
+  Thanjavur: 'Thanjavur',
+  Theni: 'Theni',
+  Thoothukudi: 'Thoothukudi',
+  Tiruchirappalli: 'Tiruchirappalli',
+  Tirunelveli: 'Tirunelveli',
+  Tirupathur: 'Tirupathur',
+  Tiruppur: 'Tiruppur',
+  Tiruvallur: 'Tiruvallur',
+  Tiruvannamalai: 'Tiruvannamalai',
+  Tiruvarur: 'Tiruvarur',
+  Vellore: 'Vellore',
+  Viluppuram: 'Viluppuram',
+  Virudhunagar: 'Virudhunagar'
+}
+
+export const tnDistrictsInTamil = {
+  Ariyalur: 'அரியலூர்',
+  Chengalpattu: 'செங்கல்பட்டு',
+  Chennai: 'சென்னை',
+  Coimbatore: 'கோவை',
+  Cuddalore: 'கடலூர்',
+  Dharmapuri: 'தர்மபுரி',
+  Dindigul: 'திண்டுக்கல்',
+  Erode: 'ஈரோடு',
+  Kallakurichi: 'கள்ளக்குறிச்சி',
+  Kanchipuram: 'காஞ்சிபுரம்',
+  Kanyakumari: 'கன்னியாகுமரி',
+  Karur: 'கரூர்',
+  Krishnagiri: 'கிருஷ்ணகிரி',
+  Madurai: 'மதுரை',
+  Mayiladuthurai: 'மயிலாடுதுறை',
+  Nagapattinam: 'நாகப்பட்டினம்',
+  Namakkal: 'நாமக்கல்',
+  Nilgiris: 'நீலகிரி',
+  Perambalur: 'பெரம்பலூர்',
+  Pudukkottai: 'புதுக்கோட்டை',
+  Ramanathapuram: 'ராமநாதபுரம்',
+  Ranipet: 'ராணிப்பேட்டை',
+  Salem: 'சேலம்',
+  Sivaganga: 'சிவகங்கை',
+  Tenkasi: 'தென்காசி',
+  Thanjavur: 'தஞ்சாவூர்',
+  Theni: 'தேனி',
+  Thoothukudi: 'தூத்துக்குடி',
+  Tiruchirappalli: 'திருச்சிராப்பள்ளி',
+  Tirunelveli: 'திருநெல்வேலி',
+  Tirupathur: 'திருப்பத்தூர்',
+  Tiruppur: 'திருப்பூர்',
+  Tiruvallur: 'திருவள்ளூர்',
+  Tiruvannamalai: 'திருவண்ணாமலை',
+  Tiruvarur: 'திருவாரூர்',
+  Vellore: 'வேலூர்',
+  Viluppuram: 'விழுப்புரம்',
+  Virudhunagar: 'விருதுநகர்'
+}
 
 export const navItems = [
   'navigation.home',
