@@ -114,8 +114,7 @@ export function Account({
                   e,
                   name,
                   password,
-                  setIsFieldLoading,
-                  toast
+                  setIsFieldLoading
                 )
                 if (res) {
                   MyToast({
