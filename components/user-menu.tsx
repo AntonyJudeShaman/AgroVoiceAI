@@ -63,7 +63,7 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
       <div className="p-2 mb-6 space-y-3">
         <Link href="/settings" className="w-full">
           <Button
-            className="flex text-md rounded-lg w-full hover:dark:bg-teal-950/30 hover:bg-green-200/50 px-5 py-7 text-left justify-start items-center cursor-pointer"
+            className="flex text-sm rounded-lg w-full hover:dark:bg-teal-950/30 hover:bg-green-200/50 px-5 py-7 text-left justify-start items-center cursor-pointer"
             size="lg"
             variant="ghost"
           >
