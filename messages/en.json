@@ -74,40 +74,47 @@
     "settings": {
       "setting": "Settings",
       "desc": "Manage account and website settings.",
-      "save": "save",
+      "tab1": "Profile & Account",
+      "tab2": "Chatbot Preferences",
+      "save": "Save",
+      "cancel": "Cancel",
       "account": {
         "name": {
           "title": "Your Name",
           "desc": "Please enter your full name or a display name you are comfortable with."
         },
-        "profile": {
+        "image": {
           "title": "Profile Picture",
           "desc": "Upload a profile image (optional).",
-          "upl": "Upload image",
-          "rmv": "Remove"
+          "upload": "Upload image",
+          "remove": "Remove",
+          "drag:": "Drag n drop an image file here, or click to select a file"
         },
         "email": {
           "title": "Your Email",
-          "desc": "Your email cannot be changed."
+          "desc": "Please enter your email address."
         },
-        "dist": {
+        "district": {
           "title": "Your District",
           "desc": "Please select a district."
         },
-        "phone": {
-          "title": "Your Phone Number",
-          "desc": "Please enter your phone number."
+        "username": {
+          "title": "Your Username",
+          "desc": "Enter a username.",
+          "sub_desc": "Your username cannot be changed."
         },
         "delete": {
           "title": "Delete account",
-          "desc": "This will delete your account and all your data permanently."
+          "confirm": "Are you absolutely sure?",
+          "desc": "This will delete your account and all your data permanently.",
+          "sub_desc": "This will permanently delete your account.",
+          "delete": "Delete"
         }
       },
       "bot": {
-        "prefer": "Chatbot Preferences",
         "title": "Additional Information",
         "desc": "Please provide extra information for the chatbot to give more precise suggestions for your crop.",
-        "content": "Type I like to grow tomatoes or I am interested in organic farming or tell about the current method carried out for your crops to get better suggestions."
+        "placeholder": "I like to \"grow tomatoes\" or I am \"interested in organic farming\" or tell about the current method carried out for your crops to get better suggestions."
       },
       "weather": {
         "sunday": "Sunday",

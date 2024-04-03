@@ -87,3 +87,18 @@ export type NavbarProps = {
   explore?: string
   download?: string
 }
+
+export type SettingsProps = {
+  user?: any
+  title: string
+  description: string
+  save: string
+  upload?: string
+  remove?: string
+  cancel?: string
+  drag?: string
+  subDescription?: string
+  deleteButton?: string
+  confirm?: string
+  placeholder?: string
+}

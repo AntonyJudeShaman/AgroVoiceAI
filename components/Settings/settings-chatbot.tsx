@@ -15,15 +15,15 @@ import { Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { handlePrefSubmit } from '@/helpers/user-info'
 import { Textarea } from '../ui/textarea'
+import { SettingsProps } from '@/lib/types'
 
 export function SettingsChatbot({
   user,
-  className,
-  ...props
-}: {
-  user: any
-  className: string
-}) {
+  title,
+  description,
+  save,
+  placeholder
+}: SettingsProps) {
   const [isSavingPref, setIsSavingPref] = useState<boolean>(false)
   const [isPreferenceChanged, setIsPreferenceChanged] = useState<boolean>(false)
   const [preference, setPreference] = useState(user?.chatbotPreference || '')
@@ -39,7 +39,6 @@ export function SettingsChatbot({
     <>
       <div
         className={cn(
-          className,
           'flex flex-col md:space-x-4 md:space-y-0 space-y-4 space-x-0 md:flex-row'
         )}
       >
@@ -51,17 +50,13 @@ export function SettingsChatbot({
                 user,
                 preference,
                 setIsSavingPref,
-                setIsPreferenceChanged,
-                toast
+                setIsPreferenceChanged
               )
             }
           >
             <CardHeader>
-              <CardTitle>Additional Information</CardTitle>
-              <CardDescription>
-                Please provide extra information for the chatbot to give more
-                precise suggestions for your crop.
-              </CardDescription>
+              <CardTitle>{title}</CardTitle>
+              <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-1">
@@ -72,7 +67,7 @@ export function SettingsChatbot({
                   onChange={handlePrefChange}
                   spellCheck="true"
                   autoCorrect="true"
-                  placeholder='Type "I like to grow tomatoes" or "I am interested in organic farming" or tell about the current method carried out for your crops to get better suggestions.'
+                  placeholder={placeholder}
                 />
               </div>
             </CardContent>
@@ -81,7 +76,6 @@ export function SettingsChatbot({
                 type="submit"
                 className={cn(
                   buttonVariants(),
-                  className,
                   'dark:hover:text-black/80 dark:hover:bg-white/80 hover:text-white/80 disabled:text-gray-600 disabled:border-gray-400 hover:opacity-85 dark:hover:opacity-100 flex justify-center items-center',
                   `${
                     isPreferenceChanged
@@ -96,7 +90,7 @@ export function SettingsChatbot({
                 {isSavingPref && (
                   <Loader2 className="mr-2 size-4 animate-spin" />
                 )}
-                <span>Save</span>
+                <span>{save}</span>
               </Button>
             </CardFooter>
           </form>

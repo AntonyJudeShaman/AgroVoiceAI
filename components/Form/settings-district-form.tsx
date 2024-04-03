@@ -21,7 +21,6 @@ import {
 } from '@/components/ui/select'
 import { tnDistricts } from '@/config/constants'
 import { useState } from 'react'
-import toast from 'react-hot-toast'
 import { handleDistrictSubmit } from '@/helpers/user-info'
 import {
   Card,
@@ -33,6 +32,7 @@ import {
 } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
+import { SettingsProps } from '@/lib/types'
 
 const FormSchema = z.object({
   district: z
@@ -44,7 +44,12 @@ const FormSchema = z.object({
     })
 })
 
-export function DistrictForm({ user }: { user: any }) {
+export function SettingsDistrictForm({
+  user,
+  title,
+  description,
+  save
+}: SettingsProps) {
   const [district, setDistrict] = useState<string>(user?.userDistrict || '')
   const [isDistrictChanged, setIsDistrictChanged] = useState<boolean>(false)
   const [isSavingDistrict, setIsSavingDistrict] = useState<boolean>(false)
@@ -63,8 +68,7 @@ export function DistrictForm({ user }: { user: any }) {
       user,
       data.district,
       setIsSavingDistrict,
-      setIsDistrictChanged,
-      toast
+      setIsDistrictChanged
     ).then(() => {
       setIsDistrictChanged(false)
     })
@@ -73,8 +77,8 @@ export function DistrictForm({ user }: { user: any }) {
   return (
     <Card className="md:w-2/3 w-full border dark:border-green-900/50 border-green-200">
       <CardHeader>
-        <CardTitle>Your District</CardTitle>
-        <CardDescription>Please select a district.</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -128,7 +132,7 @@ export function DistrictForm({ user }: { user: any }) {
               {isSavingDistrict && (
                 <Loader2 className="mr-2 size-4 animate-spin" />
               )}
-              <span>Save</span>
+              <span>{save}</span>
             </Button>
           </CardFooter>
         </form>

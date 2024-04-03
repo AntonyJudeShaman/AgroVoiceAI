@@ -29,8 +29,16 @@ import { Loader2, Trash2 } from 'lucide-react'
 import { deleteAccount } from '@/app/actions'
 import { signOut } from 'next-auth/react'
 import MyToast from '../ui/my-toast'
+import { SettingsProps } from '@/lib/types'
 
-export function DeleteAccount() {
+export function DeleteAccount({
+  title,
+  description,
+  confirm,
+  deleteButton,
+  cancel,
+  subDescription
+}: SettingsProps) {
   const [open, setOpen] = React.useState(false)
   const [isPending, startTransition] = React.useTransition()
   const router = useRouter()
@@ -40,10 +48,8 @@ export function DeleteAccount() {
     <Card className="w-full border dark:border-gray-700/70 border-gray-300">
       <form>
         <CardHeader className="h-">
-          <CardTitle className="text-green-500">Delete account</CardTitle>
-          <CardDescription>
-            This will delete your account and all your data permanently.
-          </CardDescription>
+          <CardTitle className="text-green-500">{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </CardHeader>
         <AlertDialog open={open} onOpenChange={setOpen}>
           <AlertDialogTrigger className="" asChild>
@@ -63,21 +69,21 @@ export function DeleteAccount() {
                 ) : (
                   <Trash2 className="mr-2 size-4" />
                 )}
-                <span>Delete account</span>
+                <span>{title}</span>
               </Button>
             </CardFooter>
           </AlertDialogTrigger>
           <AlertDialogContent className="border dark:border-red-900 border-red-500">
             <AlertDialogHeader>
               <AlertDialogTitle className="text-red-600">
-                Are you absolutely sure?
+                {confirm}
               </AlertDialogTitle>
-              <AlertDialogDescription>
-                This will permanently delete your account.
-              </AlertDialogDescription>
+              <AlertDialogDescription>{subDescription}</AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel disabled={isSaving}>Cancel</AlertDialogCancel>
+              <AlertDialogCancel disabled={isSaving}>
+                {cancel}
+              </AlertDialogCancel>
               <AlertDialogAction
                 disabled={isSaving}
                 className="border bg-background hover:bg-transparent text-red-600 hover:border-red-600"
@@ -98,14 +104,13 @@ export function DeleteAccount() {
                       message: 'Error deleting account',
                       type: 'error'
                     })
-                    // Handle error here
                   } finally {
                     setIsSaving(false)
                   }
                 }}
               >
                 {isSaving && <IconSpinner className="mr-2 animate-spin" />}
-                Delete
+                {deleteButton}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

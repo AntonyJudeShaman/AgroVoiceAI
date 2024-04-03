@@ -60,13 +60,22 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
 
   return (
     <div className="w-full">
-      <div className="p-2 mb-6" onMouseEnter={() => setOpen(true)}>
+      <div className="p-2 mb-6 space-y-3">
+        <Link href="/settings" className="w-full">
+          <Button
+            className="flex text-md rounded-lg w-full hover:dark:bg-teal-950/30 hover:bg-green-200/50 px-5 py-7 text-left justify-start items-center cursor-pointer"
+            size="lg"
+            variant="ghost"
+          >
+            <Settings className="size-6 mr-2" />
+            {settings}
+          </Button>
+        </Link>
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild className="px-4 py-7">
             <Button
               variant="ghost"
               className="rounded-2xl hover:border-none flex justify-start hover:dark:bg-teal-950/30 hover:bg-green-200/50 w-full"
-              onMouseEnter={() => setOpen(true)}
             >
               {user?.image?.length ? (
                 <Image
@@ -77,13 +86,14 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
                   width={44}
                 />
               ) : (
-                <div className="flex items-center  justify-center text-xs font-medium dark:bg-teal-600 dark:text-white bg-teal-300 text-black uppercase rounded-full select-none size-7 shrink-0 bg-muted/50 text-muted-foreground">
+                <div className="flex items-center justify-center text-sm font-bold dark:bg-teal-600  bg-teal-500 text-white uppercase rounded-full select-none size-10 shrink-0 bg-muted/50 text-muted-foreground">
                   {getUserInitials(user?.name || '')}
                 </div>
               )}
               <span className="ml-2">{user?.name}</span>
             </Button>
           </DropdownMenuTrigger>
+
           <div className="w-full">
             <DropdownMenuContent
               sideOffset={16}
@@ -91,10 +101,6 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
               className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 w-[250px] lg:w-[220px] xl:w-[250px]  to-indigo-100/30"
               onMouseLeave={() => setOpen(false)}
             >
-              {/* <DropdownMenuItem className="flex-col items-start flex-wrap rounded-lg">
-              <div className="text-sm text-zinc-500">{user?.name}</div>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator /> */}
               <Link href="/settings">
                 <DropdownMenuItem className="flex text-sm h-8 rounded-lg items-center cursor-pointer">
                   <Settings className="size-4 mr-2" />

@@ -16,8 +16,7 @@ const handleNameSubmit = async (
   user: User,
   name: string,
   setIsSaving: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsNameChanged: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
+  setIsNameChanged: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   event.preventDefault()
   setIsSaving(true)
@@ -111,8 +110,7 @@ const handleDistrictSubmit = async (
   user: User,
   district: string,
   setIsSavingDistrict: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsDistrictChanged: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
+  setIsDistrictChanged: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setIsSavingDistrict(true)
 
@@ -152,8 +150,7 @@ const handleUserNameSubmit = async (
   user: User,
   userName: string,
   setIsSavingUserName: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsUserNameChanged: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
+  setIsUserNameChanged: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   event.preventDefault()
   setIsSavingUserName(true)
@@ -201,8 +198,7 @@ const handleEmailSubmit = async (
   user: User,
   email: string,
   setIsSavingEmail: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsEmailChanged: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
+  setIsEmailChanged: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   event.preventDefault()
   setIsSavingEmail(true)
@@ -242,8 +238,7 @@ const handlePrefSubmit = async (
   user: User,
   pref: string,
   setIsSavingPref: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsPrefChanged: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
+  setIsPrefChanged: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   event.preventDefault()
   setIsSavingPref(true)
@@ -292,8 +287,7 @@ const handleSubmit = async (
   e: React.FormEvent<HTMLFormElement>,
   name: string,
   password: string,
-  setIsFieldLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  toast: any
+  setIsFieldLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   e.preventDefault()
   setIsFieldLoading(true)

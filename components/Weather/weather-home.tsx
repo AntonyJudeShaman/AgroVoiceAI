@@ -10,12 +10,14 @@ import { motion } from 'framer-motion'
 import { WeatherLocationNotAvailable } from './weather-location-not-available'
 import { ForecastData } from '@/lib/types'
 import { Button } from '../ui/button'
+import { useLocale } from 'next-intl'
 
 export default function Weather({ user }: { user: any }) {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [location, setLocation] = useState(user?.userDistrict)
+  const locale = useLocale()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -164,7 +166,9 @@ export default function Weather({ user }: { user: any }) {
       </div>
       <div className="mt-12 mx-auto w-[82%] lg:w-[70%] flex justify-start flex-col text-center">
         <p className="text-3xl tracking-tighter font-pops mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
-          View weather in other locations
+          {locale === 'en'
+            ? 'View weather in other locations'
+            : 'பிற இடங்களில் வானிலையைக் காண'}
         </p>
         <WeatherLocationNotAvailable
           user={user}
