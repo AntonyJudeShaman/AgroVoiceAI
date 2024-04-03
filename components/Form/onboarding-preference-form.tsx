@@ -54,8 +54,7 @@ export default function OnboardingPreferenceForm({
                 user,
                 preference,
                 setIsSavingPref,
-                setIsPreferenceChanged,
-                toast
+                setIsPreferenceChanged
               ).then(() => {
                 setNext(true)
                 setIsSavingPref(true)

@@ -257,8 +257,7 @@ export default function OnboardingForm({
                 user,
                 name,
                 setIsSaving,
-                setIsNameChanged,
-                toast
+                setIsNameChanged
               ).then(() => {
                 setNext(true)
                 setIsSaving(true)

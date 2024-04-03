@@ -72,8 +72,7 @@ export function OnboardingLocationForm({ user }: { user: any }) {
       user,
       data.district,
       setIsSavingDistrict,
-      setIsDistrictChanged,
-      toast
+      setIsDistrictChanged
     ).then(() => {
       setIsSavingDistrict(true)
       router.push('/onboarding/preferences')
