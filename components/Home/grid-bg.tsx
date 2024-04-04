@@ -23,6 +23,7 @@ export async function DotBackGround() {
             weather={t(navItems[2])}
             market={t(navItems[3])}
             settings={t(navItems[4])}
+            pest={t(navItems[5])}
             signin={t('signin')}
             signup={t('signup')}
             logout={t('logout')}

@@ -16,15 +16,18 @@ import toast from 'react-hot-toast'
 import { handlePrefSubmit } from '@/helpers/user-info'
 import { Textarea } from '../ui/textarea'
 import { updatePageShown } from '@/app/actions'
+import { OnboardingFormProps } from '@/lib/types'
 
 export default function OnboardingPreferenceForm({
   user,
   className,
-  ...props
-}: {
-  user: any
-  className: string
-}) {
+  title,
+  description,
+  saveName,
+  placeholder,
+  back,
+  changeLater
+}: OnboardingFormProps) {
   const [isSavingPref, setIsSavingPref] = useState<boolean>(false)
   const [isPreferenceChanged, setIsPreferenceChanged] = useState<boolean>(false)
   const [preference, setPreference] = useState(user?.chatbotPreference || '')
@@ -70,11 +73,8 @@ export default function OnboardingPreferenceForm({
           }}
         >
           <CardHeader>
-            <CardTitle>Additional Information</CardTitle>
-            <CardDescription>
-              Please provide extra information for the chatbot to give more
-              precise suggestions for your crop.
-            </CardDescription>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{description}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-1">
@@ -85,7 +85,7 @@ export default function OnboardingPreferenceForm({
                 onChange={handlePrefChange}
                 spellCheck="true"
                 autoCorrect="true"
-                placeholder='Type "I like to grow tomatoes" or "I am interested in organic farming" or tell about the current method carried out for your crops to get better suggestions.'
+                placeholder={placeholder}
               />
             </div>
             <div className="flex justify-between mt-5">
@@ -98,7 +98,7 @@ export default function OnboardingPreferenceForm({
                 disabled={next || isSavingPref}
                 type="button"
               >
-                Back
+                {back}
               </Button>
               <Button
                 type="submit"
@@ -110,7 +110,7 @@ export default function OnboardingPreferenceForm({
                 {isSavingPref && (
                   <Loader2 className="mr-2 size-4 animate-spin" />
                 )}
-                <span>Save & Next</span>
+                <span>{saveName}</span>
               </Button>
             </div>
           </CardContent>
@@ -118,7 +118,7 @@ export default function OnboardingPreferenceForm({
       </Card>
       <p className="flex justify-start text-sm pb-4 dark:text-gray-500 text-gray-700">
         <Info className="size-5 mr-1" />
-        <span>You can always change your details later.</span>
+        <span>{changeLater}</span>
       </p>
     </Card>
   )

@@ -187,6 +187,7 @@ export function Account({
             <div className="flex justify-end">
               <Button
                 variant="link"
+                type="button"
                 onClick={() => router.push('/forgot_password')}
                 className="text-sm text-red-600 flex items-center px-0"
               >

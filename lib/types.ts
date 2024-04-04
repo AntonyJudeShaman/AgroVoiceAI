@@ -81,6 +81,7 @@ export type NavbarProps = {
   weather: string
   market: string
   settings: string
+  pest: string
   signin?: string
   signup?: string
   logout?: string
@@ -100,5 +101,24 @@ export type SettingsProps = {
   subDescription?: string
   deleteButton?: string
   confirm?: string
+  placeholder?: string
+  className?: string
+}
+
+export type OnboardingFormProps = {
+  user?: any
+  className?: string
+  welcome?: string
+  title?: string
+  description?: string
+  upload?: string
+  remove?: string
+  save?: string
+  cancel?: string
+  drag?: string
+  saveName?: string
+  nameText?: string
+  changeLater?: string
+  back?: string
   placeholder?: string
 }

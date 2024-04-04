@@ -1,7 +1,7 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { formatDateWithDay } from '@/lib/utils'
+import { cn, formatDateWithDay } from '@/lib/utils'
 import WeatherForecastCard from './weather-forecast-card'
 import WeatherCardsSkeleton from './weather-card-skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
@@ -11,12 +11,16 @@ import { WeatherLocationNotAvailable } from './weather-location-not-available'
 import { ForecastData } from '@/lib/types'
 import { Button } from '../ui/button'
 import { useLocale } from 'next-intl'
+import { tnDistrictsInEnglish, tnDistrictsInTamil } from '@/config/constants'
 
 export default function Weather({ user }: { user: any }) {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [location, setLocation] = useState(user?.userDistrict)
+  const [location, setLocation] = useState<keyof typeof tnDistrictsInEnglish>(
+    user?.userDistrict
+  )
+  const [date, setDate] = useState<string>('')
   const locale = useLocale()
 
   useEffect(() => {
@@ -52,10 +56,12 @@ export default function Weather({ user }: { user: any }) {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
+      <div className="flex items-center justify-center  h-[95vh] md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
         <div className="md:p-10 p-6 w-full bg-gray-50 dark:bg-gray-950 border border-red-600/80 text-lg text-white rounded-2xl">
           <p className="md:text-2xl text-center text-lg text-red-600 flex justify-center font-pops">
-            Some error occurred. Please try again later.
+            {locale === 'en'
+              ? 'Some error occurred. Please try again later.'
+              : 'சில பிழை ஏற்பட்டுள்ளது. தயவுசெய்து பின்னூட்டம் முயற்சிக்கவும்.'}
           </p>
         </div>
       </div>
@@ -64,16 +70,18 @@ export default function Weather({ user }: { user: any }) {
 
   if (!forecastData || !forecastData.list) {
     return (
-      <div className="flex items-center justify-center h-screen md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
+      <div className="flex items-center justify-center h-[95vh] md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
         <div className="md:p-10 p-6 w-full bg-gray-50 dark:bg-gray-950 border border-green-600/60 dark:border-green-800/60 text-lg text-white rounded-2xl">
           <p className="md:text-2xl text-center dark:text-white text-black text-lg flex justify-center font-pops pb-10">
-            No forecast data available. But you can check for other locations.
+            {locale === 'en'
+              ? 'No forecast data available. But you can check for other locations.'
+              : 'முன்னறிவிப்பு தரவு கிடைக்கவில்லை. ஆனால் நீங்கள் பிற இடங்களைச் சரிபார்க்கலாம்.'}
           </p>
           <div className="flex justify-center">
             <WeatherLocationNotAvailable
               user={user}
               setForecastData={setForecastData}
-              setLocation={setLocation}
+              setLocation={setLocation as Dispatch<SetStateAction<string>>}
             />
           </div>
         </div>
@@ -81,10 +89,10 @@ export default function Weather({ user }: { user: any }) {
     )
   }
 
+  const today = new Date()
   const groupedData: { [key: string]: any[] } = {}
   forecastData.list.forEach(item => {
     const date = item.dt_txt.substring(0, 10)
-    const today = new Date()
     const forecastDate = new Date(date)
 
     const daysDifference = Math.ceil(
@@ -100,21 +108,31 @@ export default function Weather({ user }: { user: any }) {
     }
   })
 
-  const today = new Date()
   const todayDate = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`
+
+  const district = (
+    locale === 'en' ? tnDistrictsInEnglish : tnDistrictsInTamil
+  )[location] as string
 
   return (
     <>
       <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
         <div className="flex items-center justify-center md:justify-between w-3/4 md:flex-row flex-col">
-          <p className="md:text-5xl 2xl:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4">
-            Weather in {location}
+          <p
+            className={cn(
+              locale === 'ta' && 'pt-1',
+              'md:text-5xl 2xl:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4'
+            )}
+          >
+            {locale === 'en' ? `Weather in ${district}` : `${district} வானிலை`}
             <Tooltip delayDuration={0}>
               <TooltipTrigger>
                 <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
               </TooltipTrigger>
               <TooltipContent className="text-sm font-pops tracking-normal">
-                Weather forecast for 4 days in {location}
+                {locale === 'en'
+                  ? `Weather forecast for 4 days in ${location}`
+                  : `${district} 4 நாட்கள் வானிலை முன்னறிவிப்பு`}
               </TooltipContent>
             </Tooltip>
           </p>
@@ -128,7 +146,7 @@ export default function Weather({ user }: { user: any }) {
               })
             }
           >
-            View other location
+            {locale === 'en' ? 'View other locations' : 'பிற இடங்களைக் காண'}
           </Button>
         </div>
         <Tabs defaultValue={todayDate} className="w-3/4">
@@ -136,7 +154,7 @@ export default function Weather({ user }: { user: any }) {
             {Object.keys(groupedData).map((date, index) => {
               return (
                 <TabsTrigger key={index} value={date}>
-                  {formatDateWithDay(date)}
+                  {formatDateWithDay(date, locale === 'en' ? 'en-IN' : 'ta-IN')}
                 </TabsTrigger>
               )
             })}
@@ -173,7 +191,7 @@ export default function Weather({ user }: { user: any }) {
         <WeatherLocationNotAvailable
           user={user}
           setForecastData={setForecastData}
-          setLocation={setLocation}
+          setLocation={setLocation as Dispatch<SetStateAction<string>>}
         />
       </div>
     </>

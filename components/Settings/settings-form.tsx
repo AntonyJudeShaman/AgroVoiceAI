@@ -38,6 +38,7 @@ export async function SettingsForm({
           save={t('settings.save')}
           cancel={t('settings.cancel')}
           drag={t('settings.account.image.drag')}
+          className="flex md:flex-row flex-col mx-auto text-center md:text-left"
         />
       </div>
       <SettingsUsernameForm
@@ -56,8 +57,8 @@ export async function SettingsForm({
         />
         <SettingsEmailForm
           user={user}
-          title={t('settings.account.district.title')}
-          description={t('settings.account.district.desc')}
+          title={t('settings.account.email.title')}
+          description={t('settings.account.email.desc')}
           save={t('settings.save')}
         />
       </div>

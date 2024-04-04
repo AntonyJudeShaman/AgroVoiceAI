@@ -23,7 +23,7 @@ import soil from '../public/images/soil.jpg'
 import { IoHome, IoHomeOutline } from 'react-icons/io5'
 import { BsCloudRain } from 'react-icons/bs'
 
-export const tableHeaderInEnglish = [
+export const marketTableHeaderInEnglish = [
   {
     label: 'Name'
   },
@@ -38,7 +38,7 @@ export const tableHeaderInEnglish = [
   }
 ]
 
-export const tableHeaderInTamil = [
+export const marketTableHeaderInTamil = [
   {
     label: 'பெயர்'
   },
@@ -91,6 +91,11 @@ export const navConfig: NavConfig = {
       title: 'Settings',
       href: '/settings',
       icon: <Settings className="size-5 mr-2" />
+    },
+    {
+      title: 'Pest',
+      href: '/pest-identification',
+      icon: <BugOffIcon className="size-5 mr-2" />
     }
   ]
 }
@@ -351,7 +356,8 @@ export const navItems = [
   'navigation.chat',
   'navigation.weather',
   'navigation.market',
-  'navigation.settings'
+  'navigation.settings',
+  'navigation.pest'
 ]
 
 export const translations = [
@@ -437,8 +443,166 @@ export const exampleMessagesTamil = [
   },
   {
     heading: 'பிரதம மந்திரி கிசான்',
-    subheading: 'சம்மான் யோஜனா பற்றி மேலும் விவரங்களை வழங்க முடியுமா?',
+    subheading: 'சம்மான் யோஜனா பற்றி விவரங்களை வழங்க முடியுமா?',
     message:
-      'பிரதம மந்திரி கிசான் சம்மான் யோஜனா பற்றி மேலும் விவரங்களை வழங்க முடியுமா?'
+      'பிரதம மந்திரி கிசான் சம்மான் யோஜனா பற்றி விவரங்களை வழங்க முடியுமா?'
   }
 ]
+
+export const vegetableNamesInEnglish = {
+  'Amaranth leaves': 'Amaranth leaves',
+  Amla: 'Amla',
+  'Ash gourd': 'Ash gourd',
+  'Baby corn': 'Baby corn',
+  'Banana flower': 'Banana flower',
+  Beetroot: 'Beetroot',
+  'Bell Pepper (Capsicum)': 'Bell Pepper (Capsicum)',
+  'Bitter gourd': 'Bitter gourd',
+  Bottlegourd: 'Bottlegourd',
+  'Butter beans': 'Butter beans',
+  'Broad beans (Fava beans, lima beans)':
+    'Broad beans (Fava beans, lima beans)',
+  Cabbage: 'Cabbage',
+  Carrot: 'Carrot',
+  Cauliflower: 'Cauliflower',
+  'Cluster beans': 'Cluster beans',
+  'Coconut (fresh)': 'Coconut (fresh)',
+  'Colocasia leaves (Taro leaves)': 'Colocasia leaves (Taro leaves)',
+  'Colocasia roots (Taro roots)': 'Colocasia roots (Taro roots)',
+  'Coriander leaves (Cilantro)': 'Coriander leaves (Cilantro)',
+  Corn: 'Corn',
+  Cucumber: 'Cucumber',
+  'Curry leaves': 'Curry leaves',
+  'Dill leaves': 'Dill leaves',
+  Drumsticks: 'Drumsticks',
+  'Eggplant (Brinjal or Aubergine)': 'Eggplant (Brinjal or Aubergine)',
+  'Brinjal ( Big )': 'Brinjal ( Big )',
+  'Elephant Yam': 'Elephant Yam',
+  'Fenugreek leaves': 'Fenugreek leaves',
+  'French Beans (Green beans)': 'French Beans (Green beans)',
+  Garlic: 'Garlic',
+  Ginger: 'Ginger',
+  'Green chili': 'Green chili',
+  'Green onion (Scallian or Spring onion)':
+    'Green onion (Scallian or Spring onion)',
+  'Green peas': 'Green peas',
+  'Ivy gourd': 'Ivy gourd',
+  'Lemon (Lime)': 'Lemon (Lime)',
+  Mango: 'Mango',
+  'Mint leaves': 'Mint leaves',
+  Mushroom: 'Mushroom',
+  'Mustard leaves': 'Mustard leaves',
+  'Okra (Ladies finger)': 'Okra (Ladies finger)',
+  'Onion Big': 'Onion Big',
+  'Onion Small': 'Onion Small',
+  'Plantain (raw banana)': 'Plantain (raw banana)',
+  Potato: 'Potato',
+  Pumpkin: 'Pumpkin',
+  'Radish (Daikon)': 'Radish (Daikon)',
+  'Ridge gourd': 'Ridge gourd',
+  'Shallot (pearl onion)': 'Shallot (pearl onion)',
+  'Snake gourd': 'Snake gourd',
+  'Sorrel leaves': 'Sorrel leaves',
+  Spinach: 'Spinach',
+  'Sweet potato': 'Sweet potato',
+  Tomato: 'Tomato'
+}
+
+export const vegetableNamesInTamil = {
+  'Amaranth leaves': 'அமராந்த் இலைகள்',
+  Amla: 'ஆம்லா',
+  'Ash gourd': 'வெள்ளைப் பூசணிக்காய்',
+  'Baby corn': 'சிறு மக்காச்சோளம்',
+  'Banana flower': 'வாழைப்பூ',
+  Beetroot: 'பீட்ரூட்',
+  'Bell Pepper (Capsicum)': 'குடை மிளகாய்',
+  'Bitter gourd': 'பாகற்காய்',
+  Bottlegourd: 'சுரைக்காய்',
+  'Butter beans': 'பெரிய அவரை',
+  'Broad beans (Fava beans, lima beans)': 'தட்டைமொச்சவகை',
+  Cabbage: 'முட்டைக்கோஸ்',
+  Carrot: 'கேரட்',
+  Cauliflower: 'பூக்கோசு',
+  'Cluster beans': 'கொத்தவரைங்காய்',
+  'Coconut (fresh)': 'தேங்காய்',
+  'Colocasia leaves (Taro leaves)': 'சேம்பு இலைகள்',
+  'Colocasia roots (Taro roots)': 'சேப்பங்கிழங்கு வேர்',
+  'Coriander leaves (Cilantro)': 'கொத்தமல்லி இலைகள்',
+  Corn: 'சோளம்',
+  Cucumber: 'வெள்ளரிக்காய்',
+  'Curry leaves': 'கறிவேப்பிலை',
+  'Dill leaves': 'வெந்தயம் இலைகள்',
+  Drumsticks: 'முருங்கைக்காய்',
+  'Eggplant (Brinjal or Aubergine)': 'கத்திரிக்காய்',
+  'Brinjal ( Big )': 'கத்தரி (பெரிய)',
+  'Elephant Yam': 'சேனைக்கிழங்கு',
+  'Fenugreek leaves': 'வெந்தயக் கீரை',
+  'French Beans (Green beans)': 'பச்சை பீன்ஸ்',
+  Garlic: 'பூண்டு',
+  Ginger: 'இஞ்சி',
+  'Green chili': 'பச்சை மிளகாய்',
+  'Green onion (Scallian or Spring onion)': 'பச்சை வெங்காயம்',
+  'Green peas': 'பச்சை பட்டாணி',
+  'Ivy gourd': 'கோவைக்காய்',
+  'Lemon (Lime)': 'எலுமிச்சை',
+  Mango: 'மாங்கனி',
+  'Mint leaves': 'புதினா இலைகள்',
+  Mushroom: 'காளான்',
+  'Mustard leaves': 'கடுகு இலைகள்',
+  'Okra (Ladies finger)': 'வெண்டை',
+  'Onion Big': 'பெரிய வெங்காயம்',
+  'Onion Small': 'சின்ன வெங்காயம்',
+  'Plantain (raw banana)': 'வாழைப்பழம்',
+  Potato: 'உருளைக்கிழங்கு',
+  Pumpkin: 'பூசணிக்காய்',
+  'Radish (Daikon)': 'முள்ளங்கி',
+  'Ridge gourd': 'பீர்க்கங்காய்',
+  'Shallot (pearl onion)': 'முத்து வெங்காயம்',
+  'Snake gourd': 'புடலங்காய்',
+  'Sorrel leaves': 'சிவந்த இலைகள்',
+  Spinach: 'கீரை',
+  'Sweet potato': 'சர்க்கரைவள்ளிக்கிழங்கு',
+  Tomato: 'தக்காளி'
+}
+
+export const weatherMainInEnglish = {
+  Thunderstorm: 'Thunderstorm',
+  Drizzle: 'Drizzle',
+  Rain: 'Rain',
+  Snow: 'Snow',
+  Clear: 'Clear',
+  Clouds: 'Clouds',
+  Mist: 'Mist',
+  Haze: 'Haze'
+}
+
+export const weatherMainInTamil = {
+  Thunderstorm: 'இடிப்புயல்',
+  Drizzle: 'தூறல்',
+  Rain: 'மழை',
+  Snow: 'பனி',
+  Clear: 'தெளிவு',
+  Clouds: 'முகில்',
+  Mist: 'மூடுபனி',
+  Haze: 'மூடுபனி'
+}
+
+export const weatherDescriptionInEnglish = {
+  'broken clouds': 'Broken clouds',
+  'scattered clouds': 'Scattered clouds',
+  'few clouds': 'Few clouds',
+  'overcast clouds': 'Overcast clouds',
+  'light rain': 'Light rain',
+  'moderate rain': 'Moderate rain',
+  'clear sky': 'Clear sky'
+}
+
+export const weatherDescriptionInTamil = {
+  'broken clouds': 'உடைந்த மேகங்கள்',
+  'scattered clouds': 'சிதறிய மேகங்கள்',
+  'few clouds': 'சில மேகங்கள்',
+  'overcast clouds': 'மேகமூட்டம்',
+  'light rain': 'தூறல்',
+  'moderate rain': 'மிதமான மழை',
+  'clear sky': 'தெளிந்த வானம்'
+}

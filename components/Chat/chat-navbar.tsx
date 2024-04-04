@@ -24,6 +24,7 @@ export default function ChatNavbar({
   weather,
   market,
   settings,
+  pest,
   download
 }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
@@ -40,7 +41,7 @@ export default function ChatNavbar({
     return () => window.removeEventListener('scroll', handleScroll)
   }, [scrolled])
 
-  const navItems = [home, chat, weather, market, settings]
+  const navItems = [home, chat, weather, market, settings, pest]
 
   return (
     <nav

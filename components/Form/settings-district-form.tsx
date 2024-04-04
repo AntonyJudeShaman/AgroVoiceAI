@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { tnDistricts } from '@/config/constants'
+import { tnDistricts, tnDistrictsInTamil } from '@/config/constants'
 import { useState } from 'react'
 import { handleDistrictSubmit } from '@/helpers/user-info'
 import {
@@ -33,6 +33,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { SettingsProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 const FormSchema = z.object({
   district: z
@@ -73,7 +74,7 @@ export function SettingsDistrictForm({
       setIsDistrictChanged(false)
     })
   }
-
+  const locale = useLocale()
   return (
     <Card className="md:w-2/3 w-full border dark:border-green-900/50 border-green-200">
       <CardHeader>
@@ -106,7 +107,11 @@ export function SettingsDistrictForm({
                     <SelectContent className="h-60 bg-gradient-to-br dark:from-slate-900 dark:to-slate-950">
                       {tnDistricts.map(district => (
                         <SelectItem key={district.label} value={district.value}>
-                          {district.label}
+                          {locale === 'en'
+                            ? district.label
+                            : tnDistrictsInTamil[
+                                district.label as keyof typeof tnDistrictsInTamil
+                              ]}
                         </SelectItem>
                       ))}
                     </SelectContent>

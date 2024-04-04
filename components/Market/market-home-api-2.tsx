@@ -13,10 +13,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { Info } from 'lucide-react'
 import { motion } from 'framer-motion'
 import {
-  tableHeaderInEnglish,
-  tableHeaderInTamil,
+  marketTableHeaderInEnglish,
+  marketTableHeaderInTamil,
   tnDistrictsInEnglish,
-  tnDistrictsInTamil
+  tnDistrictsInTamil,
+  vegetableNamesInEnglish,
+  vegetableNamesInTamil
 } from '@/config/constants'
 import { cn, parseItems } from '@/lib/utils'
 import { Item } from '@/lib/types'
@@ -114,7 +116,7 @@ export default function MarketHome2({ user }: { user: any }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
-        <div className="md:w-[80%] 2xl:w-[70%] z-10 md:p-6 p-3 ">
+        <div className="md:w-[80%] 2xl:w-[70%] z-10 md:p-6 p- ">
           <div className="flex items-center justify-center md:justify-between w-full md:flex-row flex-col">
             <p
               className={cn(
@@ -132,12 +134,12 @@ export default function MarketHome2({ user }: { user: any }) {
                 <TooltipContent className="text-sm font-pops tracking-normal">
                   {locale === 'en'
                     ? `Daily prices of vegetables in ${district}`
-                    : `${district} சந்தை விலைகள்`}
+                    : `${district} சந்தை இன்று காய்கறிகளின் தினசரி விலை`}
                 </TooltipContent>
               </Tooltip>
             </p>
           </div>
-          <div className="flex justify-between md:ml-2 mb-6 text-lg md:-mt-4 md:p-0 px-1">
+          <div className="flex justify-between md:ml-1 ml-2 mb-6 text-lg md:-mt-4 md:p-0 px-1">
             <p className="flex md:justify-start text-md justify-center">
               {new Date().toLocaleDateString(
                 `${locale === 'en' ? 'en-IN' : 'ta-IN'}`,
@@ -150,7 +152,7 @@ export default function MarketHome2({ user }: { user: any }) {
             </p>
             <Button
               variant="link"
-              className="text-red-600 dark:text-red-600/90 cursor-pointer font-pops -mt-[2px] text-lg justify-end px-0 after:bg-current"
+              className="text-red-600 dark:text-red-600/90 cursor-pointer font-pops -mt-[2px] text-lg justify-end px-0 mr-2 md:mr-0 after:bg-current"
               onClick={() =>
                 window.scrollTo({
                   top: document.documentElement.scrollHeight,
@@ -168,8 +170,8 @@ export default function MarketHome2({ user }: { user: any }) {
                 <TableHeader className="">
                   <TableRow className="rounded-t-2xl hover:bg-slate-200 dark:hover:bg-slate-800">
                     {(locale === 'en'
-                      ? tableHeaderInEnglish
-                      : tableHeaderInTamil
+                      ? marketTableHeaderInEnglish
+                      : marketTableHeaderInTamil
                     ).map((item, index) => (
                       <TableHead
                         key={index}
@@ -186,17 +188,23 @@ export default function MarketHome2({ user }: { user: any }) {
                       key={index}
                       className="hover:bg-slate-200 dark:hover:bg-slate-800"
                     >
-                      <TableCell className="md:p-6 p-3 md:text-md text-sm">
+                      <TableCell className="md:p-6 p-3 md:text-md text-xs">
                         <motion.div
                           key={index}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          {item.name}
+                          {locale === 'en'
+                            ? vegetableNamesInEnglish[
+                                item.name as keyof typeof vegetableNamesInEnglish
+                              ]
+                            : vegetableNamesInTamil[
+                                item.name as keyof typeof vegetableNamesInTamil
+                              ]}
                         </motion.div>
                       </TableCell>
-                      <TableCell className="md:p-6 p-3 md:text-md text-sm">
+                      <TableCell className="md:p-6 p-3 md:text-md text-xs">
                         <motion.div
                           key={index}
                           initial={{ opacity: 0 }}
@@ -206,7 +214,7 @@ export default function MarketHome2({ user }: { user: any }) {
                           {locale === 'en' ? 'Kg / Pcs' : 'கிலோ / பீஸ்'}
                         </motion.div>
                       </TableCell>
-                      <TableCell className="md:p-6 p-3 md:text-md text-sm">
+                      <TableCell className="md:p-6 p-3 md:text-md text-xs">
                         <motion.div
                           key={index}
                           initial={{ opacity: 0 }}
@@ -216,7 +224,7 @@ export default function MarketHome2({ user }: { user: any }) {
                           {item.marketPrice.substring(2)}
                         </motion.div>
                       </TableCell>
-                      <TableCell className="md:p-6 p-3 md:text-md text-sm">
+                      <TableCell className="md:p-6 p-3 md:text-md text-xs">
                         <motion.div
                           key={index}
                           initial={{ opacity: 0 }}

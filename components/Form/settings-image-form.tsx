@@ -43,7 +43,8 @@ export function SettingsImageForm({
   remove,
   save,
   cancel,
-  drag
+  drag,
+  className
 }: SettingsProps) {
   const [imageURL, setImageURL] = useState(user?.image || '')
   const [isSavingImage, setIsSavingImage] = useState(false)
@@ -122,7 +123,7 @@ export function SettingsImageForm({
 
   return (
     <Card className="md:w-2/3 w-full flex md:justify-center border dark:border-green-900/50 border-green-200">
-      <div className="flex md:flex-row flex-col mx-auto">
+      <div className={className}>
         <p className="rounded-full flex justify-center items-center">
           {user?.image ? (
             <img
@@ -153,7 +154,7 @@ export function SettingsImageForm({
             </div>
           </div>
         )}
-        <div className="flex flex-col text-center md:text-left justify-center">
+        <div className="flex flex-col justify-center">
           <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>{description}</CardDescription>

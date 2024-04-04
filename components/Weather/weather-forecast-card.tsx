@@ -15,6 +15,14 @@ import {
 } from 'lucide-react'
 import { formatTime12hr } from '@/lib/utils'
 import { Card, CardContent, CardHeader } from '../ui/card'
+import { useLocale } from 'next-intl'
+import local from 'next/font/local'
+import {
+  weatherDescriptionInEnglish,
+  weatherDescriptionInTamil,
+  weatherMainInEnglish,
+  weatherMainInTamil
+} from '@/config/constants'
 
 function getWeatherGradientClass(weatherMain: any) {
   switch (weatherMain) {
@@ -36,6 +44,7 @@ function getWeatherGradientClass(weatherMain: any) {
 }
 
 function WeatherForecastCard({ forecast, forecastIndex }: any) {
+  const locale = useLocale()
   return (
     <Card
       className={`rounded-lg mt-8 flex justify-center duration-500 dark:text-gray-300 dark:hover:text-white border dark:hover:border-green-200 dark:border-gray-800 border-gray-200 hover:border-green-900 shadow-lg lg:p-4 p-3 ${getWeatherGradientClass(
@@ -76,11 +85,26 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
             <div>
               <p className="flex flex-col">
                 <span className="text-3xl font-semibold">
-                  {forecast.weather[0].main}
+                  {locale === 'en'
+                    ? weatherMainInEnglish[
+                        forecast.weather[0]
+                          .main as keyof typeof weatherMainInEnglish
+                      ]
+                    : weatherMainInTamil[
+                        forecast.weather[0]
+                          .main as keyof typeof weatherMainInTamil
+                      ]}
                 </span>
-                <span className="text-sm pl-1">
-                  {' '}
-                  {forecast.weather[0].description}
+                <span className="text-sm pl-1 pt-1">
+                  {locale === 'en'
+                    ? weatherDescriptionInEnglish[
+                        forecast.weather[0]
+                          .description as keyof typeof weatherDescriptionInEnglish
+                      ]
+                    : weatherDescriptionInTamil[
+                        forecast.weather[0]
+                          .description as keyof typeof weatherDescriptionInTamil
+                      ]}
                 </span>{' '}
               </p>
             </div>
@@ -89,23 +113,28 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
         <CardContent>
           <div className="font-pops space-y-2">
             <p className="text-md flex items-center">
-              <ThermometerSun className="size-5 mr-2" /> Temperature:{' '}
+              <ThermometerSun className="size-5 mr-2" />
+              {locale === 'en' ? 'Temperature: ' : 'வெப்பநிலை: '}
               {Math.round(forecast.main.temp - 273.15)}°C
-            </p>{' '}
+            </p>
             <p className="text-md flex items-center">
-              <SunSnow className="size-5 mr-2" /> Feels like:{' '}
+              <SunSnow className="size-5 mr-2" />
+              {locale === 'en' ? 'Feels like: ' : 'உணர்வு: '}
               {Math.round(forecast.main.feels_like - 273.15)}°C
             </p>
             <p className="text-md flex items-center">
-              <Droplets className="size-5 mr-2" /> Humidity:{' '}
+              <Droplets className="size-5 mr-2" />
+              {locale === 'en' ? 'Humidity: ' : 'ஈரத்தன்மை: '}
               {forecast.main.humidity}%
             </p>
             <p className="text-md flex items-center">
-              <Wind className="size-5 mr-2" /> Wind Speed:{' '}
+              <Wind className="size-5 mr-2" />
+              {locale === 'en' ? 'Wind Speed: ' : 'காற்று வேகம்: '}
               {forecast.wind.speed.toFixed(1)} m/s
             </p>
             <p className="text-md flex items-center">
-              <GaugeCircle className="size-5 mr-2" /> Pressure:{' '}
+              <GaugeCircle className="size-5 mr-2" />
+              {locale === 'en' ? 'Pressure: ' : 'அழுத்தம்: '}
               {forecast.main.pressure} hPa
             </p>
           </div>

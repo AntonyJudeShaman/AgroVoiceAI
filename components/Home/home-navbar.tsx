@@ -27,6 +27,7 @@ export default function Navbar({
   weather,
   market,
   settings,
+  pest,
   signin,
   signup,
   logout,
@@ -36,7 +37,7 @@ export default function Navbar({
   const path = usePathname()
   const router = useRouter()
 
-  const navItems = [home, chat, weather, market, settings]
+  const navItems = [home, chat, weather, market, settings, pest]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,7 +100,7 @@ export default function Navbar({
         </SheetContent>
       </Sheet>
       <Link
-        className="mr-6 hidden font-normal items-center font-pops text-2xl dark:text-white text-black xl:flex"
+        className="mr-4 hidden font-normal items-center font-pops text-2xl dark:text-white text-black xl:flex"
         href="/"
       >
         <IconLogo className="size-12 mr-3" /> {title}

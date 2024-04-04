@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { tnDistricts } from '@/config/constants'
+import { tnDistricts, tnDistrictsInTamil } from '@/config/constants'
 import { useState } from 'react'
 import { User } from '@prisma/client'
 import toast from 'react-hot-toast'
@@ -38,6 +38,8 @@ import { useRouter } from 'next/navigation'
 import { AlertDialogTrigger } from '../ui/alert-dialog'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { Dialog } from '../ui/dialog'
+import { OnboardingFormProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 const FormSchema = z.object({
   district: z
@@ -49,7 +51,13 @@ const FormSchema = z.object({
     })
 })
 
-export function OnboardingLocationForm({ user }: { user: any }) {
+export function OnboardingLocationForm({
+  user,
+  title,
+  description,
+  back,
+  saveName
+}: OnboardingFormProps) {
   const [district, setDistrict] = useState<string>(user?.userDistrict || '')
   const [isDistrictChanged, setIsDistrictChanged] = useState<boolean>(false)
   const [isSavingDistrict, setIsSavingDistrict] = useState<boolean>(false)
@@ -80,12 +88,14 @@ export function OnboardingLocationForm({ user }: { user: any }) {
     })
   }
 
+  const locale = useLocale()
+
   return (
     <Card className="md:w-2/3 xl:w-2/4 m-4 w-full border z-20 bg-transparent">
       <CardHeader className="flex flex-row justify-between">
         <div className="space-y-1">
-          <CardTitle>Your District</CardTitle>
-          <CardDescription>Please select a district.</CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </div>
         <p className="flex justify-start text-sm pb-4 dark:text-gray-500 text-gray-700">
           <Tooltip delayDuration={0}>
@@ -93,7 +103,9 @@ export function OnboardingLocationForm({ user }: { user: any }) {
               <Info className="size-5 mr-3" />
             </TooltipTrigger>
             <TooltipContent>
-              It helps in recommendations based on your region.
+              {locale === 'en'
+                ? 'It helps in recommendations based on your region.'
+                : 'உங்கள் பகுதியின் அடிப்படையில் பரிந்துரைக்க உதவுகின்றது.'}
             </TooltipContent>
           </Tooltip>
         </p>
@@ -124,7 +136,11 @@ export function OnboardingLocationForm({ user }: { user: any }) {
                     <SelectContent className="h-60 bg-gradient-to-br dark:from-slate-900 dark:to-slate-950">
                       {tnDistricts.map(district => (
                         <SelectItem key={district.label} value={district.value}>
-                          {district.label}
+                          {locale === 'en'
+                            ? district.label
+                            : tnDistrictsInTamil[
+                                district.label as keyof typeof tnDistrictsInTamil
+                              ]}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -144,7 +160,7 @@ export function OnboardingLocationForm({ user }: { user: any }) {
               disabled={next || isSavingDistrict}
               type="button"
             >
-              Back
+              {back}
             </Button>
             <Button
               type="submit"
@@ -156,7 +172,7 @@ export function OnboardingLocationForm({ user }: { user: any }) {
               {isSavingDistrict && (
                 <Loader2 className="mr-2 size-4 animate-spin" />
               )}
-              <span>Save & Next</span>
+              <span>{saveName}</span>
             </Button>
           </CardFooter>
         </form>

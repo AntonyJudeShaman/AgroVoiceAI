@@ -75,7 +75,7 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
           <DropdownMenuTrigger asChild className="px-4 py-7">
             <Button
               variant="ghost"
-              className="rounded-2xl hover:border-none flex justify-start hover:dark:bg-teal-950/30 hover:bg-green-200/50 w-full"
+              className="rounded-2xl hover:border-green-800 border flex justify-start dark:bg-teal-950/30 hover:dark:bg-teal-950/60 bg-green-200/50 hover:bg-green-200/80 w-full"
             >
               {user?.image?.length ? (
                 <Image

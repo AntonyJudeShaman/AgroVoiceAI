@@ -45,11 +45,11 @@ export function formatDate(input: string | number | Date): string {
   })
 }
 
-export function formatDateWithDay(date: string | undefined): string {
+export function formatDateWithDay(date: any, locale: string): string {
   const [day, month, year] = date!.split('-')
   const parsedDate = new Date(Number(year), Number(month) - 1, Number(day))
 
-  const dayOfWeek = parsedDate.toLocaleDateString('en-US', { weekday: 'long' })
+  const dayOfWeek = parsedDate.toLocaleDateString(locale, { weekday: 'long' })
 
   return `${dayOfWeek}, ${date!.substring(0, 2)}`
 }

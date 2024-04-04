@@ -26,15 +26,24 @@ import { firebaseConfig } from '@/lib/firebase'
 import { initializeApp } from 'firebase/app'
 import { removeImage } from '@/app/actions'
 import MyToast from '../ui/my-toast'
+import { OnboardingFormProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 export default function OnboardingForm({
   user,
   className,
-  ...props
-}: {
-  user: any
-  className: string
-}) {
+  welcome,
+  title,
+  description,
+  upload,
+  remove,
+  save,
+  cancel,
+  drag,
+  nameText,
+  changeLater,
+  saveName
+}: OnboardingFormProps) {
   const [isSaving, setIsSaving] = useState<boolean>(false)
   const [isSavingImage, setIsSavingImage] = useState<boolean>(false)
   const [isNameChanged, setIsNameChanged] = useState<boolean>(false)
@@ -102,6 +111,8 @@ export default function OnboardingForm({
     }
   }
 
+  const locale = useLocale()
+
   return (
     <Card
       className={cn(
@@ -109,8 +120,13 @@ export default function OnboardingForm({
         'flex flex-col m-4 items-center dark:bg-slate-900/10 bg-white/80 shadow-2xl'
       )}
     >
-      <p className="md:text-4xl text-3xl mt-4 bg-clip-text text-center text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-display px-8">
-        Welcome to AgroVoiceAI
+      <p
+        className={cn(
+          locale === 'en' ? '' : 'pt-2',
+          'md:text-4xl text-3xl mt-4 bg-clip-text text-center text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-display px-8'
+        )}
+      >
+        {welcome}
       </p>
       {/* <p className="flex justify-start font-pops px-8">
         Let's create your profile.
@@ -134,7 +150,7 @@ export default function OnboardingForm({
           </div>
           <div className="flex flex-col text-center items-center md:text-left justify-center">
             <CardHeader>
-              <CardTitle>Profile Picture (optional)</CardTitle>
+              <CardTitle>{title}</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-row justify-start">
               <Dialog open={open} onOpenChange={setOpen}>
@@ -148,7 +164,7 @@ export default function OnboardingForm({
                     {isSavingImage && (
                       <Loader2 className="mr-2 size-4 animate-spin" />
                     )}
-                    Upload image
+                    {upload}
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="">
@@ -179,8 +195,7 @@ export default function OnboardingForm({
                           </p>
                         ) : (
                           <p className="flex justify-center p-2 items-center">
-                            Drag n drop an image file here, or click to select a
-                            file
+                            {drag}
                           </p>
                         )}
                       </div>
@@ -193,7 +208,7 @@ export default function OnboardingForm({
                           variant="outline"
                           type="button"
                         >
-                          Cancel
+                          {cancel}
                         </Button>
                       </DialogClose>
                       <Button
@@ -202,7 +217,7 @@ export default function OnboardingForm({
                         variant="default"
                         type="submit"
                       >
-                        Save
+                        {save}
                       </Button>
                     </DialogFooter>
                   </form>
@@ -231,7 +246,7 @@ export default function OnboardingForm({
                   }
                 }}
               >
-                Remove
+                {remove}
               </Button>
             </CardContent>
           </div>
@@ -276,7 +291,7 @@ export default function OnboardingForm({
           }}
         >
           <CardHeader>
-            <CardTitle>Name</CardTitle>
+            <CardTitle>{nameText}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-1 -mt-3">
@@ -297,7 +312,7 @@ export default function OnboardingForm({
                 variant="outline"
               >
                 {isSaving && <Loader2 className="mr-2 size-4 animate-spin" />}
-                <span>Save & Next</span>
+                <span>{saveName}</span>
               </Button>
             </div>
           </CardContent>
@@ -305,7 +320,7 @@ export default function OnboardingForm({
       </Card>
       <p className="flex justify-start text-sm pb-4 dark:text-gray-500 text-gray-700">
         <Info className="size-5 mr-3" />
-        <span>You can always change your details later.</span>
+        <span>{changeLater}</span>
       </p>
     </Card>
   )
