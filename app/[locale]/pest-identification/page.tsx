@@ -1,7 +1,12 @@
-import React from 'react'
+import { getCurrentUser } from '../../actions'
+import MarketHome2 from '@/components/Market/market-home-api-2'
+import SessionPageContainer from '@/components/session-page-container'
 
-function Pest() {
-  return <div>Pest</div>
+export default async function Market() {
+  const user = await getCurrentUser()
+  return (
+    <>
+      <SessionPageContainer component="" />
+    </>
+  )
 }
-
-export default Pest

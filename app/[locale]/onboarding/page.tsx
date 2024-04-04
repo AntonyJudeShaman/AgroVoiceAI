@@ -3,12 +3,17 @@ import React from 'react'
 import { getCurrentUser } from '../../actions'
 import { redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
+import { auth } from '@/lib/auth'
 
 export default async function Onboarding() {
+  const session = await auth()
   const user = await getCurrentUser()
   console.log(user)
-  if (user?.pageShown) {
+  if (user?.pageShown && session) {
     redirect('/options')
+  }
+  if (!session?.user?.id) {
+    redirect('/sign-in')
   }
   const t = await getTranslations('Index')
   return (

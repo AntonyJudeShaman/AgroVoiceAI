@@ -78,17 +78,23 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
               className="rounded-2xl hover:border-green-800 border flex justify-start dark:bg-teal-950/30 hover:dark:bg-teal-950/60 bg-green-200/50 hover:bg-green-200/80 w-full"
             >
               {user?.image?.length ? (
-                <Image
-                  className="size-9 transition-opacity duration-300 rounded-full my-4 justify-start select-none hover:opacity-80"
-                  src={user?.image ?? ''}
-                  alt={user.name ?? 'Avatar'}
-                  height={44}
-                  width={44}
-                />
+                <>
+                  <Image
+                    className="size-9 transition-opacity duration-300 rounded-full my-4 justify-start select-none hover:opacity-80"
+                    src={user?.image ?? ''}
+                    alt={user.name ?? 'Avatar'}
+                    height={44}
+                    width={44}
+                  />
+                  <p className="size-[0.8rem] dark:bg-green-400 bg-green-700 top-3 right-3 flex relative z-40 rounded-full"></p>
+                </>
               ) : (
-                <div className="flex items-center justify-center text-sm font-bold dark:bg-teal-600  bg-teal-500 text-white uppercase rounded-full select-none size-10 shrink-0 bg-muted/50 text-muted-foreground">
-                  {getUserInitials(user?.name || '')}
-                </div>
+                <>
+                  <div className="flex items-center justify-center text-sm font-bold dark:bg-teal-600  bg-teal-500 text-white uppercase rounded-full select-none size-10 shrink-0 bg-muted/50 text-muted-foreground">
+                    {getUserInitials(user?.name || '')}
+                  </div>
+                  <p className="size-[0.8rem] dark:bg-green-400 bg-green-700 top-3 right-3 flex relative z-40 rounded-full"></p>
+                </>
               )}
               <span className="ml-2">{user?.name}</span>
             </Button>

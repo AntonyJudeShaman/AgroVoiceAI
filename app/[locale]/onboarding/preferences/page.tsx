@@ -3,13 +3,18 @@ import OnboardingPreferenceForm from '@/components/Form/onboarding-preference-fo
 import React from 'react'
 import { redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
+import { auth } from '@/lib/auth'
 
 export default async function OnboardingPreference() {
+  const session = await auth()
   const user = await getCurrentUser()
-  if (user?.pageShown && user) {
+  console.log(user)
+  if (user?.pageShown && session) {
     redirect('/options')
   }
-
+  if (!session?.user?.id) {
+    redirect('/sign-in')
+  }
   const t = await getTranslations('Index')
 
   return (

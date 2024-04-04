@@ -3,10 +3,17 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 import { OnboardingLocationForm } from '@/components/Form/onboarding-location'
 import { getTranslations } from 'next-intl/server'
+import { auth } from '@/lib/auth'
 
 export default async function OnboardingLocation() {
+  const session = await auth()
+
+  if (!session?.user?.id) {
+    redirect('/sign-in')
+  }
+
   const users = await getCurrentUser()
-  if (users?.pageShown && users) {
+  if (users?.pageShown && session) {
     redirect('/onboarding/preferences')
   }
 

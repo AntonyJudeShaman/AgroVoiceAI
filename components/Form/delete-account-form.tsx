@@ -26,7 +26,7 @@ import {
 } from '../ui/card'
 import { cn } from '@/lib/utils'
 import { Loader2, Trash2 } from 'lucide-react'
-import { deleteAccount } from '@/app/actions'
+import { clearChats, deleteAccount } from '@/app/actions'
 import { signOut } from 'next-auth/react'
 import MyToast from '../ui/my-toast'
 import { SettingsProps } from '@/lib/types'
@@ -91,6 +91,7 @@ export function DeleteAccount({
                   event.preventDefault()
                   setIsSaving(true)
                   try {
+                    await clearChats()
                     await deleteAccount()
                     setOpen(false)
                     MyToast({

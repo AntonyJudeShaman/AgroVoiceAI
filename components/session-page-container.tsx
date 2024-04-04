@@ -8,7 +8,7 @@ import { getTranslations } from 'next-intl/server'
 export default async function SessionPageContainer({
   component
 }: {
-  component: React.ReactNode
+  component?: React.ReactNode
 }) {
   const user = await getCurrentUser()
   const session = await auth()

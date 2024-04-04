@@ -113,7 +113,7 @@
         }
       },
       "bot": {
-        "title": "Additional Information",
+        "title": "Additional Information (optional)",
         "desc": "Please provide extra information for the chatbot to give more precise suggestions for your crop.",
         "placeholder": "I like to \"grow tomatoes\" or I am \"interested in organic farming\" or tell about the current method carried out for your crops to get better suggestions."
       }
