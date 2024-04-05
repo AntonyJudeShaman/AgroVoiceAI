@@ -7,8 +7,7 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import { Analytics } from '@vercel/analytics/react'
 import { Providers } from '@/components/Theme/providers'
-import { Inter } from 'next/font/google'
-import { Poppins } from 'next/font/google'
+import { Inter, Poppins, Bricolage_Grotesque } from 'next/font/google'
 import { TailwindIndicator } from '@/components/Theme/tailwind-indicator'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
@@ -19,6 +18,13 @@ const poppins = Poppins({
   style: ['normal', 'italic'],
   subsets: ['latin', 'latin-ext', 'devanagari'],
   variable: '--font-pops'
+})
+
+const bricol = Bricolage_Grotesque({
+  weight: ['200', '300', '400', '500', '600', '700', '800'],
+  style: ['normal'],
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-bricol'
 })
 
 const calSans = LocalFont({
@@ -60,12 +66,13 @@ export default function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
-          'font-sans antialiased scroll-smooth transition-transform duration-1000',
+          'font-san antialiased scroll-smooth font-bricol transition-transform duration-1000',
           GeistSans.variable,
           GeistMono.variable,
           inter.variable,
           calSans.variable,
           poppins.variable,
+          bricol.variable,
           `
           ${
             process.env.NODE_ENV === 'development' ? 'debug-screens' : undefined

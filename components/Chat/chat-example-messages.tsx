@@ -28,7 +28,7 @@ export default function ChatExampleMessages({ messages, append, id }: any) {
               <div className="text-sm font-semibold font-pops">
                 {example.heading}
               </div>
-              <div className="text-sm dark:text-gray-400 text-gray-600">
+              <div className="text-sm dark:text-gray-400 font-bricol text-gray-600">
                 {example.subheading}
               </div>
             </div>

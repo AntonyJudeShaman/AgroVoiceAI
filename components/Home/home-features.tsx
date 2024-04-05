@@ -8,7 +8,7 @@ async function HomeFeatures() {
     <div className="">
       <Header
         heading={t('home.topic')}
-        className="mt-16 p-3 text-4xl md:text-5xl text-center lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-pops font-bold tracking-tighter"
+        className="mt-16 p-3 text-4xl md:text-5xl text-center lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bricol font-bold tracking-tighter"
       />
     </div>
   )

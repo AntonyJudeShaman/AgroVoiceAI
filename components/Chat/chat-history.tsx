@@ -32,7 +32,7 @@ export async function ChatHistory() {
             'h-10 w-full z-40 justify-start bg-slate-50 px-4 shadow-none transition-colors hover:bg-slate-200/40 dark:bg-slate-900 dark:hover:bg-slate-300/10'
           )}
         >
-          <IconPlus className="-translate-x-2 stroke-2" />
+          <IconPlus className="-translate-x-2 stroke-2 font-bricol" />
           {t('sidebar.new_chat')}
         </Link>
         <ClearHistory

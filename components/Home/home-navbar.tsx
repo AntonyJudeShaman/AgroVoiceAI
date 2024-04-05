@@ -122,7 +122,7 @@ export default function Navbar({
                   >
                     <Button
                       variant="link"
-                      className="flex items-center text-[1rem] px-0 after:bg-current shadow-none"
+                      className="flex items-center text-[0.85rem] px-0 after:bg-current shadow-none"
                     >
                       {item.icon}
                       {navItems[index]}

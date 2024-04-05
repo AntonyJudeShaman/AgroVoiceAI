@@ -32,7 +32,7 @@ export async function BentoGridItem() {
             </div>
             <div
               key={'description-' + i}
-              className="font-sans font-normal text-neutral-600 text-md dark:text-neutral-300"
+              className="font-bricol font-normal text-neutral-600 text-md dark:text-neutral-300"
             >
               {t(translations[i].description)}
             </div>

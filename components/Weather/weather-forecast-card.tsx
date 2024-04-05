@@ -111,7 +111,7 @@ function WeatherForecastCard({ forecast, forecastIndex }: any) {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="font-pops space-y-2">
+          <div className="font-bricol space-y-2">
             <p className="text-md flex items-center">
               <ThermometerSun className="size-5 mr-2" />
               {locale === 'en' ? 'Temperature: ' : 'வெப்பநிலை: '}

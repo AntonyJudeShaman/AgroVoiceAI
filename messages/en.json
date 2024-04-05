@@ -89,7 +89,7 @@
           "desc": "Upload a profile image",
           "upload": "Upload image",
           "remove": "Remove",
-          "drag:": "Drag n drop an image file here, or click to select a file"
+          "drag": "Drag n drop an image file here, or click to select a file"
         },
         "email": {
           "title": "Your Email",

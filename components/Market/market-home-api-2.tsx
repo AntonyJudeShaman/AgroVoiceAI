@@ -175,7 +175,7 @@ export default function MarketHome2({ user }: { user: any }) {
                     ).map((item, index) => (
                       <TableHead
                         key={index}
-                        className="md:p-6 p-3 font-bold md:text-2xl text-green-600"
+                        className="md:p-6 p-3 font-bold font-bricol md:text-2xl text-green-600"
                       >
                         {item.label}
                       </TableHead>
@@ -243,7 +243,7 @@ export default function MarketHome2({ user }: { user: any }) {
         </div>
       </div>
       <div className="mt-12 mx-auto w-[82%] lg:w-[70%] flex justify-start flex-col text-center">
-        <p className="text-3xl tracking-tighter font-pops mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
+        <p className="text-3xl tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
           {locale === 'en'
             ? 'View price in other locations'
             : 'பிற இடங்களில் விலையைக் காண'}
