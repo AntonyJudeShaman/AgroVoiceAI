@@ -22,6 +22,7 @@ import MyToast from '../ui/my-toast'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import { MemoizedReactMarkdown } from '@/components/markdown'
+import Link from 'next/link'
 
 export default function PestTest({
   user,
@@ -65,6 +66,7 @@ export default function PestTest({
   }
 
   const locale = useLocale()
+  const router = useRouter()
 
   const handleUpload = async () => {
     setIsProcessed(false)
@@ -96,7 +98,7 @@ export default function PestTest({
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center z-40 mt-0 md:mt-[10%] w-screen">
+      <div className="flex flex-col justify-center items-center z-40 mt-0 md:mt-[10%] max-w-screen">
         <Card className="md:max-w-4xl z-40 w-full flex md:justify-center items-center mx-auto border-none shadow-none bg-transparent">
           <div className={className}>
             {image && !response && (
@@ -246,9 +248,14 @@ export default function PestTest({
         </Card>
       </div>
       {response && (
-        <div className="mx-auto max-w-2xl mt-6 lg:-mt-[3%] mb-10">
+        <div className="mx-auto flex flex-col max-w-4xl mt-6 lg:-mt-[3%] mb-10">
+          <div className="mr-4 mb-4 flex justify-end">
+            <Button onClick={() => router.push('/pest-identification/new')}>
+              {locale === 'en' ? 'Back' : 'பின்னால்'}
+            </Button>
+          </div>
           <div className="max-w-2xl mx-auto flex items-center ml-4 mb-5">
-            <p className="flex md:flex-row flex-col items-center">
+            <p className="flex flex-row items-center">
               <span className="mr-2 bg-clip-text font-pops text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% text-4xl font-bold">
                 Pest Name:
               </span>{' '}
