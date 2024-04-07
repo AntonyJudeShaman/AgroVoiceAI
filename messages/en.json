@@ -89,7 +89,7 @@
           "desc": "Upload a profile image",
           "upload": "Upload image",
           "remove": "Remove",
-          "drag": "Drag n drop an image file here, or click to select a file"
+          "drag": "Drag n drop an image file here"
         },
         "email": {
           "title": "Your Email",
@@ -118,7 +118,14 @@
         "placeholder": "I like to \"grow tomatoes\" or I am \"interested in organic farming\" or tell about the current method carried out for your crops to get better suggestions."
       }
     },
-
+    "pest": {
+      "title": "Pest Identification",
+      "desc": "Identify pests and diseases in your crops by uploading images.",
+      "upload": "Upload Image",
+      "submit": "Submit",
+      "result": "Result",
+      "try_again": "Try Again"
+    },
     "onboarding": {
       "welcome": "Welcome to AgroVoiceAI",
       "save&next": "Save & Next",

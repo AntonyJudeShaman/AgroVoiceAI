@@ -197,7 +197,7 @@ export const options = [
       'Spot crop pests and diseases in user-uploaded images, get quick solutions.',
     icon: <BugOffIcon />,
     header: <PestField />,
-    url: '/chat'
+    url: '/pest-identification'
   },
 
   {

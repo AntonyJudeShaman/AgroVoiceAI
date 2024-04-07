@@ -55,6 +55,7 @@ model User {
   gender            String?
   emailVerified     DateTime?
   image             String?   @db.Text
+  pestImage         String?   @db.Text
   chatbotPreference String?   @db.LongText
   pageShown         Boolean?  @default(false)
   createdAt         DateTime  @default(now()) @map(name: "created_at")

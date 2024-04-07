@@ -106,6 +106,52 @@ const handleImageSubmit = async (
   }
 }
 
+const handlePestImageSubmit = async (
+  event: React.FormEvent<HTMLFormElement>,
+  user: User,
+  imageURL: string,
+  setIsSavingImage: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsImageChanged: React.Dispatch<React.SetStateAction<boolean>>,
+  toast: any
+) => {
+  event.preventDefault()
+
+  setIsSavingImage(true)
+  toast.loading('Uploading file...')
+  try {
+    imageURLSchema.parse(imageURL)
+    const response = await fetch(`/api/user/pest-image`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: user.id, imageURL: imageURL })
+    })
+
+    if (response.ok) {
+      toast.dismiss()
+      MyToast({ message: 'Image updated.', type: 'success' })
+    } else {
+      const errorMessage = await response.text()
+      toast.dismiss()
+      MyToast({ message: 'Failed to upload image.', type: 'error' })
+    }
+  } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      toast.dismiss()
+      MyToast({ message: 'Image format not supported.', type: 'error' })
+    } else {
+      toast.dismiss()
+      MyToast({
+        message: 'An error occurred. Please try again later.',
+        type: 'error'
+      })
+    }
+  } finally {
+    setIsSavingImage(false)
+  }
+}
+
 const handleDistrictSubmit = async (
   user: User,
   district: string,
@@ -314,6 +360,7 @@ const handleSubmit = async (
 export {
   handleNameSubmit,
   handleImageSubmit,
+  handlePestImageSubmit,
   handleDistrictSubmit,
   handleEmailSubmit,
   handleUserNameSubmit,
