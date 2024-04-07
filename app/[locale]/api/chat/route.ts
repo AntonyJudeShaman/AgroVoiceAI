@@ -5,11 +5,14 @@ import { auth } from '@/lib/auth'
 import { nanoid } from '@/lib/utils'
 import redis from '@/lib/redis'
 import { getChatbotPreference } from '@/app/actions'
-// export const runtime = 'nodejs16'
+
+export const runtime = 'edge'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!
 })
+
+const userRequestQueues: { [key: string]: number[] } = {}
 
 export async function POST(req: Request) {
   const json = await req.json()
@@ -17,11 +20,20 @@ export async function POST(req: Request) {
   const userId = (await auth())?.user.id || nanoid()
   const preferences = await getChatbotPreference()
 
-  // if (!userId) {
-  //   return new Response('Unauthorized', {
-  //     status: 401
-  //   })
-  // }
+  if (!userRequestQueues[userId]) {
+    userRequestQueues[userId] = []
+  }
+
+  const currentTime = Date.now()
+  userRequestQueues[userId] = userRequestQueues[userId].filter(
+    timestamp => currentTime - timestamp < 60000
+  )
+
+  if (userRequestQueues[userId].length >= 10) {
+    return new Response('Too Many Requests', { status: 429 })
+  }
+
+  userRequestQueues[userId].push(currentTime)
 
   const context = []
   context.push({
