@@ -53,7 +53,7 @@ export async function getLocation() {
   const userId = await getUserId()
   const district = await db.user.findMany({
     where: {
-      id: userId
+      id: userId || ''
     },
     select: {
       userDistrict: true
@@ -67,7 +67,7 @@ export async function getCurrentUser() {
   const id = await getUserId()
   const user = await db.user.findFirst({
     where: {
-      id: id
+      id: id || ''
     }
   })
   return user
@@ -75,8 +75,8 @@ export async function getCurrentUser() {
 
 export async function getUserId() {
   const session = await auth()
-
-  return session?.user?.id
+  if (session) return session?.user?.id
+  return null
 }
 
 export async function getChatbotPreference() {
