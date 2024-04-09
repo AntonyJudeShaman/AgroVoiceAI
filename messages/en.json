@@ -140,7 +140,8 @@
       "password": "Password",
       "placeholder1": "Enter your Email",
       "placeholder2": "Enter your password",
-      "register": "Register"
+      "register": "Register",
+      "forgot": "Forgot Password?"
     },
     "Signin": {
       "account": "Sign in to your account",
