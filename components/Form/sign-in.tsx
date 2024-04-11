@@ -22,6 +22,7 @@ import { nameSchema, validateInput } from '@/lib/schema'
 import { z } from 'zod'
 import Link from 'next/link'
 import { AccountProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 export function Account({
   title,
@@ -57,6 +58,8 @@ export function Account({
   const passwordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible)
   }
+
+  const locale = useLocale()
 
   return (
     <Card className="font-pops ">
@@ -105,7 +108,10 @@ export function Account({
               nameSchema.parse(password)
               if (!validateInput(name) || !validateInput(password)) {
                 MyToast({
-                  message: 'Dont try to inject code. 😒',
+                  message:
+                    locale === 'en'
+                      ? 'Dont try to inject code. 😒'
+                      : 'குறியீட்டை உட்செலுத்த முயற்சிக்காதீர்கள். 😒',
                   type: 'error'
                 })
                 setIsFieldLoading(false)
@@ -118,13 +124,19 @@ export function Account({
                 )
                 if (res) {
                   MyToast({
-                    message: 'Signed in successfully. Redirecting...',
+                    message:
+                      locale === 'en'
+                        ? 'Signed in successfully. Redirecting...'
+                        : 'வெற்றிகரமாக உள்நுழைந்துள்ளது. திசைதிருப்புகிறது...',
                     type: 'success'
                   })
                   router.push('/onboarding')
                 } else {
                   MyToast({
-                    message: 'Invalid credentials. Please try again.',
+                    message:
+                      locale === 'en'
+                        ? 'Invalid credentials. Please try again.'
+                        : 'தவறான சான்றுகள். மீண்டும் முயருங்கள்.',
                     type: 'error'
                   })
                 }
@@ -133,12 +145,17 @@ export function Account({
               if (error instanceof z.ZodError) {
                 MyToast({
                   message:
-                    'Username & Password must contain at least 4 characters.',
+                    locale === 'en'
+                      ? 'Username & Password must contain at least 4 characters.'
+                      : 'பயனர்பெயர் மற்றும் கடவுச்சொல் குறைந்ததும் 4 எழுத்துகள் கொண்டிருக்க வேண்டும்.',
                   type: 'error'
                 })
               } else {
                 MyToast({
-                  message: 'An error occurred. Please try again later.',
+                  message:
+                    locale === 'en'
+                      ? 'An error occurred. Please try again later.'
+                      : 'பிழை ஏற்பட்டது. பிறகு முயற்சிக்கவும்.',
                   type: 'error'
                 })
               }

@@ -105,7 +105,10 @@ export default function OnboardingForm({
       setOpen(false)
     } catch (error) {
       MyToast({
-        message: 'Error uploading file. Please try again later.',
+        message:
+          locale == 'en'
+            ? 'Error uploading file. Please try again later.'
+            : 'கோப்பை பதிவேற்றுவதில் பிழை. பிறகு முயற்சிக்கவும்',
         type: 'error'
       })
     }
@@ -235,12 +238,18 @@ export default function OnboardingForm({
                     toast.dismiss()
 
                     MyToast({
-                      message: 'Profile picture updated.',
+                      message:
+                        locale === 'en'
+                          ? 'Profile picture updated.'
+                          : 'சுயவிவரப் படம் புதுப்பிக்கப்பட்டது.',
                       type: 'success'
                     })
                   } else {
                     MyToast({
-                      message: 'No image to remove.',
+                      message:
+                        locale === 'en'
+                          ? 'No image to remove.'
+                          : 'அழிக்க எந்த படமும் இல்லை.',
                       type: 'error'
                     })
                   }
@@ -259,7 +268,10 @@ export default function OnboardingForm({
 
             if (!name.trim()) {
               MyToast({
-                message: 'Name cannot be empty.',
+                message:
+                  locale === 'en'
+                    ? 'Name cannot be empty.'
+                    : 'பெயர் காலியாக இருக்க முடியாது.',
                 type: 'error'
               })
               setIsSaving(false)

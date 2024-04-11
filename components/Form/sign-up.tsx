@@ -18,6 +18,7 @@ import MyToast from '../ui/my-toast'
 import { set, z } from 'zod'
 import { nameSchema, validateInput } from '@/lib/schema'
 import { AccountProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 export function CreateAccount({
   title,
@@ -51,6 +52,7 @@ export function CreateAccount({
     setIsPasswordVisible(!isPasswordVisible)
   }
 
+  const locale = useLocale()
   return (
     <div className="md:min-w-[50vh]">
       <Card className="font-pops w-full">
@@ -102,7 +104,10 @@ export function CreateAccount({
                 nameSchema.parse(password)
                 if (!validateInput(name) || !validateInput(password)) {
                   MyToast({
-                    message: "Don't try to inject code. 😒",
+                    message:
+                      locale === 'en'
+                        ? 'Dont try to inject code. 😒'
+                        : 'குறியீட்டை உட்செலுத்த முயற்சிக்காதீர்கள். 😒',
                     type: 'error'
                   })
                 } else {
@@ -119,7 +124,10 @@ export function CreateAccount({
 
                   if (response.status === 200) {
                     MyToast({
-                      message: 'Account created! Please sign in.',
+                      message:
+                        locale === 'en'
+                          ? 'Account created! Please sign in.'
+                          : 'கணக்கு உருவாக்கப்பட்டது! உள்நுழையவும்.',
                       type: 'success'
                     })
                     setTimeout(() => {
@@ -128,7 +136,10 @@ export function CreateAccount({
                     }, 2000)
                   } else {
                     MyToast({
-                      message: 'The user already exists. Please sign in',
+                      message:
+                        locale === 'en'
+                          ? 'The user already exists. Please sign in'
+                          : 'பயனர் ஏற்கனவே இருக்கிறார். உள்நுழையவும்',
                       type: 'error'
                     })
                   }
@@ -137,12 +148,17 @@ export function CreateAccount({
                 if (error instanceof z.ZodError) {
                   MyToast({
                     message:
-                      'Username & Password must contain at least 4 characters.',
+                      locale === 'en'
+                        ? 'Username & Password must contain at least 4 characters.'
+                        : 'பயனர்பெயர் மற்றும் கடவுச்சொல் குறைந்ததும் 4 எழுத்துகள் கொண்டிருக்க வேண்டும்.',
                     type: 'error'
                   })
                 } else {
                   MyToast({
-                    message: 'An error occurred. Please try again later.',
+                    message:
+                      locale === 'en'
+                        ? 'An error occurred. Please try again later.'
+                        : 'பிழை ஏற்பட்டது. பிறகு முயற்சிக்கவும்.',
                     type: 'error'
                   })
                 }

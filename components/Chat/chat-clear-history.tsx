@@ -85,7 +85,10 @@ export function ClearHistory({
                 const result = await clearChats()
                 if (result && 'error' in result) {
                   MyToast({
-                    message: 'Error clearing chat history',
+                    message:
+                      locale === 'en'
+                        ? 'உரையாடல் வரலாற்றை அழிப்பதில் பிழை'
+                        : 'Error clearing chat history',
                     type: 'error'
                   })
                   return
@@ -95,7 +98,10 @@ export function ClearHistory({
                 router.refresh()
                 router.push(`/chat`)
                 MyToast({
-                  message: 'Chat history cleared successfully',
+                  message:
+                    locale === 'en'
+                      ? 'Chat history cleared successfully'
+                      : 'உரையாடல் வரலாறு வெற்றிகரமாக அழிக்கப்பட்டது',
                   type: 'success'
                 })
               })

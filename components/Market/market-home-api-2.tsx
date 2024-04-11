@@ -54,13 +54,19 @@ export default function MarketHome2({ user }: { user: any }) {
           setItems(parseItems(data.scrapedData))
         } else {
           MyToast({
-            message: 'Failed to fetch prices. ',
+            message:
+              locale === 'en'
+                ? 'Failed to fetch prices.'
+                : 'விலைகளைப் பெற முடியவில்லை.',
             type: 'error'
           })
         }
       } catch (error: any) {
         MyToast({
-          message: 'Failed to fetch prices. Please try again later.',
+          message:
+            locale === 'en'
+              ? 'Failed to fetch prices. Please try again later.'
+              : 'விலைகளைப் பெற முடியவில்லை. பின்னர் முயற்சிக்கவும்.',
           type: 'error'
         })
       } finally {

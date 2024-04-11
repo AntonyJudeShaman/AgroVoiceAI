@@ -109,7 +109,10 @@ export default function PestHome({
       setOpen(false)
     } catch (error) {
       MyToast({
-        message: 'Error uploading file. Please try again later.',
+        message:
+          locale === 'en'
+            ? 'Error uploading file. Please try again later.'
+            : 'கோப்பை பதிவேற்றுவதில் பிழை ஏற்பட்டது. பிறகு முயற்சிக்கவும்.',
         type: 'error'
       })
     } finally {
@@ -143,7 +146,10 @@ export default function PestHome({
       setIsProcessed(true)
     } catch (error) {
       MyToast({
-        message: 'Error processing image. Please try again later.',
+        message:
+          locale === 'en'
+            ? 'Error processing image. Please try again later.'
+            : 'படத்தை செயலாக்குவதில் பிழை ஏற்பட்டது. பிறகு முயற்சிக்கவும்.',
         type: 'error'
       })
     } finally {
@@ -318,18 +324,28 @@ export default function PestHome({
                             size="lg"
                             onClick={async () => {
                               if (image) {
-                                toast.loading('Please wait...')
+                                toast.loading(
+                                  locale === 'en'
+                                    ? 'Please wait...'
+                                    : 'காத்திருக்கவும்...'
+                                )
                                 setImage(null)
                                 setIsUploaded(false)
                                 toast.dismiss()
 
                                 MyToast({
-                                  message: 'Image removed.',
+                                  message:
+                                    locale === 'en'
+                                      ? 'Image removed.'
+                                      : 'படம் நீக்கப்பட்டது.',
                                   type: 'success'
                                 })
                               } else {
                                 MyToast({
-                                  message: 'No image to remove.',
+                                  message:
+                                    locale === 'en'
+                                      ? 'No image to remove.'
+                                      : 'அழிக்க எந்த படமும் இல்லை.',
                                   type: 'error'
                                 })
                               }

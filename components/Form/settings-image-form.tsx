@@ -34,6 +34,7 @@ import { IconClose } from '../ui/icons'
 import { Label } from '../ui/label'
 import { cn } from '@/lib/utils'
 import { SettingsProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 export function SettingsImageForm({
   user,
@@ -54,6 +55,7 @@ export function SettingsImageForm({
   const [modalVisible, setModalVisible] = useState(false)
   const [modalImage, setModalImage] = useState('')
   const [isUploaded, setIsUploaded] = useState<boolean>(true)
+  const locale = useLocale()
 
   const firebaseApp = initializeApp(firebaseConfig, 'profile')
   const storage = getStorage(firebaseApp)
@@ -110,7 +112,10 @@ export function SettingsImageForm({
       setOpen(false)
     } catch (error) {
       MyToast({
-        message: 'Error uploading file. Please try again later.',
+        message:
+          locale === 'en'
+            ? 'Error uploading file. Please try again later.'
+            : 'கோப்பை பதிவேற்றுவதில் பிழை. பிறகு முயற்சிக்கவும்',
         type: 'error'
       })
     }
@@ -248,12 +253,18 @@ export function SettingsImageForm({
                   toast.dismiss()
 
                   MyToast({
-                    message: 'Profile picture updated.',
+                    message:
+                      locale === 'en'
+                        ? 'Profile picture updated.'
+                        : 'சுயவிவரப் படம் புதுப்பிக்கப்பட்டது.',
                     type: 'success'
                   })
                 } else {
                   MyToast({
-                    message: 'No image to remove.',
+                    message:
+                      locale === 'en'
+                        ? 'No image to remove.'
+                        : 'அழிக்க எந்த படமும் இல்லை.',
                     type: 'error'
                   })
                 }

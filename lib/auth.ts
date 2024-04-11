@@ -20,8 +20,8 @@ export const {
   handlers: { GET, POST },
   auth
 } = NextAuth({
+  debug: process.env.NODE_ENV === 'development',
   providers: [
-    Google,
     Credentials({
       authorize: async credentials => {
         console.log('inside authorize')
@@ -31,22 +31,12 @@ export const {
             userName: credentials.name as string
           }
         })
-
-        console.log('after user check')
-        const encoder = new TextEncoder()
-        const saltedPassword = encoder.encode(
-          (credentials.password as string) + 10
-        )
-        const hashedPasswordBuffer = await crypto.subtle.digest(
-          'SHA-512',
-          saltedPassword
-        )
         const hashedPassword = await hashPassword(
           credentials.password as string
         )
         if (user) {
           if (hashedPassword === user?.password) {
-            console.log('User found')
+            console.log('User found', user)
             return user
           } else {
             console.error('Invalid credentials')
@@ -66,35 +56,30 @@ export const {
     updateAge: 24 * 60 * 60
   },
   callbacks: {
-    async session({ token, session, user }) {
+    async session({ token, session }) {
+      console.log('inside session', token)
       if (token) {
-        session.user.id = token?.id || (user?.id as any)
+        session.user.id = token?.id as string
       }
       return session
     },
     async jwt({ token, user }) {
-      console.log('inside jwt')
+      console.log('inside jwt', token)
       const dbUser = await db.user.findFirst({
         where: {
-          userName: token.name
+          id: token.id as string
         }
       })
 
       if (!dbUser) {
         if (user) {
-          token.id = user?.id
+          token.id = token?.id
         }
         return token
       }
-
+      console.log('before jwt', token)
       return {
-        id: dbUser.id,
-        name: dbUser.name,
-        email: dbUser.email,
-        picture: dbUser.image,
-        phone: dbUser.phone,
-        age: dbUser.age,
-        password: dbUser.password
+        id: token.id
       }
     }
   },

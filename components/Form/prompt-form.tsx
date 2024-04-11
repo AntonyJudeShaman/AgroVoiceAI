@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 import { inputSchema, validateInput } from '@/lib/schema'
 import toast from 'react-hot-toast'
 import MyToast from '../ui/my-toast'
+import { useLocale } from 'next-intl'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -28,6 +29,7 @@ export function PromptForm({
   isLoading
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
+  const locale = useLocale()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
   const router = useRouter()
   React.useEffect(() => {
@@ -45,7 +47,13 @@ export function PromptForm({
         }
         inputSchema.parse(input)
         if (!validateInput(input)) {
-          MyToast({ message: 'Dont try to inject code. 😒', type: 'error' })
+          MyToast({
+            message:
+              locale === 'en'
+                ? 'Dont try to inject code. 😒'
+                : 'குறியீட்டை உட்செலுத்த முயற்சிக்காதீர்கள். 😒',
+            type: 'error'
+          })
         } else {
           setInput('')
           await onSubmit(input)
@@ -71,7 +79,9 @@ export function PromptForm({
               <span className="sr-only">New Chat</span>
             </button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent>
+            {locale === 'en' ? 'New Chat' : 'புதிய உரையாடல்'}
+          </TooltipContent>
         </Tooltip>
         <Textarea
           ref={inputRef}
@@ -96,7 +106,9 @@ export function PromptForm({
                 <span className="sr-only">Send message</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Send message</TooltipContent>
+            <TooltipContent>
+              {locale === 'en' ? 'Send message' : 'அனுப்பு'}
+            </TooltipContent>
           </Tooltip>
         </div>
       </div>

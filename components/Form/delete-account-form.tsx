@@ -30,6 +30,7 @@ import { clearChats, deleteAccount } from '@/app/actions'
 import { signOut } from 'next-auth/react'
 import MyToast from '../ui/my-toast'
 import { SettingsProps } from '@/lib/types'
+import { useLocale } from 'next-intl'
 
 export function DeleteAccount({
   title,
@@ -43,6 +44,8 @@ export function DeleteAccount({
   const [isPending, startTransition] = React.useTransition()
   const router = useRouter()
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
+
+  const locale = useLocale()
 
   return (
     <Card className="w-full border dark:border-gray-700/70 border-gray-300">
@@ -95,14 +98,20 @@ export function DeleteAccount({
                     await deleteAccount()
                     setOpen(false)
                     MyToast({
-                      message: 'Account deleted successfully',
+                      message:
+                        locale === 'en'
+                          ? 'Account deleted successfully'
+                          : 'கணக்கு வெற்றிகரமாக நீக்கப்பட்டது',
                       type: 'success'
                     })
                     window.history.pushState({}, '', `/`)
                     signOut()
                   } catch (error) {
                     MyToast({
-                      message: 'Error deleting account',
+                      message:
+                        locale === 'en'
+                          ? 'Error deleting account'
+                          : 'கணக்கை நீக்குவதில் பிழை',
                       type: 'error'
                     })
                   } finally {

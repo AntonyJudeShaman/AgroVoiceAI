@@ -24,6 +24,7 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import MyToast from '../ui/my-toast'
+import { useLocale } from 'next-intl'
 
 interface SidebarActionsProps {
   chat: Chat
@@ -50,6 +51,7 @@ export function SidebarActions({
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
   const [isRemovePending, startRemoveTransition] = React.useTransition()
+  const locale = useLocale()
 
   return (
     <>
@@ -115,7 +117,10 @@ export function SidebarActions({
 
                   if (result && 'error' in result) {
                     MyToast({
-                      message: 'Error deleting chat',
+                      message:
+                        locale === 'en'
+                          ? 'Error deleting chat'
+                          : 'உரையாடலை நீக்குவதில் பிழை',
                       type: 'error'
                     })
                     return
@@ -125,7 +130,10 @@ export function SidebarActions({
                   router.refresh()
                   router.push('/chat')
                   MyToast({
-                    message: 'Chat deleted successfully',
+                    message:
+                      locale === 'en'
+                        ? 'Chat deleted successfully'
+                        : 'உரையாடல் வெற்றிகரமாக நீக்கப்பட்டது',
                     type: 'success'
                   })
                 })

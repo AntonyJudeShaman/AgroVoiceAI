@@ -70,7 +70,13 @@ export function WeatherLocationNotAvailable({
           })
 
           if (!res.ok) {
-            MyToast({ message: 'Failed to fetch weather data', type: 'error' })
+            MyToast({
+              message:
+                locale === 'en'
+                  ? 'Failed to fetch weather data'
+                  : 'வானிலைத் தரவைப் பெறுவதில் தோல்வி',
+              type: 'error'
+            })
           }
 
           const forecastData = await res.json()
@@ -80,7 +86,10 @@ export function WeatherLocationNotAvailable({
           }
         } catch (error: any) {
           MyToast({
-            message: 'Some error occurred. Please try again later.',
+            message:
+              locale === 'en'
+                ? 'Some error occurred. Please try again later.'
+                : 'சில பிழை ஏற்பட்டது. பிறகு முயற்சிக்கவும்.',
             type: 'error'
           })
         } finally {
