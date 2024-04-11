@@ -85,7 +85,7 @@ export default function RootLayout({
           <TailwindIndicator />
           <Providers
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >

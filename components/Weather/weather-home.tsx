@@ -138,7 +138,7 @@ export default function Weather({ user }: { user: any }) {
           </p>
           <Button
             variant="link"
-            className=" text-red-600 dark:text-red-600/90 cursor-pointer mb-3 font-pops text-lg px-0 after:bg-current"
+            className=" text-red-600 shadow-none dark:text-red-600/90 cursor-pointer mb-3 font-pops text-lg px-0 after:bg-current"
             onClick={() =>
               window.scrollTo({
                 top: document.documentElement.scrollHeight,

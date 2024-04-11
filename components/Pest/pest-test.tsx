@@ -98,7 +98,12 @@ export default function PestTest({
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center z-40 mt-0 md:mt-[10%] max-w-screen">
+      <div
+        className={cn(
+          response && 'md:bg-gradient-to-tr',
+          'flex flex-col md:w-2/3 md:p-6 md:mt-[20vh] dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 mb-10 md:rounded-2xl md:border border-teal-900 mx-auto'
+        )}
+      >
         <Card className="md:max-w-4xl z-40 w-full flex md:justify-center items-center mx-auto border-none shadow-none bg-transparent">
           <div className={className}>
             {image && !response && (
@@ -266,40 +271,40 @@ export default function PestTest({
               )}
             </div>
           </div>
-        </Card>
-      </div>
-      {response && (
-        <div className="flex justify-center items-center mb-10">
-          <div className="flex flex-col lg:w-2/3 p-2 md:p-6 md:bg-gradient-to-tr dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 lg:-mt-[3%] mb-10 md:rounded-2xl md:border dark:border-teal-900 mx-auto">
-            <div className="mr-4 mb-4 flex justify-end">
-              <Button onClick={() => router.push('/pest-identification/new')}>
-                {locale === 'en' ? 'Find Other' : 'மற்றொரு முயற்சி'}
-              </Button>
-            </div>
-            <div className="max-w-2xl mx-auto flex items-center ml-4 mb-5">
-              <p className="flex flex-row items-center">
-                <span className="mr-2 bg-clip-text font-bricol text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% text-4xl font-bold">
-                  Pest Name:
-                </span>{' '}
-                <span className="text-4xl capitalize">{response.pest}</span>
-              </p>
-            </div>
-            <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
-              <MemoizedReactMarkdown
-                className="prose break-words dark:prose-invert font-bricol prose-p:leading-relaxed prose-pre:p-0"
-                remarkPlugins={[remarkGfm, remarkMath]}
-                components={{
-                  p({ children }) {
-                    return <p className="mb-2 last:mb-0">{children}</p>
-                  }
-                }}
-              >
-                {response.response}
-              </MemoizedReactMarkdown>
+        </Card>{' '}
+        {response && (
+          <div className="flex justify-center items-center mb-10">
+            <div className="flex flex-col w-full p-2 md:p-6 mt-6 lg:-mt-[3%] mb-10 md:rounded-2xl mx-auto">
+              <div className="mr-4 mb-4 flex justify-end">
+                <Button onClick={() => router.push('/pest-identification/new')}>
+                  {locale === 'en' ? 'Find Other' : 'மற்றொரு முயற்சி'}
+                </Button>
+              </div>
+              <div className="max-w-2xl mx-auto flex items-center ml-4 mb-5">
+                <p className="flex flex-row items-center">
+                  <span className="mr-2 bg-clip-text font-bricol text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% text-4xl font-bold">
+                    Pest Name:
+                  </span>{' '}
+                  <span className="text-4xl capitalize">{response.pest}</span>
+                </p>
+              </div>
+              <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
+                <MemoizedReactMarkdown
+                  className="prose break-words dark:prose-invert font-bricol prose-p:leading-relaxed prose-pre:p-0"
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  components={{
+                    p({ children }) {
+                      return <p className="mb-2 last:mb-0">{children}</p>
+                    }
+                  }}
+                >
+                  {response.response}
+                </MemoizedReactMarkdown>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }
