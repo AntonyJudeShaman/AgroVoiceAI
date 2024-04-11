@@ -104,7 +104,7 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
             <DropdownMenuContent
               sideOffset={16}
               align="center"
-              className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 w-[250px] lg:w-[220px] xl:w-[250px]  to-indigo-100/30"
+              className="bg-gradient-to-tr dark:from-slate-800 dark:to-slate-900/90 to-60% from-zinc-300 w-[250px] lg:w-[220px] xl:w-[250px] to-indigo-100/30"
               onMouseLeave={() => setOpen(false)}
             >
               <Link href="/settings">

@@ -102,12 +102,42 @@ export default function PestTest({
         <Card className="md:max-w-4xl z-40 w-full flex md:justify-center items-center mx-auto border-none shadow-none bg-transparent">
           <div className={className}>
             {image && !response && (
-              <img
-                src={image}
-                alt={user?.name || 'Profile Picture'}
-                className="cursor-pointer w-[40vh] mt-8 md:mt-0 flex justify-center rounded-2xl md:border dark:border-green-800 border-teal-400 items-center"
-                onClick={() => handleImageClick(image)}
-              />
+              <>
+                <img
+                  src={image}
+                  alt={user?.name || 'Profile Picture'}
+                  className="cursor-pointer mx-auto w-[40vh] md:w-[50vh] mt-8 0 flex justify-center rounded-2xl md:border dark:border-green-800 border-teal-400 items-center"
+                  onClick={() => handleImageClick(image)}
+                />
+                {isProcessed && (
+                  <>
+                    <p className="mt-6 mx-auto text-lg text-red-600">
+                      {locale === 'en'
+                        ? 'Some error occurred. Please try again.'
+                        : 'பிழை ஏற்பட்டது. மீண்டும் முயல்க'}
+                    </p>
+                    <div className="mx-auto space-x-4">
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="min-w-1/3 mt-6 mx-auto"
+                        onClick={() => router.push('/pest-identification/new')}
+                      >
+                        {locale === 'en' ? 'Back' : 'பின்னால்'}
+                      </Button>
+                      <Button
+                        className="min-w-1/3 mt-6 mx-auto"
+                        onClick={handleUpload}
+                        size="lg"
+                      >
+                        {locale === 'en'
+                          ? 'Try again'
+                          : 'மீண்டும் முயற்சி செய்'}
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </>
             )}
             {modalVisible && (
               <div
@@ -165,21 +195,12 @@ export default function PestTest({
                                     disabled={isUploadingImage}
                                     className="flex w-full flex-col justify-center items-center text-left rounded-md placeholder:text-white  border-2 border-dashed border-gray-500 h-auto bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                   >
-                                    <Label
-                                      htmlFor="fileInput"
-                                      className="text-lg font-pops text-center p-4"
-                                      id="fileLabel"
-                                    >
-                                      {locale === 'en'
-                                        ? 'Click to select a file'
-                                        : 'ஒரு கோப்பை தேர்ந்தெடுக்க கிளிக் செய்க'}
-                                    </Label>
                                     <Input
                                       type="file"
                                       id="fileInput"
                                       onChange={handleFileChange}
                                       disabled={isUploadingImage}
-                                      className="appearance-none w-2/3 m-4 bg-gradient-to-r from-green-600 from-10% via-green-600 via-30% to-emerald-600 to-60%"
+                                      className="appearance-none w-2/3 m-10 bg-gradient-to-r from-green-600 from-10% via-green-600 via-30% to-emerald-600 to-60%"
                                       lang="ta"
                                     />
                                   </button>
@@ -209,6 +230,7 @@ export default function PestTest({
                             >
                               {locale === 'en' ? 'Find pest' : 'கண்டுபிடி'}
                             </Button>
+
                             <Button
                               className={cn('ml-3')}
                               disabled={isSavingImage}
@@ -217,7 +239,6 @@ export default function PestTest({
                               size="lg"
                               onClick={async () => {
                                 if (image) {
-                                  toast.loading('Please wait...')
                                   setImage(null)
                                   setIsUploaded(false)
                                   toast.dismiss()
@@ -248,32 +269,34 @@ export default function PestTest({
         </Card>
       </div>
       {response && (
-        <div className="mx-auto flex flex-col max-w-4xl mt-6 lg:-mt-[3%] mb-10">
-          <div className="mr-4 mb-4 flex justify-end">
-            <Button onClick={() => router.push('/pest-identification/new')}>
-              {locale === 'en' ? 'Back' : 'பின்னால்'}
-            </Button>
-          </div>
-          <div className="max-w-2xl mx-auto flex items-center ml-4 mb-5">
-            <p className="flex flex-row items-center">
-              <span className="mr-2 bg-clip-text font-pops text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% text-4xl font-bold">
-                Pest Name:
-              </span>{' '}
-              <span className="text-4xl capitalize">{response.pest}</span>
-            </p>
-          </div>
-          <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
-            <MemoizedReactMarkdown
-              className="prose break-words dark:prose-invert font-bricol prose-p:leading-relaxed prose-pre:p-0"
-              remarkPlugins={[remarkGfm, remarkMath]}
-              components={{
-                p({ children }) {
-                  return <p className="mb-2 last:mb-0">{children}</p>
-                }
-              }}
-            >
-              {response.response}
-            </MemoizedReactMarkdown>
+        <div className="flex justify-center items-center mb-10">
+          <div className="flex flex-col lg:w-2/3 p-2 md:p-6 md:bg-gradient-to-tr dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 lg:-mt-[3%] mb-10 md:rounded-2xl md:border dark:border-teal-900 mx-auto">
+            <div className="mr-4 mb-4 flex justify-end">
+              <Button onClick={() => router.push('/pest-identification/new')}>
+                {locale === 'en' ? 'Find Other' : 'மற்றொரு முயற்சி'}
+              </Button>
+            </div>
+            <div className="max-w-2xl mx-auto flex items-center ml-4 mb-5">
+              <p className="flex flex-row items-center">
+                <span className="mr-2 bg-clip-text font-bricol text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% text-4xl font-bold">
+                  Pest Name:
+                </span>{' '}
+                <span className="text-4xl capitalize">{response.pest}</span>
+              </p>
+            </div>
+            <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
+              <MemoizedReactMarkdown
+                className="prose break-words dark:prose-invert font-bricol prose-p:leading-relaxed prose-pre:p-0"
+                remarkPlugins={[remarkGfm, remarkMath]}
+                components={{
+                  p({ children }) {
+                    return <p className="mb-2 last:mb-0">{children}</p>
+                  }
+                }}
+              >
+                {response.response}
+              </MemoizedReactMarkdown>
+            </div>
           </div>
         </div>
       )}
