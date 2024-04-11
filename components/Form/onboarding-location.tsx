@@ -82,6 +82,7 @@ export function OnboardingLocationForm({
       setIsSavingDistrict,
       setIsDistrictChanged
     ).then(() => {
+      setNext(true)
       setIsSavingDistrict(true)
       router.push('/onboarding/preferences')
       setIsSavingDistrict(false)
@@ -121,6 +122,7 @@ export function OnboardingLocationForm({
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={user?.userDistrict || 'Select your district'}
+                    disabled={next || isSavingDistrict}
                   >
                     <FormControl>
                       <SelectTrigger>

@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { IconCheck, IconCopy } from '@/components/ui/icons'
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { cn } from '@/lib/utils'
-import toast from 'react-hot-toast'
+import MyToast from '../ui/my-toast'
+import { useLocale } from 'next-intl'
 
 interface ChatMessageActionsProps extends React.ComponentProps<'div'> {
   message: Message
@@ -18,10 +19,15 @@ export function ChatMessageActions({
   ...props
 }: ChatMessageActionsProps) {
   const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 3000 })
+  const locale = useLocale()
 
   const onCopy = () => {
     if (isCopied) return
-    toast.success('Text copied to Clipboard.')
+    MyToast({
+      message:
+        locale == 'en' ? 'Text copied to Clipboard.' : 'உரை நகலெடுக்கப்பட்டது.',
+      type: 'success'
+    })
     copyToClipboard(message.content)
   }
 

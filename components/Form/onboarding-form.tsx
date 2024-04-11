@@ -163,7 +163,7 @@ export default function OnboardingForm({
                 <DialogTrigger>
                   <Button
                     className={cn(className, 'p-3')}
-                    disabled={isSavingImage}
+                    disabled={isSavingImage || isSaving || next}
                     variant="outline"
                     type="button"
                   >
@@ -231,7 +231,7 @@ export default function OnboardingForm({
               </Dialog>
               <Button
                 className={cn(className, 'ml-3')}
-                disabled={isSavingImage}
+                disabled={isSavingImage || isSaving || next}
                 variant="outline"
                 type="button"
                 onClick={async () => {
@@ -316,6 +316,7 @@ export default function OnboardingForm({
                 size={32}
                 value={name}
                 onChange={handleNameChange}
+                disabled={isSaving || next}
               />
             </div>
             <div className="flex justify-end mt-5">

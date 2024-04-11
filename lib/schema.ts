@@ -11,7 +11,7 @@ export const districtSchema = z.string()
 export const emailSchema = z.string().email()
 
 export function validateInput(input: string) {
-  let harmfulPattern = /<script>|script|\)|\(|<|>|<\/script>/i
+  let harmfulPattern = /<script>|script|\)|\(|<|>|}|{|!|\+|=|<\/script>/i
 
   input = sanitize(input)
 

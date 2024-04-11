@@ -86,6 +86,7 @@ export default function OnboardingPreferenceForm({
                 spellCheck="true"
                 autoCorrect="true"
                 placeholder={placeholder}
+                disabled={isSavingPref || next}
               />
             </div>
             <div className="flex justify-between mt-5">

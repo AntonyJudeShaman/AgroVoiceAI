@@ -7,12 +7,14 @@ import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { IconLogo, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/Chat/chat-message-actions'
+import { useLocale } from 'next-intl'
 
 export interface ChatMessageProps {
   message: Message
 }
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
+  const locale = useLocale()
   return (
     <div
       className={cn('group font-mon relative mb-4 flex items-start md:-ml-12')}
@@ -36,7 +38,18 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
-              return <p className="mb-2 last:mb-0">{children}</p>
+              return (
+                <p className="mb-2 last:mb-0 flex flex-col">
+                  {message.role === 'user' ? (
+                    <span className="font-display">
+                      {locale === 'en' ? 'You' : 'நீங்கள்'}
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                  {children}
+                </p>
+              )
             },
             code({ node, inline, className, children, ...props }) {
               if (children.length) {
