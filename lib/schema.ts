@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { sanitize } from 'isomorphic-dompurify'
 
 export const nameSchema = z.string().min(3).max(50)
 export const imageURLSchema = z.string().url()
@@ -10,7 +11,9 @@ export const districtSchema = z.string()
 export const emailSchema = z.string().email()
 
 export function validateInput(input: string) {
-  const harmfulPattern = /<script>|script|<|>|<\/script>/i
+  let harmfulPattern = /<script>|script|\)|\(|<|>|<\/script>/i
+
+  input = sanitize(input)
 
   if (harmfulPattern.test(input)) {
     return false
