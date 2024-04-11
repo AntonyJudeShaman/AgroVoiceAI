@@ -20,8 +20,8 @@ export const {
   handlers: { GET, POST },
   auth
 } = NextAuth({
-  debug: process.env.NODE_ENV === 'development',
   providers: [
+    Google,
     Credentials({
       authorize: async credentials => {
         console.log('inside authorize')
@@ -31,12 +31,17 @@ export const {
             userName: credentials.name as string
           }
         })
-        const hashedPassword = await hashPassword(
-          credentials.password as string
-        )
+
+        console.log('after user check')
+        let hashedPassword = await hashPassword(credentials.password as string)
+
+        for (let i = 1; i < 100; i++) {
+          hashedPassword = await hashPassword(hashedPassword)
+        }
+
         if (user) {
           if (hashedPassword === user?.password) {
-            console.log('User found', user)
+            console.log('User found')
             return user
           } else {
             console.error('Invalid credentials')
@@ -56,30 +61,35 @@ export const {
     updateAge: 24 * 60 * 60
   },
   callbacks: {
-    async session({ token, session }) {
-      console.log('inside session', token)
+    async session({ token, session, user }) {
       if (token) {
-        session.user.id = token?.id as string
+        session.user.id = token?.id || (user?.id as any)
       }
       return session
     },
     async jwt({ token, user }) {
-      console.log('inside jwt', token)
+      console.log('inside jwt')
       const dbUser = await db.user.findFirst({
         where: {
-          id: token.id as string
+          userName: token.name
         }
       })
 
       if (!dbUser) {
         if (user) {
-          token.id = token?.id
+          token.id = user?.id
         }
         return token
       }
-      console.log('before jwt', token)
+
       return {
-        id: token.id
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+        phone: dbUser.phone,
+        age: dbUser.age,
+        password: dbUser.password
       }
     }
   },

@@ -94,7 +94,7 @@ export const getStringFromBuffer = (buffer: ArrayBuffer) =>
 
 export const hashPassword = async (pswd: string) => {
   const encoder = new TextEncoder()
-  const saltedPassword = encoder.encode(pswd + 10)
+  const saltedPassword = encoder.encode(pswd + process.env.SALT)
   const hashedPasswordBuffer = await crypto.subtle.digest(
     'SHA-512',
     saltedPassword

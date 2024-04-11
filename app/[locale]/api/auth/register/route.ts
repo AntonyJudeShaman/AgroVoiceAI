@@ -12,7 +12,10 @@ export async function POST(req: Request) {
   if (exists) {
     return NextResponse.json({ error: 'User already exists' }, { status: 400 })
   } else {
-    const hashedPassword = await hashPassword(pswd)
+    let hashedPassword = await hashPassword(pswd as string)
+    for (let i = 1; i < 100; i++) {
+      hashedPassword = await hashPassword(hashedPassword)
+    }
     const user = await db.user.create({
       data: {
         userName: name,

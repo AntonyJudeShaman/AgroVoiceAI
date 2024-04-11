@@ -52,6 +52,7 @@ export default function OnboardingForm({
   const [name, setName] = useState(user?.name || '')
   const [imageURL, setImageURL] = useState(user?.image || '')
   const [open, setOpen] = useState(false)
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
   const [next, setNext] = useState(false)
 
   const firebaseApp = initializeApp(firebaseConfig, 'profile')
@@ -70,15 +71,17 @@ export default function OnboardingForm({
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
+      setIsUploadingImage(true)
       const file = acceptedFiles[0]
-      const uniqueFileName = `${Date.now()}_${file.name}`
-      const storageRef = reff(storage, 'Profile/' + uniqueFileName)
+      const fileName = `${Date.now()}_${file.name}`
+      const storageRef = reff(storage, 'Profile/' + fileName)
       toast.loading('Please wait...')
       await uploadBytes(storageRef, file)
       const downloadURL = await getDownloadURL(storageRef)
       setImageURL(downloadURL)
       toast.dismiss()
       setIsUploaded(false)
+      setIsUploadingImage(false)
     },
     [storage]
   )
@@ -206,7 +209,7 @@ export default function OnboardingForm({
                     <DialogFooter>
                       <DialogClose>
                         <Button
-                          disabled={isSavingImage}
+                          disabled={isSavingImage || isUploadingImage}
                           className="m-1 mt-4"
                           variant="outline"
                           type="button"
