@@ -20,6 +20,7 @@ const config = {
       }
     ]
   },
+  experimental: { appDir: true },
   webpack5: true
 }
 // @ts-ignore
