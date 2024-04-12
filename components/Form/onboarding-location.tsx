@@ -153,9 +153,9 @@ export function OnboardingLocationForm({
               )}
             />
           </CardContent>
-          <CardFooter className="justify-between flex">
+          <CardFooter className="justify-end flex">
             {' '}
-            <Button
+            {/* <Button
               className="flex mr-3 h-full"
               onClick={() => router.push('/onboarding')}
               variant="outline"
@@ -163,7 +163,7 @@ export function OnboardingLocationForm({
               type="button"
             >
               {back}
-            </Button>
+            </Button> */}
             <Button
               type="submit"
               className={cn(buttonVariants())}

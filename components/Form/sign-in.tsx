@@ -130,7 +130,7 @@ export function Account({
                         : 'வெற்றிகரமாக உள்நுழைந்துள்ளது. திசைதிருப்புகிறது...',
                     type: 'success'
                   })
-                  router.push('/onboarding')
+                  router.push('/onboarding/location')
                 } else {
                   MyToast({
                     message:
