@@ -6,7 +6,7 @@ import { nanoid } from '@/lib/utils'
 import redis from '@/lib/redis'
 import { getChatbotPreference } from '@/app/actions'
 
-export const runtime = 'edge'
+// export const runtime = 'node'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!

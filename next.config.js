@@ -19,6 +19,9 @@ const config = {
         pathname: '**'
       }
     ]
+  },
+  experimental: {
+    webpackBuildWorker: true
   }
 }
 // @ts-ignore

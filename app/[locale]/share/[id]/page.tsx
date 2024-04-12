@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/utils'
 import { getSharedChat } from '@/app/actions'
 import { ChatList } from '@/components/Chat/chat-list'
 import { FooterText } from '@/components/footer'
+import NotFound from '../../not-found'
 
 interface SharePageProps {
   params: {
@@ -26,7 +27,7 @@ export default async function SharePage({ params }: SharePageProps) {
   const chat = await getSharedChat(params.id)
 
   if (!chat || !chat?.sharePath) {
-    notFound()
+    return <NotFound />
   }
 
   return (

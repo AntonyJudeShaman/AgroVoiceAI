@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 const Hf = new HfInference(process.env.HUGGINGFACE_API_KEY)
 
 // IMPORTANT! Set the runtime to edge
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export async function POST(req: Request) {
   const json = await req.json()

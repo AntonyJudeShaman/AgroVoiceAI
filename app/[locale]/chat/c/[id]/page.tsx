@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { getChat } from '@/app/actions'
 import { Chat } from '@/components/Chat/chat'
+import NotFound from '@/app/[locale]/not-found'
 
 export interface ChatPageProps {
   params: {
@@ -36,11 +37,11 @@ export default async function ChatPage({ params }: ChatPageProps) {
   const chat = await getChat(params.id, session?.user.id || '')
 
   if (!chat) {
-    notFound()
+    return <NotFound />
   }
 
   if (chat?.userId !== session?.user?.id) {
-    notFound()
+    return <NotFound />
   }
 
   return (
