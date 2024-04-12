@@ -101,7 +101,7 @@ export default function PestTest({
       <div
         className={cn(
           response && 'md:bg-gradient-to-tr',
-          'flex flex-col md:w-2/3 md:p-6 md:mt-[20vh] dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 mb-10 md:rounded-2xl md:border border-teal-900 mx-auto'
+          'flex flex-col md:w-2/3 md:p-6 md:mt-[20vh] dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 mb-16 md:rounded-2xl md:border border-teal-900 mx-auto'
         )}
       >
         <Card className="md:max-w-4xl z-40 w-full flex md:justify-center items-center mx-auto border-none shadow-none bg-transparent">
@@ -198,14 +198,14 @@ export default function PestTest({
                                   <button
                                     type="button"
                                     disabled={isUploadingImage}
-                                    className="flex w-full flex-col justify-center items-center text-left rounded-md placeholder:text-white  border-2 border-dashed border-gray-500 h-auto bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    className="flex w-full flex-col justify-center items-center cursor-auto text-left rounded-md placeholder:text-white  border-2 border-dashed border-gray-500 h-auto bg-transparent px-3 py-2 text-sm ring-offset-background file:border file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                   >
                                     <Input
                                       type="file"
                                       id="fileInput"
                                       onChange={handleFileChange}
                                       disabled={isUploadingImage}
-                                      className="appearance-none w-2/3 m-10 bg-gradient-to-r from-green-600 from-10% via-green-600 via-30% to-emerald-600 to-60%"
+                                      className="appearance-none w-2/3 m-10 bg-gradient-to-r cursor-pointer from-green-600 from-10% via-green-600 via-30% to-emerald-600 to-60%"
                                       lang="ta"
                                     />
                                   </button>
@@ -273,8 +273,8 @@ export default function PestTest({
           </div>
         </Card>{' '}
         {response && (
-          <div className="flex justify-center items-center mb-10">
-            <div className="flex flex-col w-full p-2 md:p-6 mt-6 lg:-mt-[3%] mb-10 md:rounded-2xl mx-auto">
+          <div className="flex justify-center items-center">
+            <div className="flex flex-col w-full p-2 md:p-6 mt-6 lg:-mt-[3%] md:rounded-2xl mx-auto">
               <div className="mr-4 mb-4 flex justify-end">
                 <Button onClick={() => router.push('/pest-identification/new')}>
                   {locale === 'en' ? 'Find Other' : 'மற்றொரு முயற்சி'}

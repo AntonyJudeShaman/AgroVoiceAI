@@ -29,7 +29,7 @@ describe('POST function', () => {
   })
 
   it('should return 404 if user is not found', async () => {
-    const req = mockRequest({ name: 'nonexistentuser', pswd: 'password' })
+    const req = mockRequest({ name: 'user', pswd: 'password' })
     const res = mockResponse()
 
     db.user.findUnique.mockResolvedValueOnce(null)
