@@ -2,6 +2,12 @@
 
 const withNextIntl = require('next-intl/plugin')()
 
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true
+})
+
 /** @type {import('next').NextConfig} */
 const config = {
   images: {
@@ -15,5 +21,5 @@ const config = {
     ]
   }
 }
-
-module.exports = withNextIntl(config)
+// @ts-ignore
+module.exports = withNextIntl(withPWA(config))

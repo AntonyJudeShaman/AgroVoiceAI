@@ -11,6 +11,7 @@ import { Inter, Poppins, Bricolage_Grotesque } from 'next/font/google'
 import { TailwindIndicator } from '@/components/Theme/tailwind-indicator'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
+import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const poppins = Poppins({
@@ -38,12 +39,13 @@ export const metadata = {
     template: `%s - AgroVoiceAI`
   },
   description:
-    'An AI-powered chatbot for agriculture-related questions and answers.',
+    'AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests.',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png'
-  }
+  },
+  manifest: '/site.webmanifest'
 }
 
 export const viewport = {
@@ -64,6 +66,46 @@ export default function RootLayout({
 }: RootLayoutProps) {
   return (
     <html lang={locale} suppressHydrationWarning>
+      <Head>
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="AgroVoiceAI" />
+        <meta
+          property="og:description"
+          content="AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests."
+        />
+        <meta property="og:site_name" content="PWA App" />
+        <meta property="og:url" content="https://agrovoiceai.vercel.app" />
+        <meta
+          property="og:image"
+          content="https://agrovoiceai.vercel.app/apple-touch-icon.png"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:url" content="https://agrovoiceai.vercel.app" />
+        <meta name="twitter:title" content="AgroVoiceAI" />
+        <meta
+          name="twitter:description"
+          content="AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests."
+        />
+        <meta
+          name="twitter:image"
+          content="https://agrovoiceai.vercel.app/android-chrome-192x192.png"
+        />
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
       <body
         className={cn(
           'font-san antialiased scroll-smooth font-bricol transition-transform duration-1000',
