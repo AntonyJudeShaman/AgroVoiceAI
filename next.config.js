@@ -20,9 +20,7 @@ const config = {
       }
     ]
   },
-  experimental: {
-    webpackBuildWorker: true
-  }
+  webpack5: true
 }
 // @ts-ignore
 module.exports = withNextIntl(withPWA(config))

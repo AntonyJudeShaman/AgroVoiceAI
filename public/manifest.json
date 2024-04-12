@@ -1,7 +1,6 @@
 {
   "name": "AgroVoiceAI",
   "short_name": "AgroVoiceAI",
-  "description": "AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -16,7 +15,7 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#020817",
+  "start_url": "/",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/"
+  "orientation": "portrait"
 }

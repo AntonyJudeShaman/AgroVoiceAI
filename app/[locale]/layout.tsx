@@ -21,7 +21,7 @@ const poppins = Poppins({
   variable: '--font-pops'
 })
 
-const bricol = Bricolage_Grotesque({
+const bricol = Poppins({
   weight: ['200', '300', '400', '500', '600', '700', '800'],
   style: ['normal'],
   subsets: ['latin', 'latin-ext'],
@@ -73,6 +73,10 @@ export default function RootLayout({
           type="image/png"
           sizes="32x32"
           href="/favicon-32x32.png"
+        />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
         <link
           rel="icon"
