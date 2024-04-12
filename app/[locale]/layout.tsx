@@ -44,8 +44,7 @@ export const metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png'
-  },
-  manifest: '/site.webmanifest'
+  }
 }
 
 export const viewport = {
@@ -67,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <Head>
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link
           rel="icon"
