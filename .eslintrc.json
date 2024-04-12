@@ -5,8 +5,6 @@
     "next/core-web-vitals",
     "prettier",
     "plugin:tailwindcss/recommended",
-    "plugin:jest-dom/recommended",
-    "plugin:testing-library/react"
   ],
   "plugins": ["tailwindcss"],
   "rules": {
