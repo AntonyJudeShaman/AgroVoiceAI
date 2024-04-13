@@ -43,15 +43,15 @@ export const metadata: Metadata = {
   description:
     'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.',
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
+    icon: '/en/favicon.ico',
+    shortcut: '/en/favicon-16x16.png',
     apple: '/apple-touch-icon.png'
   },
   creator: 'Antony Jude Shaman',
-  manifest: '/manifest.json',
+  manifest: '/en/manifest.json',
   twitter: {
-    card: 'summary_large_image',
-    images: '/android-chrome-192x192.png',
+    card: 'summary',
+    images: '/favicon.ico',
     title: 'AgroVoiceAI',
     description:
       'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.'
