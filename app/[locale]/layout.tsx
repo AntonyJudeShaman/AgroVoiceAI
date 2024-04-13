@@ -44,7 +44,8 @@ export const metadata = {
     icon: '/en/favicon.ico',
     shortcut: '/en/favicon-16x16.png',
     apple: '/en/apple-touch-icon.png'
-  }
+  },
+  manifest: '/en/manifest.json'
 }
 
 export const viewport = {
