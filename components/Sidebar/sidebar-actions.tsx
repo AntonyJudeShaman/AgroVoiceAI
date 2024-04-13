@@ -56,7 +56,7 @@ export function SidebarActions({
   return (
     <>
       <div className="space-x-1">
-        {/* <Tooltip delayDuration={0}>
+        <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
             <Button
               variant="ghost"
@@ -64,11 +64,15 @@ export function SidebarActions({
               onClick={() => setShareDialogOpen(true)}
             >
               <IconShare />
-              <span className="sr-only">Share</span>
+              <span className="sr-only">
+                {locale === 'en' ? 'Share' : 'பகிர்'}
+              </span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Share chat</TooltipContent>
-        </Tooltip> */}
+          <TooltipContent>
+            {locale === 'en' ? 'Share Chat' : 'சாட் பகிர்ந்துகொள்'}
+          </TooltipContent>
+        </Tooltip>
         <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
             <Button

@@ -38,18 +38,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
-              return (
-                <p className="mb-2 last:mb-0 flex flex-col">
-                  {message.role === 'user' ? (
-                    <span className="font-display">
-                      {locale === 'en' ? 'You' : 'நீங்கள்'}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                  {children}
-                </p>
-              )
+              return <p className="mb-2 last:mb-0 flex flex-col">{children}</p>
             },
             code({ node, inline, className, children, ...props }) {
               if (children.length) {

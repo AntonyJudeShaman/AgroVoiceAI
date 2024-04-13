@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://agrovoiceai.vercel.app/</loc>
+	<lastmod>2024-04-13T20:50:40+01:00</lastmod>
+	<priority>1</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/chat</loc>
+	<lastmod>2024-04-13T20:50:41+01:00</lastmod>
+	<priority>1</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/weather</loc>
+	<lastmod>2024-04-13T20:50:44+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/market</loc>
+	<lastmod>2024-04-13T20:50:46+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/settings</loc>
+	<lastmod>2024-04-13T20:50:46+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/pest-identification</loc>
+	<lastmod>2024-04-13T20:50:48+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/sign-in</loc>
+	<lastmod>2024-04-13T20:50:50+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/en/sign-up</loc>
+	<lastmod>2024-04-13T20:50:50+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/chat</loc>
+	<lastmod>2024-04-13T20:50:41+01:00</lastmod>
+	<priority>1</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/weather</loc>
+	<lastmod>2024-04-13T20:50:44+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/market</loc>
+	<lastmod>2024-04-13T20:50:46+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/settings</loc>
+	<lastmod>2024-04-13T20:50:46+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/pest-identification</loc>
+	<lastmod>2024-04-13T20:50:48+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/sign-in</loc>
+	<lastmod>2024-04-13T20:50:50+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://agrovoiceai.vercel.app/ta/sign-up</loc>
+	<lastmod>2024-04-13T20:50:50+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+</urlset>

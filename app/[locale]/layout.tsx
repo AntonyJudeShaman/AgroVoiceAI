@@ -12,6 +12,7 @@ import { TailwindIndicator } from '@/components/Theme/tailwind-indicator'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import Head from 'next/head'
+import { Metadata, Viewport } from 'next'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const poppins = Poppins({
@@ -21,7 +22,7 @@ const poppins = Poppins({
   variable: '--font-pops'
 })
 
-const bricol = Poppins({
+const bricol = Bricolage_Grotesque({
   weight: ['200', '300', '400', '500', '600', '700', '800'],
   style: ['normal'],
   subsets: ['latin', 'latin-ext'],
@@ -33,22 +34,54 @@ const calSans = LocalFont({
   variable: '--font-calsans'
 })
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL('https://agrovoiceai.vercel.app/en'),
   title: {
     default: 'AgroVoiceAI',
     template: `%s - AgroVoiceAI`
   },
   description:
-    'AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests.',
+    'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.',
   icons: {
     icon: '/en/favicon.ico',
     shortcut: '/en/favicon-16x16.png',
     apple: '/en/apple-touch-icon.png'
   },
-  manifest: '/en/manifest.json'
+  creator: 'Antony Jude Shaman',
+  manifest: '/en/manifest.json',
+  twitter: {
+    card: 'summary_large_image',
+    images: '/en/android-chrome-192x192.png',
+    title: 'AgroVoiceAI',
+    description:
+      'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.'
+  },
+  openGraph: {
+    type: 'website',
+    title: 'AgroVoiceAI',
+    description:
+      'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.',
+    siteName: 'AgroVoiceAI',
+    url: 'https://agrovoiceai.vercel.app/en',
+    images: '/en/apple-touch-icon.png'
+  },
+  viewport: {
+    initialScale: 1,
+    width: 'device-width',
+    userScalable: false,
+    viewportFit: 'cover',
+    minimumScale: 1,
+    maximumScale: 1
+  }
 }
 
-export const viewport = {
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: 'device-width',
+  userScalable: false,
+  viewportFit: 'cover',
+  minimumScale: 1,
+  maximumScale: 1,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
@@ -74,39 +107,6 @@ export default function RootLayout({
           type="image/png"
           sizes="32x32"
           href="/en/favicon-32x32.png"
-        />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/en/favicon-16x16.png"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="AgroVoiceAI" />
-        <meta
-          property="og:description"
-          content="AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests."
-        />
-        <meta property="og:site_name" content="AgroVoiceAI" />
-        <meta property="og:url" content="https://agrovoiceai.vercel.app" />
-        <meta
-          property="og:image"
-          content="https://agrovoiceai.vercel.app/en/apple-touch-icon.png"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:url" content="https://agrovoiceai.vercel.app" />
-        <meta name="twitter:title" content="AgroVoiceAI" />
-        <meta
-          name="twitter:description"
-          content="AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests."
-        />
-        <meta
-          name="twitter:image"
-          content="https://agrovoiceai.vercel.app/en/android-chrome-192x192.png"
         />
         <link rel="shortcut icon" href="/en/favicon.ico" />
       </Head>
