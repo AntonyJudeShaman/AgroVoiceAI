@@ -342,7 +342,7 @@ const handleSubmit = async (
       redirect: false,
       name: name,
       password: password,
-      callbackUrl: '/onboarding'
+      callbackUrl: '/onboarding/location'
     })
 
     if (res?.url?.includes('onboarding')) {
