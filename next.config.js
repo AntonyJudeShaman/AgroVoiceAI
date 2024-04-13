@@ -3,7 +3,7 @@
 const withNextIntl = require('next-intl/plugin')()
 
 const withPWA = require('next-pwa')({
-  dest: 'public',
+  dest: 'public/en',
   register: true,
   skipWaiting: true
 })
