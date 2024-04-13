@@ -41,9 +41,9 @@ export const metadata = {
   description:
     'AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests.',
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png'
+    icon: '/en/favicon.ico',
+    shortcut: '/en/favicon-16x16.png',
+    apple: '/en/apple-touch-icon.png'
   }
 }
 
@@ -66,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <Head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/en/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link
           rel="icon"
@@ -82,7 +82,7 @@ export default function RootLayout({
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/favicon-16x16.png"
+          href="/en/favicon-16x16.png"
         />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="AgroVoiceAI" />
@@ -90,11 +90,11 @@ export default function RootLayout({
           property="og:description"
           content="AgroVoiceAI is a web app that helps farmers to get their queries resolved with our Chatbot. It also provides the latest market & weather updates and the ability to test soil conditions and detect pests."
         />
-        <meta property="og:site_name" content="PWA App" />
+        <meta property="og:site_name" content="AgroVoiceAI" />
         <meta property="og:url" content="https://agrovoiceai.vercel.app" />
         <meta
           property="og:image"
-          content="https://agrovoiceai.vercel.app/apple-touch-icon.png"
+          content="https://agrovoiceai.vercel.app/en/apple-touch-icon.png"
         />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:url" content="https://agrovoiceai.vercel.app" />
@@ -105,9 +105,9 @@ export default function RootLayout({
         />
         <meta
           name="twitter:image"
-          content="https://agrovoiceai.vercel.app/android-chrome-192x192.png"
+          content="https://agrovoiceai.vercel.app/en/android-chrome-192x192.png"
         />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/en/favicon.ico" />
       </Head>
       <body
         className={cn(
