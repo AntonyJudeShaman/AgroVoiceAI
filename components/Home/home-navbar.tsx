@@ -41,7 +41,7 @@ export default function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 0
+      const isScrolled = window.scrollY > 100
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled)
       }
@@ -53,7 +53,7 @@ export default function Navbar({
 
   return (
     <nav
-      className={`flex dark:text-white text-black h-20 fixed  w-full mx-auto justify-center items-center px-4 md:px-6 ${scrolled ? ' backdrop-blur-lg shadow-md z-50' : ''}`}
+      className={`flex dark:text-white text-black h-20 fixed duration-300 w-full mx-auto justify-center items-center px-4 md:px-6 ${scrolled ? ' backdrop-blur-lg shadow-md dark:shadow-green-900 shadow-green-100 z-50' : ''}`}
     >
       <Sheet>
         <SheetTrigger asChild>
@@ -117,7 +117,10 @@ export default function Navbar({
                     aria-label={item.title}
                     href={item.href}
                     className={cn(
-                      'group relative flex flex-col justify-center text-right text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-gray-400 text-zinc-700 hover:text-black md:inline-block rounded-md p-2 font-medium'
+                      'group relative flex flex-col justify-center text-right text-sm dark:hover:text-white items-center overflow-hidden mr-4 dark:text-gray-400 text-zinc-700 hover:text-black md:inline-block rounded-md p-2 font-medium',
+                      scrolled
+                        ? 'dark:hover:text-gray-600 dark:text-zinc-200 text-black hover:text-zinc-700'
+                        : ''
                     )}
                   >
                     <Button
