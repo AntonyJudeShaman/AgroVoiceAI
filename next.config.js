@@ -19,9 +19,7 @@ const config = {
         pathname: '**'
       }
     ]
-  },
-  experimental: { appDir: true },
-  webpack5: true
+  }
 }
 // @ts-ignore
 module.exports = withNextIntl(withPWA(config))
