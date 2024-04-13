@@ -90,7 +90,7 @@ export function UserMenu({ settings, appearance, logout }: UserMenuProps) {
                 </>
               ) : (
                 <>
-                  <div className="flex items-center justify-center text-sm font-bold dark:bg-teal-600  bg-teal-500 text-white uppercase rounded-full select-none size-10 shrink-0 bg-muted/50 text-muted-foreground">
+                  <div className="flex items-center justify-center text-sm font-bold dark:bg-teal-600  bg-teal-500 text-white uppercase rounded-full select-none size-10 shrink-0">
                     {getUserInitials(user?.name || '')}
                   </div>
                   <p className="size-[0.8rem] dark:bg-green-400 bg-green-700 top-3 right-3 flex relative z-40 rounded-full"></p>

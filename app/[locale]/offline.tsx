@@ -7,7 +7,7 @@ export default function Offline() {
   return (
     <div className="min-h-screen w-full font-pops dark:bg-grid-small-white/[0.3] bg-grid-small-black/[0.2] relative flex flex-col items-center justify-center">
       <h1 className="md:text-7xl text-5xl font-display text-center font-bold mb-4 dark:text-white text-black">
-        Oops! You're offline.
+        Oops! You&apos;re offline.
       </h1>
       <p className="md:text-lg text-md text-center dark:text-white text-black mb-8">
         Please check your internet connection and try again
