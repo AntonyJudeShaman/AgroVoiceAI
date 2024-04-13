@@ -43,15 +43,15 @@ export const metadata: Metadata = {
   description:
     'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.',
   icons: {
-    icon: '/en/favicon.ico',
-    shortcut: '/en/favicon-16x16.png',
-    apple: '/en/apple-touch-icon.png'
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png'
   },
   creator: 'Antony Jude Shaman',
-  manifest: '/en/manifest.json',
+  manifest: '/manifest.json',
   twitter: {
     card: 'summary_large_image',
-    images: '/en/android-chrome-192x192.png',
+    images: '/android-chrome-192x192.png',
     title: 'AgroVoiceAI',
     description:
       'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.'
@@ -63,14 +63,13 @@ export const metadata: Metadata = {
       'AgroVoiceAI your one-stop solution for all your farming needs. Get the latest market & weather updates, test soil conditions, detect pests, and get your queries resolved with our Chatbot.',
     siteName: 'AgroVoiceAI',
     url: 'https://agrovoiceai.vercel.app/en',
-    images: '/en/apple-touch-icon.png'
+    images: '/apple-touch-icon.png'
   },
   viewport: {
     initialScale: 1,
     width: 'device-width',
     userScalable: false,
     viewportFit: 'cover',
-    minimumScale: 1,
     maximumScale: 1
   }
 }
@@ -80,7 +79,6 @@ export const viewport: Viewport = {
   width: 'device-width',
   userScalable: false,
   viewportFit: 'cover',
-  minimumScale: 1,
   maximumScale: 1,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
@@ -100,7 +98,6 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <Head>
-        <link rel="manifest" href="/en/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link
           rel="icon"
