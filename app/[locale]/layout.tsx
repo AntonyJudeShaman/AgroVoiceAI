@@ -64,13 +64,6 @@ export const metadata: Metadata = {
     siteName: 'AgroVoiceAI',
     url: 'https://agrovoiceai.vercel.app/en',
     images: '/apple-touch-icon.png'
-  },
-  viewport: {
-    initialScale: 1,
-    width: 'device-width',
-    userScalable: false,
-    viewportFit: 'cover',
-    maximumScale: 1
   }
 }
 
