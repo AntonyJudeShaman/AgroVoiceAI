@@ -22,7 +22,7 @@ export default async function OnboardingLocation() {
   return (
     <>
       {!users?.pageShown && (
-        <div className="flex flex-col justify-center items-center min-h-screen dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+        <div className="flex flex-col mx-6 md:mx-0 justify-center items-center min-h-screen dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
           {' '}
           <div className="z-40">
             <LocaleSwitcher />

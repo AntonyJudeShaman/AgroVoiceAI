@@ -20,6 +20,8 @@ import LocaleSwitcher from '../locale-switcher'
 import { NavbarProps } from '@/lib/types'
 import toast from 'react-hot-toast'
 import { useLocale } from 'next-intl'
+import MyToast from '../ui/my-toast'
+import { useTheme } from 'next-themes'
 
 export default function Navbar({
   session,
@@ -39,6 +41,7 @@ export default function Navbar({
   const path = usePathname()
   const router = useRouter()
   const locale = useLocale()
+  const { setTheme, theme } = useTheme()
 
   const navItems = [home, chat, weather, market, settings, pest]
 
@@ -166,17 +169,31 @@ export default function Navbar({
           <Button
             onClick={() => {
               toast.loading(
-                locale === 'en' ? 'Signing out...' : 'வெளியேறுகிறது'
+                locale === 'en' ? 'Signing out...' : 'வெளியேறுகிறது',
+                {
+                  style: {
+                    borderRadius: '10px',
+                    background: theme === 'light' ? '#333' : '#d83030',
+                    color: '#fff',
+                    fontSize: '14px'
+                  },
+                  iconTheme: {
+                    primary: theme === 'light' ? 'lightgreen' : 'white',
+                    secondary: 'black'
+                  },
+                  className: 'font-pops'
+                }
               )
               signOut({
                 callbackUrl: '/'
               })
-              toast.dismiss()
-              toast.success(
-                locale === 'en'
-                  ? 'You have been signed out successfully!'
-                  : 'நீங்கள் வெற்றிகரமாக வெளியேற்றப்பட்டீர்கள்!'
-              )
+              MyToast({
+                message:
+                  locale === 'en'
+                    ? 'You have been signed out successfully!'
+                    : 'நீங்கள் வெற்றிகரமாக வெளியேற்றப்பட்டீர்கள்!',
+                type: 'success'
+              })
             }}
             variant="outline"
             className="rounded-2xl md:text-md border-gray-500 border"

@@ -71,7 +71,7 @@ export function OnboardingLocationForm({
 
   function handleDistrictChange(event: React.ChangeEvent<HTMLInputElement>) {
     setDistrict(event.target.value)
-    setIsDistrictChanged(event.target.value !== user?.userDistrict)
+    setIsDistrictChanged(event.target.value !== user?.district)
   }
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -92,7 +92,7 @@ export function OnboardingLocationForm({
   const locale = useLocale()
 
   return (
-    <Card className="md:w-2/3 xl:w-2/4 m-4 w-full border z-20 bg-transparent">
+    <Card className="md:w-2/3 xl:w-2/4 2xl:w-2/5 m-4 w-full border z-20 bg-transparent">
       <CardHeader className="flex flex-row justify-between">
         <div className="space-y-1">
           <CardTitle>{title}</CardTitle>

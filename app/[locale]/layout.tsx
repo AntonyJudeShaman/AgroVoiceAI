@@ -78,7 +78,6 @@ export const viewport: Viewport = {
   initialScale: 1,
   width: 'device-width',
   userScalable: false,
-  viewportFit: 'cover',
   maximumScale: 1,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
@@ -99,13 +98,13 @@ export default function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <Head>
         <meta name="mobile-web-app-capable" content="yes" />
-        <link
+        {/* <link
           rel="icon"
           type="image/png"
           sizes="32x32"
           href="/en/favicon-32x32.png"
         />
-        <link rel="shortcut icon" href="/en/favicon.ico" />
+        <link rel="shortcut icon" href="/en/favicon.ico" /> */}
       </Head>
       <body
         className={cn(
