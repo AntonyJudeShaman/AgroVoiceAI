@@ -18,6 +18,8 @@ import { signOut } from 'next-auth/react'
 import { navConfig } from '@/config/constants'
 import LocaleSwitcher from '../locale-switcher'
 import { NavbarProps } from '@/lib/types'
+import toast from 'react-hot-toast'
+import { useLocale } from 'next-intl'
 
 export default function Navbar({
   session,
@@ -36,6 +38,7 @@ export default function Navbar({
   const [scrolled, setScrolled] = useState(false)
   const path = usePathname()
   const router = useRouter()
+  const locale = useLocale()
 
   const navItems = [home, chat, weather, market, settings, pest]
 
@@ -161,11 +164,20 @@ export default function Navbar({
           </div>
           <ThemeToggle />
           <Button
-            onClick={() =>
+            onClick={() => {
+              toast.loading(
+                locale === 'en' ? 'Signing out...' : 'வெளியேறுகிறது'
+              )
               signOut({
                 callbackUrl: '/'
               })
-            }
+              toast.dismiss()
+              toast.success(
+                locale === 'en'
+                  ? 'You have been signed out successfully!'
+                  : 'நீங்கள் வெற்றிகரமாக வெளியேற்றப்பட்டீர்கள்!'
+              )
+            }}
             variant="outline"
             className="rounded-2xl md:text-md border-gray-500 border"
             size="lg"

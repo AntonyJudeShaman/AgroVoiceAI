@@ -15,7 +15,7 @@ export default async function OnboardingLocation() {
 
   const users = await getCurrentUser()
   if (users?.pageShown && session) {
-    redirect('/onboarding/preferences')
+    redirect('/options')
   }
 
   const t = await getTranslations('Index')
