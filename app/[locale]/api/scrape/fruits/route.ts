@@ -28,7 +28,7 @@ function scrapeDataFromTables(response:any) {
 export async function POST(req: NextRequest) {
   try {
     const { location } = await req.json()
-    const websiteUrl: string = `https://market.todaypricerates.com/${location}-vegetables-price-in-Tamil-Nadu`
+    const websiteUrl: string = `https://market.todaypricerates.com/${location}-fruits-price-in-Tamil-Nadu`
     // 'https://market.todaypricerates.com/${location}-vegetables-price-in-Tamil-Nadu'
     // 'https://market.todaypricerates.com/fruits-daily-price'
     const response = await axios.get(websiteUrl)
@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
   })
   try{
     
-    const websiteUrl: string = `https://market.todaypricerates.com/${location?.userDistrict}-vegetables-price-in-Tamil-Nadu`
+    const websiteUrl: string = `https://market.todaypricerates.com/${location?.userDistrict}-fruits-price-in-Tamil-Nadu`
     
     const response = await axios.get(websiteUrl)
     

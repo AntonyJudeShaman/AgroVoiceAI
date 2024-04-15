@@ -565,6 +565,68 @@ export const vegetableNamesInTamil = {
   Tomato: 'தக்காளி'
 }
 
+export const fruitsNamesInEnglish = {
+  'Apple washington': 'Apple washington',
+  'Apple Simla': 'Apple Simla',
+  'Apple Green ( Smith )': 'Apple Green ( Smith )',
+  'Apricot': 'Apricot',
+  'Avocado (Butterfruit)': 'Avocado (Butterfruit)',
+  'Banana Morris Kg': 'Banana Morris Kg',
+  'Banana Regular': 'Banana Regular',
+  'Banana other': 'Banana other',
+  'Cantaloupe (Musk melon)': 'Cantaloupe (Musk melon)',
+  'Custard apple': 'Custard apple',
+  'Gooseberry, Indian': 'Gooseberry, Indian',
+  'Grapes ( Black )': 'Grapes ( Black )',
+  'Grapes ( Green )': 'Grapes ( Green )',
+  'Guava': 'Guava',
+  'Jackfruit': 'Jackfruit',
+  'Lychee': 'Lychee',
+  'Mango, ripe': 'Mango, ripe',
+  'Mango, unripe': 'Mango, unripe',
+  'Orange': 'Orange',
+  'Orange Imported': 'Orange Imported',
+  'Papaya': 'Papaya',
+  'Pears': 'Pears',
+  'Pineapple': 'Pineapple',
+  'Pomegranate': 'Pomegranate',
+  'Sapota (Sapodilla)': 'Sapota (Sapodilla)',
+  'Sugar cane': 'Sugar cane',
+  'Sweet lime': 'Sweet lime',
+  'Watermelon': 'Watermelon'
+};
+
+export const fruitsNamesInTamil = {
+  'Apple washington': 'ஆப்பிள் வாஷிங்டன்',
+  'Apple Simla': 'ஆப்பிள் சிம்லா',
+  'Apple Green ( Smith )': 'ஆப்பிள் கிரீன் (ஸ்மித்)',
+  'Apricot': 'பாதாமி பழம்',
+  'Avocado (Butterfruit)': 'அவகேடோ (பட்டர்ஃப்ரூட்)',
+  'Banana Morris Kg': 'வாழை மோரிஸ்',
+  'Banana Regular': 'வாழைப்பழம் வழக்கமானது',
+  'Banana other': 'வாழை மற்றது',
+  'Cantaloupe (Musk melon)': 'பாகற்காய் (கஸ்தூரி முலாம்பழம்)',
+  'Custard apple': 'கஸ்டர்ட் ஆப்பிள்',
+  'Gooseberry, Indian': 'நெல்லிக்காய், இந்தியன்',
+  'Grapes ( Black )': 'திராட்சை (கருப்பு)',
+  'Grapes ( Green )': 'திராட்சை (பச்சை)',
+  'Guava': 'கொய்யா',
+  'Jackfruit': 'பலாப்பழம்',
+  'Lychee': 'லிச்சி',
+  'Mango, ripe': 'மா, பழுத்த',
+  'Mango, unripe': 'மாம்பழம், பழுக்காதது',
+  'Orange': 'ஆரஞ்சு',
+  'Orange Imported': 'ஆரஞ்சு இறக்குமதி செய்யப்பட்டது',
+  'Papaya': 'பப்பாளி',
+  'Pears': 'பேரிக்காய்',
+  'Pineapple': 'அன்னாசி',
+  'Pomegranate': 'மாதுளை',
+  'Sapota (Sapodilla)': 'சப்போட்டா (சப்போட்டா)',
+  'Sugar cane': 'கரும்பு',
+  'Sweet lime': 'இனிப்பு சுண்ணாம்பு',
+  'Watermelon': 'தர்பூசணி'
+};
+
 export const weatherMainInEnglish = {
   Thunderstorm: 'Thunderstorm',
   Drizzle: 'Drizzle',
