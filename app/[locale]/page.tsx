@@ -1,6 +1,7 @@
 import { DotBackGround } from '@/components/Home/grid-bg'
 import { BentoGridItem } from '@/components/Home/bento-grid-layout'
 import HomeFeatures from '@/components/Home/home-features'
+import LocationComponent from '@/components/location'
 
 export default async function IndexPage() {
   return (
@@ -8,6 +9,7 @@ export default async function IndexPage() {
       <DotBackGround />
       <HomeFeatures />
       <BentoGridItem />
+      <LocationComponent />
     </div>
   )
 }
