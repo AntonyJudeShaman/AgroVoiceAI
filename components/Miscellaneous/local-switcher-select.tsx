@@ -4,17 +4,17 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 import clsx from 'clsx'
 import { useParams } from 'next/navigation'
 import { ChangeEvent, ReactNode, useTransition } from 'react'
-import { useRouter, usePathname } from '../navigation'
-import { Button } from './ui/button'
+import { useRouter, usePathname } from '../../navigation'
+import { Button } from '../ui/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from './ui/select'
+} from '../ui/select'
 import { useLocale } from 'next-intl'
-import { IconChevronUpDown } from './ui/icons'
+import { IconChevronUpDown } from '../ui/icons'
 
 type Props = {
   children: ReactNode

@@ -15,7 +15,7 @@ import {
 import { Settings, SunMoon, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { getCurrentUser, getUser } from '@/app/actions'
-import { ThemeToggle } from './Theme/theme-toggle'
+import { ThemeToggle } from '../Theme/theme-toggle'
 
 export interface UserMenuProps {
   user?: Session['user']

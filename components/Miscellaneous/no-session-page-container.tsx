@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth'
 import Navbar from '@/components/Home/home-navbar'
 import { redirect } from 'next/navigation'
-import { Spotlight } from './ui/spotlight'
+import { Spotlight } from '../ui/spotlight'
 import { getTranslations } from 'next-intl/server'
 import { navItems } from '@/config/constants'
 

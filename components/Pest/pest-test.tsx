@@ -21,7 +21,7 @@ import { LoadingDots } from '../ui/loading-dots'
 import MyToast from '../ui/my-toast'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
-import { MemoizedReactMarkdown } from '@/components/markdown'
+import { MemoizedReactMarkdown } from '@/components/Miscellaneous/markdown'
 import Link from 'next/link'
 
 export default function PestTest({

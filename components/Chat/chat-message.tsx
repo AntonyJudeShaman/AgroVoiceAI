@@ -4,7 +4,7 @@ import remarkMath from 'remark-math'
 
 import { cn } from '@/lib/utils'
 import { CodeBlock } from '@/components/ui/codeblock'
-import { MemoizedReactMarkdown } from '@/components/markdown'
+import { MemoizedReactMarkdown } from '@/components/Miscellaneous/markdown'
 import { IconLogo, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/Chat/chat-message-actions'
 import { useLocale } from 'next-intl'

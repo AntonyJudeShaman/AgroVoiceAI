@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { OnboardingLocationForm } from '@/components/Form/onboarding-location'
 import { getTranslations } from 'next-intl/server'
 import { auth } from '@/lib/auth'
-import LocaleSwitcher from '@/components/locale-switcher'
+import LocaleSwitcher from '@/components/Miscellaneous/locale-switcher'
 
 export default async function OnboardingLocation() {
   const session = await auth()

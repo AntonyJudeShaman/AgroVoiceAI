@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
 import { getSharedChat } from '@/app/actions'
 import { ChatList } from '@/components/Chat/chat-list'
-import { FooterText } from '@/components/footer'
+import { FooterText } from '@/components/Miscellaneous/footer'
 import NotFound from '../../not-found'
 
 interface SharePageProps {

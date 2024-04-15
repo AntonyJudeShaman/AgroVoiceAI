@@ -1,6 +1,6 @@
 import { getCurrentUser } from '../../actions'
 import PestTest from '@/components/Pest/pest-test'
-import SessionPageContainer from '@/components/session-page-container'
+import SessionPageContainer from '@/components/Miscellaneous/session-page-container'
 import { getTranslations } from 'next-intl/server'
 import PestHome from '@/components/Pest/pest-home'
 

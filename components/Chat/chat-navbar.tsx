@@ -14,7 +14,7 @@ import { ThemeToggle } from '../Theme/theme-toggle'
 import { DownloadIcon } from 'lucide-react'
 import { BottomGradient } from '../ui/bottom-gradient'
 import { navConfig } from '@/config/constants'
-import LocaleSwitcher from '../locale-switcher'
+import LocaleSwitcher from '../Miscellaneous/locale-switcher'
 import { NavbarProps } from '@/lib/types'
 
 export default function ChatNavbar({

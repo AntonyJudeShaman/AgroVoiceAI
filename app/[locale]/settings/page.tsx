@@ -10,7 +10,7 @@ import { Bot, User } from 'lucide-react'
 import Link from 'next/link'
 import { SettingsHeader } from '@/components/Settings/settings-header'
 import { IconLogo } from '@/components/ui/icons'
-import SessionPageContainer from '@/components/session-page-container'
+import SessionPageContainer from '@/components/Miscellaneous/session-page-container'
 import { getTranslations } from 'next-intl/server'
 import { redirect } from 'next/navigation'
 

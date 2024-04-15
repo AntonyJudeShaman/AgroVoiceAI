@@ -1,7 +1,7 @@
 import { DotBackGround } from '@/components/Home/grid-bg'
 import { BentoGridItem } from '@/components/Home/bento-grid-layout'
 import HomeFeatures from '@/components/Home/home-features'
-import LocationComponent from '@/components/location'
+import LocationComponent from '@/components/Miscellaneous/location'
 
 export default async function IndexPage() {
   return (

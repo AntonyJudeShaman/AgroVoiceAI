@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { CreateAccount } from '@/components/Form/sign-up'
-import NoSessionPageContainer from '@/components/no-session-page-container'
+import NoSessionPageContainer from '@/components/Miscellaneous/no-session-page-container'
 import { getTranslations } from 'next-intl/server'
 
 export default async function SignInPage() {

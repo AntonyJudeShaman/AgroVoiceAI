@@ -4,7 +4,7 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { auth } from '@/lib/auth'
-import LocaleSwitcher from '@/components/locale-switcher'
+import LocaleSwitcher from '@/components/Miscellaneous/locale-switcher'
 
 export default async function OnboardingPreference() {
   const session = await auth()
