@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
       let scrapedData: string[] = []
 
       const tables = document.querySelectorAll('table')
-
       tables.forEach((table: HTMLTableElement) => {
         table.querySelectorAll('tr').forEach((row: HTMLTableRowElement) => {
           const rowData: string[] = []
