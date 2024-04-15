@@ -12,7 +12,6 @@ export async function POST(req: NextRequest) {
     if (response.status === 200) {
       const dom = new JSDOM(response.data)
       const document = dom.window.document
-
       let scrapedData: string[] = []
 
       const tables = document.querySelectorAll('table')
