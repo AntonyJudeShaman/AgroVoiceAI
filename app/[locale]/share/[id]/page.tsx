@@ -1,11 +1,10 @@
 import { type Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
-import { formatDate } from '@/lib/utils'
 import { getSharedChat } from '@/app/actions'
 import { ChatList } from '@/components/Chat/chat-list'
 import { FooterText } from '@/components/Miscellaneous/footer'
 import NotFound from '../../not-found'
+import { formatDateFromMS } from '@/lib/utils'
 
 interface SharePageProps {
   params: {
@@ -38,7 +37,8 @@ export default async function SharePage({ params }: SharePageProps) {
             <div className="space-y-1 md:-mx-8">
               <h1 className="text-2xl font-bold">{chat.title}</h1>
               <div className="text-sm text-muted-foreground">
-                {formatDate(chat.createdAt)} · {chat.messages.length} messages
+                {chat.createdAt && formatDateFromMS(+chat.createdAt)} ·{' '}
+                {chat.messages.length} messages
               </div>
             </div>
           </div>

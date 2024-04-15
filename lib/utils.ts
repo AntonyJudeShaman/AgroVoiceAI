@@ -45,6 +45,16 @@ export function formatDate(input: string | number | Date): string {
   })
 }
 
+export const formatDateFromMS = (milliseconds: number): string => {
+  const date = new Date(milliseconds)
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  return date.toLocaleDateString('en-US', options)
+}
+
 export function formatDateWithDay(date: any, locale: string): string {
   const [day, month, year] = date!.split('-')
   const parsedDate = new Date(Number(year), Number(month) - 1, Number(day))
