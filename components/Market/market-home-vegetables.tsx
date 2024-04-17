@@ -27,7 +27,7 @@ import { MarketLocationNotAvailable } from './market-location-not-available'
 import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
 
-export default function MarketHome2({ user }: { user: any }) {
+export default function MarketHomeVegetables({ user }: { user: any }) {
   const [items, setItems] = useState<Item[]>([])
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
@@ -75,7 +75,7 @@ export default function MarketHome2({ user }: { user: any }) {
     }
 
     fetchData()
-  }, [])
+  }, [user, locale])
 
   if (loading) {
     return <MarketTableSkeleton />
@@ -122,7 +122,7 @@ export default function MarketHome2({ user }: { user: any }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
-        <div className="md:w-[80%] 2xl:w-[70%] z-10 md:p-6 p- ">
+        <div className="md:w-[80%] 2xl:w-[70%] z-10">
           <div className="flex items-center justify-center md:justify-between w-full md:flex-row flex-col">
             <p
               className={cn(

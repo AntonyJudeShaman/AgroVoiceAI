@@ -1,9 +1,9 @@
 import { getCurrentUser } from '@/app/actions'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getTranslations } from 'next-intl/server'
-import MarketHome2 from './market-home-api-2'
 import MarketHomeFruits from './market-home-fruits'
 import { useLocale } from 'next-intl'
+import MarketHomeVegetables from './market-home-vegetables'
 
 export async function MarketsTab() {
   const t = await getTranslations('Index')
@@ -24,7 +24,7 @@ export async function MarketsTab() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="vegetables">
-        <MarketHome2 user={user} />
+        <MarketHomeVegetables user={user} />
       </TabsContent>
       <TabsContent value="fruits">
         <MarketHomeFruits user={user} />

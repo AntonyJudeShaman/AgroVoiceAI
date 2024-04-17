@@ -178,8 +178,8 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
   await redis.del(`chat:${id}`)
   await redis.zrem(`user:chat:${session.user.id}`, `chat:${id}`)
 
-  revalidatePath('/chat')
-  return revalidatePath('/chat')
+  revalidatePath('/chat/c/[id]')
+  return revalidatePath('/chat/c/[id]')
 }
 
 export async function clearChats() {
@@ -208,7 +208,7 @@ export async function clearChats() {
 
   await pipeline.exec()
 
-  revalidatePath('/chat')
+  revalidatePath('/chat/c/[id]')
   return redirect('/chat')
 }
 

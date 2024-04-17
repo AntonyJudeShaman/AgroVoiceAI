@@ -3,7 +3,7 @@ import React from 'react'
 export default function MarketTableSkeleton() {
   return (
     <div className="relative">
-      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10 p-6 ">
+      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10 ">
         <div className="w-full flex flex-col justify-center md:w-[80%] 2xl:w-[70%]">
           <div
             className="animate-pulse dark:bg-gray-800 border mx-auto md:mx-0 border-gray-400 dark:border-gray-600 bg-gray-200 mb-6 md:w-[60%] 2xl:w-[50%] w-[80%] rounded-2xl"

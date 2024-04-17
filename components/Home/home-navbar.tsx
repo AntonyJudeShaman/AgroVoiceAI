@@ -187,13 +187,6 @@ export default function Navbar({
               signOut({
                 callbackUrl: '/'
               })
-              MyToast({
-                message:
-                  locale === 'en'
-                    ? 'You have been signed out successfully!'
-                    : 'நீங்கள் வெற்றிகரமாக வெளியேற்றப்பட்டீர்கள்!',
-                type: 'success'
-              })
             }}
             variant="outline"
             className="rounded-2xl md:text-md border-gray-500 border"
@@ -209,11 +202,27 @@ export default function Navbar({
           </div>
           <ThemeToggle />
           <Button
-            onClick={() =>
+            onClick={() => {
+              toast.loading(
+                locale === 'en' ? 'Signing out...' : 'வெளியேறுகிறது',
+                {
+                  style: {
+                    borderRadius: '10px',
+                    background: theme === 'light' ? '#333' : '#d83030',
+                    color: '#fff',
+                    fontSize: '14px'
+                  },
+                  iconTheme: {
+                    primary: theme === 'light' ? 'lightgreen' : 'white',
+                    secondary: 'black'
+                  },
+                  className: 'font-pops'
+                }
+              )
               signOut({
                 callbackUrl: '/'
               })
-            }
+            }}
             className=""
             variant="outline"
           >

@@ -13,12 +13,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { Info } from 'lucide-react'
 import { motion } from 'framer-motion'
 import {
-    fruitsNamesInEnglish,
+  fruitsNamesInEnglish,
   fruitsNamesInTamil,
   marketTableHeaderInEnglish,
   marketTableHeaderInTamil,
   tnDistrictsInEnglish,
-  tnDistrictsInTamil,
+  tnDistrictsInTamil
 } from '@/config/constants'
 import { cn, parseItems } from '@/lib/utils'
 import { Item } from '@/lib/types'
@@ -123,7 +123,7 @@ export default function MarketHomeFruits({ user }: { user: any }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
-        <div className="md:w-[80%] 2xl:w-[70%] z-10 md:p-6 p- ">
+        <div className="md:w-[80%] 2xl:w-[70%] z-10">
           <div className="flex items-center justify-center md:justify-between w-full md:flex-row flex-col">
             <p
               className={cn(
