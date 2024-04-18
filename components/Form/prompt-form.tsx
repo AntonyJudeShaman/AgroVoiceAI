@@ -68,7 +68,6 @@ export function PromptForm({
               : 'பேச்சு கண்டறியப்படவில்லை',
           type: 'error'
         })
-        toast('Sorry, I did not catch that. 😔')
       }
     }
     recognition.onend = () => {

@@ -42,6 +42,8 @@ export function SettingsChatbot({
 
   const [isMicrophoneActive, setIsMicrophoneActive] = useState<boolean>(false)
 
+  let trans = ''
+
   function handleVoice() {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
@@ -59,18 +61,17 @@ export function SettingsChatbot({
       if (transcript.trim() !== '') {
         setPreference(transcript)
         setIsPreferenceChanged(true)
-      } else {
-        MyToast({
-          message:
-            locale === 'en'
-              ? 'Sorry, I did not catch that. 😔'
-              : 'பேச்சு கண்டறியப்படவில்லை',
-          type: 'error'
-        })
-        toast('Sorry, I did not catch that. 😔')
       }
+      trans = transcript
     }
     recognition.onend = () => {
+      if (trans.trim() !== '') {
+        toast(
+          locale === 'en'
+            ? 'Sorry, I did not catch that. 😔'
+            : 'பேச்சு கண்டறியப்படவில்லை'
+        )
+      }
       setIsMicrophoneActive(false)
       recognition.stop()
     }
