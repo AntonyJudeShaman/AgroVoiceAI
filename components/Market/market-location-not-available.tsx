@@ -127,13 +127,17 @@ export function MarketLocationNotAvailable({
                   <FormItem onChange={handleDistrictChange}>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={user?.userDistrict || 'Select a location.'}
+                      defaultValue={
+                        district
+                          ? district
+                          : user?.userDistrict || 'Select a location.'
+                      }
                     >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue
                             placeholder={
-                              user?.userDistrict ? user?.userDistrict : district
+                              district ? district : user?.userDistrict
                             }
                           />
                         </SelectTrigger>

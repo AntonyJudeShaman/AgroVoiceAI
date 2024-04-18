@@ -122,3 +122,11 @@ export type OnboardingFormProps = {
   back?: string
   placeholder?: string
 }
+
+export type MarketProps = {
+  user: any
+  items: Item[]
+  loading: boolean
+  error: string | null
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>
+}

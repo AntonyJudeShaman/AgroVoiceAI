@@ -21,61 +21,29 @@ import {
   vegetableNamesInTamil
 } from '@/config/constants'
 import { cn, parseItems } from '@/lib/utils'
-import { Item } from '@/lib/types'
+import { Item, MarketProps } from '@/lib/types'
 import { Button } from '../ui/button'
 import { MarketLocationNotAvailable } from './market-location-not-available'
 import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
 
-export default function MarketHomeVegetables({ user }: { user: any }) {
-  const [items, setItems] = useState<Item[]>([])
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
+export default function MarketHomeVegetables({
+  user,
+  items,
+  loading,
+  error,
+  setItems
+}: MarketProps) {
   const [location, setLocation] = useState<keyof typeof tnDistrictsInEnglish>(
     user?.userDistrict
   )
 
   const locale = useLocale()
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('/api/scrape', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ location: user.userDistrict })
-        })
-
-        if (response.ok) {
-          const data = await response.json()
-          // console.log(data)
-          setItems(parseItems(data.scrapedData))
-        } else {
-          MyToast({
-            message:
-              locale === 'en'
-                ? 'Failed to fetch prices.'
-                : 'விலைகளைப் பெற முடியவில்லை.',
-            type: 'error'
-          })
-        }
-      } catch (error: any) {
-        MyToast({
-          message:
-            locale === 'en'
-              ? 'Failed to fetch prices. Please try again later.'
-              : 'விலைகளைப் பெற முடியவில்லை. பின்னர் முயற்சிக்கவும்.',
-          type: 'error'
-        })
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [user, locale])
+  console.log('v items', items)
+  const district = (
+    locale === 'en' ? tnDistrictsInEnglish : tnDistrictsInTamil
+  )[location] as string
 
   if (loading) {
     return <MarketTableSkeleton />
@@ -94,6 +62,7 @@ export default function MarketHomeVegetables({ user }: { user: any }) {
       </div>
     )
   }
+
   if (!items || !items.length) {
     return (
       <div className="flex items-center justify-center h-[95vh] md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
@@ -114,10 +83,6 @@ export default function MarketHomeVegetables({ user }: { user: any }) {
       </div>
     )
   }
-
-  const district = (
-    locale === 'en' ? tnDistrictsInEnglish : tnDistrictsInTamil
-  )[location] as string
 
   return (
     <>

@@ -7,7 +7,7 @@ export default async function Market() {
   const user = await getCurrentUser()
   return (
     <>
-      <SessionPageContainer component={<MarketsTab />} />
+      <SessionPageContainer component={<MarketsTab user={user} />} />
     </>
   )
 }
