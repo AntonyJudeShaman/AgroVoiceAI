@@ -13,10 +13,9 @@ import {
 import { IconArrowElbow, IconClose, IconPlus } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
 import { inputSchema, validateInput } from '@/lib/schema'
-import toast from 'react-hot-toast'
 import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
-import { Mic, Mic2 } from 'lucide-react'
+import { Mic } from 'lucide-react'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -58,7 +57,7 @@ export function PromptForm({
     }
     recognition.onresult = async function (e) {
       const transcript = e.results[0][0].transcript
-      if (transcript.trim() === '') {
+      if (transcript.trim() !== '') {
         setInput(transcript)
       }
     }

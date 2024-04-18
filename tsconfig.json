@@ -43,7 +43,7 @@
     ".next/types/**/*.ts",
     "jest.config.js",
     "jest.setup.js"
-  ],
+, "lib/pinecone.js"  ],
   "exclude": [
     "node_modules"
   ]

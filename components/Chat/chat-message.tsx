@@ -15,9 +15,9 @@ export interface ChatMessageProps {
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
   const locale = useLocale()
-  {
-    message.role !== 'user' && speak(message.content, locale)
-  }
+  // {
+  //   message.role !== 'user' && speak(message.content, locale)
+  // }
   return (
     <div
       className={cn('group font-mon relative mb-4 flex items-start md:-ml-12')}
