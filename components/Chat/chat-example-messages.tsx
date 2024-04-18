@@ -2,6 +2,7 @@ import {
   exampleMessagesEnglish,
   exampleMessagesTamil
 } from '@/config/constants'
+import { motion } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import React from 'react'
 
@@ -12,26 +13,30 @@ export default function ChatExampleMessages({ messages, append, id }: any) {
       {messages.length === 0 &&
         (locale === 'en' ? exampleMessagesEnglish : exampleMessagesTamil).map(
           (example, index) => (
-            <div
+            <motion.div
               key={example.heading}
-              className={`cursor-pointer rounded-md md:rounded-tl-none md:rounded-b-none md:rounded-tr-2xl md:rounded-bl-2xl border p-4 duration-300 bg-gradient-to-tr dark:from-slate-900 dark:to-slate-950/40 dark:hover:to-slate-900 dark:hover:from-slate-950/40 to-60% from-zinc-100  to-indigo-100/30 hover:to-zinc-200  hover:from-indigo-200/30  
-          
-        }`}
-              onClick={async () => {
-                await append({
-                  id,
-                  content: example.message,
-                  role: 'user'
-                })
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.25 }}
             >
-              <div className="text-sm font-semibold font-pops">
-                {example.heading}
+              <div
+                className={`cursor-pointer rounded-md md:rounded-tl-none md:rounded-b-none md:rounded-tr-2xl md:rounded-bl-2xl border p-4 duration-300 bg-gradient-to-tr dark:from-slate-900 dark:to-slate-950/40 dark:hover:to-slate-900 dark:hover:from-slate-950/40 to-60% from-zinc-100  to-indigo-100/30 hover:to-zinc-200  hover:from-indigo-200/30 }`}
+                onClick={async () => {
+                  await append({
+                    id,
+                    content: example.message,
+                    role: 'user'
+                  })
+                }}
+              >
+                <div className="text-sm font-semibold font-pops">
+                  {example.heading}
+                </div>
+                <div className="text-sm dark:text-gray-400 font-bricol text-gray-600">
+                  {example.subheading}
+                </div>
               </div>
-              <div className="text-sm dark:text-gray-400 font-bricol text-gray-600">
-                {example.subheading}
-              </div>
-            </div>
+            </motion.div>
           )
         )}
     </div>

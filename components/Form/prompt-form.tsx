@@ -15,6 +15,7 @@ import { inputSchema, validateInput } from '@/lib/schema'
 import toast from 'react-hot-toast'
 import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
+import { Mic, Mic2 } from 'lucide-react'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -37,6 +38,23 @@ export function PromptForm({
       inputRef.current.focus()
     }
   }, [])
+
+  function handleVoice() {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition
+    const recognition = new SpeechRecognition()
+    recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
+    recognition.interimResults = false
+    recognition.maxAlternatives = 1
+    recognition.start()
+    recognition.onresult = async function (e) {
+      const transcript = e.results[0][0].transcript
+      setInput(transcript)
+    }
+    recognition.onend = () => {
+      recognition.stop()
+    }
+  }
 
   return (
     <form
@@ -94,7 +112,21 @@ export function PromptForm({
           spellCheck={true}
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
-        <div className="absolute right-0 top-4 sm:right-4">
+        <div className="absolute right-0 top-4 sm:right-4 flex items-center space-x-3">
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <button
+                onClick={handleVoice}
+                className="rounded-full bg-slate-800 p-2"
+              >
+                <Mic className="size-5" />
+                <span className="sr-only">Send message</span>
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {locale === 'en' ? 'Click to speak' : 'பேச கிளிக் செய்க'}
+            </TooltipContent>
+          </Tooltip>
           <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <Button

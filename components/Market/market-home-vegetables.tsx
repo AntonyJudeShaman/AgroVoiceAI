@@ -40,7 +40,6 @@ export default function MarketHomeVegetables({
 
   const locale = useLocale()
 
-  console.log('v items', items)
   const district = (
     locale === 'en' ? tnDistrictsInEnglish : tnDistrictsInTamil
   )[location] as string
@@ -48,6 +47,7 @@ export default function MarketHomeVegetables({
   if (loading) {
     return <MarketTableSkeleton />
   }
+  console.log(items)
 
   if (error) {
     return (

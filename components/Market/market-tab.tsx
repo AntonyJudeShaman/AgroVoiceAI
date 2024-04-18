@@ -41,7 +41,7 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
 
         if (vegetablesResponse) {
           const vegetablesRes = await vegetablesResponse.json()
-          console.log('after fetch', vegetablesRes)
+          // console.log('after fetch', vegetablesRes)
           setVegetablesData(parseItems(vegetablesRes.scrapedData))
         } else {
           MyToast({
@@ -54,21 +54,26 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
         }
         if (fruitsResponse) {
           const fruitsRes = await fruitsResponse.json()
-          console.log('after fetch fruits', fruitsRes)
+          // console.log('after fetch fruits', fruitsRes)
           setFruitsData(parseItems(fruitsRes.scrapedData))
         } else {
-          setFruitsError(
-            locale === 'en'
-              ? 'Failed to fetch fruits data.'
-              : 'காய்கறி தரவைப் பெறுவதில் தோல்வி ஏற்பட்டது.'
-          )
+          MyToast({
+            message:
+              locale === 'en'
+                ? 'Failed to fetch prices. Please try again later.'
+                : 'விலைகளைப் பெற முடியவில்லை. பின்னர் முயற்சிக்கவும்.',
+            type: 'error'
+          })
         }
       } catch (error) {
-        setError(
-          locale === 'en'
-            ? 'Failed to fetch fruits data. Please try again later.'
-            : 'காய்கறி தரவைப் பெறுவதில் தோல்வி ஏற்பட்டது. தயவுசெய்து பின்னர் முயற்சிக்கவும்.'
-        )
+        MyToast({
+          message:
+            locale === 'en'
+              ? 'Failed to fetch prices. Please try again later.'
+              : 'விலைகளைப் பெற முடியவில்லை. பின்னர் முயற்சிக்கவும்.',
+          type: 'error'
+        })
+        setError('aa')
       } finally {
         setLoading(false)
       }
@@ -91,8 +96,8 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
     )
   }
 
-  console.log('vdata', vegetablesData)
-  console.log('fdata', fruitsData)
+  // console.log('vdata', vegetablesData)
+  // console.log('fdata', fruitsData)
 
   return (
     <>
@@ -128,6 +133,7 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
         </TabsContent>
         <TabsContent value="graph">
           {/* <PlotComponent data={data} /> */}
+          {/* <VegetablePricesChart vegetableData={vegetablesData} /> */}
         </TabsContent>
       </Tabs>
     </>
