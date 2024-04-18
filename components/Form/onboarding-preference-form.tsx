@@ -53,7 +53,7 @@ export default function OnboardingPreferenceForm({
       window.SpeechRecognition || window.webkitSpeechRecognition
     setPreference('')
     const recognition = new SpeechRecognition()
-    recognition.lang = 'ta-IN'
+    recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
     recognition.interimResults = true
     recognition.maxAlternatives = 1
     recognition.start()
