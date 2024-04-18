@@ -49,8 +49,8 @@ export function PromptForm({
       window.SpeechRecognition || window.webkitSpeechRecognition
     setInput('')
     const recognition = new SpeechRecognition()
-    recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
-    recognition.interimResults = false
+    recognition.lang = 'auto'
+    recognition.interimResults = true
     recognition.maxAlternatives = 1
     recognition.start()
     recognition.onstart = () => {
@@ -93,6 +93,7 @@ export function PromptForm({
             <button
               className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-700"
               onClick={closeModal}
+              type="button"
             >
               <IconClose className="z-40 size-8 dark:text-white text-black" />
             </button>
@@ -165,8 +166,9 @@ export function PromptForm({
               <TooltipTrigger asChild>
                 <Button
                   onClick={handleVoice}
+                  type="button"
                   className={cn(
-                    'rounded-ful dark:bg-slate-800 dark:text-white text-black bg-white border border-gray-300 dark:border-gray-700 p-2 cursor-pointer',
+                    'rounded-ful dark:bg-slate-800 dark:text-white text-black bg-white dark:hover:bg-primary border border-gray-300 dark:border-gray-700 p-2 cursor-pointer',
                     isMicrophoneActive ||
                       !isLoading ||
                       'opacity-40 cursor-not-allowed'

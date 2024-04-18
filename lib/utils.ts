@@ -14,6 +14,24 @@ export const nanoid = () => {
   return `${nanoidString.slice(0, 8)}-${nanoidString.slice(8, 12)}-${nanoidString.slice(12, 16)}-${nanoidString.slice(16, 20)}-${nanoidString.slice(20)}`
 }
 
+export function speak(text: string, locale: string) {
+  const utterance = new SpeechSynthesisUtterance(text)
+
+  // Get available voices
+  const voices = window.speechSynthesis.getVoices()
+
+  // Select a default voice (for example, the first available voice)
+  const defaultVoice = voices.find(voice => voice.lang === locale)
+
+  if (defaultVoice) {
+    utterance.voice = defaultVoice
+  } else {
+    console.error('No default voice available.')
+  }
+
+  window.speechSynthesis.speak(utterance)
+}
+
 export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit

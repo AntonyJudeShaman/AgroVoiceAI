@@ -9,6 +9,7 @@ import { IconRefresh, IconShare, IconStop } from '@/components/ui/icons'
 import { ChatShareDialog } from '@/components/Chat/chat-share-dialog'
 import { useLocale } from 'next-intl'
 import ChatExampleMessages from './chat-example-messages'
+import { FooterText } from '../Form/footer-text'
 
 export interface ChatPanelProps
   extends Pick<
@@ -102,7 +103,7 @@ export function ChatPanel({
             isLoading={isLoading}
             reload={reload}
           />
-          {/* <FooterText className="hidden sm:block" /> */}
+          <FooterText className="hidden sm:block" />
         </div>
       </div>
     </div>

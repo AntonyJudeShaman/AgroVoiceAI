@@ -2,7 +2,7 @@ import { Message } from 'ai'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
-import { cn } from '@/lib/utils'
+import { cn, speak } from '@/lib/utils'
 import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/Miscellaneous/markdown'
 import { IconLogo, IconUser } from '@/components/ui/icons'
@@ -15,6 +15,9 @@ export interface ChatMessageProps {
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
   const locale = useLocale()
+  {
+    message.role !== 'user' && speak(message.content, locale)
+  }
   return (
     <div
       className={cn('group font-mon relative mb-4 flex items-start md:-ml-12')}
