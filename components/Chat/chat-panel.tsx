@@ -100,6 +100,7 @@ export function ChatPanel({
             input={input}
             setInput={setInput}
             isLoading={isLoading}
+            reload={reload}
           />
           {/* <FooterText className="hidden sm:block" /> */}
         </div>

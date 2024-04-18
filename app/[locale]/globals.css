@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes blink {
+  0% {
+    transform: opacity(0.3);
+  }
+  25% {
+    transform: opacity(0.5);
+  }
+  50% {
+    transform: opacity(0.9);
+  }
+  75% {
+    transform: opacity(0.5);
+  }
+  100% {
+    transform: opacity(1);
+  }
+}
+
+.animate-opacity {
+  animation: blink 1s linear infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
