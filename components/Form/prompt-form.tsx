@@ -17,6 +17,7 @@ import toast from 'react-hot-toast'
 import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
 import { Mic, Mic2 } from 'lucide-react'
+import { set } from 'zod'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -42,12 +43,16 @@ export function PromptForm({
     }
   }, [])
 
-  const [isMicrophoneActive, setIsMicrophoneActive] = React.useState(false)
+  const [isMicrophoneActive, setIsMicrophoneActive] =
+    React.useState<boolean>(false)
+  const [isMicActivated, setIsMicActivated] = React.useState<boolean>(false)
+  let text = ''
 
   function handleVoice() {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
     setInput('')
+    setIsMicActivated(true)
     const recognition = new SpeechRecognition()
     recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
     recognition.interimResults = true
@@ -58,17 +63,10 @@ export function PromptForm({
     }
     recognition.onresult = async function (e) {
       const transcript = e.results[0][0].transcript
-      if (transcript.trim() !== '') {
+      if (transcript.trim() === '') {
         setInput(transcript)
-      } else {
-        MyToast({
-          message:
-            locale === 'en'
-              ? 'Sorry, I did not catch that. 😔'
-              : 'பேச்சு கண்டறியப்படவில்லை',
-          type: 'error'
-        })
       }
+      text = transcript
     }
     recognition.onend = () => {
       setIsMicrophoneActive(false)
@@ -78,6 +76,15 @@ export function PromptForm({
 
   const closeModal = () => {
     setIsMicrophoneActive(false)
+  }
+
+  if (text.trim() === '' && isMicActivated) {
+    toast(
+      locale === 'en'
+        ? 'Sorry, I did not catch that. 😔'
+        : 'பேச்சு கண்டறியப்படவில்லை'
+    )
+    setIsMicActivated(false)
   }
 
   return (
@@ -127,7 +134,7 @@ export function PromptForm({
         }}
         ref={formRef}
       >
-        <div className="relative md:w-[46rem] flex flex-col px-8 overflow-hidden max-h-60 grow md:dark:bg-black dark:bg-transparent bg-gray-100 sm:rounded-md sm:border dark:sm:border-gray-600 sm:border-gray-400 sm:px-12 dark:focus-within:border-blue-500 focus-within:border-blue-700">
+        <div className="relative flex flex-col pl-[24px] pr-[82px] overflow-hidden max-h-60 grow md:dark:bg-black dark:bg-transparent bg-gray-100 sm:rounded-md sm:border dark:sm:border-gray-600 sm:border-gray-400 sm:pl-12 sm:pr-28 dark:focus-within:border-blue-500 focus-within:border-blue-700">
           <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <button
@@ -158,7 +165,7 @@ export function PromptForm({
             onChange={e => setInput(e.target.value)}
             placeholder="Send a message."
             spellCheck={true}
-            className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+            className="min-h-[60px] w-full resize-none bg-transparent px-4 mr-6 py-[1.3rem] focus-within:outline-none sm:text-sm"
           />
           <div className="absolute right-0 top-4 sm:right-4 flex items-center space-x-3">
             <Tooltip delayDuration={0}>

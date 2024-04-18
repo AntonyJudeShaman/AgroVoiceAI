@@ -46,12 +46,14 @@ export default function OnboardingPreferenceForm({
   }
 
   const [isMicrophoneActive, setIsMicrophoneActive] = useState<boolean>(false)
-  let trans = ''
+  const [isMicActivated, setIsMicActivated] = useState<boolean>(false)
+  let text = ''
 
   function handleVoice() {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
     setPreference('')
+    setIsMicActivated(true)
     const recognition = new SpeechRecognition()
     recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
     recognition.interimResults = true
@@ -65,19 +67,10 @@ export default function OnboardingPreferenceForm({
       if (transcript.trim() !== '') {
         setPreference(transcript)
         setIsPreferenceChanged(true)
-      } else {
-        toast('Sorry, I did not catch that. 😔')
       }
-      trans = transcript
+      text = transcript
     }
     recognition.onend = () => {
-      if (trans.trim() !== '') {
-        toast(
-          locale === 'en'
-            ? 'Sorry, I did not catch that. 😔'
-            : 'பேச்சு கண்டறியப்படவில்லை'
-        )
-      }
       setIsMicrophoneActive(false)
       recognition.stop()
     }
@@ -85,6 +78,15 @@ export default function OnboardingPreferenceForm({
 
   const closeModal = () => {
     setIsMicrophoneActive(false)
+  }
+
+  if (text.trim() === '') {
+    toast(
+      locale === 'en'
+        ? 'Sorry, I did not catch that. 😔'
+        : 'பேச்சு கண்டறியப்படவில்லை'
+    )
+    setIsMicActivated(true)
   }
 
   return (
