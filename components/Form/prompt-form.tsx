@@ -17,7 +17,6 @@ import toast from 'react-hot-toast'
 import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
 import { Mic, Mic2 } from 'lucide-react'
-import { set } from 'zod'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -43,16 +42,12 @@ export function PromptForm({
     }
   }, [])
 
-  const [isMicrophoneActive, setIsMicrophoneActive] =
-    React.useState<boolean>(false)
-  const [isMicActivated, setIsMicActivated] = React.useState<boolean>(false)
-  let text = ''
+  const [isMicrophoneActive, setIsMicrophoneActive] = React.useState(false)
 
   function handleVoice() {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
     setInput('')
-    setIsMicActivated(true)
     const recognition = new SpeechRecognition()
     recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
     recognition.interimResults = true
@@ -66,7 +61,6 @@ export function PromptForm({
       if (transcript.trim() === '') {
         setInput(transcript)
       }
-      text = transcript
     }
     recognition.onend = () => {
       setIsMicrophoneActive(false)
@@ -76,15 +70,6 @@ export function PromptForm({
 
   const closeModal = () => {
     setIsMicrophoneActive(false)
-  }
-
-  if (text.trim() === '' && isMicActivated) {
-    toast(
-      locale === 'en'
-        ? 'Sorry, I did not catch that. 😔'
-        : 'பேச்சு கண்டறியப்படவில்லை'
-    )
-    setIsMicActivated(false)
   }
 
   return (

@@ -18,7 +18,7 @@ export default async function SessionPageContainer({
   }
 
   if (!user?.pageShown && session) {
-    redirect('/onboarding')
+    redirect('/onboarding/location')
   }
 
   const t = await getTranslations('Index')
