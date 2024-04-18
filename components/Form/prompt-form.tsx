@@ -49,7 +49,7 @@ export function PromptForm({
       window.SpeechRecognition || window.webkitSpeechRecognition
     setInput('')
     const recognition = new SpeechRecognition()
-    recognition.lang = 'auto'
+    recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
     recognition.interimResults = true
     recognition.maxAlternatives = 1
     recognition.start()

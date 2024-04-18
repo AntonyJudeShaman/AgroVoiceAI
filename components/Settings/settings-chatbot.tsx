@@ -47,7 +47,7 @@ export function SettingsChatbot({
       window.SpeechRecognition || window.webkitSpeechRecognition
     setPreference('')
     const recognition = new SpeechRecognition()
-    recognition.lang = 'auto'
+    recognition.lang = 'ta-IN'
     recognition.interimResults = true
     recognition.maxAlternatives = 1
     recognition.start()
