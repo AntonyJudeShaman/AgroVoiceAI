@@ -2,7 +2,6 @@ import { type Metadata } from 'next'
 
 import { getSharedChat } from '@/app/actions'
 import { ChatList } from '@/components/Chat/chat-list'
-import { FooterText } from '@/components/Miscellaneous/footer'
 import NotFound from '../../not-found'
 import { formatDateFromMS } from '@/lib/utils'
 
@@ -45,7 +44,6 @@ export default async function SharePage({ params }: SharePageProps) {
         </div>
         <ChatList messages={chat.messages} />
       </div>
-      <FooterText className="py-8" />
     </>
   )
 }
