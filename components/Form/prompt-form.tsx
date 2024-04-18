@@ -9,7 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
+import { IconArrowElbow, IconClose, IconPlus } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
 import { inputSchema, validateInput } from '@/lib/schema'
 import toast from 'react-hot-toast'
@@ -39,6 +39,8 @@ export function PromptForm({
     }
   }, [])
 
+  const [isMicrophoneActive, setIsMicrophoneActive] = React.useState(false)
+
   function handleVoice() {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
@@ -47,13 +49,41 @@ export function PromptForm({
     recognition.interimResults = false
     recognition.maxAlternatives = 1
     recognition.start()
+    recognition.onstart = () => {
+      setIsMicrophoneActive(true) // Set microphone active
+    }
     recognition.onresult = async function (e) {
       const transcript = e.results[0][0].transcript
       setInput(transcript)
     }
     recognition.onend = () => {
+      setIsMicrophoneActive(false)
       recognition.stop()
     }
+  }
+
+  const closeModal = () => {
+    setIsMicrophoneActive(false)
+  }
+
+  {
+    isMicrophoneActive && (
+      <div
+        className="fixed inset-0 z-50 p-6 flex animate-in duration-500 justify-center items-center bg-black bg-opacity-60"
+        onClick={closeModal}
+      >
+        <div className="max-w-3/4 bg-transparent p-8 rounded-full shadow-lg">
+          <button
+            className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-700"
+            onClick={closeModal}
+          >
+            <IconClose className="z-40 size-8 dark:text-white text-black" />
+          </button>
+          <Mic className="w-full h-auto text-white" />
+          <p>{locale === 'en' ? 'Mic is On' : 'மைக் இயக்கத்தில் உள்ளது'}</p>
+        </div>
+      </div>
+    )
   }
 
   return (
