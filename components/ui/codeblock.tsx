@@ -12,6 +12,7 @@ import { IconCheck, IconCopy, IconDownload } from '@/components/ui/icons'
 import { Button } from '@/components/ui/button'
 import toast from 'react-hot-toast'
 import MyToast from './my-toast'
+import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 interface Props {
   language: string
@@ -47,7 +48,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
     if (typeof window === 'undefined') {
       return
     }
-    const fileExtension = programmingLanguages[language] || '.txt'
+    const fileExtension = '.txt'
     const suggestedFileName = `file-${generateRandomString(
       3,
       true
@@ -83,8 +84,8 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
 
   return (
     <div className="relative w-full font-sans codeblock bg-zinc-950">
-      <div className="flex items-center justify-between w-full px-6 py-2 pr-4 bg-zinc-900 text-zinc-100">
-        <span className="text-xs lowercase">{language}</span>
+      <div className="flex items-center justify-between w-full px-6 py-2 pr-4 dark:bg-slate-900 bg-slate-700 text-zinc-100">
+        <span className="text-xs">AgroVoiceAI</span>
         <div className="flex items-center space-x-1">
           <Button
             variant="ghost"
@@ -108,13 +109,13 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
       </div>
       <SyntaxHighlighter
         language={language}
-        style={coldarkDark}
+        style={atomOneDarkReasonable}
         PreTag="div"
         showLineNumbers
         customStyle={{
           margin: 0,
           width: '100%',
-          background: 'transparent',
+          background: 'black',
           padding: '1.5rem 1rem'
         }}
         lineNumberStyle={{

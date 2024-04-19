@@ -104,6 +104,7 @@ export function ClearHistory({
                       : 'உரையாடல் வரலாறு வெற்றிகரமாக அழிக்கப்பட்டது',
                   type: 'success'
                 })
+                router.refresh()
               })
             }}
           >

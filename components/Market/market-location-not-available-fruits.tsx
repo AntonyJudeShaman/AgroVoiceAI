@@ -164,7 +164,7 @@ export function MarketLocationNotAvailableFruits({
               />
             ) : (
               <div className="mt-4 flex justify-center">
-                <LoadingDots className="bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
+                <LoadingDots className="bg-gradient-to-r size-5 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
               </div>
             )}
             {/* <div className="flex justify-end">

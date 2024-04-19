@@ -140,6 +140,7 @@ export function SidebarActions({
                         : 'உரையாடல் வெற்றிகரமாக நீக்கப்பட்டது',
                     type: 'success'
                   })
+                  router.refresh()
                 })
               }}
             >

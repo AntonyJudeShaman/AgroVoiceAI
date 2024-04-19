@@ -220,7 +220,7 @@ export default function PestTest({
                   ) : (
                     <div className="m-1 mt-8">
                       {isProcessing ? (
-                        <LoadingDots className="bg-gradient-to-r size-8 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
+                        <LoadingDots className="bg-gradient-to-r size-5 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
                       ) : (
                         image &&
                         !isSuccess && (

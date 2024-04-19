@@ -10,6 +10,8 @@ import { ChatShareDialog } from '@/components/Chat/chat-share-dialog'
 import { useLocale } from 'next-intl'
 import ChatExampleMessages from './chat-example-messages'
 import { FooterText } from '../Form/footer-text'
+import { Loader, Loader2 } from 'lucide-react'
+import { LoadingDots } from '../ui/loading-dots'
 
 export interface ChatPanelProps
   extends Pick<
@@ -48,14 +50,17 @@ export function ChatPanel({
         <ChatExampleMessages messages={messages} id={id} append={append} />
         <div className="flex items-center justify-center h-12">
           {isLoading ? (
-            <Button
-              variant="outline"
-              onClick={() => stop()}
-              className="bg-background"
-            >
-              <IconStop className="mr-2" />
-              {locale === 'en' ? 'Stop generating' : 'நிறுத்து'}
-            </Button>
+            <div className="flex items-center space-x-4">
+              <LoadingDots className="bg-gradient-to-r size-3 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
+              <Button
+                variant="outline"
+                onClick={() => stop()}
+                className="bg-background"
+              >
+                <IconStop className="mr-2" />
+                {locale === 'en' ? 'Stop generating' : 'நிறுத்து'}
+              </Button>
+            </div>
           ) : (
             messages?.length >= 2 && (
               <div className="flex space-x-2">

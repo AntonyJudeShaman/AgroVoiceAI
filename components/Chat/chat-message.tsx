@@ -43,6 +43,18 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
             p({ children }) {
               return <p className="mb-2 last:mb-0 flex flex-col">{children}</p>
             },
+            table({ children }) {
+              return (
+                <div className="px-5 rounded-2xl border dark:border-border border-gray-400 dark:bg-slate-900 bg-gray-100">
+                  <div className="overflow-auto">
+                    <table className="table-auto w-full dark:text-white/80 text-black">
+                      {children}
+                    </table>
+                  </div>
+                </div>
+              )
+            },
+
             code({ node, inline, className, children, ...props }) {
               if (children.length) {
                 if (children[0] == '▍') {
