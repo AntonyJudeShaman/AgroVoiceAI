@@ -45,7 +45,7 @@ export default function LocaleSwitcherSelect({
   return (
     <div className={clsx('relative')}>
       <select
-        className="appearance-none flex w-full mr-4 bg-transparent text-sm font-sans font-medium justify-evenly ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none items-center rounded-md hover:text-accent-foreground hover:bg-accent py-2 px-4 border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50"
+        className="appearance-none cursor-pointer flex w-full mr-4 bg-transparent text-sm font-sans font-medium justify-evenly ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none items-center rounded-md hover:text-accent-foreground hover:bg-accent py-2 px-4 border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50"
         defaultValue={defaultValue}
         disabled={isPending}
         onChange={onSelectChange}

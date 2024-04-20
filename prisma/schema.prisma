@@ -75,3 +75,15 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map(name: "verification_tokens")
 }
+
+model MarketStore {
+  id          Int      @id @default(autoincrement())
+  district    String
+  name        String
+  unit        String
+  marketPrice Float
+  retailPrice String
+  mallPrice   String
+  type        String
+  createdAt   DateTime @default(now())
+}
