@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   }
 
   const response = Hf.textGenerationStream({
-    model: 'OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5',
+    model: 'mistral-7b-instruct-4k',
     inputs: experimental_buildOpenAssistantPrompt(messages),
     parameters: {
       max_new_tokens: 500,

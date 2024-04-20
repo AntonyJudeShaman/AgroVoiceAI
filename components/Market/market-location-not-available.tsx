@@ -42,12 +42,13 @@ const FormSchema = z.object({
 export function MarketLocationNotAvailable({
   user,
   setItems,
-  setLocation
+  setLocation,
+  className
 }: {
   user: User
   setItems: React.Dispatch<React.SetStateAction<Item[]>>
   setLocation: React.Dispatch<React.SetStateAction<string>>
-}) {
+} & { className: string }) {
   const [district, setDistrict] = useState<string>(user?.userDistrict || '')
   const [isDistrictChanged, setIsDistrictChanged] = useState<boolean>(false)
   const [isLoadingDistrict, setIsLoadingDistrict] = useState<boolean>(false)
@@ -115,10 +116,15 @@ export function MarketLocationNotAvailable({
   }
 
   return (
-    <Card className="w-full border-none bg-transparent shadow-none">
+    <Card
+      className={cn(
+        'w-[20%] border-none bg-transparent shadow-none',
+        className
+      )}
+    >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
-          <CardContent className="2xl:w-[90%] mx-auto pb-20">
+          <CardContent className="2xl:w-[90%] mx-auto">
             {!isLoadingDistrict ? (
               <FormField
                 control={form.control}

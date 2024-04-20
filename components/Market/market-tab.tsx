@@ -10,6 +10,7 @@ import { Item } from '@/lib/types'
 import { tnDistrictsInEnglish } from '@/config/constants'
 import { parseItems } from '@/lib/utils'
 import MyToast from '../ui/my-toast'
+import MarketHomeFruitsGraph from './Market-dashboard'
 
 export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
   const [vegetablesData, setVegetablesData] = useState<Item[]>([])
@@ -132,8 +133,17 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
           />
         </TabsContent>
         <TabsContent value="graph">
-          {/* <PlotComponent data={data} /> */}
-          {/* <VegetablePricesChart vegetableData={vegetablesData} /> */}
+          {' '}
+          <MarketHomeFruitsGraph
+            user={user}
+            fruitsData={fruitsData}
+            vegetablesData={vegetablesData}
+            loading={loading}
+            fruitsError={fruitsError}
+            vegetablesError={vegetablesError}
+            setFruitsData={setFruitsData}
+            setVegetablesData={setVegetablesData}
+          />
         </TabsContent>
       </Tabs>
     </>

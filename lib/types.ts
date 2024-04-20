@@ -125,8 +125,8 @@ export type OnboardingFormProps = {
 
 export type MarketProps = {
   user: any
-  items: Item[]
-  loading: boolean
-  error: string | null
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
+  items?: Item[]
+  loading?: boolean
+  error?: string | null
+  setItems?: React.Dispatch<React.SetStateAction<Item[]>>
 }

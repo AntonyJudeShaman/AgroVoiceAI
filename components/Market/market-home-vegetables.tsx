@@ -75,8 +75,9 @@ export default function MarketHomeVegetables({
           <div className="flex justify-center">
             <MarketLocationNotAvailable
               user={user}
-              setItems={setItems}
+              setItems={setItems!}
               setLocation={setLocation as Dispatch<SetStateAction<string>>}
+              className="w-full"
             />
           </div>
         </div>
@@ -110,8 +111,8 @@ export default function MarketHomeVegetables({
               </Tooltip>
             </p>
           </div>
-          <div className="flex justify-between md:ml-1 ml-2 mb-6 text-lg md:-mt-4 md:p-0 px-1">
-            <p className="flex md:justify-start text-md justify-center">
+          <div className="flex justify-between items-center md:ml-1 ml-2 text-lg md:-mt-10 md:p-0">
+            <p className="flex justify-start text-md ">
               {new Date().toLocaleDateString(
                 `${locale === 'en' ? 'en-IN' : 'ta-IN'}`,
                 {
@@ -121,18 +122,12 @@ export default function MarketHomeVegetables({
                 }
               )}
             </p>
-            <Button
-              variant="link"
-              className="text-red-600 shadow-none dark:text-red-600/90 cursor-pointer font-pops -mt-[2px] text-lg justify-end px-0 mr-2 md:mr-0 after:bg-current"
-              onClick={() =>
-                window.scrollTo({
-                  top: document.documentElement.scrollHeight,
-                  behavior: 'smooth'
-                })
-              }
-            >
-              {locale === 'en' ? 'View other locations' : 'பிற இடங்களைக் காண'}
-            </Button>
+            <MarketLocationNotAvailable
+              user={user}
+              setItems={setItems!}
+              setLocation={setLocation as Dispatch<SetStateAction<string>>}
+              className="md:w-[20%] w-[50%] mt-6  md:mr-0"
+            />
           </div>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 opacity-30 -z-10 min-h-full filter blur-2xl mix-blend-screen"></div>
@@ -221,8 +216,9 @@ export default function MarketHomeVegetables({
         </p>
         <MarketLocationNotAvailable
           user={user}
-          setItems={setItems}
+          setItems={setItems!}
           setLocation={setLocation as Dispatch<SetStateAction<string>>}
+          className="w-full"
         />
       </div>
     </>

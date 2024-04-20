@@ -1,10 +1,11 @@
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
+import { geolocation } from '@vercel/edge'
 
 import { auth } from '@/lib/auth'
-import { nanoid } from '@/lib/utils'
+import { getWeatherData, nanoid } from '@/lib/utils'
 import redis from '@/lib/redis'
-import { getChatbotPreference } from '@/app/actions'
+import { getChatbotPreference, getCurrentUser } from '@/app/actions'
 
 export const runtime = 'edge'
 
@@ -19,6 +20,27 @@ export async function POST(req: Request) {
   const { messages } = json
   const userId = (await auth())?.user.id || nanoid()
   const preferences = await getChatbotPreference()
+  // const { city } = await geolocation(req)
+
+  // const location = city
+
+  // const weatherData = await getWeatherData('Chennai')
+
+  // const weatherData = await fetch('/api/weather', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify({ location: 'Chennai' })
+  // })
+
+  // if (weatherData) {
+  //   const weatherDataJson = await weatherData.json()
+  //   messages.push({
+  //     role: 'system',
+  //     content: `If you are asked about the weather in a location you can use this, the weather in ${location} is ${weatherDataJson.list[0].weather[0].main} with a temperature of ${Math.round(weatherDataJson.main.temp - 273.15)}°C. Present this data in a good format.`
+  //   })
+  // }
 
   if (!userRequestQueues[userId]) {
     userRequestQueues[userId] = []
@@ -39,12 +61,6 @@ export async function POST(req: Request) {
   context.push({
     role: 'system',
     content: `AgroVoiceAI: Your Agricultural Assistant. AgroVoiceAI is an advanced agricultural assistant powered by cutting-edge AI technology. It provides guidance and information on various aspects of farming to optimize practices and achieve better results. Features include personalized crop recommendations, pest identification, crop management tips, and farming Q&A. Backed by expert knowledge, AgroVoiceAI delivers accurate and reliable information through an intuitive interface. It continuously learns and improves to provide better results over time. Happy Farming! 🌾🚜🌱`
-  })
-
-  context.push({
-    role: 'system',
-    content:
-      'If the user asks for a downloadable format or if user want to download or save it, give in code tag with normal text format'
   })
 
   if (preferences) {

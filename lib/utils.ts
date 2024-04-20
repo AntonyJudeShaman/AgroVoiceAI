@@ -9,6 +9,13 @@ export function cn(...inputs: ClassValue[]) {
 
 export const chatid = customAlphabet('0123456789abcdef', 32)
 
+export async function getWeatherData(location: string) {
+  return fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.OPENWEATHERMAP_API_KEY}`,
+    { next: { revalidate: 60 } }
+  ).then(res => res.json())
+}
+
 export const nanoid = () => {
   const nanoidString = chatid()
   return `${nanoidString.slice(0, 8)}-${nanoidString.slice(8, 12)}-${nanoidString.slice(12, 16)}-${nanoidString.slice(16, 20)}-${nanoidString.slice(20)}`
