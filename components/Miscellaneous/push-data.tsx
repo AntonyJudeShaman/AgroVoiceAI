@@ -46,7 +46,10 @@ export default function MarketsData(originalPassword: {
         )
 
         if (!response.ok) {
-          throw new Error('Failed to fetch prices.')
+          MyToast({
+            message: `fetch for ${district.value} failed.`,
+            type: 'error'
+          })
         }
 
         const responseData = await response.json()
@@ -65,13 +68,17 @@ export default function MarketsData(originalPassword: {
         })
 
         if (!storeResponse.ok) {
-          throw new Error('Failed to store data for district ' + district.value)
+          MyToast({
+            message: `Failed to store ${category} data for ${district.value}`,
+            type: 'error'
+          })
+        } else {
+          MyToast({
+            message: `${category} data stored successfully for ${district.value}`,
+            type: 'success'
+          })
         }
-
-        console.log('Data stored successfully for district', district.value)
       }
-
-      toast.success('Market Data stored successfully.')
     } catch (error: any) {
       setError(error.message)
       MyToast({
