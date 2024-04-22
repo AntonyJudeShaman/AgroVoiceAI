@@ -23,6 +23,29 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import { MemoizedReactMarkdown } from '@/components/Miscellaneous/markdown'
 import Link from 'next/link'
+import ReactCrop, { PixelCrop } from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
+import {
+  getStorage,
+  ref as reff,
+  uploadBytes,
+  getDownloadURL
+} from 'firebase/storage'
+import { firebaseConfig } from '@/lib/firebase'
+import { initializeApp } from 'firebase/app'
+import {
+  handleFeedbackSubmit,
+  handleImageSubmit,
+  handlePestImageSubmit
+} from '@/helpers/user-info'
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogTrigger
+} from '../ui/alert-dialog'
+import { Textarea } from '../ui/textarea'
+import { set } from 'zod'
 
 export default function PestTest({
   user,
@@ -37,7 +60,7 @@ export default function PestTest({
 }: SettingsProps) {
   const [file, setFile] = useState(null)
   const [response, setResponse] = useState<any>(null)
-  const [image, setImage] = useState(null as string | null)
+  const [image, setImage] = useState<any>(null)
   const [isSavingImage, setIsSavingImage] = useState(false)
   const [isUploadingImage, setIsUploadingImage] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
@@ -46,17 +69,52 @@ export default function PestTest({
   const [isProcessing, setIsProcessing] = useState(false)
   const [isProcessed, setIsProcessed] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [crop, setCrop] = useState<PixelCrop | any>(null)
+  const [imageURL, setImageURL] = useState<string>('')
+  const [feedbackImageURL, setFeedbackImageURL] = useState<string>('')
+  const [showAnswerInput, setShowAnswerInput] = useState(false)
+  const [isFeedbackChanged, setIsFeedbackChanged] = useState(false)
+  const [feedback, setFeedback] = useState('')
+  const [answer, setAnswer] = useState('')
 
   useLockBody(modalVisible)
 
-  const handleImageClick = (image: string) => {
-    setModalImage(image)
-    setModalVisible(true)
+  const handleCropChange = (newCrop: any) => {
+    setCrop(newCrop)
   }
 
-  const closeModal = () => {
-    setModalVisible(false)
-    setModalImage('')
+  const firebaseApp = initializeApp(firebaseConfig, 'Pests')
+  const storage = getStorage(firebaseApp)
+
+  const handleCropComplete = (croppedArea: any) => {
+    const canvas = document.createElement('canvas')
+    const imageElement = document.createElement('img')
+    imageElement.src = image as string
+
+    imageElement.onload = () => {
+      const scaleX = imageElement.naturalWidth / imageElement.width
+      const scaleY = imageElement.naturalHeight / imageElement.height
+
+      canvas.width = croppedArea.width * scaleX
+      canvas.height = croppedArea.height * scaleY
+      const ctx = canvas.getContext('2d')
+
+      ctx?.drawImage(
+        imageElement,
+        croppedArea.x * scaleX,
+        croppedArea.y * scaleY,
+        croppedArea.width * scaleX,
+        croppedArea.height * scaleY,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      )
+
+      const croppedImage = canvas.toDataURL('image/jpeg')
+      setFile(croppedImage as any)
+      console.log('croppedImage:', file)
+    }
   }
 
   const handleFileChange = (e: any) => {
@@ -68,31 +126,110 @@ export default function PestTest({
   const locale = useLocale()
   const router = useRouter()
 
-  const handleUpload = async () => {
+  const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      const fileName = `${Date.now()}.jpeg`
+      const storageRef = reff(storage, 'Pests/' + fileName)
+      const response = await fetch(image)
+      const blob = await response.blob()
+      await uploadBytes(storageRef, blob)
+      const downloadURL = await getDownloadURL(storageRef)
+      setFeedbackImageURL(downloadURL)
+      await handlePestImageSubmit(
+        event,
+        user,
+        downloadURL,
+        setIsSavingImage,
+        toast
+      )
+      setIsProcessing(true)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  let croppedImage: Blob | undefined
+
+  const handleUpload = async (event: any) => {
     setIsProcessed(false)
     setIsProcessing(true)
-    const formData = new FormData()
-    formData.append('image', file as any)
-    console.log('formData:', formData)
-
     try {
-      const response = await fetch('http://localhost:5000/classify', {
-        method: 'POST',
-        body: formData
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to classify image')
+      toast.loading(
+        locale === 'en' ? 'Processing image ...' : 'படம் செயலாக்கப்படுகிறது',
+        {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'lightgreen',
+            secondary: 'black'
+          },
+          className: 'font-pops'
+        }
+      )
+      const uploadResponse = await handleFileUpload(event)
+      if (uploadResponse) {
+        let imageToSend: Blob | undefined
+        if (crop?.width && file && crop.height && crop.x && crop.y) {
+          imageToSend = await fetch(file).then(res => res.blob())
+        } else {
+          imageToSend = await fetch(image).then(res => res.blob())
+        }
+        const formData = new FormData()
+        formData.append('image', imageToSend!)
+        toast.dismiss()
+        toast.loading(
+          locale === 'en' ? 'Finding pest ...' : 'பூச்சியைக் கண்டரிகிரோம்...',
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+              fontSize: '14px'
+            },
+            iconTheme: {
+              primary: 'lightgreen',
+              secondary: 'black'
+            },
+            className: 'font-pops'
+          }
+        )
+        const response = await fetch('http://localhost:5000/classify', {
+          method: 'POST',
+          body: formData
+        })
+        if (!response.ok) {
+          throw new Error('Failed to classify image')
+        }
+        const data = await response.json()
+        setResponse(data)
+        setIsSuccess(true)
       }
-
-      const data = await response.json()
-      setResponse(data)
-      setIsSuccess(true)
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error uploading file:', error)
+      toast.error('Error uploading file. Please try again later.')
     } finally {
       setIsProcessing(false)
       setIsProcessed(true)
+      toast.dismiss()
+    }
+  }
+
+  const handleRadioChange = (e: any) => {
+    if (e.target.value) {
+      setIsFeedbackChanged(true)
+      if (e.target.value === 'incorrect') {
+        setShowAnswerInput(true)
+      } else {
+        setShowAnswerInput(false)
+      }
+    } else {
+      setIsFeedbackChanged(false)
     }
   }
 
@@ -104,16 +241,26 @@ export default function PestTest({
           'flex flex-col md:w-2/3 md:p-6 md:mt-[20vh] dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 mb-16 md:rounded-2xl md:border border-teal-900 mx-auto'
         )}
       >
-        <Card className="md:max-w-4xl z-40 w-full flex md:justify-center items-center mx-auto border-none shadow-none bg-transparent">
-          <div className={className}>
+        <Card className="md:max-w-4xl z-40 w-full flex md:justify-center mt-8 p-6 md:p-0 items-center mx-auto border-none shadow-none bg-transparent">
+          <div className="mx-auto">
             {image && !response && (
               <>
-                <img
-                  src={image}
-                  alt={user?.name || 'Profile Picture'}
-                  className="cursor-pointer mx-auto w-[40vh] md:w-[50vh] mt-8 0 flex justify-center rounded-2xl md:border dark:border-green-800 border-teal-400 items-center"
-                  onClick={() => handleImageClick(image)}
-                />
+                <p className="mb-5 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
+                  {locale === 'en'
+                    ? 'Please drag over the image to crop it'
+                    : 'படத்தை செதுக்க, அதன் மேல் இழுக்கவும்'}
+                </p>
+                <ReactCrop
+                  crop={crop}
+                  onChange={handleCropChange}
+                  onComplete={handleCropComplete}
+                >
+                  <img
+                    src={image}
+                    alt={user?.name || 'Profile Picture'}
+                    style={{ maxWidth: '100%', maxHeight: '100%' }}
+                  />
+                </ReactCrop>
                 {isProcessed && (
                   <>
                     <p className="mt-6 mx-auto text-lg text-red-600">
@@ -132,7 +279,7 @@ export default function PestTest({
                       </Button>
                       <Button
                         className="min-w-1/3 mt-6 mx-auto"
-                        onClick={handleUpload}
+                        onClick={e => handleUpload(e)}
                         size="lg"
                       >
                         {locale === 'en'
@@ -143,26 +290,6 @@ export default function PestTest({
                   </>
                 )}
               </>
-            )}
-            {modalVisible && (
-              <div
-                className="fixed inset-0 z-50 p-6 flex animate-in duration-500 justify-center items-center dark:bg-black bg-white bg-opacity-100"
-                onClick={closeModal}
-              >
-                <div className="max-w-3/4 bg-transparent p-8 rounded-full">
-                  <button
-                    className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-700"
-                    onClick={closeModal}
-                  >
-                    <IconClose className="z-40 size-8 dark:text-white text-black" />
-                  </button>
-                  <img
-                    src={modalImage}
-                    alt="Modal"
-                    className="w-full h-auto p12"
-                  />
-                </div>
-              </div>
             )}
             <div className="flex flex-col justify-center items-center space-y-4">
               {!isProcessed && (
@@ -228,7 +355,7 @@ export default function PestTest({
                             <Button
                               disabled={isProcessing}
                               variant="default"
-                              onClick={handleUpload}
+                              onClick={e => handleUpload(e)}
                               size="lg"
                               type="button"
                               className="mb-4"
@@ -274,8 +401,126 @@ export default function PestTest({
         </Card>{' '}
         {response && (
           <div className="flex justify-center items-center">
-            <div className="flex flex-col w-full p-2 md:p-6 mt-6 lg:-mt-[3%] md:rounded-2xl mx-auto">
-              <div className="mr-4 mb-4 flex justify-end">
+            <div className="flex flex-col w-full p-2 md:p-6 -mt-[10%] lg:-mt-[3%] md:rounded-2xl mx-auto">
+              <div className="mr-4 mb-4 space-x-4 flex md:justify-end md:mt-0 justify-center">
+                <AlertDialog>
+                  <AlertDialogTrigger>
+                    <Button>
+                      {locale === 'en'
+                        ? 'Is this correct?'
+                        : 'கணிப்பு சரியானது என்று நினைக்கிறீர்களா?'}
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <form
+                      onSubmit={e => {
+                        toast.loading('Submitting feedback...')
+                        handleFeedbackSubmit(
+                          e,
+                          feedbackImageURL,
+                          feedback,
+                          answer,
+                          response.confidence,
+                          response.pest
+                        )
+                        setTimeout(() => {
+                          toast.dismiss()
+                        }, 1500)
+                      }}
+                    >
+                      <div className="mx-auto flex flex-col space-y-4 w-full">
+                        <Label className="text-lg font-medium">
+                          {locale === 'en'
+                            ? 'Detection correctness:'
+                            : 'கண்டறிதல் சரியானதா?'}
+                        </Label>
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="radio"
+                              id="correct"
+                              name="correctness"
+                              value="correct"
+                              onChange={e => handleRadioChange(e)}
+                            />
+                            <Label htmlFor="correct">
+                              {locale === 'en' ? 'Correct' : 'சரியானது'}
+                            </Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="radio"
+                              id="incorrect"
+                              name="correctness"
+                              value="incorrect"
+                              onChange={e => handleRadioChange(e)}
+                            />
+                            <Label htmlFor="incorrect">
+                              {locale === 'en' ? 'Incorrect' : 'தவறானது'}
+                            </Label>
+                          </div>
+                        </div>
+                        <Label
+                          htmlFor="feedback"
+                          className="text-md font-medium"
+                        >
+                          {locale === 'en'
+                            ? 'Feedback (optional):'
+                            : 'கருத்து (விரும்பினால்):'}
+                        </Label>
+                        <Textarea
+                          id="feedback"
+                          className="border rounded-md p-2 min-h-[8rem]"
+                          placeholder={
+                            locale === 'en'
+                              ? 'Provide your feedback here...'
+                              : 'உங்கள் கருத்தை இங்கே தெரிவு செய்யவும்...'
+                          }
+                          onChange={e => setFeedback(e.target.value)}
+                        ></Textarea>
+                        {showAnswerInput && (
+                          <>
+                            <Label
+                              htmlFor="answer"
+                              className="text-md font-medium"
+                            >
+                              {locale === 'en'
+                                ? 'What do you think it is? (optional):'
+                                : 'அது என்ன என்று நீங்கள் என்ன நினைக்கிறீர்கள்? (விரும்பினால்):'}
+                            </Label>
+                            <Input
+                              id="answer"
+                              className="border rounded-md p-2"
+                              placeholder={
+                                locale === 'en'
+                                  ? 'Enter pest name here...'
+                                  : 'பூச்சியின் பெயரை இங்கே உள்ளிடவும்...'
+                              }
+                              onChange={e => setAnswer(e.target.value)}
+                            />
+                          </>
+                        )}
+                        <div className="flex justify-end">
+                          <Button
+                            type="submit"
+                            disabled={!isFeedbackChanged}
+                            className="mr-2"
+                          >
+                            {locale === 'en' ? 'Submit' : 'சமர்ப்பிக்கவும்'}
+                          </Button>
+                          <AlertDialogCancel
+                            type="button"
+                            className="m-0"
+                            onClick={e => setIsFeedbackChanged(false)}
+                          >
+                            {locale === 'en' ? 'Cancel' : 'ரத்து செய்'}
+                          </AlertDialogCancel>
+                        </div>
+                      </div>
+                    </form>
+                  </AlertDialogContent>
+                </AlertDialog>
+
                 <Button onClick={() => router.push('/pest-identification/new')}>
                   {locale === 'en' ? 'Find Other' : 'மற்றொரு முயற்சி'}
                 </Button>

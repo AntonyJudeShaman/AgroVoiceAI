@@ -4,7 +4,7 @@ import { parseItems } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import MyToast from '@/components/ui/my-toast'
 import { Item } from '@/lib/types'
-import { tnDistricts } from '@/config/constants'
+import { tnDistrictsThatHasData } from '@/config/constants'
 import toast from 'react-hot-toast'
 import { LoadingDots } from '@/components/ui/loading-dots'
 import { Input } from '@/components/ui/input'
@@ -26,7 +26,7 @@ export default function MarketsData(originalPassword: {
     const dataToPush = category === 'vegetables' ? vegetablesData : fruitsData
 
     try {
-      for (const district of tnDistricts) {
+      for (const district of tnDistrictsThatHasData) {
         if (category === 'vegetables') {
           setLoadingVegetables(true)
         }
@@ -80,9 +80,8 @@ export default function MarketsData(originalPassword: {
         }
       }
     } catch (error: any) {
-      setError(error.message)
       MyToast({
-        message: 'Failed to fetch or store prices. Please try again later.',
+        message: `Failed to fetch or store prices. Please try again later.`,
         type: 'error'
       })
     } finally {

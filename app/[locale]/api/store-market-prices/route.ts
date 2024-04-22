@@ -1,12 +1,10 @@
 import { db } from '@/lib/db'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
-
 export async function POST(req: NextRequest) {
   try {
     const { district, items, type } = await req.json()
 
-    console.log('Storing data for district:', district)
+    console.log('Storing data for district:', district, 'type', type)
 
     for (const item of items) {
       await db.marketStore.create({

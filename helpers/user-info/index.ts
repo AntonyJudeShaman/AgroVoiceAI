@@ -111,13 +111,12 @@ const handlePestImageSubmit = async (
   user: User,
   imageURL: string,
   setIsSavingImage: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsImageChanged: React.Dispatch<React.SetStateAction<boolean>>,
   toast: any
 ) => {
   event.preventDefault()
 
   setIsSavingImage(true)
-  toast.loading('Uploading file...')
+  // toast.loading('Uploading file...')
   try {
     imageURLSchema.parse(imageURL)
     const response = await fetch(`/api/user/pest-image`, {
@@ -129,12 +128,11 @@ const handlePestImageSubmit = async (
     })
 
     if (response.ok) {
-      toast.dismiss()
-      MyToast({ message: 'Image updated.', type: 'success' })
+      // MyToast({ message: 'Image processed.', type: 'success' })
     } else {
       const errorMessage = await response.text()
       toast.dismiss()
-      MyToast({ message: 'Failed to upload image.', type: 'error' })
+      MyToast({ message: 'Failed to process image.', type: 'error' })
     }
   } catch (error: any) {
     if (error instanceof z.ZodError) {
@@ -357,6 +355,36 @@ const handleSubmit = async (
   }
 }
 
+const handleFeedbackSubmit = async (
+  e: React.FormEvent<HTMLFormElement>,
+  pestImage: string,
+  feedback?: string,
+  answer?: string,
+  confidence?: string,
+  modelAnswer?: string
+) => {
+  e.preventDefault()
+
+  const formData = new FormData(e.target as HTMLFormElement)
+  const correctness = formData.get('correctness')
+
+  const data = {
+    pestImage: pestImage,
+    userAnswer: answer,
+    modelAnswer: modelAnswer,
+    confidence: confidence,
+    correctness: correctness,
+    feedback: feedback
+  }
+
+  console.log('pest data', data)
+
+  try {
+  } catch (error) {
+    console.error('Error adding document: ', error)
+  }
+}
+
 export {
   handleNameSubmit,
   handleImageSubmit,
@@ -365,5 +393,6 @@ export {
   handleEmailSubmit,
   handleUserNameSubmit,
   handlePrefSubmit,
+  handleFeedbackSubmit,
   handleSubmit
 }

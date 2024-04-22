@@ -57,10 +57,10 @@ export function Chat({ id, initialMessages, className, session }: ChatProps) {
           router.refresh()
           router.push(`chat/c/${id}`)
           router.refresh()
+          router.push(`chat/c/${id}`)
         } else {
-          router.refresh()
+          // router.refresh()
         }
-        router.refresh()
       }
     })
   return (
