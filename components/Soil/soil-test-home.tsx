@@ -76,12 +76,12 @@ export default function SoilTest({ user }: any) {
   const handleSearchAgain = () => {
     fetchData()
   }
-
+  const server = process.env.NEXT_PUBLIC_SOIL_TEST_SERVER_URL!
   const handleSoilSubmit = async (e: any) => {
     e.preventDefault()
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:5000/recommend_crop', {
+      const res = await fetch(server, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -113,13 +113,13 @@ export default function SoilTest({ user }: any) {
           ? 'Soil Testing & Recommendation'
           : 'மண் சோதனை மற்றும் பரிந்துரை'}
       </p>
-      <Card className="flex w-full md:w-[50%] mt-10 p-6 dark:bg-gray-900 bg-gray-100">
+      <Card className="flex w-full md:w-[50%] mt-10 md:p-6 dark:bg-gray-900 bg-gray-100">
         {loading ? (
           <div className="p-6 flex justify-center mx-auto">
             <LoadingDots className="bg-gradient-to-r size-3 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
           </div>
         ) : !data?.K ? (
-          <div className="p-6 text-xl mx-auto text-red-600">
+          <div className=" text-xl mx-auto text-red-600">
             {locale === 'en' ? (
               <div className="flex flex-col mx-auto">
                 <p>Please perform a test to display the results.</p>
@@ -137,7 +137,7 @@ export default function SoilTest({ user }: any) {
             )}
           </div>
         ) : recommendation ? (
-          <div className="flex md:p-6 flex-col">
+          <div className="flex p-6 flex-col">
             <p className="font-pops font-semibold text-start tracking-tighter pt-2 pb-3 text-2xl md:text-2xl lg:text-3xl 2xl:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
               {locale === 'en'
                 ? 'Recommended crop for your soil'
@@ -160,7 +160,7 @@ export default function SoilTest({ user }: any) {
           </div>
         ) : (
           <div className="flex flex-col w-full justify-between p-6">
-            <div className="flex w-full justify-between p-6">
+            <div className="flex w-full justify-between space-x-4 p-4">
               <p
                 className={cn(
                   'z-50 overflow-hidden text-xl rounded-md border bg-popover hover:bg-slate-900/60 hover:text-popover-foreground/90 px-4 py-2.5 font-medium text-popover-foreground shadow-md shadow-green-400'
@@ -178,7 +178,7 @@ export default function SoilTest({ user }: any) {
                 {data?.N}
               </p>
             </div>
-            <div className="flex w-full justify-between p-6">
+            <div className="flex w-full justify-between space-x-4 p-4">
               <p
                 className={cn(
                   'z-50 overflow-hidden text-xl rounded-md border bg-popover hover:bg-slate-900/60 hover:text-popover-foreground/90 px-4 py-2.5 font-medium text-popover-foreground shadow-md shadow-green-400'
@@ -196,7 +196,7 @@ export default function SoilTest({ user }: any) {
                 {data?.ph}
               </p>
             </div>
-            <div className="flex w-full justify-between p-6">
+            <div className="flex w-full justify-between space-x-4 p-4">
               <p
                 className={cn(
                   'z-50 overflow-hidden text-xl rounded-md border bg-popover hover:bg-slate-900/60 hover:text-popover-foreground/90 px-4 py-2.5 font-medium text-popover-foreground shadow-md shadow-green-400'
@@ -214,7 +214,7 @@ export default function SoilTest({ user }: any) {
                 {data?.rainfall}
               </p>
             </div>
-            <div className="flex w-full mx-auto justify-center p-6">
+            <div className="flex w-full mx-auto justify-center p-4">
               <p
                 className={cn(
                   'z-50 overflow-hidden text-xl rounded-md border bg-popover hover:bg-slate-900/60 hover:text-popover-foreground/90 px-4 py-2.5 font-medium text-popover-foreground shadow-md shadow-green-400'
@@ -224,7 +224,7 @@ export default function SoilTest({ user }: any) {
                 {data?.temperature}
               </p>
             </div>
-            <div className="flex md:flex-row flex-col space-x-4 mx-auto">
+            <div className="flex md:flex-row flex-col md:space-x-4 mx-auto">
               <Button
                 type="button"
                 className="mx-auto mt-5"

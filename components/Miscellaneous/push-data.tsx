@@ -140,7 +140,7 @@ export default function MarketsData(originalPassword: {
             <form
               onSubmit={e => {
                 e.preventDefault()
-                if (password.toString() === 'antony') {
+                if (password.toString() === process.env.NEXT_PUBLIC_PASSWORD) {
                   setIsPasswordValid(true)
                 }
               }}
