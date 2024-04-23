@@ -82,6 +82,7 @@ export default function Weather({ user }: { user: any }) {
               user={user}
               setForecastData={setForecastData}
               setLocation={setLocation as Dispatch<SetStateAction<string>>}
+              className="w-full"
             />
           </div>
         </div>
@@ -136,18 +137,13 @@ export default function Weather({ user }: { user: any }) {
               </TooltipContent>
             </Tooltip>
           </p>
-          <Button
-            variant="link"
-            className=" text-red-600 shadow-none dark:text-red-600/90 cursor-pointer mb-3 font-pops text-lg px-0 after:bg-current"
-            onClick={() =>
-              window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-              })
-            }
-          >
-            {locale === 'en' ? 'View other locations' : 'பிற இடங்களைக் காண'}
-          </Button>
+
+          <WeatherLocationNotAvailable
+            user={user}
+            setForecastData={setForecastData}
+            setLocation={setLocation as Dispatch<SetStateAction<string>>}
+            className="w-[18rem] mt-6  md:mr-0"
+          />
         </div>
         <Tabs defaultValue={todayDate} className="w-3/4">
           <TabsList className="grid font-pops w-full md:grid-cols-4 grid-cols-2 md:h-full h-20 border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
@@ -181,18 +177,6 @@ export default function Weather({ user }: { user: any }) {
             </TabsContent>
           ))}
         </Tabs>
-      </div>
-      <div className="mt-12 mx-auto w-[82%] lg:w-[70%] flex justify-start flex-col text-center">
-        <p className="text-3xl tracking-tighter font-pops mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
-          {locale === 'en'
-            ? 'View weather in other locations'
-            : 'பிற இடங்களில் வானிலையைக் காண'}
-        </p>
-        <WeatherLocationNotAvailable
-          user={user}
-          setForecastData={setForecastData}
-          setLocation={setLocation as Dispatch<SetStateAction<string>>}
-        />
       </div>
     </>
   )

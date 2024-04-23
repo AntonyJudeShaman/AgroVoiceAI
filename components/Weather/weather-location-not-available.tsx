@@ -42,11 +42,13 @@ const FormSchema = z.object({
 export function WeatherLocationNotAvailable({
   user,
   setForecastData,
-  setLocation
+  setLocation,
+  className
 }: {
   user: User
   setForecastData: React.Dispatch<React.SetStateAction<ForecastData | null>>
   setLocation: React.Dispatch<React.SetStateAction<string>>
+  className: string
 }) {
   const [district, setDistrict] = useState<string>(user?.userDistrict || '')
   const [isDistrictChanged, setIsDistrictChanged] = useState<boolean>(false)
@@ -114,7 +116,12 @@ export function WeatherLocationNotAvailable({
   }
 
   return (
-    <Card className="w-full border-none bg-transparent shadow-none">
+    <Card
+      className={cn(
+        'w-[20%] border-none bg-transparent shadow-none',
+        className
+      )}
+    >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
           <CardContent className="2xl:w-[90%] mx-auto pb-20">

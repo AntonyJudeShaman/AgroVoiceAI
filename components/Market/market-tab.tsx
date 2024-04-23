@@ -42,7 +42,6 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
 
         if (vegetablesResponse) {
           const vegetablesRes = await vegetablesResponse.json()
-          // console.log('after fetch', vegetablesRes)
           setVegetablesData(parseItems(vegetablesRes.scrapedData))
         } else {
           MyToast({
@@ -55,7 +54,6 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
         }
         if (fruitsResponse) {
           const fruitsRes = await fruitsResponse.json()
-          // console.log('after fetch fruits', fruitsRes)
           setFruitsData(parseItems(fruitsRes.scrapedData))
         } else {
           MyToast({
@@ -96,9 +94,6 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
       </div>
     )
   }
-
-  // console.log('vdata', vegetablesData)
-  // console.log('fdata', fruitsData)
 
   return (
     <>

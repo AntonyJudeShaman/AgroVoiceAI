@@ -127,7 +127,7 @@ export default function MarketHomeFruits({
               user={user}
               setItems={setItems!}
               setLocation={setLocation as Dispatch<SetStateAction<string>>}
-              className="md:w-[20%] w-[50%] mt-6 md:mr-0"
+              className="md:w-[18rem] w-2/3 mt-6  md:mr-0"
             />
           </div>
           <div className="relative">
