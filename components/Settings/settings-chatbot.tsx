@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Loader2, Mic } from 'lucide-react'
+import { Info, Loader2, Mic } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { handlePrefSubmit } from '@/helpers/user-info'
 import { Textarea } from '../ui/textarea'
@@ -20,6 +20,7 @@ import MyToast from '../ui/my-toast'
 import { useLocale } from 'next-intl'
 import { IconClose } from '../ui/icons'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+import { FooterText } from '../Form/footer-text'
 
 export function SettingsChatbot({
   user,
@@ -153,6 +154,7 @@ export function SettingsChatbot({
                   autoCorrect="true"
                   placeholder={placeholder}
                 />
+                <FooterText className="mt-4 mb-0" />
               </div>
             </CardContent>
             <CardFooter className="bg-gradient-to-r dark:from-green-900/40 from-10% dark:via-teal-900/40 via-30% dark:to-emerald-900/40 from-green-200 via-teal-100 to-emerald-100  to-60% p-3 border dark:border-green-900/50 border-green-200 rounded-b-2xl md:-m-2 md:mt-4 justify-end flex">

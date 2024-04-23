@@ -5,6 +5,7 @@ import { BottomGradient } from '../ui/bottom-gradient'
 import { auth } from '@/lib/auth'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { cn } from '@/lib/utils'
+import DownloadButton from './download-button'
 
 export default async function Home() {
   const session = await auth()
@@ -47,17 +48,7 @@ export default async function Home() {
                   {t('chat')}
                 </Button>
               </Link>
-              <Link href="#">
-                <Button
-                  size="lg"
-                  className=" relative group/btn dark:bg-zinc-950/70 bg-white hover:bg-white dark:hover:bg-zinc-950 flex space-x-2 items-center py-5 justify-center px-6 w-full  rounded-md h-10 font-medium shadow-input dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-                  variant="outline"
-                >
-                  <DownloadIcon className="size-5 mr-2" />
-                  {t('app')}
-                  <BottomGradient />
-                </Button>
-              </Link>
+              <DownloadButton app={t('app')} />
             </div>
           </div>
         </main>

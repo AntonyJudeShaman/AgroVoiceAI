@@ -290,7 +290,13 @@ function MarketHomeFruitsGraph({
               }}
             />
             <Tooltip />
-            <Legend />
+            <Legend
+              verticalAlign="bottom"
+              align="center"
+              wrapperStyle={{
+                left: isMobile ? '20px' : '40px'
+              }}
+            />
             <Line
               type="monotone"
               dataKey="marketPrice"

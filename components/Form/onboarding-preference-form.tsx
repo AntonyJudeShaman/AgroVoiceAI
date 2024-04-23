@@ -21,6 +21,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { useLocale } from 'next-intl'
 import MyToast from '../ui/my-toast'
 import { IconClose } from '../ui/icons'
+import { FooterText } from './footer-text'
 
 export default function OnboardingPreferenceForm({
   user,
@@ -104,7 +105,7 @@ export default function OnboardingPreferenceForm({
       <Card
         className={cn(
           className,
-          'flex flex-col md:w-2/3 xl:w-2/4 m-4 w-full items-center shadow-none z-20 bg-transparent'
+          'flex flex-col md:w-2/3 xl:w-2/4 m-4 w-full items-center shadow-non z-20 bg-transparent'
         )}
       >
         <Card className="w-full border-none bg-transparent shadow-none">
@@ -173,6 +174,7 @@ export default function OnboardingPreferenceForm({
                   placeholder={placeholder}
                   disabled={isSavingPref || next}
                 />
+                <FooterText className="mt-4 mb-0" />
               </div>
               <div className="flex justify-between mt-5">
                 <Button
