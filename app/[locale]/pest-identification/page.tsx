@@ -11,17 +11,6 @@ export default async function Market() {
       <SessionPageContainer
         component={
           <>
-            {/* <PestHome
-              user={user}
-              title={t('pest.title')}
-              description={t('pest.desc')}
-              upload={t('pest.upload')}
-              remove={t('settings.account.image.remove')}
-              save={t('pest.submit')}
-              cancel={t('settings.cancel')}
-              drag={t('settings.account.image.drag')}
-              className="flex flex-col mx-auto text-center md:text-left"
-            /> */}
             <PestTest
               user={user}
               title={t('pest.title')}

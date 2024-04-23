@@ -10,6 +10,12 @@ import {
 import { User } from '@prisma/client/edge'
 import { signIn } from 'next-auth/react'
 import { z } from 'zod'
+import { getDatabase } from 'firebase/database'
+import { app } from '@/lib/firebase'
+import { ref, push, child, update, onValue } from 'firebase/database'
+import { getCurrentUser } from '@/app/actions'
+
+const database = getDatabase(app)
 
 const handleNameSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
@@ -361,10 +367,13 @@ const handleFeedbackSubmit = async (
   feedback?: string,
   answer?: string,
   confidence?: string,
-  modelAnswer?: string
+  modelAnswer?: string,
+  setIsFeedbackSuccess?: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsFeedbackLoading?: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   e.preventDefault()
 
+  setIsFeedbackLoading && setIsFeedbackLoading(true)
   const formData = new FormData(e.target as HTMLFormElement)
   const correctness = formData.get('correctness')
 
@@ -377,11 +386,21 @@ const handleFeedbackSubmit = async (
     feedback: feedback
   }
 
-  console.log('pest data', data)
-
   try {
+    const user = await getCurrentUser()
+
+    const userName = user?.userName || 'anonymous'
+
+    console.log('pest data', data)
+    const feedbackRef = push(ref(database, 'PestFeedbacks/'))
+    await update(
+      ref(database, `PestFeedbacks/${feedbackRef.key}-${userName}`),
+      data
+    )
+
+    setIsFeedbackSuccess && setIsFeedbackSuccess(true)
   } catch (error) {
-    console.error('Error adding document: ', error)
+    setIsFeedbackSuccess && setIsFeedbackSuccess(false)
   }
 }
 

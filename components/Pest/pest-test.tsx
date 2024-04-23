@@ -76,6 +76,9 @@ export default function PestTest({
   const [isFeedbackChanged, setIsFeedbackChanged] = useState(false)
   const [feedback, setFeedback] = useState('')
   const [answer, setAnswer] = useState('')
+  const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState<boolean>(false)
+  const [isFeedbackSuccess, setIsFeedbackSuccess] = useState<boolean>(false)
+  const [isFeedbackLoading, setIsFeedbackLoading] = useState<boolean>(false)
 
   useLockBody(modalVisible)
 
@@ -402,8 +405,11 @@ export default function PestTest({
         {response && (
           <div className="flex justify-center items-center">
             <div className="flex flex-col w-full p-2 md:p-6 -mt-[10%] lg:-mt-[3%] md:rounded-2xl mx-auto">
-              <div className="mr-4 mb-4 space-x-4 flex md:justify-end md:mt-0 justify-center">
-                <AlertDialog>
+              <div className="mr-4 mb-4 z-50 space-x-4 flex md:justify-end md:mt-0 justify-center">
+                <AlertDialog
+                  open={isFeedbackSubmitted}
+                  onOpenChange={setIsFeedbackSubmitted}
+                >
                   <AlertDialogTrigger>
                     <Button>
                       {locale === 'en'
@@ -412,112 +418,152 @@ export default function PestTest({
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
-                    <form
-                      onSubmit={e => {
-                        toast.loading('Submitting feedback...')
-                        handleFeedbackSubmit(
-                          e,
-                          feedbackImageURL,
-                          feedback,
-                          answer,
-                          response.confidence,
-                          response.pest
-                        )
-                        setTimeout(() => {
-                          toast.dismiss()
-                        }, 1500)
-                      }}
-                    >
-                      <div className="mx-auto flex flex-col space-y-4 w-full">
-                        <Label className="text-lg font-medium">
-                          {locale === 'en'
-                            ? 'Detection correctness:'
-                            : 'கண்டறிதல் சரியானதா?'}
-                        </Label>
-                        <div className="flex items-center space-x-4">
-                          <div className="flex items-center space-x-2">
-                            <input
-                              type="radio"
-                              id="correct"
-                              name="correctness"
-                              value="correct"
-                              onChange={e => handleRadioChange(e)}
-                            />
-                            <Label htmlFor="correct">
-                              {locale === 'en' ? 'Correct' : 'சரியானது'}
-                            </Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <input
-                              type="radio"
-                              id="incorrect"
-                              name="correctness"
-                              value="incorrect"
-                              onChange={e => handleRadioChange(e)}
-                            />
-                            <Label htmlFor="incorrect">
-                              {locale === 'en' ? 'Incorrect' : 'தவறானது'}
-                            </Label>
-                          </div>
-                        </div>
-                        <Label
-                          htmlFor="feedback"
-                          className="text-md font-medium"
-                        >
-                          {locale === 'en'
-                            ? 'Feedback (optional):'
-                            : 'கருத்து (விரும்பினால்):'}
-                        </Label>
-                        <Textarea
-                          id="feedback"
-                          className="border rounded-md p-2 min-h-[8rem]"
-                          placeholder={
-                            locale === 'en'
-                              ? 'Provide your feedback here...'
-                              : 'உங்கள் கருத்தை இங்கே தெரிவு செய்யவும்...'
-                          }
-                          onChange={e => setFeedback(e.target.value)}
-                        ></Textarea>
-                        {showAnswerInput && (
-                          <>
-                            <Label
-                              htmlFor="answer"
-                              className="text-md font-medium"
+                    {isFeedbackSuccess ? (
+                      <>
+                        <div className="mx-auto flex flex-col text-transparnt bg-gradent-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% text-2xl space-y-4 w-full">
+                          <p className="mx-auto md:pt-6">
+                            Feedback submitted!!
+                          </p>
+                          <div className="flex justify-end">
+                            <AlertDialogCancel
+                              type="button"
+                              className="m-0"
+                              onClick={e => {
+                                setIsFeedbackChanged(false)
+                                setIsFeedbackSubmitted(true)
+                              }}
                             >
-                              {locale === 'en'
-                                ? 'What do you think it is? (optional):'
-                                : 'அது என்ன என்று நீங்கள் என்ன நினைக்கிறீர்கள்? (விரும்பினால்):'}
-                            </Label>
-                            <Input
-                              id="answer"
-                              className="border rounded-md p-2"
-                              placeholder={
-                                locale === 'en'
-                                  ? 'Enter pest name here...'
-                                  : 'பூச்சியின் பெயரை இங்கே உள்ளிடவும்...'
-                              }
-                              onChange={e => setAnswer(e.target.value)}
-                            />
-                          </>
-                        )}
-                        <div className="flex justify-end">
-                          <Button
-                            type="submit"
-                            disabled={!isFeedbackChanged}
-                            className="mr-2"
-                          >
-                            {locale === 'en' ? 'Submit' : 'சமர்ப்பிக்கவும்'}
-                          </Button>
-                          <AlertDialogCancel
-                            type="button"
-                            className="m-0"
-                            onClick={e => setIsFeedbackChanged(false)}
-                          >
-                            {locale === 'en' ? 'Cancel' : 'ரத்து செய்'}
-                          </AlertDialogCancel>
+                              {locale === 'en' ? 'Close' : 'மூடு'}
+                            </AlertDialogCancel>
+                          </div>
                         </div>
-                      </div>
-                    </form>
+                      </>
+                    ) : (
+                      <form
+                        onSubmit={e => {
+                          toast.loading(
+                            locale === 'en'
+                              ? 'Submitting feedback...'
+                              : 'கருத்து சமர்ப்பிக்கப்படுகிறது...'
+                          )
+                          handleFeedbackSubmit(
+                            e,
+                            feedbackImageURL,
+                            feedback,
+                            answer,
+                            response.confidence,
+                            response.pest,
+                            setIsFeedbackSuccess,
+                            setIsFeedbackLoading
+                          )
+                          setTimeout(() => {
+                            toast.dismiss()
+                          }, 1500)
+                          setTimeout(() => {
+                            MyToast({
+                              message:
+                                locale === 'en'
+                                  ? 'Feedback submitted. Thank you!.'
+                                  : 'கருத்து சமர்ப்பிக்கப்பட்டது. நன்றி!',
+                              type: 'success'
+                            })
+                          }, 1800)
+                        }}
+                      >
+                        <div className="mx-auto flex flex-col space-y-4 w-full">
+                          <Label className="text-lg font-medium">
+                            {locale === 'en'
+                              ? 'Detection correctness:'
+                              : 'கண்டறிதல் சரியானதா?'}
+                          </Label>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="correct"
+                                name="correctness"
+                                value="correct"
+                                onChange={e => handleRadioChange(e)}
+                              />
+                              <Label htmlFor="correct">
+                                {locale === 'en' ? 'Correct' : 'சரியானது'}
+                              </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="incorrect"
+                                name="correctness"
+                                value="incorrect"
+                                onChange={e => handleRadioChange(e)}
+                              />
+                              <Label htmlFor="incorrect">
+                                {locale === 'en' ? 'Incorrect' : 'தவறானது'}
+                              </Label>
+                            </div>
+                          </div>
+                          <Label
+                            htmlFor="feedback"
+                            className="text-md font-medium"
+                          >
+                            {locale === 'en'
+                              ? 'Feedback (optional):'
+                              : 'கருத்து (விரும்பினால்):'}
+                          </Label>
+                          <Textarea
+                            id="feedback"
+                            className="border rounded-md p-2 min-h-[8rem]"
+                            placeholder={
+                              locale === 'en'
+                                ? 'Provide your feedback here...'
+                                : 'உங்கள் கருத்தை இங்கே தெரிவு செய்யவும்...'
+                            }
+                            onChange={e => setFeedback(e.target.value)}
+                          ></Textarea>
+                          {showAnswerInput && (
+                            <>
+                              <Label
+                                htmlFor="answer"
+                                className="text-md font-medium"
+                              >
+                                {locale === 'en'
+                                  ? 'What do you think it is? (optional):'
+                                  : 'அது என்ன என்று நீங்கள் என்ன நினைக்கிறீர்கள்? (விரும்பினால்):'}
+                              </Label>
+                              <Input
+                                id="answer"
+                                className="border rounded-md p-2"
+                                placeholder={
+                                  locale === 'en'
+                                    ? 'Enter pest name here...'
+                                    : 'பூச்சியின் பெயரை இங்கே உள்ளிடவும்...'
+                                }
+                                onChange={e => setAnswer(e.target.value)}
+                              />
+                            </>
+                          )}
+                          <div className="flex justify-end">
+                            <Button
+                              type="submit"
+                              disabled={!isFeedbackChanged || isFeedbackLoading}
+                              className="mr-2"
+                            >
+                              {locale === 'en' ? 'Submit' : 'சமர்ப்பிக்கவும்'}
+                            </Button>
+                            <AlertDialogCancel
+                              type="button"
+                              className="m-0"
+                              onClick={e => {
+                                setIsFeedbackChanged(false)
+                                setIsFeedbackSubmitted(true)
+                              }}
+                            >
+                              {locale === 'en' ? 'Cancel' : 'ரத்து செய்'}
+                            </AlertDialogCancel>
+                          </div>
+                        </div>
+                      </form>
+                    )}
                   </AlertDialogContent>
                 </AlertDialog>
 
