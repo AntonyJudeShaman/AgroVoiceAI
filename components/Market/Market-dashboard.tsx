@@ -12,7 +12,7 @@ import {
 import MarketTableSkeleton from './market-table-skeleton'
 import { useLocale } from 'next-intl'
 import { Button } from '../ui/button'
-import { Info } from 'lucide-react'
+import { ArrowBigDown, Info } from 'lucide-react'
 import { Item, MarketProps } from '@/lib/types'
 import { TooltipContent, Tooltip, TooltipTrigger } from '../ui/tooltip'
 import {
@@ -25,6 +25,10 @@ import {
 } from '@/config/constants'
 import { MarketLocationNotAvailableFruits } from './market-location-not-available-fruits'
 import { cn } from '@/lib/utils'
+import { db } from '@/lib/db'
+import { MarketLocationNotAvailable } from './market-location-not-available'
+import { IconChevronUpDown } from '../ui/icons'
+import toast from 'react-hot-toast'
 
 function MarketHomeFruitsGraph({
   user,
@@ -44,81 +48,79 @@ function MarketHomeFruitsGraph({
   setVegetablesData: Dispatch<SetStateAction<Item[]>>
 }) {
   const [location, setLocation] = useState<keyof typeof tnDistrictsInEnglish>(
-    user?.userDistrict
+    user?.userDistrict || ''
   )
   const [chartData, setChartData] = useState<any[]>([])
-  const [dummyData, setDummyData] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>('vegetables')
   const [selectedItem, setSelectedItem] = useState<string>('')
-  const isMobile = window.innerWidth <= 768
+
   const locale = useLocale()
   const district = (
     locale === 'en' ? tnDistrictsInEnglish : tnDistrictsInTamil
   )[location] as string
+
   const marketPrice = locale === 'en' ? 'Market Price' : 'சந்தை விலை'
 
-  useEffect(() => {
-    console.log('chartData:', chartData)
-  }, [chartData])
+  const isMobile = window.innerWidth <= 500
 
   useEffect(() => {
-    const fetchData = () => {
-      const newData = generateDummyData(selectedCategory, selectedItem)
-      console.log('dummyData: ', newData)
-      setDummyData(newData)
+    if (selectedCategory && selectedItem) {
+      toast.loading(
+        locale === 'en' ? 'Fetching data...' : 'தரவைப் பெறுகிறது...',
+        {
+          duration: 1000,
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '14px'
+          },
+          iconTheme: {
+            primary: 'lightgreen',
+            secondary: 'black'
+          },
+          className: 'font-pops'
+        }
+      )
+      fetchData(selectedCategory, selectedItem)
     }
-    fetchData()
-  }, [selectedCategory, selectedItem])
+  }, [selectedCategory, selectedItem, location])
 
-  useEffect(() => {
-    if (dummyData && dummyData.length) {
-      const dataForChart = dummyData.map(item => ({
-        name: item.date,
-        [marketPrice]: item.marketPrice
-      }))
-      setChartData(dataForChart)
+  async function fetchData(category: string, selectedItem: string) {
+    try {
+      const dataResponse = await fetch('/api/get-market-prices', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          district: location,
+          item: selectedItem,
+          type: category
+        })
+      })
+
+      const responseData = await dataResponse.json()
+
+      console.log('data', responseData.data)
+
+      const formattedData = responseData.data.map(
+        (item: {
+          createdAt: { toString: () => string | any[] }
+          name: any
+          marketPrice: number
+        }) => ({
+          date: item.createdAt.toString().slice(0, 10),
+          name: item.name,
+          marketPrice: item.marketPrice
+        })
+      )
+
+      setChartData(formattedData)
+      console.log(chartData)
+    } catch (error) {
+      console.error('Error fetching data:', error)
     }
-  }, [dummyData, marketPrice])
-
-  const generateDummyData = (category: string, selectedItem: string) => {
-    const data = category === 'vegetables' ? vegetablesData : fruitsData
-
-    const filteredData = data.filter(item => item.name === selectedItem)
-
-    const today = new Date()
-    const dates = []
-    for (let i = 30; i >= 0; i--) {
-      const date = new Date(today)
-      date.setDate(date.getDate() - i)
-      dates.push(date.toLocaleDateString())
-    }
-
-    const formattedData = dates.map(date => {
-      const dummyItem = filteredData.length
-        ? filteredData[0]
-        : { name: selectedItem, marketPrice: '0' }
-      const randomPrice = Math.random() * (10 - 1) + 1
-      return {
-        date,
-        name:
-          locale === 'en'
-            ? vegetableNamesInEnglish[
-                dummyItem.name as keyof typeof vegetableNamesInEnglish
-              ] ||
-              fruitsNamesInEnglish[
-                dummyItem.name as keyof typeof fruitsNamesInEnglish
-              ]
-            : vegetableNamesInTamil[
-                dummyItem.name as keyof typeof vegetableNamesInTamil
-              ] ||
-              fruitsNamesInTamil[
-                dummyItem.name as keyof typeof fruitsNamesInTamil
-              ],
-        marketPrice: parseFloat(randomPrice.toFixed(2))
-      }
-    })
-
-    return formattedData
   }
 
   if (loading) {
@@ -161,63 +163,51 @@ function MarketHomeFruitsGraph({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
-        <div className="md:w-[80%] 2xl:w-[70%] z-10">
+      <div className="flex flex-col items-center mx-auto justify-center md:mt-[5rem] mt-[2rem] pb-10">
+        <div className="z-10">
           <div className="flex items-center justify-center md:justify-between w-full md:flex-row flex-col">
-            <div className="flex flex-row items-center">
+            <div className="flex flex-col mx-auto items-center">
               <p
                 className={cn(
                   locale === 'ta' && 'pt-1',
-                  'md:text-5xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4'
+                  'md:text-5xl text-4xl flex sm:flex-row flex-col text-center justify-center pb-2 items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4'
                 )}
               >
                 {locale === 'en'
-                  ? `Today's Price in ${district}`
-                  : `${district} சந்தை விலைகள்`}
+                  ? `Insights for ${district}`
+                  : `${district} சந்தை நுண்ணறிவுகள்`}
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger>
                     <Info className="size-6 sm:ml-4 hidden sm:block sm:mt-0 mt-4 dark:text-white text-black" />
                   </TooltipTrigger>
                   <TooltipContent className="text-sm font-pops tracking-normal">
                     {locale === 'en'
-                      ? `Daily prices of ${selectedCategory === 'vegetables' ? 'vegetables' : 'fruits'} in ${district}`
-                      : `${district} சந்தை இன்று காய்கறிகளின் தினசரி விலை`}
+                      ? `Daily price insights for the district ${district}`
+                      : `${district} மாவட்டத்திற்கான தினசரி விலை அறிக்கைகள்`}
                   </TooltipContent>
                 </Tooltip>
-              </p>
+              </p>{' '}
+              <div className="flex mx-auto text-lg md:-mt-4">
+                <MarketLocationNotAvailable
+                  user={user}
+                  setItems={
+                    setVegetablesData as Dispatch<SetStateAction<Item[]>>
+                  }
+                  setLocation={setLocation as Dispatch<SetStateAction<string>>}
+                  className="w-[18rem] mt-6  md:mr-0"
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex justify-between md:ml-1 ml-2 mb-6 text-lg md:-mt-4 md:p-0 px-1">
-            <p className="flex md:justify-start text-md justify-center">
-              {new Date().toLocaleDateString(
-                `${locale === 'en' ? 'en-IN' : 'ta-IN'}`,
-                {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                }
-              )}
-            </p>
-            <Button
-              variant="link"
-              className="text-red-600 shadow-none dark:text-red-600/90 cursor-pointer font-pops -mt-[2px] text-lg justify-end px-0 mr-2 md:mr-0 after:bg-current"
-              onClick={() =>
-                window.scrollTo({
-                  top: document.documentElement.scrollHeight,
-                  behavior: 'smooth'
-                })
-              }
-            >
-              {locale === 'en' ? 'View other locations' : 'பிற இடங்களைக் காண'}
-            </Button>
           </div>
         </div>
       </div>
 
-      <div className=" mx-auto w-[82%] lg:w-[70%] flex  text-center">
-        <div className="flex flex-col md:flex-row relative">
+      <div className="mx-auto flex text-center justify-center -mt-10">
+        <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
           <select
-            className="p-2 rounded-md shadow-md focus:outline-none bg-background border border-gray-300 mr-4 mb-4"
+            className={cn(
+              'flex h-9 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm shadow ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+            )}
             value={selectedCategory}
             onChange={e => setSelectedCategory(e.target.value)}
           >
@@ -228,10 +218,15 @@ function MarketHomeFruitsGraph({
               <option value="fruits">
                 {locale === 'en' ? 'Fruits' : 'பழங்கள்'}
               </option>
+              <div>
+                <IconChevronUpDown className="opacity-50" />
+              </div>
             </>
           </select>
           <select
-            className="p-2 rounded-md shadow-md focus:outline-none bg-background border border-gray-300 mb-4"
+            className={cn(
+              'flex h-9 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm shadow ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+            )}
             value={selectedItem}
             onChange={e => setSelectedItem(e.target.value)}
           >
@@ -254,15 +249,16 @@ function MarketHomeFruitsGraph({
       </div>
 
       <div className="flexl items-center justify-center md:p-0 p-6 mx-auto">
-        <div className="flex justify-center mt-10 mx-auto">
+        <div className="flex justify-center md:mt-10 mx-0 -ml-5 max-w-screen  ">
           <LineChart
-            width={isMobile ? 300 : 800}
-            height={isMobile ? 200 : 400}
             data={chartData}
+            width={isMobile ? 400 : 1000}
+            height={isMobile ? 500 : 400}
+            className="px-0 mb-10"
           >
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis dataKey="marketPrice" />
+            <CartesianGrid strokeDasharray="10 10" />
             <RechartsTooltip
               content={({ label, payload }) => {
                 if (payload && payload.length) {
@@ -274,45 +270,36 @@ function MarketHomeFruitsGraph({
                         border: '1px solid #ccc'
                       }}
                     >
-                      <p style={{ color: '#8884d8' }}> {label}</p>
+                      <p style={{ color: '#8884d8' }} className="flex mx-auto">
+                        {new Date(label).toLocaleDateString(undefined, {
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </p>
                       {payload.map((entry, index) => (
                         <p key={index} style={{ color: entry.color }}>
-                          {entry.name}: {entry.value}
+                          Market Price: {entry.value}
                         </p>
                       ))}
                     </div>
                   )
+                } else {
+                  return <p className="text-4xl z-50">No data</p>
                 }
-                return null
               }}
             />
             <Tooltip />
             <Legend />
             <Line
               type="monotone"
-              dataKey={marketPrice}
+              dataKey="marketPrice"
               stroke="#82ca9d"
               strokeWidth={2}
-              dot={{
-                stroke: '#82ca9d',
-                strokeWidth: 2,
-                r: 5
-              }}
+              dot={{ stroke: '#82ca9d', strokeWidth: 4, r: 10 }}
             />
           </LineChart>
         </div>
-      </div>
-
-      <div className="mt-12 mx-auto w-[82%] lg:w-[70%] flex justify-start flex-col text-center">
-        <p className="text-3xl tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
-          {locale === 'en' ? 'View in other locations' : 'பிற இடங்களில் காண'}
-        </p>
-        <MarketLocationNotAvailableFruits
-          user={user}
-          setItems={setFruitsData}
-          setLocation={setLocation as Dispatch<SetStateAction<string>>}
-          className="w-full"
-        />
       </div>
     </>
   )

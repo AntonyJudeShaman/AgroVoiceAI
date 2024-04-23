@@ -111,7 +111,7 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
             {locale === 'en' ? 'Fruits' : 'பழங்கள்'}
           </TabsTrigger>
           <TabsTrigger value="graph">
-            {locale === 'en' ? 'Graph' : 'வரைபடம்'}
+            {locale === 'en' ? 'Insights' : 'நுண்ணறிவு'}
           </TabsTrigger>
         </TabsList>
         <TabsContent value="vegetables">

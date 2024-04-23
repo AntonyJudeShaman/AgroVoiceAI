@@ -201,7 +201,7 @@ export function Account({
               </div>
               <BottomGradient />
             </div>{' '}
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <Button
                 variant="link"
                 type="button"
@@ -212,7 +212,7 @@ export function Account({
                   {forgot}
                 </p>
               </Button>
-            </div>
+            </div> */}
           </div>
 
           <Button

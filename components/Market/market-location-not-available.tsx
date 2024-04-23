@@ -173,22 +173,6 @@ export function MarketLocationNotAvailable({
                 <LoadingDots className="bg-gradient-to-r size-5 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
               </div>
             )}
-            {/* <div className="flex justify-end">
-              <Button
-                type="submit"
-                className={cn(
-                  'mt-4',
-                  isLoadingDistrict ? 'opacity-50 cursor-not-allowed' : ''
-                )}
-                size="lg"
-                disabled={!isDistrictChanged || isLoadingDistrict}
-              >
-                {isLoadingDistrict && (
-                  <Loader2 className="mr-2 size-4 animate-spin" />
-                )}
-                <span>{locale === 'en' ? 'Search' : 'தேடு'}</span>
-              </Button>
-            </div> */}
           </CardContent>
         </form>
       </Form>
