@@ -7,7 +7,7 @@ export default async function Market() {
   const user = await getCurrentUser()
   const t = await getTranslations('Index')
   return (
-    <div className="dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] max-w-full">
+    <div className="dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] w-screen">
       <SessionPageContainer
         component={
           <>

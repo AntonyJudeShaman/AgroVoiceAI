@@ -30,35 +30,44 @@ export default function DownloadButton({ app }: any) {
   }, [])
 
   const handleInstallClick = () => {
-    if (deferredPrompt) {
-      setLoading(true)
-      ;(deferredPrompt as any).prompt()
-      ;(deferredPrompt as any).userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === 'accepted') {
-          MyToast({
-            message:
-              locale === 'en'
-                ? 'App installed'
-                : locale === 'ta'
-                  ? 'பயன்பாடு நிறுவப்பட்டது'
-                  : '',
-            type: 'success'
-          })
-        } else {
-          MyToast({
-            message:
-              locale === 'en'
-                ? 'Installation cancelled'
-                : locale === 'ta'
-                  ? 'நிறுவுதல் ரத்து செய்யப்பட்டது'
-                  : '',
-            type: 'error'
-          })
-        }
-        setDeferredPrompt(null)
-        setLoading(false)
+    if (!deferredPrompt) {
+      MyToast({
+        message:
+          locale === 'en'
+            ? 'Sorry, your browser does not support installing our app or it is already installed. Try using Chrome browser.'
+            : 'மன்னிக்கவும், உங்கள் உலாவியில் எங்கள் பயன்பாட்டை நிறுவ ஆதரிக்கவில்லை அல்லது அது ஏற்கனவே நிறுவப்பட்டுள்ளது. Chrome உலாவியைப் பயன்படுத்தவும்.',
+        type: 'error'
       })
+      return
     }
+
+    setLoading(true)
+    ;(deferredPrompt as any).prompt()
+    ;(deferredPrompt as any).userChoice.then((choiceResult: any) => {
+      if (choiceResult.outcome === 'accepted') {
+        MyToast({
+          message:
+            locale === 'en'
+              ? 'App installed'
+              : locale === 'ta'
+                ? 'பயன்பாடு நிறுவப்பட்டது'
+                : '',
+          type: 'success'
+        })
+      } else {
+        MyToast({
+          message:
+            locale === 'en'
+              ? 'Installation cancelled'
+              : locale === 'ta'
+                ? 'நிறுவுதல் ரத்து செய்யப்பட்டது'
+                : '',
+          type: 'error'
+        })
+      }
+      setDeferredPrompt(null)
+      setLoading(false)
+    })
   }
 
   return (

@@ -2,6 +2,7 @@ import {
   Bot,
   BugOffIcon,
   CloudDrizzle,
+  Crop,
   HeartPulseIcon,
   Home,
   HomeIcon,
@@ -91,6 +92,12 @@ export const navConfig: NavConfig = {
       title: 'Settings',
       href: '/settings',
       icon: <Settings className="size-5 mr-2" />
+    },
+
+    {
+      title: 'Soil Test',
+      href: '/soiltest',
+      icon: <HeartPulseIcon className="size-5 mr-2" />
     },
     {
       title: 'Pest',
@@ -390,6 +397,7 @@ export const navItems = [
   'navigation.weather',
   'navigation.market',
   'navigation.settings',
+  'navigation.soil',
   'navigation.pest'
 ]
 

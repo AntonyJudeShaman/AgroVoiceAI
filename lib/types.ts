@@ -81,6 +81,7 @@ export type NavbarProps = {
   weather: string
   market: string
   settings: string
+  soil: string
   pest: string
   signin?: string
   signup?: string

@@ -31,6 +31,7 @@ export default function Navbar({
   weather,
   market,
   settings,
+  soil,
   pest,
   signin,
   signup,
@@ -43,7 +44,7 @@ export default function Navbar({
   const locale = useLocale()
   const { setTheme, theme } = useTheme()
 
-  const navItems = [home, chat, weather, market, settings, pest]
+  const navItems = [home, chat, weather, market, settings, soil, pest]
 
   useEffect(() => {
     const handleScroll = () => {

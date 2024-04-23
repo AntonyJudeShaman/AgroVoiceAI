@@ -300,7 +300,7 @@ export default function PestTest({
                   {isUploaded || !image ? (
                     <>
                       <CardHeader className="p-6 md:p-0 pt-12 flex justify-center text-center">
-                        <CardTitle className="font-pops pt-2 pb-3 text-6xl md:text-5xl lg:text-6xl 2xl:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
+                        <CardTitle className="font-pops pt-2 pb-3 text-5xl md:text-5xl lg:text-6xl 2xl:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
                           {title}
                         </CardTitle>
                         <CardDescription className="text-lg md:text-xl">

@@ -391,7 +391,6 @@ const handleFeedbackSubmit = async (
 
     const userName = user?.userName || 'anonymous'
 
-    console.log('pest data', data)
     const feedbackRef = push(ref(database, 'PestFeedbacks/'))
     await update(
       ref(database, `PestFeedbacks/${feedbackRef.key}-${userName}`),

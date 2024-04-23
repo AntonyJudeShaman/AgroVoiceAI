@@ -8,6 +8,7 @@
       "weather": "Weather",
       "market": "Market",
       "settings": "Settings",
+      "soil": "Soil Test",
       "pest": "Pest"
     },
     "signin": "Sign in",
@@ -138,7 +139,7 @@
       "details": "Please provide your details to register",
       "username": "Username",
       "password": "Password",
-      "placeholder1": "Enter your Email",
+      "placeholder1": "Enter your Username",
       "placeholder2": "Enter your password",
       "register": "Register",
       "forgot": "Forgot Password?"
@@ -148,7 +149,7 @@
       "details": "Please provide your credentials to sign in",
       "username": "Username",
       "password": "Password",
-      "placeholder1": "Enter your Email",
+      "placeholder1": "Enter your Username",
       "placeholder2": "Enter your password",
       "signin": "Sign In",
       "forgot": "Forgot Password?"
