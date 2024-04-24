@@ -167,7 +167,7 @@ export default function SoilTest({ user }: any) {
                 )}
               >
                 <span>Potassium Value: </span>
-                {data?.K}
+                {data?.K} mg/kg
               </p>{' '}
               <p
                 className={cn(
@@ -175,7 +175,7 @@ export default function SoilTest({ user }: any) {
                 )}
               >
                 <span>Nitrogen Value: </span>
-                {data?.N}
+                {data?.N} mg/kg
               </p>
             </div>
             <div className="flex w-full justify-between space-x-4 p-4">
@@ -185,7 +185,7 @@ export default function SoilTest({ user }: any) {
                 )}
               >
                 <span>Phosphorus Value: </span>
-                {data?.P}
+                {data?.P} mg/kg
               </p>{' '}
               <p
                 className={cn(
@@ -211,7 +211,7 @@ export default function SoilTest({ user }: any) {
                 )}
               >
                 <span>Electrical Conductivity: </span>
-                {data?.rainfall}
+                {data?.rainfall} uS/cm
               </p>
             </div>
             <div className="flex w-full mx-auto justify-center p-4">
@@ -221,7 +221,7 @@ export default function SoilTest({ user }: any) {
                 )}
               >
                 <span>Temperature: </span>
-                {data?.temperature}
+                {data?.temperature} F
               </p>
             </div>
             <div className="flex md:flex-row flex-col md:space-x-4 mx-auto">
