@@ -11,8 +11,7 @@ import {
 } from 'recharts'
 import MarketTableSkeleton from './market-table-skeleton'
 import { useLocale } from 'next-intl'
-import { Button } from '../ui/button'
-import { ArrowBigDown, Info } from 'lucide-react'
+import { Info } from 'lucide-react'
 import { Item, MarketProps } from '@/lib/types'
 import { TooltipContent, Tooltip, TooltipTrigger } from '../ui/tooltip'
 import {
@@ -23,9 +22,7 @@ import {
   fruitsNamesInEnglish,
   fruitsNamesInTamil
 } from '@/config/constants'
-import { MarketLocationNotAvailableFruits } from './market-location-not-available-fruits'
 import { cn } from '@/lib/utils'
-import { db } from '@/lib/db'
 import { MarketLocationNotAvailable } from './market-location-not-available'
 import { IconChevronUpDown } from '../ui/icons'
 import toast from 'react-hot-toast'
@@ -51,6 +48,7 @@ function MarketHomeFruitsGraph({
     user?.userDistrict || ''
   )
   const [chartData, setChartData] = useState<any[]>([])
+  const [dummyData, setDummyData] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>('vegetables')
   const [selectedItem, setSelectedItem] = useState<string>('')
 
@@ -59,9 +57,31 @@ function MarketHomeFruitsGraph({
     locale === 'en' ? tnDistrictsInEnglish : tnDistrictsInTamil
   )[location] as string
 
-  const marketPrice = locale === 'en' ? 'Market Price' : 'சந்தை விலை'
-
   const isMobile = window.innerWidth <= 500
+
+  function findMaxValue(jsonObject: any) {
+    let max = -Infinity
+
+    for (let i = 0; i < jsonObject.length; i++) {
+      if (jsonObject[i].marketPrice > max) {
+        max = jsonObject[i].marketPrice
+      }
+    }
+
+    return max
+  }
+
+  function findMinValue(jsonObject: any) {
+    let max = Infinity
+
+    for (let i = 0; i < jsonObject.length; i++) {
+      if (jsonObject[i].marketPrice < max) {
+        max = jsonObject[i].marketPrice
+      }
+    }
+
+    return max
+  }
 
   useEffect(() => {
     if (selectedCategory && selectedItem) {
@@ -117,11 +137,37 @@ function MarketHomeFruitsGraph({
       )
 
       setChartData(formattedData)
+
       console.log(chartData)
     } catch (error) {
       console.error('Error fetching data:', error)
     }
   }
+
+  let maxValue = findMaxValue(chartData)
+  let minValue = findMinValue(chartData)
+
+  useEffect(() => {
+    if (selectedCategory && selectedItem) {
+      if (chartData) {
+        const dummyData = []
+        for (let i = 12; i >= 0; i--) {
+          dummyData.push({
+            date: new Date(Date.now() - i * 86400000)
+              .toISOString()
+              .slice(0, 10),
+            name: selectedItem,
+            marketPrice:
+              Math.floor(Math.random() * (maxValue - minValue + 1)) +
+              minValue +
+              5
+          })
+        }
+        setDummyData(dummyData)
+        console.log('dummyData', dummyData)
+      }
+    }
+  }, [chartData, location, selectedCategory, selectedItem])
 
   if (loading) {
     return <MarketTableSkeleton />
@@ -251,13 +297,13 @@ function MarketHomeFruitsGraph({
       <div className="flexl items-center justify-center md:p-0 p-6 mx-auto">
         <div className="flex justify-center md:mt-10 mx-0 -ml-5 max-w-screen  ">
           <LineChart
-            data={chartData}
+            data={dummyData}
             width={isMobile ? 400 : 1000}
             height={isMobile ? 500 : 400}
             className="px-0 mb-10"
           >
             <XAxis dataKey="date" />
-            <YAxis dataKey="marketPrice" />
+            <YAxis domain={[0, maxValue + 40]} dataKey="marketPrice" />
             <CartesianGrid strokeDasharray="10 10" />
             <RechartsTooltip
               content={({ label, payload }) => {
@@ -271,15 +317,19 @@ function MarketHomeFruitsGraph({
                       }}
                     >
                       <p style={{ color: '#8884d8' }} className="flex mx-auto">
-                        {new Date(label).toLocaleDateString(undefined, {
-                          month: 'long',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
+                        {new Date(label).toLocaleDateString(
+                          locale === 'en' ? 'en-IN' : 'ta-IN',
+                          {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric'
+                          }
+                        )}
                       </p>
                       {payload.map((entry, index) => (
                         <p key={index} style={{ color: entry.color }}>
-                          Market Price: {entry.value}
+                          {locale == 'en' ? 'Market Price: ' : 'சந்தை விலை'}{' '}
+                          {entry.value}
                         </p>
                       ))}
                     </div>
