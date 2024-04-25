@@ -1,16 +1,15 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { getCurrentUser } from '@/app/actions'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { getTranslations } from 'next-intl/server'
 import MarketHomeFruits from './market-home-fruits'
 import MarketHomeVegetables from './market-home-vegetables'
 import { useLocale } from 'next-intl'
 import { Item } from '@/lib/types'
-import { tnDistrictsInEnglish } from '@/config/constants'
 import { parseItems } from '@/lib/utils'
 import MyToast from '../ui/my-toast'
 import MarketHomeFruitsGraph from './Market-dashboard'
+import { Apple, Carrot, LightbulbIcon, Store } from 'lucide-react'
+import MarketLinkage from './market-linkage'
 
 export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
   const [vegetablesData, setVegetablesData] = useState<Item[]>([])
@@ -98,15 +97,22 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
   return (
     <>
       <Tabs defaultValue="vegetables" className="w-full px-4">
-        <TabsList className="grid font-pops md:w-[80%] 2xl:w-[70%] mx-auto grid-cols-3 border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
+        <TabsList className="grid font-pops md:w-[80%] 2xl:w-[70%] mx-auto grid-cols-2 h-auto md:grid-cols-4 border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
           <TabsTrigger value="vegetables">
+            <Carrot className="size-5 mr-2" />{' '}
             {locale === 'en' ? 'Vegetables' : 'காய்கறிகள்'}
           </TabsTrigger>
           <TabsTrigger value="fruits">
+            <Apple className="size-5 mr-2" />{' '}
             {locale === 'en' ? 'Fruits' : 'பழங்கள்'}
           </TabsTrigger>
           <TabsTrigger value="graph">
+            <LightbulbIcon className="size-5 mr-2" />{' '}
             {locale === 'en' ? 'Insights' : 'நுண்ணறிவு'}
+          </TabsTrigger>{' '}
+          <TabsTrigger value="shop">
+            <Store className="size-5 mr-2" />{' '}
+            {locale === 'en' ? 'Market Info' : 'சந்தை தகவல்'}
           </TabsTrigger>
         </TabsList>
         <TabsContent value="vegetables">
@@ -139,6 +145,10 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
             setFruitsData={setFruitsData}
             setVegetablesData={setVegetablesData}
           />
+        </TabsContent>
+        <TabsContent value="shop">
+          {' '}
+          <MarketLinkage />
         </TabsContent>
       </Tabs>
     </>

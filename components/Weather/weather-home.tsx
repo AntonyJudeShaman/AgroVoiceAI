@@ -117,12 +117,12 @@ export default function Weather({ user }: { user: any }) {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
+      <div className="flex flex-col items-center justify-center mt-[5rem] pb-10">
         <div className="flex items-center justify-center md:justify-between w-3/4 md:flex-row flex-col">
           <p
             className={cn(
               locale === 'ta' && 'pt-1',
-              'md:text-5xl 2xl:text-6xl text-4xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4'
+              'md:text-5xl 2xl:text-6xl text-5xl pb-4 flex sm:flex-row flex-col text-center justify-center items-center bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60% font-bold font-pops tracking-tighter mb-4'
             )}
           >
             {locale === 'en' ? `Weather in ${district}` : `${district} வானிலை`}
@@ -137,16 +137,17 @@ export default function Weather({ user }: { user: any }) {
               </TooltipContent>
             </Tooltip>
           </p>
-
-          <WeatherLocationNotAvailable
-            user={user}
-            setForecastData={setForecastData}
-            setLocation={setLocation as Dispatch<SetStateAction<string>>}
-            className="w-[18rem] mt-6  md:mr-0"
-          />
+          <div className="md:pt-[3rem] -pb-[5rem]">
+            <WeatherLocationNotAvailable
+              user={user}
+              setForecastData={setForecastData}
+              setLocation={setLocation as Dispatch<SetStateAction<string>>}
+              className="w-[18rem] md:mr-0"
+            />
+          </div>
         </div>
         <Tabs defaultValue={todayDate} className="w-3/4">
-          <TabsList className="grid font-pops w-full md:grid-cols-4 grid-cols-2 md:h-full h-20 border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
+          <TabsList className="grid font-pops w-full md:grid-cols-4 md:-mt-[3rem] -mt-[3rem] grid-cols-2 md:h-full h-auto border dark:bg-black bg-white border-gray-500 dark:border-slate-700">
             {Object.keys(groupedData).map((date, index) => {
               return (
                 <TabsTrigger key={index} value={date}>

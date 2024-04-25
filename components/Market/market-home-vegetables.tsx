@@ -86,7 +86,7 @@ export default function MarketHomeVegetables({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[8rem] pb-10">
+      <div className="flex flex-col items-center justify-center md:mt-[5rem] mt-[3rem] pb-10">
         <div className="md:w-[80%] 2xl:w-[70%] z-10">
           <div className="flex items-center justify-center md:justify-between w-full md:flex-row flex-col">
             <p

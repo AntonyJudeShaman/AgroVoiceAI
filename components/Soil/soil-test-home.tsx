@@ -16,6 +16,9 @@ import { Label } from '../ui/label'
 import { MemoizedReactMarkdown } from '../Miscellaneous/markdown'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import { IconClose } from '../ui/icons'
+import { Mic } from 'lucide-react'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
 type SoilTestData = {
   K: number
@@ -60,8 +63,15 @@ export default function SoilTest({ user }: any) {
   const handleSearchAgain = () => {
     fetchData()
   }
-  const { messages, input, setInput, handleInputChange, handleSubmit, append } =
-    useChat({ api: '/api/soil-test-chat' })
+  const {
+    messages,
+    input,
+    setInput,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    append
+  } = useChat({ api: '/api/soil-test-chat' })
 
   const server = process.env.NEXT_PUBLIC_SOIL_TEST_SERVER_URL!
 
@@ -99,8 +109,61 @@ export default function SoilTest({ user }: any) {
     }
   }
 
+  const [isMicrophoneActive, setIsMicrophoneActive] = useState(false)
+
+  function handleVoice() {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition
+    setInput('')
+    const recognition = new SpeechRecognition()
+    recognition.lang = locale === 'en' ? 'en-IN' : 'ta-IN'
+    recognition.interimResults = true
+    recognition.maxAlternatives = 1
+    recognition.start()
+    recognition.onstart = () => {
+      setIsMicrophoneActive(true)
+    }
+    recognition.onresult = async function (e) {
+      const transcript = e.results[0][0].transcript
+      if (transcript.trim() !== '') {
+        setInput(transcript)
+      }
+    }
+    recognition.onend = () => {
+      setIsMicrophoneActive(false)
+      recognition.stop()
+    }
+  }
+
+  const closeModal = () => {
+    setIsMicrophoneActive(false)
+  }
+
   return (
     <div className="flex justify-center flex-col w-full p-6 items-center mx-auto xl:-mt-[5rem]">
+      {isMicrophoneActive && (
+        <div
+          className="fixed inset-0 p-6 flex animate-in duration-500 justify-center items-center"
+          onClick={closeModal}
+          style={{ backdropFilter: 'blur(10px)', zIndex: 99999999 }}
+        >
+          <div className="bg-transparent p-8 shadow-none rounded-full flex flex-col items-center">
+            <button
+              className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-700"
+              onClick={closeModal}
+              type="button"
+            >
+              <IconClose className="z-40 size-8 dark:text-white text-black" />
+            </button>
+            <div className="animate-opacity">
+              <Mic className="md:size-32 size-20 w-full text-red-600" />
+            </div>
+            <p className="text-3xl mt-4 font-display">
+              {locale === 'en' ? 'Mic is On' : 'மைக் இயக்கத்தில் உள்ளது'}
+            </p>
+          </div>
+        </div>
+      )}
       <p className="font-pops font-semibold tracking-tighter text-center xl:pt-2 pb-3 text-4xl md:text-5xl lg:text-6xl 2xl:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
         {locale === 'en'
           ? 'Soil Testing & Recommendation'
@@ -197,55 +260,83 @@ export default function SoilTest({ user }: any) {
                   setChatLoading(false)
                 }}
               >
-                <div>
-                  {' '}
-                  <Label className="text-lg">
-                    {locale === 'en'
-                      ? 'Have any question?'
-                      : 'ஏதேனும் கேள்வி உள்ளதா?'}
-                    <Input
-                      className="mt-3"
-                      value={input}
-                      onChange={handleInputChange}
-                      disabled={chatLoading}
-                    />
-                  </Label>
-                </div>
+                <Card>
+                  <div className="px-6 py-3">
+                    {' '}
+                    <Label className="text-lg">
+                      {locale === 'en'
+                        ? 'Have any question?'
+                        : 'ஏதேனும் கேள்வி உள்ளதா?'}
+                      <div className="flex items-center">
+                        <Input
+                          className="mt-3"
+                          value={input}
+                          onChange={handleInputChange}
+                          disabled={chatLoading}
+                        />{' '}
+                        <Tooltip delayDuration={0}>
+                          <TooltipTrigger asChild>
+                            <Button
+                              onClick={handleVoice}
+                              type="button"
+                              size="lg"
+                              className={cn(
+                                'rounded-ful dark:bg-slate-800 mt-3 dark:text-white text-black bg-white dark:hover:bg-primary border border-gray-300 dark:border-gray-700 p-2 cursor-pointer',
+                                isMicrophoneActive ||
+                                  !isLoading ||
+                                  'opacity-40 cursor-not-allowed'
+                              )}
+                              disabled={isMicrophoneActive || isLoading}
+                            >
+                              <Mic className="size-5" />
+                              <span className="sr-only">Open Microphone</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            {locale === 'en'
+                              ? 'Click to speak'
+                              : 'பேச கிளிக் செய்க'}
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </Label>
+                  </div>
 
-                <div className="flex justify-between mt-4">
-                  <Button
-                    onClick={() => router.push('/soiltest/new')}
-                    variant="outline"
-                    className="md:mr-4 mr-0"
-                    type="button"
-                    disabled={chatLoading}
-                  >
-                    {locale === 'en' ? 'Back' : 'பின்னால்'}
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={chatLoading}
-                    className="flex items-center p-3"
-                  >
-                    {locale === 'en' ? (
-                      <p className="flex items-center">
-                        {chatLoading ? (
-                          <LoadingDots className="bg-gradient-to-r size-2 from-zinc-500 from-10% via-gray-500 via-30% to-zinc-500 to-60%" />
-                        ) : (
-                          'Send'
-                        )}
-                      </p>
-                    ) : (
-                      <p className="flex items-center">
-                        {chatLoading ? (
-                          <LoadingDots className="bg-gradient-to-r size-2 from-zinc-500 from-10% via-gray-500 via-30% to-zinc-500 to-60%" />
-                        ) : (
-                          'அனுப்பு'
-                        )}
-                      </p>
-                    )}
-                  </Button>
-                </div>
+                  <div className="flex justify-between mt-4 px-6 pb-4">
+                    <Button
+                      onClick={() => router.push('/soiltest/new')}
+                      variant="outline"
+                      className="md:mr-4 mr-0"
+                      type="button"
+                      disabled={chatLoading}
+                    >
+                      {locale === 'en' ? 'Back' : 'பின்னால்'}
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={chatLoading}
+                      className="flex items-center p-3"
+                    >
+                      {locale === 'en' ? (
+                        <p className="flex items-center">
+                          {chatLoading ? (
+                            <LoadingDots className="bg-gradient-to-r size-2 from-zinc-500 from-10% via-gray-500 via-30% to-zinc-500 to-60%" />
+                          ) : (
+                            'Send'
+                          )}
+                        </p>
+                      ) : (
+                        <p className="flex items-center">
+                          {chatLoading ? (
+                            <LoadingDots className="bg-gradient-to-r size-2 from-zinc-500 from-10% via-gray-500 via-30% to-zinc-500 to-60%" />
+                          ) : (
+                            'அனுப்பு'
+                          )}
+                        </p>
+                      )}
+                    </Button>
+                  </div>
+                </Card>
               </form>
             </>
           </div>
