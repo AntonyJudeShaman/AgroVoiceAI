@@ -207,6 +207,7 @@ export default function SoilTest({ user }: any) {
                       className="mt-3"
                       value={input}
                       onChange={handleInputChange}
+                      disabled={chatLoading}
                     />
                   </Label>
                 </div>
