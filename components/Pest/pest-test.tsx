@@ -79,6 +79,7 @@ export default function PestTest({
   const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState<boolean>(false)
   const [isFeedbackSuccess, setIsFeedbackSuccess] = useState<boolean>(false)
   const [isFeedbackLoading, setIsFeedbackLoading] = useState<boolean>(false)
+  const [isImageUploaded, setIsImageUploaded] = useState(false)
 
   useLockBody(modalVisible)
 
@@ -146,6 +147,7 @@ export default function PestTest({
         setIsSavingImage,
         toast
       )
+      setIsImageUploaded(true)
       setIsProcessing(true)
       return true
     } catch (error) {
@@ -159,23 +161,26 @@ export default function PestTest({
     setIsProcessed(false)
     setIsProcessing(true)
     try {
-      toast.loading(
-        locale === 'en' ? 'Processing image ...' : 'படம் செயலாக்கப்படுகிறது',
-        {
-          style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            fontSize: '14px'
-          },
-          iconTheme: {
-            primary: 'lightgreen',
-            secondary: 'black'
-          },
-          className: 'font-pops'
-        }
-      )
-      const uploadResponse = await handleFileUpload(event)
+      let uploadResponse = true
+      if (!isImageUploaded) {
+        toast.loading(
+          locale === 'en' ? 'Processing image ...' : 'படம் செயலாக்கப்படுகிறது',
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+              fontSize: '14px'
+            },
+            iconTheme: {
+              primary: 'lightgreen',
+              secondary: 'black'
+            },
+            className: 'font-pops'
+          }
+        )
+        uploadResponse = await handleFileUpload(event)
+      }
       if (uploadResponse) {
         let imageToSend: Blob | undefined
         if (crop?.width && file && crop.height && crop.x && crop.y) {
@@ -210,12 +215,12 @@ export default function PestTest({
           throw new Error('Failed to classify image')
         }
         const data = await response.json()
+        // setIsImageUploaded(false)
         setResponse(data)
         setIsSuccess(true)
       }
     } catch (error) {
-      console.error('Error uploading file:', error)
-      toast.error('Error uploading file. Please try again later.')
+      toast.error('Error processing file. Please try again later.')
     } finally {
       setIsProcessing(false)
       setIsProcessed(true)
@@ -244,7 +249,7 @@ export default function PestTest({
           'flex flex-col md:w-2/3 md:p-6 md:mt-[20vh] dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 mb-16 md:rounded-2xl md:border border-teal-900 mx-auto'
         )}
       >
-        <Card className="md:max-w-4xl z-40 w-full flex md:justify-center mt-8 p-6 md:p-0 items-center mx-auto border-none shadow-none bg-transparent">
+        <Card className="md:max-w-4xl w-full flex md:justify-center mt-8 p-6 md:p-0 items-center mx-auto border-none shadow-none bg-transparent">
           <div className="mx-auto">
             {image && !response && (
               <>
