@@ -445,7 +445,7 @@ export const exampleMessagesEnglish = [
     heading: 'How can I',
     subheading: 'maximize limited space for crop cultivation?',
     message:
-      'How can I small-scale farmers maximize limited space for crop cultivation?'
+      'How can a small-scale farmer maximize limited space for crop cultivation?'
   },
   {
     heading: 'How do I',
@@ -708,4 +708,54 @@ export const weatherDescriptionInTamil = {
   'light rain': 'தூறல்',
   'moderate rain': 'மிதமான மழை',
   'clear sky': 'தெளிந்த வானம்'
+}
+
+export const cropInEnglish = {
+  1: 'Rice',
+  2: 'Maize',
+  3: 'Jute',
+  4: 'Cotton',
+  5: 'Coconut',
+  6: 'Papaya',
+  7: 'Orange',
+  8: 'Apple',
+  9: 'Muskmelon',
+  10: 'Watermelon',
+  11: 'Grapes',
+  12: 'Mango',
+  13: 'Banana',
+  14: 'Pomegranate',
+  15: 'Lentil',
+  16: 'Blackgram',
+  17: 'Mungbean',
+  18: 'Mothbeans',
+  19: 'Pigeonpeas',
+  20: 'Kidneybeans',
+  21: 'Chickpea',
+  22: 'Coffee'
+}
+
+export const cropInTamil = {
+  1: 'அரிசி',
+  2: 'சோளம்',
+  3: 'சணல்',
+  4: 'பருத்தி',
+  5: 'தேங்காய்',
+  6: 'பப்பாளி',
+  7: 'ஆரஞ்சு',
+  8: 'ஆப்பிள்',
+  9: 'முலாம்பழம்',
+  10: 'தர்பூசணி',
+  11: 'திராட்சை',
+  12: 'மாங்கனி',
+  13: 'வாழை',
+  14: 'மாதுளை',
+  15: 'பருப்பு',
+  16: 'கருப்பட்டி',
+  17: 'அவரை விதை',
+  18: 'மாது அவரை',
+  19: 'துவரம்பருப்பு',
+  20: 'சிவப்பு காராமணி',
+  21: 'கொண்டைக்கடலை',
+  22: 'காபி பயிர்'
 }
