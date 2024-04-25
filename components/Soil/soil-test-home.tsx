@@ -61,7 +61,7 @@ export default function SoilTest({ user }: any) {
     fetchData()
   }
   const { messages, input, setInput, handleInputChange, handleSubmit, append } =
-    useChat()
+    useChat({ api: '/api/soil-test-chat' })
 
   const server = process.env.NEXT_PUBLIC_SOIL_TEST_SERVER_URL!
 

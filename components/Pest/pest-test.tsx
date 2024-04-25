@@ -8,6 +8,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
@@ -46,6 +47,7 @@ import {
 } from '../ui/alert-dialog'
 import { Textarea } from '../ui/textarea'
 import { set } from 'zod'
+import { Info } from 'lucide-react'
 
 export default function PestTest({
   user,
@@ -348,6 +350,12 @@ export default function PestTest({
                                 </div>
                               </div>
                             </CardContent>
+                            <CardFooter className="flex md:flex-row flex-col text-red-600 text-center">
+                              <Info className="md:mr-4 mb-4 md:mb-0 size md:size-5" />
+                              {locale === 'en'
+                                ? 'Uploaded images are used for model training. Please avoid images other than pests.'
+                                : 'பதிவேற்றப்பட்ட படங்கள் மாதிரி பயிற்சிக்கு பயன்படுத்தப்படுகின்றன. பூச்சிகளைத் தவிர வேறு படங்களைத் தவிர்க்கவும்.'}
+                            </CardFooter>
                           </>
                         </div>
                         <div></div>
