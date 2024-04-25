@@ -114,11 +114,11 @@ export default function SoilTest({ user }: any) {
         ) : !data?.K ? (
           <div className=" text-xl mx-auto text-red-600">
             {locale === 'en' ? (
-              <div className="flex flex-col mx-auto">
+              <div className="flex flex-col mx-auto p-6 text-center">
                 <p>
                   {locale === 'en'
-                    ? 'Please perform a test to display the results.'
-                    : 'முடிவுகளைக் காட்ட ஒரு மண் சோதனையைச் செய்யவும்'}
+                    ? 'No test results found. Please perform a test to display the results.'
+                    : 'சோதனை முடிவுகள் எதுவும் கிடைக்கவில்லை. முடிவுகளைக் காட்ட ஒரு மண் சோதனையைச் செய்யவும்'}
                 </p>
                 <Button
                   type="button"
@@ -275,7 +275,7 @@ export default function SoilTest({ user }: any) {
                 {data?.N} mg/kg
               </p>
             </div>
-            <div className="flex sm:flex-row flex-col w-full justify-between sm:space-x-4 mt-4 sm:mt-0 p-4">
+            <div className="flex sm:flex-row flex-col w-full justify-between sm:space-x-4 p-4">
               <p
                 className={cn(
                   'z-50 overflow-hidden text-xl rounded-md border bg-popover hover:bg-slate-900/60 hover:text-popover-foreground/90 px-4 py-2.5 font-medium text-popover-foreground shadow-md shadow-green-400'
@@ -319,7 +319,7 @@ export default function SoilTest({ user }: any) {
                 {data?.rainfall} uS/cm
               </p>
             </div>
-            <div className="flex w-full mx-auto justify-center p-4 mt-4 sm:mt-0">
+            <div className="flex w-full mx-auto justify-center p-4">
               <p
                 className={cn(
                   'z-50 overflow-hidden text-xl w-full lg:w-2/3 rounded-md border bg-popover hover:bg-slate-900/60 hover:text-popover-foreground/90 px-4 py-2.5 font-medium text-popover-foreground shadow-md shadow-green-400'
@@ -331,10 +331,11 @@ export default function SoilTest({ user }: any) {
                 {data?.temperature} F
               </p>
             </div>
-            <div className="flex md:flex-row flex-col md:space-x-4 mx-auto">
+            <div className="flex md:flex-row flex-col md:space-x-4 mx-auto w-full">
               <Button
                 type="button"
-                className="mx-auto mt-5"
+                className="mx-auto mt-5 w-full"
+                size="lg"
                 onClick={e => handleSoilSubmit(e)}
                 disabled={loading}
               >
@@ -342,7 +343,8 @@ export default function SoilTest({ user }: any) {
               </Button>{' '}
               <Button
                 type="button"
-                className="mx-auto mt-5"
+                className="mx-auto mt-5 w-full"
+                size="lg"
                 onClick={handleSearchAgain}
                 disabled={loading || recommendation !== ''}
               >

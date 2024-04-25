@@ -162,25 +162,7 @@ export default function PestTest({
     setIsProcessing(true)
     try {
       let uploadResponse = true
-      if (!isImageUploaded) {
-        toast.loading(
-          locale === 'en' ? 'Processing image ...' : 'படம் செயலாக்கப்படுகிறது',
-          {
-            style: {
-              borderRadius: '10px',
-              background: '#333',
-              color: '#fff',
-              fontSize: '14px'
-            },
-            iconTheme: {
-              primary: 'lightgreen',
-              secondary: 'black'
-            },
-            className: 'font-pops'
-          }
-        )
-        uploadResponse = await handleFileUpload(event)
-      }
+
       if (uploadResponse) {
         let imageToSend: Blob | undefined
         if (crop?.width && file && crop.height && crop.x && crop.y) {
@@ -190,7 +172,6 @@ export default function PestTest({
         }
         const formData = new FormData()
         formData.append('image', imageToSend!)
-        toast.dismiss()
         toast.loading(
           locale === 'en' ? 'Finding pest ...' : 'பூச்சியைக் கண்டரிகிரோம்...',
           {
@@ -214,10 +195,30 @@ export default function PestTest({
         if (!response.ok) {
           throw new Error('Failed to classify image')
         }
+        toast.dismiss()
         const data = await response.json()
         // setIsImageUploaded(false)
         setResponse(data)
         setIsSuccess(true)
+        if (!isImageUploaded) {
+          toast.loading(
+            locale === 'en' ? 'Finishing up..' : 'முடிவடைகிறது....',
+            {
+              style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+                fontSize: '14px'
+              },
+              iconTheme: {
+                primary: 'lightgreen',
+                secondary: 'black'
+              },
+              className: 'font-pops'
+            }
+          )
+          uploadResponse = await handleFileUpload(event)
+        }
       }
     } catch (error) {
       toast.error('Error processing file. Please try again later.')
