@@ -137,7 +137,7 @@ export default function PestTest({
     try {
       const fileName = `${Date.now()}.jpeg`
       const storageRef = reff(storage, 'Pests/' + fileName)
-      const response = await fetch(image)
+      const response = await fetch(file!)
       const blob = await response.blob()
       await uploadBytes(storageRef, blob)
       const downloadURL = await getDownloadURL(storageRef)
@@ -245,11 +245,11 @@ export default function PestTest({
   }
 
   return (
-    <>
+    <div className="p-6 md:p-0">
       <div
         className={cn(
           response && 'md:bg-gradient-to-tr',
-          'flex flex-col md:w-2/3 md:p-6 md:mt-[20vh] dark:from-slate-900 dark:to-transparent to-80% from-zinc-100 to-indigo-100/30 mt-6 mb-16 md:rounded-2xl md:border border-teal-900 mx-auto'
+          'flex flex-col md:mt-[15vh] rounded-2xl mb-16 w-full md:w-[80%] lg:w-[60%] mt-10 md:p-6 dark:bg-gray-900 bg-gray-100 border border-gray-300 dark:border-slate-800 mx-auto'
         )}
       >
         <Card className="md:max-w-4xl w-full flex md:justify-center mt-8 p-6 md:p-0 items-center mx-auto border-none shadow-none bg-transparent">
@@ -302,7 +302,7 @@ export default function PestTest({
                 )}
               </>
             )}
-            <div className="flex flex-col justify-center items-center space-y-4">
+            <div className="flex flex-col justify-center items-center space-y-4 mb-10">
               {!isProcessed && (
                 <>
                   {isUploaded || !image ? (
@@ -418,7 +418,7 @@ export default function PestTest({
         </Card>{' '}
         {response && (
           <div className="flex justify-center items-center">
-            <div className="flex flex-col w-full p-2 md:p-6 -mt-[10%] lg:-mt-[3%] md:rounded-2xl mx-auto">
+            <div className="flex flex-col w-full p-2 md:p-6 -mt-[22%] lg:-mt-[7%] md:rounded-2xl mx-auto">
               <div className="mr-4 mb-4 z-50 space-x-4 flex md:justify-end md:mt-0 justify-center">
                 <AlertDialog
                   open={isFeedbackSubmitted}
@@ -610,6 +610,6 @@ export default function PestTest({
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }

@@ -169,7 +169,7 @@ export default function SoilTest({ user }: any) {
           ? 'Soil Testing & Recommendation'
           : 'மண் சோதனை மற்றும் பரிந்துரை'}
       </p>
-      <Card className="flex w-full md:w-[80%] lg:w-[60%] mt-10 md:p-6 dark:bg-gray-900 bg-gray-100">
+      <Card className="flex w-full md:w-[80%] lg:w-[60%] mt-10 md:p-6 dark:bg-gray-900 bg-gray-100 border border-gray-300 dark:border-slate-800">
         {loading ? (
           <div className="p-6 flex justify-center mx-auto">
             <LoadingDots className="bg-gradient-to-r size-3 from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%" />
@@ -200,7 +200,7 @@ export default function SoilTest({ user }: any) {
           <div className="flex p-6 flex-col mx-auto">
             <p className="font-pops font-semibold text-start tracking-tighter pt-2 pb-3 text-2xl md:text-2xl lg:text-3xl 2xl:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-green-500 from-10% via-green-500 via-30% to-emerald-500 to-60%">
               {locale === 'en'
-                ? 'Recommended crop for your soil'
+                ? 'Recommended crop for your soil is'
                 : 'உங்கள் மண்ணுக்கு பரிந்துரைக்கப்படும் பயிர்'}
             </p>
             <p className="mb-5 text-xl">
@@ -260,7 +260,7 @@ export default function SoilTest({ user }: any) {
                   setChatLoading(false)
                 }}
               >
-                <Card>
+                <Card className="border border-gray-200 dark:border-slate-800">
                   <div className="px-6 py-3">
                     {' '}
                     <Label className="text-lg">
@@ -279,9 +279,9 @@ export default function SoilTest({ user }: any) {
                             <Button
                               onClick={handleVoice}
                               type="button"
-                              size="lg"
+                              size="icon"
                               className={cn(
-                                'rounded-ful dark:bg-slate-800 mt-3 dark:text-white text-black bg-white dark:hover:bg-primary border border-gray-300 dark:border-gray-700 p-2 cursor-pointer',
+                                'rounded-lg ml-2 dark:bg-slate-800 mt-3 dark:text-white text-black bg-white dark:hover:bg-primary border border-gray-300 dark:border-gray-700 p-2 cursor-pointer',
                                 isMicrophoneActive ||
                                   !isLoading ||
                                   'opacity-40 cursor-not-allowed'

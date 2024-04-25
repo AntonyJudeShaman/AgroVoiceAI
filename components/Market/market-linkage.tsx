@@ -24,7 +24,7 @@ export default function MarketLinkage() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mx-auto">
           <WobbleCard
-            containerClassName="col-span-1 lg:col-span-2 px-0 h-full"
+            containerClassName="col-span-1 lg:col-span-2 px-0 h-full border hover:border-green-600 duration-300"
             className=""
           >
             <div className="w-full">
@@ -50,7 +50,7 @@ export default function MarketLinkage() {
               </Link>
             </div>
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 min-h-auto bg-cyan-700">
+          <WobbleCard containerClassName="col-span-1 min-h-auto bg-cyan-700 border hover:border-blue-600 duration-300">
             <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-bold tracking-tighter text-white">
               {locale === 'en' ? 'AgriBazaar' : 'அக்ரிபஜார்'}
             </h2>
@@ -70,7 +70,7 @@ export default function MarketLinkage() {
               </Button>
             </Link>
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 bg-gradient-to-tr from-slate-800 to-slate-900/90 to-60% min-h-auto">
+          <WobbleCard containerClassName="col-span-1 bg-gradient-to-tr from-slate-800 to-slate-900/90 to-60% min-h-auto border hover:border-slate-700 duration-300">
             <div>
               <h2 className="md:max-w-lg  text-left text-balance text-2xl md:text-xl lg:text-3xl font-bold tracking-tighter text-white">
                 {locale === 'en' ? 'Farmer Bazaar' : 'உழவர் பஜார்'}
@@ -94,7 +94,7 @@ export default function MarketLinkage() {
             </div>
           </WobbleCard>
           <WobbleCard
-            containerClassName="col-span-1 lg:col-span-2 bg-gradient-to-r from-green-700 from-10% via-green-700 via-30% to-emerald-700 to-60% px-0 h-full"
+            containerClassName="col-span-1 lg:col-span-2 bg-gradient-to-r from-green-700 from-10% via-green-700 via-30% to-emerald-700 to-60% px-0 h-full border hover:border-purple-700 duration-300"
             className=""
           >
             <div className="w-full">
