@@ -7,9 +7,9 @@ import { useLocale } from 'next-intl'
 import { Item } from '@/lib/types'
 import { parseItems } from '@/lib/utils'
 import MyToast from '../ui/my-toast'
-import MarketHomeFruitsGraph from './Market-dashboard'
 import { Apple, Carrot, LightbulbIcon, Store } from 'lucide-react'
 import MarketLinkage from './market-linkage'
+import MarketDashBoard from './Market-dashboard'
 
 export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
   const [vegetablesData, setVegetablesData] = useState<Item[]>([])
@@ -135,7 +135,7 @@ export const MarketsTab = ({ user }: { user: any }): JSX.Element => {
         </TabsContent>
         <TabsContent value="graph">
           {' '}
-          <MarketHomeFruitsGraph
+          <MarketDashBoard
             user={user}
             fruitsData={fruitsData}
             vegetablesData={vegetablesData}

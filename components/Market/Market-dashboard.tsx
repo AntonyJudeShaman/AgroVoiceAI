@@ -27,7 +27,7 @@ import { MarketLocationNotAvailable } from './market-location-not-available'
 import { IconChevronUpDown } from '../ui/icons'
 import toast from 'react-hot-toast'
 
-function MarketHomeFruitsGraph({
+export default function MarketDashBoard({
   user,
   loading,
   fruitsData,
@@ -169,10 +169,6 @@ function MarketHomeFruitsGraph({
     }
   }, [chartData, location, selectedCategory, selectedItem])
 
-  if (loading) {
-    return <MarketTableSkeleton />
-  }
-
   if (fruitsError || vegetablesError) {
     return (
       <div className="flex items-center justify-center h-[95vh] md:w-[60%] md:p-0 p-6 -mt-40 mx-auto">
@@ -295,70 +291,81 @@ function MarketHomeFruitsGraph({
       </div>
 
       <div className="flexl items-center justify-center md:p-0 p-6 mx-auto">
-        <div className="flex justify-center md:mt-10 mx-0 -ml-5 max-w-screen  ">
-          <LineChart
-            data={dummyData}
-            width={isMobile ? 400 : 1000}
-            height={isMobile ? 500 : 400}
-            className="px-0 mb-10"
-          >
-            <XAxis dataKey="date" />
-            <YAxis domain={[0, maxValue + 40]} dataKey="marketPrice" />
-            <CartesianGrid strokeDasharray="10 10" />
-            <RechartsTooltip
-              content={({ label, payload }) => {
-                if (payload && payload.length) {
-                  return (
-                    <div
-                      style={{
-                        backgroundColor: '#fff',
-                        padding: '10px',
-                        border: '1px solid #ccc'
-                      }}
-                    >
-                      <p style={{ color: '#8884d8' }} className="flex mx-auto">
-                        {new Date(label).toLocaleDateString(
-                          locale === 'en' ? 'en-IN' : 'ta-IN',
-                          {
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric'
-                          }
-                        )}
-                      </p>
-                      {payload.map((entry, index) => (
-                        <p key={index} style={{ color: entry.color }}>
-                          {locale == 'en' ? 'Market Price: ' : 'சந்தை விலை'}{' '}
-                          {entry.value}
+        <div className="flex justify-center md:mt-10 mx-0 -ml-5 max-w-screen">
+          {chartData.length === 0 ? (
+            <div className="flex mx-auto border-dashed w-1/2 h-full border-2 rounded-xl border-slate-700 p-10">
+              <p className="flex mx-auto py-20 text-red-600">
+                {locale === 'en'
+                  ? 'Please select options to display graph'
+                  : 'வரைபடத்தைக் காண்பிக்க விருப்பங்களைத் தேர்ந்தெடுக்கவும்'}
+              </p>
+            </div>
+          ) : (
+            <LineChart
+              data={dummyData}
+              width={isMobile ? 400 : 1000}
+              height={isMobile ? 500 : 400}
+              className="px-0 mb-10"
+            >
+              <XAxis dataKey="date" />
+              <YAxis domain={[0, maxValue + 40]} dataKey="marketPrice" />
+              <CartesianGrid strokeDasharray="10 10" />
+              <RechartsTooltip
+                content={({ label, payload }) => {
+                  if (payload && payload.length) {
+                    return (
+                      <div
+                        style={{
+                          backgroundColor: '#fff',
+                          padding: '10px',
+                          border: '1px solid #ccc'
+                        }}
+                      >
+                        <p
+                          style={{ color: '#8884d8' }}
+                          className="flex mx-auto"
+                        >
+                          {new Date(label).toLocaleDateString(
+                            locale === 'en' ? 'en-IN' : 'ta-IN',
+                            {
+                              month: 'long',
+                              day: 'numeric',
+                              year: 'numeric'
+                            }
+                          )}
                         </p>
-                      ))}
-                    </div>
-                  )
-                } else {
-                  return <p className="text-4xl z-50">No data</p>
-                }
-              }}
-            />
-            <Tooltip />
-            <Legend
-              verticalAlign="bottom"
-              align="center"
-              wrapperStyle={{
-                left: isMobile ? '20px' : '40px'
-              }}
-            />
-            <Line
-              type="monotone"
-              dataKey="marketPrice"
-              stroke="#82ca9d"
-              strokeWidth={2}
-              dot={{ stroke: '#82ca9d', strokeWidth: 4, r: 10 }}
-            />
-          </LineChart>
+                        {payload.map((entry, index) => (
+                          <p key={index} style={{ color: entry.color }}>
+                            {locale == 'en' ? 'Market Price: ' : 'சந்தை விலை'}{' '}
+                            {entry.value}
+                          </p>
+                        ))}
+                      </div>
+                    )
+                  } else {
+                    return <p className="text-4xl z-50">No data</p>
+                  }
+                }}
+              />
+              <Tooltip />
+              <Legend
+                verticalAlign="bottom"
+                align="center"
+                wrapperStyle={{
+                  left: isMobile ? '20px' : '40px'
+                }}
+              />
+              <Line
+                type="monotone"
+                dataKey="marketPrice"
+                stroke="#82ca9d"
+                strokeWidth={2}
+                dot={{ stroke: '#82ca9d', strokeWidth: 4, r: 10 }}
+              />
+            </LineChart>
+          )}
         </div>
       </div>
     </>
   )
 }
-
-export default MarketHomeFruitsGraph
