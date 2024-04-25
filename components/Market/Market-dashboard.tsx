@@ -291,10 +291,10 @@ export default function MarketDashBoard({
       </div>
 
       <div className="flexl items-center justify-center md:p-0 p-6 mx-auto">
-        <div className="flex justify-center md:mt-10 mx-0 -ml-5 max-w-screen">
+        <div className="flex justify-center md:mt-10 mx-0 max-w-screen">
           {chartData.length === 0 ? (
-            <div className="flex mx-auto border-dashed w-1/2 h-full border-2 rounded-xl border-slate-700 p-10">
-              <p className="flex mx-auto py-20 text-red-600">
+            <div className="flex mx-auto border-dashed w-full md:w-1/2 h-full border-2 rounded-xl border-slate-700 p-10">
+              <p className="flex mx-auto text-center py-20 text-lg text-red-600">
                 {locale === 'en'
                   ? 'Please select options to display graph'
                   : 'வரைபடத்தைக் காண்பிக்க விருப்பங்களைத் தேர்ந்தெடுக்கவும்'}
@@ -305,7 +305,7 @@ export default function MarketDashBoard({
               data={dummyData}
               width={isMobile ? 400 : 1000}
               height={isMobile ? 500 : 400}
-              className="px-0 mb-10"
+              className="px-0 mb-10 -ml-12 mx-0"
             >
               <XAxis dataKey="date" />
               <YAxis domain={[0, maxValue + 40]} dataKey="marketPrice" />

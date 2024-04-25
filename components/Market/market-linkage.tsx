@@ -28,7 +28,7 @@ export default function MarketLinkage() {
             className=""
           >
             <div className="w-full">
-              <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-bold tracking-tighter text-white">
                 {locale === 'en' ? 'AgriBegri' : 'அக்ரிபெக்ரி'}
               </h2>
               <p className="mt-4 text-left  text-base/6 text-neutral-200">
@@ -51,7 +51,7 @@ export default function MarketLinkage() {
             </div>
           </WobbleCard>
           <WobbleCard containerClassName="col-span-1 min-h-auto bg-cyan-700">
-            <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+            <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-bold tracking-tighter text-white">
               {locale === 'en' ? 'AgriBazaar' : 'அக்ரிபஜார்'}
             </h2>
             <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
@@ -72,7 +72,7 @@ export default function MarketLinkage() {
           </WobbleCard>
           <WobbleCard containerClassName="col-span-1 bg-gradient-to-tr from-slate-800 to-slate-900/90 to-60% min-h-auto">
             <div>
-              <h2 className="md:max-w-lg  text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="md:max-w-lg  text-left text-balance text-2xl md:text-xl lg:text-3xl font-bold tracking-tighter text-white">
                 {locale === 'en' ? 'Farmer Bazaar' : 'உழவர் பஜார்'}
               </h2>
               <p className="mt-4 text-left  text-base/6 text-neutral-200">
@@ -98,7 +98,7 @@ export default function MarketLinkage() {
             className=""
           >
             <div className="w-full">
-              <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="text-left text-balance font-bold tracking-tighter text-2xl md:text-xl lg:text-3xl text-white">
                 {locale === 'en' ? 'AgrisNet' : 'அக்ரிஸ்நெட்'}
               </h2>
               <p className="mt-4 text-left text-base/6 text-neutral-200">
