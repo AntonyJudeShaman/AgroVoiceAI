@@ -47,8 +47,12 @@ export default function SoilTest({ user }: any) {
       soilDataRef,
       snapshot => {
         const data = snapshot.val()
-        setData(data)
-        setLoading(false)
+        const updatedData = {
+        ...data,
+        rainfall: 230
+      };
+      setData(updatedData);
+      setLoading(false)
       },
       {
         onlyOnce: true
