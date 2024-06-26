@@ -26,7 +26,7 @@ type SoilTestData = {
   P: number
   humidity: number
   ph: number
-  rainfall: number
+  electrical_conductivity: number
   temperature: number
 }
 
@@ -407,7 +407,7 @@ export default function SoilTest({ user }: any) {
                     ? 'Electrical Conductivity: '
                     : 'மின் கடத்துத்திறன்: '}
                 </span>
-                {data?.rainfall} uS/cm
+                {data?.electrical_conductivity} S/m
               </p>
             </div>
             <div className="flex w-full mx-auto justify-center p-4">
